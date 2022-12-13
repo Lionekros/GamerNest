@@ -1,0 +1,40 @@
+-Tecnologias
+	-JavaScript
+	-HTML
+	-CSS/SCSS
+	-PHP
+	-Gulp
+	-Composer
+
+-Tendrá
+3 tipos de cuentas
+	-Admin
+	-Periodista/Contribuyente
+	-Usuario
+
+-Admin
+	-Accederá a la página de administración
+	-Crud cuentas
+	-Eliminar y Actualizar noticias (No crear)
+	-Crud juegos
+	-
+	
+
+-Periodista
+	-Accederá a la página de administración
+	-Podrá crear noticias y editarlas
+	-Las noticias tendrán su "firma" Automaticamente
+	-Editar su perfil?
+	-Si queremos mas seguridad, podemos hacer que las noticias tengan que autorizarlas un admin antes de publicarse
+
+-Usuario
+	-Verá todas las noticias
+	-Podrá darle a favoritos a los juegos y tendrá un pestaña especial para ver noticias relacionadas a éstos juegos
+	-Panel de control con los juegos que tenga en fav, para poder eliminarlos facilmente
+	-Perfil público?
+
+-Páginas
+	-Pagina del periodista con una lista de todas sus noticias?
+
+Buscador:
+	-Te da una pestaña por tipo de búsqueda o hay un seleccionador antes?
