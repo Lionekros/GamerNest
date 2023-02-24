@@ -9,6 +9,8 @@ class User extends Authenticatable
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function scoredGames()
     {
         return $this->belongsToMany(User::class, 'user_score_games');

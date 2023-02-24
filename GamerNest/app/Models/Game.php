@@ -9,6 +9,8 @@ class Game extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function genres()
     {
         return $this->belongsToMany(Genre::class);

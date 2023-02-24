@@ -9,6 +9,8 @@ class Language extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function games()
     {
         return $this->belongsToMany(Game::class);

@@ -9,6 +9,8 @@ class Dev extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function game()
     {
         return $this->belongsTo(Game::class);

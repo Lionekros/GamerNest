@@ -9,6 +9,8 @@ class Author extends Authenticatable
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function articles()
     {
         return $this->hasMany(Article::class);
