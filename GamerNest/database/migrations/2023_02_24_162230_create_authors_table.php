@@ -27,7 +27,7 @@ return new class extends Migration
             $table->boolean('isActive');
             $table->date('birthday');
             $table->dateTime('startDate');
-            $table->dateTime('endDate');
+            $table->dateTime('endDate')->nullable();
         });
     }
 
