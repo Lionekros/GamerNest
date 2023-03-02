@@ -3,7 +3,9 @@
 @section('title', 'Listado posts')
 
 @section('content')
-    <button class="btn btn-primary text-uppercase">Hola</button>
-    
-    hola
+@forelse ($articles as $article)
+{{$article->id}}
+@empty
+
+@endforelse
 @endsection

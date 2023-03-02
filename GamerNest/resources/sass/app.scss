@@ -1,8 +1,27 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 // Variables
-@import 'variables';
+@import 'Utilities/variables';
+
+// Colors (Bootstrap)
+@import 'Utilities/colors';
+
+// Buttons
+@import 'Utilities/buttons';
+
+// Normalize
+@import 'Utilities/normalize';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+html 
+{
+    font-size: 62.5%; /*For the rem*/
+    box-sizing: border-box;
+}
+*, *:before, *:after 
+{
+    box-sizing: inherit;
+}
