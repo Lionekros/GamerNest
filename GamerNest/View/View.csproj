@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Folder Include="wwwroot\img\" />
+		<Folder Include="wwwroot\scss" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<SassFile Include="wwwroot\scss/**/*.scss" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Remove="compilerconfig.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="compilerconfig.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="BuildWebCompiler2022" Version="1.14.10" />
+	  <PackageReference Include="LibSassBuilder" Version="3.0.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="3.1.32" />
+	  <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+	  <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Domain\Domain.csproj" />
+	  <ProjectReference Include="..\LogError\LogError.csproj" />
+	  <ProjectReference Include="..\Support\Support.csproj" />
+	</ItemGroup>
+
+</Project>

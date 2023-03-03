@@ -1,0 +1,19 @@
+@import 'variables';
+
+html
+{
+    font-size: 62.5%; /*For the rem*/
+    box-sizing: border-box;
+    color: $light;
+    background-color: $dark;
+}
+
+*, *:before, *:after
+{
+    box-sizing: inherit;
+}
+
+h1
+{
+    color: $primary;
+}
