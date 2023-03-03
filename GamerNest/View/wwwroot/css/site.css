@@ -317,6 +317,7 @@ html {
   box-sizing: border-box;
   color: #F5F5F5;
   background-color: #222831;
+  font-family: "Playfair Display", serif;
 }
 
 *, *:before, *:after {

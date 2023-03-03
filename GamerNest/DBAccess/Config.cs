@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBAccess
 {
-    internal class Config
+    public class Config
     {
         static string conectionChain;
 

@@ -2,52 +2,52 @@
 using System.Data.SqlClient;
 using LogError;
 using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace DBAccess
 {
-    internal class Data
+    public class Data
     {
-        public static SqlCommand CrearComando()
+        public static MySqlCommand CrearComando()
         {
             try
             {
                 string cadenaConexion = CreateConnection();
-                SqlConnection conexion = new SqlConnection();
-                conexion.ConnectionString = cadenaConexion;
-                SqlCommand comando = new SqlCommand();
-                comando = conexion.CreateCommand();
+                MySqlConnection conexion = new MySqlConnection(cadenaConexion);
+                MySqlCommand comando = new MySqlCommand();
+                comando.Connection = conexion;
                 comando.CommandType = CommandType.Text;
                 return comando;
             }
             catch ( Exception ex )
             {
-                SqlCommand comando = new SqlCommand();
+                MySqlCommand comando = new MySqlCommand();
                 Log log = new Log();
                 log.Add( ex.Message );
                 return comando;
             }
         }
 
-        public static SqlCommand CrearComandoProc(string nombreProcedimiento)
+        public static MySqlCommand CrearComandoProc(string nombreProcedimiento)
         {
             try
             {
                 string cadenaConexion = CreateConnection();
-                SqlConnection conexion = new SqlConnection(cadenaConexion);
-                SqlCommand comando = new SqlCommand(nombreProcedimiento, conexion);
+                MySqlConnection conexion = new MySqlConnection(cadenaConexion);
+                MySqlCommand comando = new MySqlCommand(nombreProcedimiento, conexion);
                 comando.CommandType = CommandType.StoredProcedure;
                 return comando;
             }
             catch ( Exception ex )
             {
-                SqlCommand comando = new SqlCommand();
+                MySqlCommand comando = new MySqlCommand();
                 Log log = new Log();
                 log.Add( ex.Message );
                 return comando;
             }
         }
 
-        public static int EjecutarComandoInsert(SqlCommand comando)
+        public static int EjecutarComandoInsert(MySqlCommand comando)
         {
             try
             {
@@ -67,13 +67,13 @@ namespace DBAccess
             }
         }
 
-        public static DataTable EjecutarComandoSelect(SqlCommand comando)
+        public static DataTable EjecutarComandoSelect(MySqlCommand comando)
         {
             DataTable tabla = new DataTable();
             try
             {
                 comando.Connection.Open();
-                SqlDataAdapter adaptador = new SqlDataAdapter();
+                MySqlDataAdapter adaptador = new MySqlDataAdapter();
                 adaptador.SelectCommand = comando;
                 adaptador.Fill( tabla );
             }
@@ -85,9 +85,12 @@ namespace DBAccess
                 return dt;
             }
             finally
-            { comando.Connection.Close(); }
+            {
+                comando.Connection.Close();
+            }
             return tabla;
         }
+
         public static string CreateConnection()
         {
             try
@@ -100,11 +103,11 @@ namespace DBAccess
             }
             catch ( Exception ex )
             {
-
                 Log log = new Log();
                 log.Add( ex.Message );
                 return "Error";
             }
         }
+
     }
 }
