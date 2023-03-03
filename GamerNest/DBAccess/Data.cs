@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Data.SqlClient;
 using LogError;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
@@ -8,74 +7,35 @@ namespace DBAccess
 {
     public class Data
     {
-        public static MySqlCommand CrearComando()
+        public static MySqlCommand CreateCommand()
         {
             try
             {
-                string cadenaConexion = CreateConnection();
-                MySqlConnection conexion = new MySqlConnection(cadenaConexion);
-                MySqlCommand comando = new MySqlCommand();
-                comando.Connection = conexion;
-                comando.CommandType = CommandType.Text;
-                return comando;
+                string conectionString = CreateConnection();
+                MySqlConnection conection = new MySqlConnection(conectionString);
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conection;
+                cmd.CommandType = CommandType.Text;
+                return cmd;
             }
             catch ( Exception ex )
             {
-                MySqlCommand comando = new MySqlCommand();
+                MySqlCommand cmd = new MySqlCommand();
                 Log log = new Log();
                 log.Add( ex.Message );
-                return comando;
+                return cmd;
             }
         }
 
-        public static MySqlCommand CrearComandoProc(string nombreProcedimiento)
+        public static DataTable ExecuteCommand(MySqlCommand cmd)
         {
+            DataTable table = new DataTable();
             try
             {
-                string cadenaConexion = CreateConnection();
-                MySqlConnection conexion = new MySqlConnection(cadenaConexion);
-                MySqlCommand comando = new MySqlCommand(nombreProcedimiento, conexion);
-                comando.CommandType = CommandType.StoredProcedure;
-                return comando;
-            }
-            catch ( Exception ex )
-            {
-                MySqlCommand comando = new MySqlCommand();
-                Log log = new Log();
-                log.Add( ex.Message );
-                return comando;
-            }
-        }
-
-        public static int EjecutarComandoInsert(MySqlCommand comando)
-        {
-            try
-            {
-                comando.Connection.Open();
-                return comando.ExecuteNonQuery();
-            }
-            catch ( Exception ex )
-            {
-                Log log = new Log();
-                log.Add( ex.Message );
-                return -1;
-            }
-            finally
-            {
-                comando.Connection.Dispose();
-                comando.Connection.Close();
-            }
-        }
-
-        public static DataTable EjecutarComandoSelect(MySqlCommand comando)
-        {
-            DataTable tabla = new DataTable();
-            try
-            {
-                comando.Connection.Open();
-                MySqlDataAdapter adaptador = new MySqlDataAdapter();
-                adaptador.SelectCommand = comando;
-                adaptador.Fill( tabla );
+                cmd.Connection.Open();
+                MySqlDataAdapter adapter = new MySqlDataAdapter();
+                adapter.SelectCommand = cmd;
+                adapter.Fill( table );
             }
             catch ( Exception ex )
             {
@@ -86,20 +46,59 @@ namespace DBAccess
             }
             finally
             {
-                comando.Connection.Close();
+                cmd.Connection.Close();
             }
-            return tabla;
+            return table;
+        }
+
+        public static MySqlCommand CreateProcedure(string procedureName)
+        {
+            try
+            {
+                string conectionString = CreateConnection();
+                MySqlConnection conection = new MySqlConnection(conectionString);
+                MySqlCommand cmd = new MySqlCommand(procedureName, conection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                return cmd;
+            }
+            catch ( Exception ex )
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                Log log = new Log();
+                log.Add( ex.Message );
+                return cmd;
+            }
+        }
+
+        public static int ExecuteProcedure(MySqlCommand cmd)
+        {
+            try
+            {
+                cmd.Connection.Open();
+                return cmd.ExecuteNonQuery();
+            }
+            catch ( Exception ex )
+            {
+                Log log = new Log();
+                log.Add( ex.Message );
+                return -1;
+            }
+            finally
+            {
+                cmd.Connection.Dispose();
+                cmd.Connection.Close();
+            }
         }
 
         public static string CreateConnection()
         {
             try
             {
-                var constructor = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-                var bbdd = constructor.Build().GetSection("ConnectionStrings").GetSection("DemoDBConnectionString").Value;
+                var db = builder.Build().GetSection("ConnectionStrings").GetSection("DemoDBConnectionString").Value;
 
-                return bbdd;
+                return db;
             }
             catch ( Exception ex )
             {
@@ -108,6 +107,5 @@ namespace DBAccess
                 return "Error";
             }
         }
-
     }
 }

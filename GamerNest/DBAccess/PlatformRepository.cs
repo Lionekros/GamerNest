@@ -12,10 +12,10 @@ namespace DBAccess
         {
             try
             {
-                MySqlCommand cmd = Data.CrearComando();
-                cmd.CommandText = "SELECT id, platform"
-                                + " FROM platforms";
-                return Data.EjecutarComandoSelect( cmd );
+                MySqlCommand cmd = Data.CreateCommand();
+                cmd.CommandText = "SELECT 4 as selector, id as idPlatform, name"
+                                + " FROM platform";
+                return Data.ExecuteCommand( cmd );
             }
             catch ( Exception ex )
             {

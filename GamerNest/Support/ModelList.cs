@@ -8,6 +8,6 @@ namespace Support
 {
     public class ModelList
     {
-        public List<PlatformModel> platformList { get; set; }
+        public List<GameExternalDataModel> platformList { get; set; }
     }
 }

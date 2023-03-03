@@ -12,27 +12,27 @@ namespace Domain
 {
     public class PlatformService
     {
-        public static List<PlatformModel> GetPlatforms()
+        public static List<GameExternalDataModel> GetPlatforms()
         {
             try
             {
                 DataTable dt = PlatformRepository.GetPlatforms();
 
-                List<PlatformModel> platformList = new List<PlatformModel>();
+                List<GameExternalDataModel> platformList = new List<GameExternalDataModel>();
 
                 foreach ( DataRow row in dt.Rows )
                 {
-                    platformList.Add( new PlatformModel( row ) );
+                    platformList.Add( new GameExternalDataModel( row ) );
                 }
 
                 return platformList;
             }
             catch ( Exception ex )
             {
-                List<PlatformModel> listaPlataforma = new List<PlatformModel>();
+                List<GameExternalDataModel> platformList = new List<GameExternalDataModel>();
                 Log log = new Log();
                 log.Add( ex.Message );
-                return listaPlataforma;
+                return platformList;
 
             }
         }
