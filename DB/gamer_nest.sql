@@ -21,7 +21,7 @@ USE `gamer_nest` ;
 -- Table `gamer_nest`.`language`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gamer_nest`.`language` (
-  `id` TINYINT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
@@ -32,7 +32,7 @@ ENGINE = InnoDB;
 -- Table `gamer_nest`.`genre`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gamer_nest`.`genre` (
-  `id` TINYINT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
@@ -43,7 +43,7 @@ ENGINE = InnoDB;
 -- Table `gamer_nest`.`player_type`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gamer_nest`.`player_type` (
-  `id` TINYINT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
@@ -54,7 +54,7 @@ ENGINE = InnoDB;
 -- Table `gamer_nest`.`platform`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gamer_nest`.`platform` (
-  `id` SMALLINT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
@@ -65,7 +65,7 @@ ENGINE = InnoDB;
 -- Table `gamer_nest`.`publisher`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gamer_nest`.`publisher` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
@@ -76,7 +76,7 @@ ENGINE = InnoDB;
 -- Table `gamer_nest`.`dev`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gamer_nest`.`dev` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
@@ -96,9 +96,9 @@ CREATE TABLE IF NOT EXISTS `gamer_nest`.`author` (
   `phone` VARCHAR(20) NOT NULL,
   `description` TEXT NULL,
   `avatar` VARCHAR(255) NULL,
-  `isAdmin` TINYINT(1) NOT NULL DEFAULT 0,
-  `canPublish` TINYINT(1) NOT NULL DEFAULT 0,
-  `isActive` TINYINT(1) NOT NULL DEFAULT 1,
+  `isAdmin` TINYINT NOT NULL DEFAULT 0,
+  `canPublish` TINYINT NOT NULL DEFAULT 0,
+  `isActive` TINYINT NOT NULL DEFAULT 1,
   `birthday` DATE NOT NULL,
   `startDate` DATETIME NOT NULL,
   `endDate` DATETIME NULL,
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `gamer_nest`.`user` (
   `password` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `avatar` VARCHAR(255) NULL DEFAULT 0,
-  `isConfirmed` TINYINT(1) NOT NULL DEFAULT 1,
+  `isConfirmed` TINYINT NOT NULL DEFAULT 1,
   `birthday` DATE NOT NULL,
   `creationDate` DATETIME NOT NULL,
   `token` VARCHAR(255) NULL,
@@ -131,17 +131,17 @@ ENGINE = InnoDB;
 -- Table `gamer_nest`.`game`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gamer_nest`.`game` (
-  `id` BIGINT NOT NULL,
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(255) NOT NULL,
   `subtitle` VARCHAR(255) NULL,
   `description` TEXT NOT NULL,
   `cover` VARCHAR(255) NOT NULL,
   `releaseDate` DATE NOT NULL,
   `totalScore` TINYINT NOT NULL DEFAULT 0,
-  `isApproved` TINYINT(1) NOT NULL DEFAULT 0,
-  `isFav` TINYINT(1) NOT NULL DEFAULT 0,
+  `isApproved` TINYINT NOT NULL DEFAULT 0,
+  `isFav` TINYINT NOT NULL DEFAULT 0,
   `idDev` INT NOT NULL,
-  `idPlatform` SMALLINT NOT NULL,
+  `idPlatform` INT NOT NULL,
   `idPublisher` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_game_publisher_idx` (`idPublisher` ASC) VISIBLE,
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `gamer_nest`.`article` (
   `summary` TEXT NOT NULL,
   `body` MEDIUMTEXT NOT NULL,
   `cover` VARCHAR(255) NOT NULL,
-  `isPublished` TINYINT(1) NOT NULL,
+  `isPublished` TINYINT NOT NULL,
   `createdDate` DATETIME NOT NULL,
   `updatedDate` DATETIME NULL,
   `idAuthor` INT NOT NULL,
@@ -193,7 +193,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gamer_nest`.`game_language` (
   `idGame` BIGINT NOT NULL,
-  `idLanguage` TINYINT NOT NULL,
+  `idLanguage` INT NOT NULL,
   PRIMARY KEY (`idGame`, `idLanguage`),
   INDEX `fk_game_has_language_language1_idx` (`idLanguage` ASC) VISIBLE,
   INDEX `fk_game_has_language_game1_idx` (`idGame` ASC) VISIBLE,
@@ -215,7 +215,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gamer_nest`.`game_genre` (
   `idGame` BIGINT NOT NULL,
-  `idGenre` TINYINT NOT NULL,
+  `idGenre` INT NOT NULL,
   PRIMARY KEY (`idGame`, `idGenre`),
   INDEX `fk_game_has_genre_genre1_idx` (`idGenre` ASC) VISIBLE,
   INDEX `fk_game_has_genre_game1_idx` (`idGame` ASC) VISIBLE,
@@ -237,7 +237,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gamer_nest`.`game_player_type` (
   `idGame` BIGINT NOT NULL,
-  `idPlayerType` TINYINT NOT NULL,
+  `idPlayerType` INT NOT NULL,
   PRIMARY KEY (`idGame`, `idPlayerType`),
   INDEX `fk_game_has_player_type_player_type1_idx` (`idPlayerType` ASC) VISIBLE,
   INDEX `fk_game_has_player_type_game1_idx` (`idGame` ASC) VISIBLE,
@@ -324,3 +324,38 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO genre (name) VALUES ('Action');
+INSERT INTO genre (name) VALUES ('Adventure');
+INSERT INTO genre (name) VALUES ('Role-playing');
+INSERT INTO genre (name) VALUES ('Simulation');
+INSERT INTO genre (name) VALUES ('Strategy');
+INSERT INTO genre (name) VALUES ('Sports');
+INSERT INTO genre (name) VALUES ('Racing');
+INSERT INTO genre (name) VALUES ('Fighting');
+INSERT INTO genre (name) VALUES ('Puzzle');
+INSERT INTO genre (name) VALUES ('Shooter');
+
+INSERT INTO platform (name) VALUES ('PlayStation 5');
+INSERT INTO platform (name) VALUES ('Xbox Series X');
+INSERT INTO platform (name) VALUES ('Nintendo Switch');
+INSERT INTO platform (name) VALUES ('PlayStation 4');
+INSERT INTO platform (name) VALUES ('Xbox One');
+INSERT INTO platform (name) VALUES ('PC');
+INSERT INTO platform (name) VALUES ('Mac');
+INSERT INTO platform (name) VALUES ('Linux');
+INSERT INTO platform (name) VALUES ('Mobile');
+INSERT INTO platform (name) VALUES ('PlayStation 3');
+INSERT INTO platform (name) VALUES ('Xbox 360');
+INSERT INTO platform (name) VALUES ('Nintendo Wii');
+
+INSERT INTO dev (name) VALUES ('Rockstar Games');
+INSERT INTO dev (name) VALUES ('Ubisoft');
+INSERT INTO dev (name) VALUES ('Blizzard Entertainment');
+INSERT INTO dev (name) VALUES ('Square Enix');
+INSERT INTO dev (name) VALUES ('Electronic Arts');
+INSERT INTO dev (name) VALUES ('CD Projekt Red');
+INSERT INTO dev (name) VALUES ('Naughty Dog');
+INSERT INTO dev (name) VALUES ('Capcom');
+INSERT INTO dev (name) VALUES ('Bethesda Game Studios');
+INSERT INTO dev (name) VALUES ('Nintendo');

@@ -4,9 +4,19 @@
 }
 
 <div class="text-center">
+    <h1>Platform</h1>
     @foreach (var item in Model.platformList)
     {
-        <h1>@item.id : @item.platform</h1>
+        <h2>@item.id : @item.name</h2>
+
+    }
+
+    <hr />
+
+    <h1>Author</h1>
+    @foreach ( var item in Model.authorList )
+    {
+        <h2>@item.id : @item.name : Publish= @item.canPublish : Active= @item.isActive : Admin= @item.isAdmin</h2>
 
     }
 </div>

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-
-namespace LogError
+﻿namespace LogError
 {
     public class Log
     {
@@ -20,7 +13,7 @@ namespace LogError
             chain += DateTime.Now + " - " + errorMessage + Environment.NewLine;
 
             StreamWriter sw = new StreamWriter(path+"/"+name, true);
-            sw.Write(chain);
+            sw.Write( chain );
             sw.Close();
         }
 
@@ -38,16 +31,16 @@ namespace LogError
         {
             try
             {
-                if (!Directory.Exists(path))
+                if ( !Directory.Exists( path ) )
                 {
-                    Directory.CreateDirectory(path);
+                    Directory.CreateDirectory( path );
                 }
             }
-            catch (DirectoryNotFoundException ex)
+            catch ( DirectoryNotFoundException ex )
             {
-                throw new Exception(ex.Message);
+                throw new Exception( ex.Message );
             }
-            
+
         }
         #endregion
     }

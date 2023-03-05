@@ -18,8 +18,10 @@ namespace View.Controllers
 
         public IActionResult Index()
         {
-            GetPlatforms();
-            return View(lists);
+            GetAllPlatforms();
+            GetAllAuthors();
+
+            return View( lists );
         }
 
         public IActionResult Privacy()
@@ -33,9 +35,14 @@ namespace View.Controllers
             return View( new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier } );
         }
 
-        public void GetPlatforms()
+        public void GetAllPlatforms()
         {
-            lists.platformList = PlatformService.GetPlatforms();
+            lists.platformList = PlatformService.GetAllPlatforms( "name", 5 );
+        }
+
+        public void GetAllAuthors()
+        {
+            lists.authorList = AuthorService.GetAllAuthors();
         }
     }
 }

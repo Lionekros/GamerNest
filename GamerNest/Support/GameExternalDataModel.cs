@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace Support
 {
@@ -16,31 +11,31 @@ namespace Support
         {
             string field = "id";
 
-            int selector = row.Field<int>("selector");
+            long selector = row.Field<long>("selector");
             switch ( selector )
             {
-                case 1:
+                case 0:
                     field = "idDev";
                     break;
-                case 2:
+                case 1:
                     field = "idGenre";
                     break;
-                case 3:
+                case 2:
                     field = "idLanguage";
                     break;
-                case 4:
+                case 3:
                     field = "idPlatform";
                     break;
-                case 5:
+                case 4:
                     field = "idPlayerType";
                     break;
-                case 6:
+                case 5:
                     field = "idPublisher";
                     break;
             }
 
             id = row.Field<int>( field );
-            name = row.Field<string>( field );
+            name = row.Field<string>( "name" );
         }
     }
 }

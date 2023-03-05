@@ -1,7 +1,7 @@
-﻿using System.Data;
-using LogError;
+﻿using LogError;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace DBAccess
 {

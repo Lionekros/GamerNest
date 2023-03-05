@@ -1,19 +1,24 @@
 ﻿using LogError;
 using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DBAccess
 {
-    public class PlatformRepository
+    public class AuthorRepository
     {
-        public static DataTable GetAllPlatforms(string orderBy = "", int limit = -1)
+        public static DataTable GetAllAuthors(string orderBy = "", int limit = -1)
         {
             try
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = "SELECT 3 as selector, id as idPlatform, name"
-                                + " FROM platform";
+                    cmd.CommandText = cmd.CommandText = "SELECT id, name, firstLastName, secondLatName, password, email, phone, description, avatar, isAdmin, canPublish, isActive, birthday, startDate, endDate"
+                                + " FROM author";
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
                         cmd.CommandText += " ORDER BY " + orderBy;
@@ -24,6 +29,7 @@ namespace DBAccess
                     }
                     return Data.ExecuteCommand( cmd );
                 }
+
             }
             catch ( MySqlException ex )
             {
@@ -32,6 +38,7 @@ namespace DBAccess
                 log.Add( ex.Message );
                 return dt;
             }
+
         }
     }
 }

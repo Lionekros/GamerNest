@@ -1,19 +1,20 @@
 ﻿using LogError;
 using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
 using System.Data;
 
 namespace DBAccess
 {
-    public class PlatformRepository
+    public class PlayerTypeRepository
     {
-        public static DataTable GetAllPlatforms(string orderBy = "", int limit = -1)
+        public static DataTable GetAllPlayerTypes(string orderBy = "", int limit = -1)
         {
             try
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = "SELECT 3 as selector, id as idPlatform, name"
-                                + " FROM platform";
+                    cmd.CommandText = "SELECT 4 as selector, id as idPlayerType, name"
+                                + " FROM player_type";
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
                         cmd.CommandText += " ORDER BY " + orderBy;
@@ -32,6 +33,7 @@ namespace DBAccess
                 log.Add( ex.Message );
                 return dt;
             }
+
         }
     }
 }
