@@ -6,12 +6,12 @@ using View.Models;
 
 namespace View.Controllers
 {
-    public class HomeController :Controller
+    public class ArticleController :Controller
     {
         ModelList lists = new ModelList();
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<ArticleController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public ArticleController(ILogger<ArticleController> logger)
         {
             _logger = logger;
         }

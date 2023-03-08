@@ -7,6 +7,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Folder Include="Views\Admin\" />
+		<Folder Include="Views\Game\" />
+		<Folder Include="Views\User\" />
 		<Folder Include="wwwroot\img\" />
 		<Folder Include="wwwroot\scss" />
 	</ItemGroup>
