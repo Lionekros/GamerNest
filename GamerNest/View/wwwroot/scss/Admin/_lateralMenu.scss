@@ -1,0 +1,42 @@
+@import '../Utilities/variables';
+
+/*Variables*/
+$width: 30rem;
+$padding: 1rem;
+$width-collapsed: 5rem;
+
+.sidemenu
+{
+    background-color: $secondary;
+    color: $light;
+    position: fixed;
+    height: 100%;
+    left: 0;
+    top: 0;
+    a
+    {
+        color: $light;
+        text-decoration: none;
+    }
+}
+
+/*HEADER*/
+
+.header
+{
+    box-sizing: border-box;
+
+    menu-btn
+    {
+        vertical-align: middle;
+        display: inline-block;
+        cursor: pointer;
+        padding: 1rem;
+        width: $width-collapsed;
+        box-sizing: border-box;
+        &:hover
+        {
+            background-color: $terciary
+        }
+    }
+}

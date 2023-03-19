@@ -1,0 +1,14 @@
+@import '_lateralMenu.scss';
+
+.adminBody
+{
+    margin-left: $width-collapsed;
+    padding: 0;
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.adminBody-expanded
+{
+    margin-left: $width;
+}

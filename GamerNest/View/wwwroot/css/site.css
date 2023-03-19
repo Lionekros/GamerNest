@@ -323,3 +323,44 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
+/*Variables*/
+.sidemenu {
+  background-color: #393E46;
+  color: #F5F5F5;
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.sidemenu a {
+  color: #F5F5F5;
+  text-decoration: none;
+}
+
+/*HEADER*/
+.header {
+  box-sizing: border-box;
+}
+.header menu-btn {
+  vertical-align: middle;
+  display: inline-block;
+  cursor: pointer;
+  padding: 1rem;
+  width: 5rem;
+  box-sizing: border-box;
+}
+.header menu-btn:hover {
+  background-color: #535a65;
+}
+
+.adminBody {
+  margin-left: 5rem;
+  padding: 0;
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.adminBody-expanded {
+  margin-left: 30rem;
+}

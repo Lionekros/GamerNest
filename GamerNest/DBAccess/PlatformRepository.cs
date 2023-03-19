@@ -12,7 +12,7 @@ namespace DBAccess
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = "SELECT 3 as selector, id as idPlatform, name"
+                    cmd.CommandText = "SELECT 3 as selector, id as idPlatform, name, icon"
                                 + " FROM platform";
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {

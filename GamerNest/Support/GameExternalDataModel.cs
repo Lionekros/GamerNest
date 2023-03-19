@@ -6,6 +6,7 @@ namespace Support
     {
         public int id { get; set; }
         public string name { get; set; }
+        public string icon { get; set; }
 
         public GameExternalDataModel(DataRow row)
         {
@@ -36,6 +37,11 @@ namespace Support
 
             id = row.Field<int>( field );
             name = row.Field<string>( "name" );
+
+            if (selector == 3)
+            {
+                icon = row.Field<string>( "icon" );
+            }
         }
     }
 }

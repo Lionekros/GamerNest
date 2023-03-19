@@ -202,6 +202,7 @@ CREATE TABLE `language` (
 CREATE TABLE `platform` (
   `id` int NOT NULL,
   `name` varchar(45) COLLATE utf8mb3_bin NOT NULL
+  `icon` varchar(255) COLLATE utf8mb3_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --

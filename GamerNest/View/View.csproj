@@ -11,7 +11,10 @@
 		<Folder Include="Views\Game\" />
 		<Folder Include="Views\User\" />
 		<Folder Include="wwwroot\img\" />
-		<Folder Include="wwwroot\scss" />
+		<Folder Include="wwwroot\scss\Admin\" />
+		<Folder Include="wwwroot\scss\Article\" />
+		<Folder Include="wwwroot\scss\Game\" />
+		<Folder Include="wwwroot\scss\User\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -20,10 +23,19 @@
 
 	<ItemGroup>
 	  <Content Remove="compilerconfig.json" />
+	  <Content Remove="wwwroot\scss\admin\_base.scss" />
+	  <Content Remove="wwwroot\scss\admin\_lateralMenu.scss" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <SassFile Remove="wwwroot\scss\admin\_base.scss" />
+	  <SassFile Remove="wwwroot\scss\admin\_lateralMenu.scss" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <None Include="compilerconfig.json" />
+	  <None Include="wwwroot\scss\admin\_base.scss" />
+	  <None Include="wwwroot\scss\admin\_lateralMenu.scss" />
 	</ItemGroup>
 
 	<ItemGroup>
