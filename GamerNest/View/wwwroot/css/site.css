@@ -571,6 +571,11 @@ html {
   opacity: 0;
 }
 
+@media (max-width: 420px) {
+  .sidebar li .tooltip {
+    display: none;
+  }
+}
 .home-section {
   position: relative;
   min-height: 100vh;
@@ -579,6 +584,32 @@ html {
   width: calc(100% - 78px);
   transition: all 0.5s ease;
   z-index: 2;
+  font-size: 1.5rem;
+}
+.home-section .text {
+  display: inline-block;
+  margin: 1.8rem;
+  width: calc(100% - 78px);
+}
+.home-section .text h1 {
+  font-size: 5rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+.home-section .text h2 {
+  font-size: 4rem;
+  color: #FFB100;
+  text-transform: uppercase;
+  text-align: center;
+}
+.home-section .text h3 {
+  padding: 1rem 0rem;
+  font-size: 2.5rem;
+  text-align: center;
+  background-color: #555555;
+  -webkit-border-radius: 2.5rem;
+  -moz-border-radius: 2.5rem;
+  border-radius: 2.5rem;
 }
 
 .sidebar.open ~ .home-section {
@@ -586,27 +617,9 @@ html {
   width: calc(100% - 250px);
 }
 
-.home-section .text {
-  display: inline-block;
-  font-size: 25px;
-  font-weight: 500;
-  margin: 18px;
+.linkActive {
+  color: #FFB100;
 }
-
-@media (max-width: 420px) {
-  .sidebar li .tooltip {
-    display: none;
-  }
+.linkActive i {
+  color: #FFB100;
 }
-/*.adminBody
-{
-    margin-left: $width-collapsed;
-    padding: 0;
-    margin: 0;
-    font-size: 1.8rem;
-}
-
-.adminBody-expanded
-{
-    margin-left: $width;
-}*/

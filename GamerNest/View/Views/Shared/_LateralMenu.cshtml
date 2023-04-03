@@ -1,0 +1,120 @@
+﻿
+<nav class="sidebar">
+    <div class="logo-details">
+        <img class="" src="~/img/Banner/Logo.png" alt="Banner">
+        <div class="logo_name">Gamer Nest</div>
+        <i class="fa-solid fa-bars" id="btn"></i>
+    </div>
+    <ul class="nav-list">
+        <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Index") ? "linkActive" : "")">
+            <a asp-controller="Admin" asp-action="Index">
+                <i class="fa-solid fa-house"></i>
+                <span class="links_name">Home</span>
+            </a>
+            <span class="tooltip">Home</span>
+        </li>
+        <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Users") ? "linkActive" : "")">
+            <a asp-controller="Admin" asp-action="Users">
+                <i class="fa-solid fa-user"></i>
+                <span class="links_name">Users</span>
+            </a>
+            <span class="tooltip">Users</span>
+        </li>
+        <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Authors") ? "linkActive" : "")">
+            <a asp-controller="Admin" asp-action="Authors">
+                <i class="fa-solid fa-user-tie"></i>
+                <span class="links_name">Authors</span>
+            </a>
+        <span class="tooltip">Authors</span>
+        </li>
+        <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Articles") ? "linkActive" : "")">
+            <a asp-controller="Admin" asp-action="Articles">
+                <i class="fa-solid fa-file-lines"></i>
+                <span class="links_name">Articles</span>
+            </a>
+            <span class="tooltip">Articles</span>
+        </li>
+        <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Games") ? "linkActive" : "")">
+            <a asp-controller="Admin" asp-action="Games">
+                <i class="fa-solid fa-gamepad"></i>
+                <span class="links_name">Games</span>
+            </a>
+            <span class="tooltip">Games</span>
+        </li>
+        <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Devs") ? "linkActive" : "")">
+            <a asp-controller="Admin" asp-action="Devs">
+                <i class="fa-solid fa-code"></i>
+                <span class="links_name">Devs</span>
+            </a>
+            <span class="tooltip">Devs</span>
+        </li>
+        <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Publishers") ? "linkActive" : "")">
+            <a asp-controller="Admin" asp-action="Publishers">
+                <i class="fa-solid fa-upload"></i>
+                <span class="links_name">Publishers</span>
+            </a>
+            <span class="tooltip">Publishers</span>
+        </li>
+        <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Platforms") ? "linkActive" : "")">
+            <a asp-controller="Admin" asp-action="Platforms">
+                <i class="fa-solid fa-layer-group"></i>
+                <span class="links_name">Platforms</span>
+            </a>
+            <span class="tooltip">Platforms</span>
+        </li>
+        <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Genres") ? "linkActive" : "")">
+            <a asp-controller="Admin" asp-action="Genres">
+                <i class="fa-solid fa-dragon"></i>
+                <span class="links_name">Genres</span>
+            </a>
+            <span class="tooltip">Genres</span>
+        </li>
+        <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Languages") ? "linkActive" : "")">
+            <a asp-controller="Admin" asp-action="Languages">
+                <i class="fa-solid fa-volume-high"></i>
+                <span class="links_name">Languages</span>
+            </a>
+            <span class="tooltip">Languages</span>
+        </li>
+        <li class="@((ViewContext.RouteData.Values["action"].ToString() == "PlayerTypes") ? "linkActive" : "")">
+            <a asp-controller="Admin" asp-action="PlayerTypes">
+                <i class="fa-solid fa-chess"></i>
+                <span class="links_name">Player Types</span>
+            </a>
+            <span class="tooltip">Player Types</span>
+        </li>
+        
+        <li class="profile">
+            <hr />
+            <div class="profile-details">
+                <img class="" src="~/img/Banner/Logo.png" alt="Banner">
+                <div class="name_job">
+                    <div class="name">Cristina Carbonell Matamoros</div>
+                    <div class="job">Admin</div>
+                </div>
+            </div>
+            <i class='bx bx-log-out' id="log_out"></i>
+        </li>
+    </ul>
+</nav>
+<script>
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+
+    const menuState = localStorage.getItem('menuState');
+
+    if (menuState === 'open') {
+        sidebar.classList.add('open');
+    }
+
+    closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+
+        if (sidebar.classList.contains('open')) {
+            localStorage.setItem('menuState', 'open');
+        } else {
+            localStorage.setItem('menuState', 'closed');
+        }
+    });
+
+</script>
