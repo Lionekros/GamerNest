@@ -18,7 +18,7 @@ namespace DBAccess
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
                     cmd.CommandText = cmd.CommandText = "SELECT id, username, password, email, avatar, isConfirmed, birthday, creationDate, token"
-                                + " FROM user;";
+                                + " FROM user";
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
                         cmd.CommandText += " ORDER BY " + orderBy;
@@ -27,6 +27,29 @@ namespace DBAccess
                     {
                         cmd.CommandText += " LIMIT " + limit;
                     }
+                    return Data.ExecuteCommand( cmd );
+                }
+
+            }
+            catch ( MySqlException ex )
+            {
+                DataTable dt = new DataTable();
+                Log log = new Log();
+                log.Add( ex.Message );
+                return dt;
+            }
+
+        }
+
+        public static DataTable GetUser(string username)
+        {
+            try
+            {
+                using ( MySqlCommand cmd = Data.CreateCommand() )
+                {
+                    cmd.CommandText = cmd.CommandText = "SELECT id, username, password, email, avatar, isConfirmed, birthday, creationDate, token"
+                                + " FROM user"
+                                + " WHERE username = " + username;
                     return Data.ExecuteCommand( cmd );
                 }
 

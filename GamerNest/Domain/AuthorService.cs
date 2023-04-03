@@ -35,5 +35,29 @@ namespace Domain
 
             }
         }
+
+        public static List<AuthorModel> GetAuthor(string email)
+        {
+            try
+            {
+                DataTable dt = AuthorRepository.GetAuthor(email);
+                List<AuthorModel> authorList = new List<AuthorModel>();
+
+                foreach ( DataRow row in dt.Rows )
+                {
+                    authorList.Add( new AuthorModel( row ) );
+                }
+
+                return authorList;
+            }
+            catch ( Exception ex )
+            {
+                List<AuthorModel> authorList = new List<AuthorModel>();
+                Log log = new Log();
+                log.Add( ex.Message );
+                return authorList;
+
+            }
+        }
     }
 }

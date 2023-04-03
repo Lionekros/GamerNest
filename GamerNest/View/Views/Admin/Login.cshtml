@@ -1,4 +1,25 @@
-﻿@model Support.ModelList
+﻿@model Support.AdminLogIn
 @{
     ViewData[ "Title" ] = "Admin - Login";
 }
+
+<main>
+    <section>
+        <div class="Form">
+            <form asp-controller="Admin" asp-action="LogIn" method="post">
+                <p class="error">@ViewBag.Message</p>
+                <div>
+                    <label asp-for="email">Email:</label>
+                    <input asp-for="email" placeholder="email" />
+                    <p class="error">@ViewBag.UsuMessage</p>
+                </div>
+                <div>
+                    <label asp-for="email">Password:</label>
+                    <input asp-for="password" type="password"/>
+                    <p class="error">@ViewBag.PassMessage</p>
+                </div>
+                <button type="submit" class="MainButton">Log in</button>
+            </form>
+        </div>
+    </section>
+</main>
