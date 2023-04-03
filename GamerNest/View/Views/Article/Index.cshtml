@@ -2,13 +2,12 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<div class="adminBody">
-    <div>
-        <!-- Render a partial view called "_MyPartial.cshtml" in the Views/Partials folder -->
-        <partial name="_LateralMenu" />
-    </div>
 
+<!-- Render a partial view called "_MyPartial.cshtml" in the Views/Partials folder -->
+<partial name="_LateralMenu" />
 
+<main class="home-section">
+    <div class="text">WELCOME</div>
     <div class="text-center">
         <h1>Platform</h1>
         @foreach ( var item in Model.platformList )
@@ -26,4 +25,4 @@
 
         }
     </div>
-</div>
+</main>

@@ -7,7 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Views\Admin\" />
 		<Folder Include="Views\Game\" />
 		<Folder Include="Views\User\" />
 		<Folder Include="wwwroot\img\" />
@@ -25,17 +24,20 @@
 	  <Content Remove="compilerconfig.json" />
 	  <Content Remove="wwwroot\scss\admin\_base.scss" />
 	  <Content Remove="wwwroot\scss\admin\_lateralMenu.scss" />
+	  <Content Remove="wwwroot\scss\utilities\_mixins.scss" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <SassFile Remove="wwwroot\scss\admin\_base.scss" />
 	  <SassFile Remove="wwwroot\scss\admin\_lateralMenu.scss" />
+	  <SassFile Remove="wwwroot\scss\utilities\_mixins.scss" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <None Include="compilerconfig.json" />
 	  <None Include="wwwroot\scss\admin\_base.scss" />
 	  <None Include="wwwroot\scss\admin\_lateralMenu.scss" />
+	  <None Include="wwwroot\scss\utilities\_mixins.scss" />
 	</ItemGroup>
 
 	<ItemGroup>
