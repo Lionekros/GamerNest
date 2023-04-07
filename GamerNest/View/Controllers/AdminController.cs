@@ -190,7 +190,6 @@ namespace View.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogIn(AdminLogIn login)
         {
             try
@@ -221,7 +220,7 @@ namespace View.Controllers
                 }
                 else
                 {
-                    ViewBag.UsuMessage = "Fill all data";
+                    ViewBag.Message = "Fill all data";
                     return View( "Login", login );
                 }
             }

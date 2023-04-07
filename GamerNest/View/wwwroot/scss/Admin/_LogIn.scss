@@ -1,0 +1,100 @@
+@import '../Utilities/variables';
+@import '../Utilities/mixins.scss';
+
+.AdminLogIn
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+
+    h1
+    {
+        font-size: 5rem;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    section
+    {
+        max-width: 50%;
+        width: 100%;
+        padding: 20px;
+        background-color: $secondary;
+        border-radius: 10px;
+        margin: 2rem 0;
+
+        @media (max-width: 767px)
+        {
+            max-width: 90%;
+        }
+
+        .form
+        {
+            margin-top: 20px;
+
+            label
+            {
+                display: block;
+                margin-bottom: 1rem;
+                font-weight: bold;
+                color: $primary;
+            }
+
+            input
+            {
+                width: 100%;
+                padding: 10px;
+                border-radius: 1rem;
+                border: 1px solid $dark;
+                margin-bottom: 2rem;
+            }
+
+            .error
+            {
+                color: $primary;
+                margin-top: -10px;
+                margin-bottom: 10px;
+                font-size: 1.5rem;
+                background-color: $terciary;
+                margin-bottom: 1rem;
+                text-align: center;
+                padding: 0.5rem;
+                border-radius: 0.5rem;
+            }
+
+            .mainButton
+            {
+                display: block;
+                width: 15%;
+                padding: 1.5rem;
+                background-color: $primary;
+                color: $light;
+                font-size: 1.5rem;
+                font-weight: bold;
+                text-align: center;
+                text-transform: uppercase;
+                border: 1px solid $light;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-left: auto;
+                text-align: center;
+                @include outline($dark);
+
+                @media (max-width: 767px)
+                {
+                    display: block;
+                    width: 100%;
+                    margin-left: 0;
+                }
+
+                &:hover
+                {
+                    background-color: darken($primary, 5%);
+                    color: darken($light, 5%);
+                }
+            }
+        }
+    }
+}

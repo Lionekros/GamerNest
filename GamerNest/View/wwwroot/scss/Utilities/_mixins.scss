@@ -18,3 +18,10 @@
         background-color: lighter($backgroundColor);
     }
 }
+
+@mixin outline($color)
+{
+    z-index: 1;
+    overflow: hidden;
+    text-shadow: -1px -1px 0 $color, 1px -1px 0 $color, -1px 1px 0 $color, 1px 1px 0 $color;
+}
