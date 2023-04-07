@@ -48,7 +48,7 @@ namespace DBAccess
                 {
                     cmd.CommandText = cmd.CommandText = "SELECT id, name, firstLastName, secondLatName, password, email, phone, description, avatar, isAdmin, canPublish, isActive, birthday, startDate, endDate"
                         + " FROM author"
-                        + " WHERE email = " + email;
+                        + " WHERE email = '" + email  + "'";
                     return Data.ExecuteCommand( cmd );
                 }
 
