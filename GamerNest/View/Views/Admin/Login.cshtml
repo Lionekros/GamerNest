@@ -3,6 +3,11 @@
     ViewData[ "Title" ] = "Admin - Login";
 }
 
+<header class="AdminHeader">
+    <img src="~/img/Banner/Logo.png" alt="Logo" />
+    <p>Gamer Nest</p>
+</header>
+
 <main class="AdminLogIn">
     <h1>Admin Log In</h1>
     <section>
@@ -29,4 +34,8 @@
             </form>
         </div>
     </section>
+    <a asp-controller="Articles" asp-action="Index">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Return</span>
+    </a>
 </main>

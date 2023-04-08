@@ -19,6 +19,36 @@
     }
 }
 
+@mixin button($backgroundColor, $textColor, $width:10%, $padding: 1rem)
+{
+    display: block;
+    width: $width;
+    padding: $padding;
+    background-color: $backgroundColor;
+    color: $textColor;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid $textColor;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+
+    @media (max-width: 767px)
+    {
+        display: block;
+        width: 100%;
+    }
+
+    &:hover
+    {
+        background-color: darken($backgroundColor, 5%);
+        color: darken($textColor, 5%);
+    }
+}
+
+
 @mixin outline($color)
 {
     z-index: 1;

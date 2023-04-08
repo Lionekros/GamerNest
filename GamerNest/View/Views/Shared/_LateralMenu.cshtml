@@ -147,24 +147,3 @@ else
         </ul>
     </nav>
 }
-<script>
-    let sidebar = document.querySelector(".sidebar");
-    let closeBtn = document.querySelector("#btn");
-
-    const menuState = localStorage.getItem('menuState');
-
-    if (menuState === 'open') {
-        sidebar.classList.add('open');
-    }
-
-    closeBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("open");
-
-        if (sidebar.classList.contains('open')) {
-            localStorage.setItem('menuState', 'open');
-        } else {
-            localStorage.setItem('menuState', 'closed');
-        }
-    });
-
-</script>
