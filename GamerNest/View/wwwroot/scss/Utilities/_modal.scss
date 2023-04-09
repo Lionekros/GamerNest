@@ -1,0 +1,82 @@
+@import '_variables.scss', '_mixins.scss';
+
+.modal
+{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+
+    .modal-content
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: $dark;
+        max-width: 100%;
+        margin: auto;
+        padding: 2rem;
+        border-radius: 1rem;
+        text-align: center;
+        border: 1px solid $light;
+    }
+
+    h2
+    {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    .modal-actions
+    {
+        margin-top: 2rem;
+        display: flex;
+        gap: 3rem;
+
+        #confirmBtn
+        {
+            @include button($primary, $light, 100%);
+            @include outline($dark);
+        }
+
+        #cancelBtn
+        {
+            @include button($terciary, $light, 100%);
+        }
+    }
+
+    @media screen and (max-width: 768px)
+    {
+        position: absolute;
+
+
+        .modal-content
+        {
+            display: block;
+        }
+
+        .modal-actions
+        {
+            display: block;
+
+            #confirmBtn
+            {
+                margin-bottom: 1rem;
+                @include button($primary, $light, 100%);
+                @include outline($dark);
+            }
+
+            #cancelBtn
+            {
+                @include button($terciary, $light, 100%);
+            }
+        }
+    }
+}

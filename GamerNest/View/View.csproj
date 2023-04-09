@@ -24,6 +24,7 @@
 	  <Content Remove="wwwroot\scss\admin\_base.scss" />
 	  <Content Remove="wwwroot\scss\admin\_lateralMenu.scss" />
 	  <Content Remove="wwwroot\scss\Admin\_LogIn.scss" />
+	  <Content Remove="wwwroot\scss\Admin\_table.scss" />
 	  <Content Remove="wwwroot\scss\utilities\_mixins.scss" />
 	</ItemGroup>
 
@@ -31,7 +32,9 @@
 	  <SassFile Remove="wwwroot\scss\admin\_base.scss" />
 	  <SassFile Remove="wwwroot\scss\admin\_lateralMenu.scss" />
 	  <SassFile Remove="wwwroot\scss\Admin\_LogIn.scss" />
+	  <SassFile Remove="wwwroot\scss\Admin\_table.scss" />
 	  <SassFile Remove="wwwroot\scss\utilities\_mixins.scss" />
+	  <SassFile Remove="wwwroot\scss\Utilities\_modal.scss" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -39,6 +42,7 @@
 	  <None Include="wwwroot\scss\admin\_base.scss" />
 	  <None Include="wwwroot\scss\Admin\_LogIn.scss" />
 	  <None Include="wwwroot\scss\admin\_lateralMenu.scss" />
+	  <None Include="wwwroot\scss\Admin\_table.scss" />
 	  <None Include="wwwroot\scss\utilities\_mixins.scss" />
 	</ItemGroup>
 

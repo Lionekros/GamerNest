@@ -312,6 +312,165 @@ template {
   display: none;
 }
 
+.modal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+.modal .modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #292929;
+  max-width: 100%;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  border: 1px solid #FCFCFC;
+}
+.modal h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.modal .modal-actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 3rem;
+}
+.modal .modal-actions #confirmBtn {
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #FFB100;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  z-index: 1;
+  overflow: hidden;
+  text-shadow: -1px -1px 0 #292929, 1px -1px 0 #292929, -1px 1px 0 #292929, 1px 1px 0 #292929;
+}
+@media (max-width: 767px) {
+  .modal .modal-actions #confirmBtn {
+    display: block;
+    width: 100%;
+  }
+}
+.modal .modal-actions #confirmBtn:hover {
+  background-color: #e69f00;
+  color: #efefef;
+}
+.modal .modal-actions #cancelBtn {
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #555555;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .modal .modal-actions #cancelBtn {
+    display: block;
+    width: 100%;
+  }
+}
+.modal .modal-actions #cancelBtn:hover {
+  background-color: #484848;
+  color: #efefef;
+}
+@media screen and (max-width: 768px) {
+  .modal {
+    position: absolute;
+  }
+  .modal .modal-content {
+    display: block;
+  }
+  .modal .modal-actions {
+    display: block;
+  }
+  .modal .modal-actions #confirmBtn {
+    margin-bottom: 1rem;
+    display: block;
+    max-width: 100%;
+    padding: 1rem;
+    background-color: #FFB100;
+    color: #FCFCFC;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid #FCFCFC;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    z-index: 1;
+    overflow: hidden;
+    text-shadow: -1px -1px 0 #292929, 1px -1px 0 #292929, -1px 1px 0 #292929, 1px 1px 0 #292929;
+  }
+}
+@media screen and (max-width: 768px) and (max-width: 767px) {
+  .modal .modal-actions #confirmBtn {
+    display: block;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .modal .modal-actions #confirmBtn:hover {
+    background-color: #e69f00;
+    color: #efefef;
+  }
+}
+@media screen and (max-width: 768px) {
+  .modal .modal-actions #cancelBtn {
+    display: block;
+    max-width: 100%;
+    padding: 1rem;
+    background-color: #555555;
+    color: #FCFCFC;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid #FCFCFC;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 768px) and (max-width: 767px) {
+  .modal .modal-actions #cancelBtn {
+    display: block;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .modal .modal-actions #cancelBtn:hover {
+    background-color: #484848;
+    color: #efefef;
+  }
+}
+
 html {
   font-size: 62.5%; /*For the rem*/
   box-sizing: border-box;
@@ -322,6 +481,10 @@ html {
 
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
 }
 
 * {
@@ -630,7 +793,7 @@ html {
 }
 .AdminLogIn section .form .mainButton {
   display: block;
-  width: 15%;
+  max-width: 100%;
   padding: 1rem;
   background-color: #FFB100;
   color: #FCFCFC;
@@ -660,7 +823,7 @@ html {
 .AdminLogIn a {
   text-decoration: none;
   display: block;
-  width: 10%;
+  max-width: 100%;
   padding: 1rem;
   background-color: #555555;
   color: #FCFCFC;
@@ -687,6 +850,63 @@ html {
   .AdminLogIn a {
     margin-top: 2rem;
     max-width: 70%;
+  }
+}
+
+.adminTable {
+  margin-top: 3rem;
+  overflow-x: auto;
+}
+.adminTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.adminTable th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #1C1C1C;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+  text-align: center;
+}
+.adminTable th:first-child {
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+}
+.adminTable th:last-child {
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+.adminTable td {
+  padding: 10px;
+  border-bottom: 1px solid #FCFCFC;
+  text-align: center;
+}
+.adminTable td a {
+  color: #FFB100;
+}
+.adminTable td a:hover {
+  color: #cc8e00;
+}
+.adminTable .checkmark-icon {
+  color: #3c763d;
+}
+.adminTable .xmark-icon {
+  color: #a94442;
+}
+.adminTable .image-cell {
+  max-width: 100px;
+  max-height: 100px;
+}
+@media screen and (max-width: 600px) {
+  .adminTable table {
+    font-size: 12px;
+  }
+  .adminTable th,
+  .adminTable td {
+    padding: 5px;
   }
 }
 

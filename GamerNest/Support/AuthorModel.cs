@@ -18,30 +18,33 @@ namespace Support
         public string phone { get; set; }
         public string description { get; set; }
         public string avatar { get; set; }
-        public sbyte isAdmin { get; set; }
-        public sbyte canPublish { get; set; }
-        public sbyte isActive { get; set; }
-        public DateTime birthday { get; set; }
-        public DateTime startDate { get; set; }
-        public DateTime? endDate { get; set; }
+        public bool isAdmin { get; set; }
+        public bool canPublish { get; set; }
+        public bool isActive { get; set; }
+        public string birthday { get; set; }
+        public string startDate { get; set; }
+        public string endDate { get; set; }
 
         public AuthorModel(DataRow row)
         {
             id = row.Field<int>( "id" );
             name = row.Field<string>( "name" );
             firstLastName = row.Field<string>( "firstLastName" );
-            secondLastName = row.Field<string>( "secondLatName" );
+            secondLastName = row.Field<string>( "secondLastName" );
             password = row.Field<string>( "password" );
             email = row.Field<string>( "email" );
             phone = row.Field<string>( "phone" );
             description = row.Field<string>( "description" );
             avatar = row.Field<string>( "avatar" );
-            isAdmin = row.Field<sbyte>( "isAdmin" );
-            canPublish = row.Field<sbyte>( "canPublish" );
-            isActive = row.Field<sbyte>( "isActive" );
-            birthday = row.Field<DateTime>( "birthday" );
-            startDate = row.Field<DateTime>( "startDate" );
-            endDate = row.Field<DateTime?>( "endDate" );
+            isAdmin = Utility.sByteToBool( row.Field<sbyte>( "isAdmin" ) );
+            canPublish = Utility.sByteToBool( row.Field<sbyte>( "canPublish" ));
+            isActive = Utility.sByteToBool( row.Field<sbyte>( "isActive" ));
+            birthday = Utility.DateTimeToString( row.Field<DateTime>( "birthday" ));
+            startDate = Utility.DateTimeToString( row.Field<DateTime>( "startDate" ));
+            if ( row[ "endDate" ] != DBNull.Value )
+                endDate = Utility.DateTimeToString( row.Field<DateTime>( "endDate" ) );
+            else
+                endDate = "";
         }
     }
 }

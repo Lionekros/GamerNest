@@ -1,0 +1,47 @@
+﻿<div class="adminTable">
+    <table>
+        <tr>
+            @foreach ( var prop in Model.First().GetType().GetProperties() )
+            {
+                // Exclude "Password" column from table
+                if ( prop.Name.ToLower() != "password" )
+                {
+                    <th>@prop.Name</th>
+                }
+            }
+        </tr>
+        @foreach ( var item in Model )
+        {
+            <tr>
+                @foreach ( var prop in item.GetType().GetProperties() )
+                {
+                    // Exclude "Password" column from table
+                    if ( prop.Name.ToLower() != "password" )
+                    {
+                        <td>
+                            @if ( prop.PropertyType == typeof( bool ) )
+                            {
+                                @if ( (bool) prop.GetValue( item ) )
+                                {
+                                    <i class="far fa-circle-check checkmark-icon"></i>
+                                }
+                                else
+                                {
+                                    <i class="far fa-circle-xmark xmark-icon"></i>
+                                }
+                            }
+                            else if ( prop.PropertyType == typeof( string ) && ((string) prop.GetValue( item ))?.StartsWith( "/img/" ) == true )
+                            {
+                                <img class="image-cell" src="@prop.GetValue(item)" alt="Image">
+                            }
+                            else
+                            {
+                                @prop.GetValue(item)
+                            }
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </table>
+</div>

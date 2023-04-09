@@ -48,7 +48,9 @@ namespace View.Controllers
                 return RedirectToAction( "LogInForm", "Admin" );
             }
 
-            return View();
+            GetAllAuthors();
+
+            return View("Authors", lists);
         }
 
         public ActionResult Devs()
@@ -261,14 +263,19 @@ namespace View.Controllers
             return correct;
         }
 
+        public void GetAllAuthors()
+        {
+            lists.authorList = AuthorService.GetAllAuthors("id");
+        }
+
         public void GetAuthor(string email)
         {
             lists.authorList = AuthorService.GetAuthor( email );
         }
 
-        public string FetchUserType(sbyte type)
+        public string FetchUserType(bool type)
         {
-            if ( type == 0 )
+            if ( type == false )
             {
                 return "Author";
             }

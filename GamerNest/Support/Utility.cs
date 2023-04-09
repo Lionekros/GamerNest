@@ -9,12 +9,12 @@ namespace Support
 {
     public static class Utility
     {
-        public static bool ConvertToBool(sbyte num)
+        public static bool sByteToBool(sbyte num)
         {
             return num == 1 ? true : false;
         }
 
-        public static sbyte ConvertToTinyInt(bool op) 
+        public static sbyte BoolToSByte(bool op) 
         {
             return op ? (sbyte) 1 : (sbyte) 0;
         }
@@ -47,6 +47,16 @@ namespace Support
                 return false;
 
             }
+        }
+
+        public static string DateTimeToString(DateTime dateTime)
+        {
+            return dateTime.ToString("dd/MM/yyyy");
+        }
+
+        public static DateTime StringToDateTime(string dateString)
+        {
+            return DateTime.ParseExact(dateString, "dd/MM/yyyy", null);
         }
     }
 }

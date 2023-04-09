@@ -84,20 +84,12 @@
 
             .error
             {
-                color: $primary;
-                margin-top: -10px;
-                margin-bottom: 10px;
-                font-size: 1.5rem;
-                background-color: $terciary;
-                margin-bottom: 1rem;
-                text-align: center;
-                padding: 0.5rem;
-                border-radius: 0.5rem;
+                @include error();
             }
 
             .mainButton
             {
-                @include button($primary, $light, 15%);
+                @include button($primary, $light, 100%);
                 @include outline($dark);
                 margin-left: auto;
             }
@@ -107,7 +99,7 @@
     a
     {
         text-decoration: none;
-        @include button($terciary, $light, 10%);
+        @include button($terciary, $light, 100%);
 
         @media (max-width: 767px)
         {

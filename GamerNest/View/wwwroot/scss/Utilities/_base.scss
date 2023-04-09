@@ -1,4 +1,4 @@
-@import 'variables', 'normalize', 'mixins';
+@import 'variables', 'normalize', 'mixins', '_modal.scss';
 
 html
 {
@@ -12,4 +12,9 @@ html
 *, *:before, *:after
 {
     box-sizing: inherit;
+}
+
+a
+{
+    text-decoration: none;
 }

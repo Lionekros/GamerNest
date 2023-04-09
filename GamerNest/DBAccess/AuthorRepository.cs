@@ -17,7 +17,7 @@ namespace DBAccess
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = cmd.CommandText = "SELECT id, name, firstLastName, secondLatName, password, email, phone, description, avatar, isAdmin, canPublish, isActive, birthday, startDate, endDate"
+                    cmd.CommandText = cmd.CommandText = "SELECT id, name, firstLastName, secondLastName, password, email, phone, description, avatar, isAdmin, canPublish, isActive, birthday, startDate, endDate"
                                 + " FROM author";
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
@@ -46,7 +46,7 @@ namespace DBAccess
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = cmd.CommandText = "SELECT id, name, firstLastName, secondLatName, password, email, phone, description, avatar, isAdmin, canPublish, isActive, birthday, startDate, endDate"
+                    cmd.CommandText = cmd.CommandText = "SELECT id, name, firstLastName, secondLastName, password, email, phone, description, avatar, isAdmin, canPublish, isActive, birthday, startDate, endDate"
                         + " FROM author"
                         + " WHERE email = '" + email  + "'";
                     return Data.ExecuteCommand( cmd );

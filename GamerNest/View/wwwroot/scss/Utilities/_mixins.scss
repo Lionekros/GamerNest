@@ -19,10 +19,10 @@
     }
 }
 
-@mixin button($backgroundColor, $textColor, $width:10%, $padding: 1rem)
+@mixin button($backgroundColor, $textColor, $width:100%, $padding: 1rem)
 {
     display: block;
-    width: $width;
+    max-width: $width;
     padding: $padding;
     background-color: $backgroundColor;
     color: $textColor;
@@ -54,4 +54,17 @@
     z-index: 1;
     overflow: hidden;
     text-shadow: -1px -1px 0 $color, 1px -1px 0 $color, -1px 1px 0 $color, 1px 1px 0 $color;
+}
+
+@mixin error()
+{
+    color: $primary;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    background-color: $terciary;
+    margin-bottom: 1rem;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
 }

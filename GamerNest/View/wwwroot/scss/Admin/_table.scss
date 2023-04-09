@@ -1,0 +1,85 @@
+﻿@import '../Utilities/_variables.scss';
+
+.adminTable
+{
+    margin-top: 3rem;
+    overflow-x: auto;
+
+    table
+    {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th
+    {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background-color: $secondary;
+        font-weight: bold;
+        text-align: left;
+        padding: 10px;
+        text-align: center;
+
+        &:first-child
+        {
+            border-top-left-radius: 2rem;
+            border-bottom-left-radius: 2rem;
+        }
+
+        &:last-child
+        {
+            border-top-right-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+        }
+    }
+
+    td
+    {
+        padding: 10px;
+        border-bottom: 1px solid $light;
+        text-align: center;
+
+        a
+        {
+            color: $primary;
+
+            &:hover
+            {
+                color: darken($primary, 10%);
+            }
+        }
+    }
+
+    .checkmark-icon
+    {
+        color: $green;
+    }
+
+    .xmark-icon
+    {
+        color: $red;
+    }
+
+    .image-cell
+    {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    @media screen and (max-width: 600px)
+    {
+        table
+        {
+            font-size: 12px;
+        }
+
+        th,
+        td
+        {
+            padding: 5px;
+        }
+    }
+}
+
