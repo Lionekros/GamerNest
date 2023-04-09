@@ -30,12 +30,12 @@
                     <tr>
                         <td>
                             <!-- Read Author -->
-                            <a asp-controller="Admin" asp-action="ReadAuthor" asp-route-id="@item.id">
+                            <a asp-controller="AdminAuthor" asp-action="ReadAuthor" asp-route-id="@item.id">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
 
                             <!-- Edit Author -->
-                            <a asp-controller="Admin" asp-action="EditAuthor" asp-route-id="@item.id">
+                            <a asp-controller="AdminAuthor" asp-action="EditAuthor" asp-route-id="@item.id">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
 
@@ -50,7 +50,7 @@
                                     <h2>Confirmation</h2>
                                     <p>Are you sure you want to delete this row?</p>
                                     <div class="modal-actions">
-                                        <button id="confirmBtn" asp-controller="Admin" asp-action="EditAuthor" data-row-id="@item.id">Delete</button>
+                                        <button id="confirmBtn" asp-controller="AdminAuthor" asp-action="EditAuthor" data-row-id="@item.id">Delete</button>
                                         <button id="cancelBtn">Cancel</button>
                                     </div>
                                 </div>

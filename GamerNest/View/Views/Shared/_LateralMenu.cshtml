@@ -1,4 +1,4 @@
-﻿@if (ViewBag.AdminType != "Admin")
+﻿@if ( ViewData[ "AdminType" ] != "Admin" )
 {
     <nav class="sidebar">
         <div class="logo-details">
@@ -15,14 +15,14 @@
                 <span class="tooltip">Home</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Authors") ? "linkActive" : "")">
-                <a asp-controller="Admin" asp-action="Authors">
+                <a asp-controller="AdminAuthor" asp-action="Authors">
                     <i class="fa-solid fa-user-tie"></i>
                     <span class="links_name">Authors</span>
                 </a>
                 <span class="tooltip">Authors</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Articles") ? "linkActive" : "")">
-                <a asp-controller="Admin" asp-action="Articles">
+                <a asp-controller="AdminArticle" asp-action="Articles">
                     <i class="fa-solid fa-file-lines"></i>
                     <span class="links_name">Articles</span>
                 </a>
@@ -33,8 +33,8 @@
                 <div class="profile-details">
                     <img class="" src="~/img/Banner/Logo.png" alt="Banner">
                     <div class="name_job">
-                        <div class="name">@ViewBag.AdminFullName</div>
-                        <div class="job">@ViewBag.AdminType</div>
+                        <div class="name">@ViewData["AdminFullName"]</div>
+                        <div class="job">@ViewData["AdminType"]</div>
                     </div>
                 </div>
                 <a asp-controller="Admin" asp-action="LogOut">
@@ -61,70 +61,70 @@ else
                 <span class="tooltip">Home</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Users") ? "linkActive" : "")">
-                <a asp-controller="Admin" asp-action="Users">
+                <a asp-controller="AdminUser" asp-action="Users">
                     <i class="fa-solid fa-user"></i>
                     <span class="links_name">Users</span>
                 </a>
                 <span class="tooltip">Users</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Authors") ? "linkActive" : "")">
-                <a asp-controller="Admin" asp-action="Authors">
+                <a asp-controller="AdminAuthor" asp-action="Authors">
                     <i class="fa-solid fa-user-tie"></i>
                     <span class="links_name">Authors</span>
                 </a>
                 <span class="tooltip">Authors</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Articles") ? "linkActive" : "")">
-                <a asp-controller="Admin" asp-action="Articles">
+                <a asp-controller="AdminArticle" asp-action="Articles">
                     <i class="fa-solid fa-file-lines"></i>
                     <span class="links_name">Articles</span>
                 </a>
                 <span class="tooltip">Articles</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Games") ? "linkActive" : "")">
-                <a asp-controller="Admin" asp-action="Games">
+                <a asp-controller="AdminGame" asp-action="Games">
                     <i class="fa-solid fa-gamepad"></i>
                     <span class="links_name">Games</span>
                 </a>
                 <span class="tooltip">Games</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Devs") ? "linkActive" : "")">
-                <a asp-controller="Admin" asp-action="Devs">
+                <a asp-controller="AdminDev" asp-action="Devs">
                     <i class="fa-solid fa-code"></i>
                     <span class="links_name">Devs</span>
                 </a>
                 <span class="tooltip">Devs</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Publishers") ? "linkActive" : "")">
-                <a asp-controller="Admin" asp-action="Publishers">
+                <a asp-controller="AdminPublisher" asp-action="Publishers">
                     <i class="fa-solid fa-upload"></i>
                     <span class="links_name">Publishers</span>
                 </a>
                 <span class="tooltip">Publishers</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Platforms") ? "linkActive" : "")">
-                <a asp-controller="Admin" asp-action="Platforms">
+                <a asp-controller="AdminPlatform" asp-action="Platforms">
                     <i class="fa-solid fa-layer-group"></i>
                     <span class="links_name">Platforms</span>
                 </a>
                 <span class="tooltip">Platforms</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Genres") ? "linkActive" : "")">
-                <a asp-controller="Admin" asp-action="Genres">
+                <a asp-controller="AdminGenre" asp-action="Genres">
                     <i class="fa-solid fa-dragon"></i>
                     <span class="links_name">Genres</span>
                 </a>
                 <span class="tooltip">Genres</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Languages") ? "linkActive" : "")">
-                <a asp-controller="Admin" asp-action="Languages">
+                <a asp-controller="AdminLanguage" asp-action="Languages">
                     <i class="fa-solid fa-volume-high"></i>
                     <span class="links_name">Languages</span>
                 </a>
                 <span class="tooltip">Languages</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "PlayerTypes") ? "linkActive" : "")">
-                <a asp-controller="Admin" asp-action="PlayerTypes">
+                <a asp-controller="AdminPlayerType" asp-action="PlayerTypes">
                     <i class="fa-solid fa-chess"></i>
                     <span class="links_name">Player Types</span>
                 </a>
@@ -132,12 +132,11 @@ else
             </li>
 
             <li class="profile">
-                
                 <div class="profile-details">
-                    <img src="@ViewBag.AdminAvatar" alt="Banner">
+                    <img class="" src="~/img/Banner/Logo.png" alt="Banner">
                     <div class="name_job">
-                        <div class="name">@ViewBag.AdminFullName</div>
-                        <div class="job">@ViewBag.AdminType</div>
+                        <div class="name">@ViewData["AdminFullName"]</div>
+                        <div class="job">@ViewData["AdminType"]</div>
                     </div>
                 </div>
                 <a asp-controller="Admin" asp-action="LogOut">

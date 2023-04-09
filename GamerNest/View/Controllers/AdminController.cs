@@ -9,173 +9,15 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace View.Controllers
 {
-    public class AdminController :Controller
+    public class AdminController :BaseController
     {
-
-        ModelList lists = new ModelList();
-
-
         public ActionResult Index()
         {
-            SetViewBags();
+            SetDefaultViewDatas();
 
             if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
             {
                 return RedirectToAction( "LogInForm", "Admin" );
-            }
-
-            return View();
-        }
-
-        public ActionResult Articles()
-        {
-            SetViewBags();
-
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
-            {
-                return RedirectToAction( "LogInForm", "Admin" );
-            }
-            return View();
-        }
-
-
-        public ActionResult Authors()
-        {
-            SetViewBags();
-
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
-            {
-                return RedirectToAction( "LogInForm", "Admin" );
-            }
-
-            GetAllAuthors();
-
-            return View("Authors", lists);
-        }
-
-        public ActionResult Devs()
-        {
-            SetViewBags();
-
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
-            {
-                return RedirectToAction( "LogInForm", "Admin" );
-            }
-            else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
-            {
-                return RedirectToAction( "Index", "Admin" );
-            }
-
-            return View();
-        }
-
-        public ActionResult Games()
-        {
-            SetViewBags();
-
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
-            {
-                return RedirectToAction( "LogInForm", "Admin" );
-            }
-            else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
-            {
-                return RedirectToAction( "Index", "Admin" );
-            }
-
-            return View();
-        }
-
-        public ActionResult Genres()
-        {
-            SetViewBags();
-
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
-            {
-                return RedirectToAction( "LogInForm", "Admin" );
-            }
-            else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
-            {
-                return RedirectToAction( "Index", "Admin" );
-            }
-
-            return View();
-        }
-
-        public ActionResult Languages()
-        {
-            SetViewBags();
-
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
-            {
-                return RedirectToAction( "LogInForm", "Admin" );
-            }
-            else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
-            {
-                return RedirectToAction( "Index", "Admin" );
-            }
-
-            return View();
-        }
-
-        public ActionResult Platforms()
-        {
-            SetViewBags();
-
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
-            {
-                return RedirectToAction( "LogInForm", "Admin" );
-            }
-            else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
-            {
-                return RedirectToAction( "Index", "Admin" );
-            }
-
-            return View();
-        }
-
-        public ActionResult PlayerTypes()
-        {
-            SetViewBags();
-
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
-            {
-                return RedirectToAction( "LogInForm", "Admin" );
-            }
-            else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
-            {
-                return RedirectToAction( "Index", "Admin" );
-            }
-
-            return View();
-        }
-
-        public ActionResult Publishers()
-        {
-            SetViewBags();
-
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
-            {
-                return RedirectToAction( "LogInForm", "Admin" );
-            }
-            else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
-            {
-                return RedirectToAction( "Index", "Admin" );
-            }
-
-            return View();
-        }
-
-        public ActionResult Users()
-        {
-            SetViewBags();
-
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
-            {
-                return RedirectToAction( "LogInForm", "Admin" );
-            }
-            else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
-            {
-                return RedirectToAction( "Index", "Admin" );
             }
 
             return View();
@@ -183,8 +25,7 @@ namespace View.Controllers
 
         public ActionResult LogInForm()
         {
-            GetAllTexts("Login", "ESP");
-            DinamycViewBag();
+            WebText( "Login");
             return View("Login");
         }
         public ActionResult LogOut()
@@ -212,6 +53,8 @@ namespace View.Controllers
                         HttpContext.Session.SetString( "AdminFullName", lists.authorList[ 0 ].name + " " + lists.authorList[ 0 ].firstLastName + " " + lists.authorList[ 0 ].secondLastName );
                         HttpContext.Session.SetString( "AdminAvatar", lists.authorList[ 0 ].avatar );
                         HttpContext.Session.SetString( "AdminType", FetchUserType( lists.authorList[ 0 ].isAdmin ) );
+
+                        HttpContext.Session.SetString( "PageLanguage", lists.authorList[ 0 ].preferedLanguage );
 
 
                         return RedirectToAction( "Index", "Admin" );
@@ -265,49 +108,9 @@ namespace View.Controllers
             return correct;
         }
 
-        public void GetAllAuthors()
-        {
-            lists.authorList = AuthorService.GetAllAuthors("id");
-        }
-
-        public void GetAllTexts(string cat, string lang = "ENG")
-        {
-            lists.webTextList = WebTextService.GetAllTextsByCategory(cat, lang);
-        }
-
         public void GetAuthor(string email)
         {
             lists.authorList = AuthorService.GetAuthor( email );
-        }
-
-        public string FetchUserType(bool type)
-        {
-            if ( type == false )
-            {
-                return "Author";
-            }
-            else
-            {
-                return "Admin";
-            }
-        }
-
-        public void SetViewBags()
-        {
-            ViewBag.AdminEmail = HttpContext.Session.GetString( "AdminEmail" );
-            ViewBag.AdminFullName = HttpContext.Session.GetString( "AdminFullName" );
-            ViewBag.AdminType = HttpContext.Session.GetString( "AdminType" );
-            ViewBag.AdminAvatar = HttpContext.Session.GetString( "AdminAvatar" );
-        }
-
-        public void DinamycViewBag()
-        {
-            foreach ( var item in lists.webTextList )
-            {
-                // Create a dynamic property with the key as the item's Id
-                ViewData[ item.title ] = item.text;
-            }
-
         }
 
     }

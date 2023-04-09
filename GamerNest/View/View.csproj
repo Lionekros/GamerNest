@@ -7,6 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Folder Include="Views\WebText\" />
 		<Folder Include="Views\Game\" />
 		<Folder Include="Views\User\" />
 		<Folder Include="wwwroot\img\" />
