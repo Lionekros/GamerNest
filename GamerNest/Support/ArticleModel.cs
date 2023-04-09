@@ -18,6 +18,7 @@ namespace Support
         public DateTime createdDate { get; set; }
         public DateTime? updatedDate { get; set; }
         public int idAuthor { get; set; }
+        public string language { get; set; }
 
         public ArticleModel(DataRow row)
         {
@@ -30,6 +31,7 @@ namespace Support
             createdDate = row.Field<DateTime>( "createdDate" );
             updatedDate = row.Field<DateTime?>( "updatedDate" );
             idAuthor = row.Field<int>( "idAuthor" );
+            language = row.Field<string>( "language" );
         }
     }
 }

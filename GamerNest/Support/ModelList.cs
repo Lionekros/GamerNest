@@ -2,6 +2,8 @@
 {
     public class ModelList
     {
+        public List<WebTextModel> webTextList { get; set; }
+
         public List<AuthorModel> authorList { get; set; }
 
         public List<GameExternalDataModel> devList { get; set; }

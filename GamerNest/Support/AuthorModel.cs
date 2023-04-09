@@ -18,6 +18,7 @@ namespace Support
         public string phone { get; set; }
         public string description { get; set; }
         public string avatar { get; set; }
+        public string preferedLanguage { get; set; }
         public bool isAdmin { get; set; }
         public bool canPublish { get; set; }
         public bool isActive { get; set; }
@@ -36,6 +37,7 @@ namespace Support
             phone = row.Field<string>( "phone" );
             description = row.Field<string>( "description" );
             avatar = row.Field<string>( "avatar" );
+            preferedLanguage = row.Field<string>( "preferedLanguage" );
             isAdmin = Utility.sByteToBool( row.Field<sbyte>( "isAdmin" ) );
             canPublish = Utility.sByteToBool( row.Field<sbyte>( "canPublish" ));
             isActive = Utility.sByteToBool( row.Field<sbyte>( "isActive" ));

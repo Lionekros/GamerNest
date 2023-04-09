@@ -7,14 +7,15 @@ namespace DBAccess
 {
     public class LanguageRepository
     {
-        public static DataTable GetAllLanguages(string orderBy = "", int limit = -1)
+        public static DataTable GetAllLanguages(string language = "ENG", string orderBy = "", int limit = -1)
         {
             try
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = "SELECT 2 as selector, id as idLanguage, name"
-                                 + " FROM language";
+                    cmd.CommandText = "SELECT 2 as selector, id as idLanguage, name, language"
+                                 + " FROM language"
+                                 + " WHERE language = '" + language + "'";
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
                         cmd.CommandText += " ORDER BY " + orderBy;

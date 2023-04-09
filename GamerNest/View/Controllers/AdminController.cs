@@ -183,6 +183,8 @@ namespace View.Controllers
 
         public ActionResult LogInForm()
         {
+            GetAllTexts("Login", "ESP");
+            DinamycViewBag();
             return View("Login");
         }
         public ActionResult LogOut()
@@ -268,6 +270,11 @@ namespace View.Controllers
             lists.authorList = AuthorService.GetAllAuthors("id");
         }
 
+        public void GetAllTexts(string cat, string lang = "ENG")
+        {
+            lists.webTextList = WebTextService.GetAllTextsByCategory(cat, lang);
+        }
+
         public void GetAuthor(string email)
         {
             lists.authorList = AuthorService.GetAuthor( email );
@@ -291,6 +298,16 @@ namespace View.Controllers
             ViewBag.AdminFullName = HttpContext.Session.GetString( "AdminFullName" );
             ViewBag.AdminType = HttpContext.Session.GetString( "AdminType" );
             ViewBag.AdminAvatar = HttpContext.Session.GetString( "AdminAvatar" );
+        }
+
+        public void DinamycViewBag()
+        {
+            foreach ( var item in lists.webTextList )
+            {
+                // Create a dynamic property with the key as the item's Id
+                ViewData[ item.title ] = item.text;
+            }
+
         }
 
     }

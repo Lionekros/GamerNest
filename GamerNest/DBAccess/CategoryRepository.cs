@@ -1,21 +1,24 @@
 ﻿using LogError;
 using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DBAccess
 {
-    public class PlayerTypeRepository
+    public class CategoryRepository
     {
-        public static DataTable GetAllPlayerTypes(string language = "ENG", string orderBy = "", int limit = -1)
+        public static DataTable GetAllCategories(string orderBy = "", int limit = -1)
         {
             try
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = "SELECT 4 as selector, id as idPlayerType, name, language"
-                                + " FROM player_type"
-                                + " WHERE language = '" + language + "'";
+                    cmd.CommandText = cmd.CommandText = "SELECT id, name"
+                        + " FROM category";
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
                         cmd.CommandText += " ORDER BY " + orderBy;
@@ -26,6 +29,7 @@ namespace DBAccess
                     }
                     return Data.ExecuteCommand( cmd );
                 }
+
             }
             catch ( MySqlException ex )
             {

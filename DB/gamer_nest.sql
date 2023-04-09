@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 09, 2023 at 07:57 PM
+-- Generation Time: Apr 09, 2023 at 10:43 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -90,6 +90,25 @@ CREATE TABLE `category` (
   `id` int NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(3, 'Admin'),
+(5, 'Article'),
+(6, 'Author'),
+(7, 'Dev'),
+(8, 'Game'),
+(9, 'Genre'),
+(10, 'Language (Game)'),
+(11, 'Language (Web)'),
+(12, 'Platform'),
+(13, 'PlayerType'),
+(14, 'Publisher'),
+(15, 'User'),
+(16, 'Login');
 
 -- --------------------------------------------------------
 
@@ -251,18 +270,19 @@ CREATE TABLE `platform` (
 --
 
 INSERT INTO `platform` (`id`, `name`, `icon`) VALUES
-(1, 'PlayStation 5', ''),
-(2, 'Xbox Series X', ''),
-(3, 'Nintendo Switch', ''),
-(4, 'PlayStation 4', ''),
-(5, 'Xbox One', ''),
-(6, 'PC', ''),
-(7, 'Mac', ''),
-(8, 'Linux', ''),
-(9, 'Mobile', ''),
-(10, 'PlayStation 3', ''),
-(11, 'Xbox 360', ''),
-(12, 'Nintendo Wii', '');
+(1, 'PlayStation 5', '<i class=\"fa-brands fa-playstation\"></i>'),
+(2, 'Xbox Series X', '<i class=\"fa-brands fa-xbox\"></i>'),
+(3, 'Nintendo Switch', '<i class=\"fa-solid fa-n\"></i>'),
+(4, 'PlayStation 4', '<i class=\"fa-brands fa-playstation\"></i>'),
+(5, 'Xbox One', '<i class=\"fa-brands fa-xbox\"></i>'),
+(6, 'PC', '<i class=\"fa-brands fa-windows\"></i>'),
+(7, 'Mac', '<i class=\"fa-brands fa-apple\"></i>'),
+(8, 'Linux', '<i class=\"fa-brands fa-linux\"></i>'),
+(9, 'Android', '<i class=\"fa-brands fa-android\"></i>'),
+(10, 'PlayStation 3', '<i class=\"fa-brands fa-playstation\"></i>'),
+(11, 'Xbox 360', '<i class=\"fa-brands fa-xbox\"></i>'),
+(12, 'Nintendo Wii', '<i class=\"fa-solid fa-n\"></i>'),
+(13, 'IOS', '<i class=\"fa-brands fa-app-store-ios\"></i>');
 
 -- --------------------------------------------------------
 
@@ -357,10 +377,27 @@ INSERT INTO `web_language` (`id`, `name`, `icon`) VALUES
 
 CREATE TABLE `web_text` (
   `id` int NOT NULL,
+  `title` varchar(255) COLLATE utf8mb3_bin NOT NULL,
   `text` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `idCategory` int NOT NULL,
   `language` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL DEFAULT 'ENG'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Dumping data for table `web_text`
+--
+
+INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
+(1, 'AdminLoginTitle', 'Admin Log In', 16, 'ENG'),
+(2, 'AdminLoginTitle', 'Acceso Administrador', 16, 'ESP'),
+(3, 'AdminLoginEmail', 'Email', 16, 'ENG'),
+(4, 'AdminLoginEmail', 'Correo', 16, 'ESP'),
+(5, 'AdminLoginPassword', 'Password', 16, 'ENG'),
+(6, 'AdminLoginPassword', 'Contraseña', 16, 'ESP'),
+(7, 'AdminLoginButtonAccess', 'Log In', 16, 'ENG'),
+(8, 'AdminLoginButtonAccess', 'Acceder', 16, 'ESP'),
+(9, 'AdminLoginButtonReturn', 'Return', 16, 'ENG'),
+(10, 'AdminLoginButtonReturn', 'Volver', 16, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -531,7 +568,7 @@ ALTER TABLE `author`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `dev`
@@ -561,7 +598,7 @@ ALTER TABLE `language`
 -- AUTO_INCREMENT for table `platform`
 --
 ALTER TABLE `platform`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `player_type`
@@ -580,12 +617,6 @@ ALTER TABLE `publisher`
 --
 ALTER TABLE `user`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `web_text`
---
-ALTER TABLE `web_text`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

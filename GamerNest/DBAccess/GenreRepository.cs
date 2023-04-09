@@ -7,14 +7,15 @@ namespace DBAccess
 {
     public class GenreRepository
     {
-        public static DataTable GetAllGenres(string orderBy = "", int limit = -1)
+        public static DataTable GetAllGenres(string language = "ENG", string orderBy = "", int limit = -1)
         {
             try
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = "SELECT 1 as selector, id as idGenre, name"
-                                + " FROM genre";
+                    cmd.CommandText = "SELECT 1 as selector, id as idGenre, name, language"
+                                + " FROM genre"
+                                + " WHERE language = '" + language + "'";
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
                         cmd.CommandText += " ORDER BY " + orderBy;

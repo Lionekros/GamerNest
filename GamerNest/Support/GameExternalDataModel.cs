@@ -7,6 +7,7 @@ namespace Support
         public int id { get; set; }
         public string name { get; set; }
         public string icon { get; set; }
+        public string language { get; set; }
 
         public GameExternalDataModel(DataRow row)
         {
@@ -41,6 +42,11 @@ namespace Support
             if (selector == 3)
             {
                 icon = row.Field<string>( "icon" );
+            }
+
+            if ( selector == 1 || selector == 2  || selector == 4 )
+            {
+                language = row.Field<string>( "language" );
             }
         }
     }

@@ -11,14 +11,15 @@ namespace DBAccess
 {
     public class ArticleRepository
     {
-        public static DataTable GetAllArticles(string orderBy = "", int limit = -1)
+        public static DataTable GetAllArticles(string language = "ENG", string orderBy = "", int limit = -1)
         {
             try
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = cmd.CommandText = "SELECT id, headline, summary, body, cover, isPublished, createdDate, updatedDate, idAuthor"
-                                + " FROM article";
+                    cmd.CommandText = cmd.CommandText = "SELECT id, headline, summary, body, cover, isPublished, createdDate, updatedDate, idAuthor, language"
+                                + " FROM article"
+                                + " WHERE language = '" + language + "'";
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
                         cmd.CommandText += " ORDER BY " + orderBy;

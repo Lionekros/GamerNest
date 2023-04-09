@@ -14,15 +14,11 @@ namespace Support
         public string Password { get; set; }
         public string Email { get; set; }
         public string Avatar { get; set; }
+        public string preferedLanguage { get; set; }
         public bool IsConfirmed { get; set; }
         public DateTime Birthday { get; set; }
         public DateTime CreationDate { get; set; }
         public string Token { get; set; }
-
-        public UserModel()
-        {
-            // Default constructor
-        }
 
         public UserModel(DataRow row)
         {

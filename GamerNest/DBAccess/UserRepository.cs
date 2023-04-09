@@ -17,7 +17,7 @@ namespace DBAccess
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = cmd.CommandText = "SELECT id, username, password, email, avatar, isConfirmed, birthday, creationDate, token"
+                    cmd.CommandText = cmd.CommandText = "SELECT id, username, password, email, avatar, preferedLanguage, isConfirmed, birthday, creationDate, token"
                                 + " FROM user";
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
