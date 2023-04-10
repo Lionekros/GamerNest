@@ -40,13 +40,13 @@
         display: flex;
         gap: 3rem;
 
-        #confirmBtn
+        [id^="confirmBtn"]
         {
             @include button($primary, $light, 100%);
             @include outline($dark);
         }
 
-        #cancelBtn
+        [id^="cancelBtn"]
         {
             @include button($terciary, $light, 100%);
         }
@@ -66,14 +66,14 @@
         {
             display: block;
 
-            #confirmBtn
+            [id^="confirmBtn"]
             {
                 margin-bottom: 1rem;
                 @include button($primary, $light, 100%);
                 @include outline($dark);
             }
 
-            #cancelBtn
+            [id^="cancelBtn"]
             {
                 @include button($terciary, $light, 100%);
             }

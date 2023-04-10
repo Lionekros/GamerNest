@@ -1,22 +1,19 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+﻿function deleteModal(ItemId)
+{
+    var deleteAction = document.getElementById('deleteAction_' + ItemId);
 
-    var deleteAction = document.getElementById('deleteAction');
+    var modal = document.getElementById('confirmationModal_' + ItemId);
+    var confirmBtn = document.getElementById('confirmBtn_' + ItemId);
+    var cancelBtn = document.getElementById('cancelBtn_' + ItemId);
 
-    var modal = document.getElementById('confirmationModal');
-    var confirmBtn = document.getElementById('confirmBtn');
-    var cancelBtn = document.getElementById('cancelBtn');
+    modal.style.display = 'flex';
 
-    deleteAction.addEventListener('click', function () {
+    confirmBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
 
-        modal.style.display = 'flex';
-
-        confirmBtn.addEventListener('click', function () {
-            modal.style.display = 'none';
-        });
-
-        cancelBtn.addEventListener('click', function () {
-            modal.style.display = 'none';
-        });
+    cancelBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
     });
 
     modal.addEventListener('click', function (event) {
@@ -24,4 +21,4 @@
             modal.style.display = 'none';
         }
     });
-});
+}
