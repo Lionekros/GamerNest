@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 09, 2023 at 10:43 PM
+-- Generation Time: Apr 10, 2023 at 12:04 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -74,7 +74,7 @@ INSERT INTO `author` (`id`, `name`, `firstLastName`, `secondLastName`, `password
 (3, 'Sarah', 'Johnson', NULL, 'password456', 'sarah.johnson@email.com', '2345678901', NULL, NULL, 'ENG', 0, 0, 1, '1995-03-15', '2022-02-01', NULL),
 (4, 'Michael', 'Chang', 'Wong', 'password789', 'michael.chang@email.com', '3456789012', NULL, NULL, 'ENG', 0, 0, 1, '1987-12-10', '2022-03-01', NULL),
 (5, 'Karen', 'Lee', 'Kim', 'password1234', 'karen.lee@email.com', '4567890123', NULL, NULL, 'ENG', 0, 1, 1, '1980-08-25', '2022-04-01', NULL),
-(6, 'David', 'Wu', NULL, 'password5678', 'david.wu@email.com', '5678901234', NULL, NULL, 'ENG', 1, 0, 1, '1992-05-20', '2022-05-01', NULL),
+(6, 'David', 'Wu', NULL, 'password5678', 'david.wu@email.com', '5678901234', NULL, NULL, 'ESP', 1, 0, 1, '1992-05-20', '2022-05-01', NULL),
 (7, 'Sophia', 'Nguyen', 'Tran', 'password91011', 'sophia.nguyen@email.com', '6789012345', NULL, NULL, 'ENG', 0, 0, 1, '1999-11-30', '2022-06-01', NULL),
 (8, 'William', 'Park', 'Jung', 'password121314', 'william.park@email.com', '7890123456', NULL, NULL, 'ENG', 0, 0, 1, '1985-04-05', '2022-07-01', NULL),
 (9, 'Olivia', 'Garcia', NULL, 'password151617', 'olivia.garcia@email.com', '8901234567', NULL, NULL, 'ENG', 0, 0, 1, '1997-08-08', '2022-08-01', NULL),
@@ -366,8 +366,8 @@ CREATE TABLE `web_language` (
 --
 
 INSERT INTO `web_language` (`id`, `name`, `icon`) VALUES
-('ENG', 'English', 'english_icon.png'),
-('ESP', 'Spanish', 'spanish_icon.png');
+('ENG', 'English', '<span class=\"fi fi-gb fis\"></span>'),
+('ESP', 'Spanish', '<span class=\"fi fi-es fis\"></span>');
 
 -- --------------------------------------------------------
 

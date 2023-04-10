@@ -65,9 +65,9 @@
                             if ( prop.Name.ToLower() != "password" )
                             {
                                 <td>
-                                    @if ( prop.PropertyType == typeof( bool ) )
+                                    @if (prop.PropertyType == typeof(bool))
                                     {
-                                        @if ( (bool) prop.GetValue( item ) )
+                                        @if ((bool)prop.GetValue(item))
                                         {
                                             <i class="far fa-circle-check checkmark-icon"></i>
                                         }
@@ -76,13 +76,28 @@
                                             <i class="far fa-circle-xmark xmark-icon"></i>
                                         }
                                     }
-                                    else if ( prop.PropertyType == typeof( string ) && ((string) prop.GetValue( item ))?.StartsWith( "/img/" ) == true )
+                                    else if (prop.PropertyType == typeof(string) && ((string)prop.GetValue(item))?.StartsWith("/img/") == true)
                                     {
                                         <img class="image-cell" src="@prop.GetValue(item)" alt="Image">
                                     }
                                     else
                                     {
-                                        @prop.GetValue(item)
+                                        var propValue = prop.GetValue(item)?.ToString();
+                                        if ( !string.IsNullOrEmpty( propValue ) )
+                                        {
+                                            if ( propValue == "ENG" )
+                                            {
+                                                <span class="fi fi-gb fis"></span>
+                                            }
+                                            else if ( propValue == "ESP" )
+                                            {
+                                                <span class="fi fi-es fis"></span>
+                                            }
+                                            else
+                                            {
+                                                @propValue
+                                            }
+                                        }
                                     }
                                 </td>
                             }
