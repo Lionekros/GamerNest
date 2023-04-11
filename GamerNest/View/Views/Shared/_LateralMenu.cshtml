@@ -131,6 +131,32 @@ else
                 <span class="tooltip">Player Types</span>
             </li>
 
+            <hr>
+
+            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Category") ? "linkActive" : "")">
+                <a asp-controller="WebText" asp-action="Category">
+                    <i class="fa-regular fa-folder-open"></i>
+                    <span class="links_name">Categories</span>
+                </a>
+                <span class="tooltip">Categories</span>
+            </li>
+            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "WebTextC") ? "linkActive" : "")">
+                <a asp-controller="WebText" asp-action="WebTextC">
+                    <i class="fa-solid fa-font"></i>
+                    <span class="links_name">Web Text</span>
+                </a>
+                <span class="tooltip">Web Text</span>
+            </li>
+            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "WebLanguage") ? "linkActive" : "")">
+                <a asp-controller="WebText" asp-action="WebLanguage">
+                    <i class="fa-solid fa-comment"></i>
+                    <span class="links_name">Web Languages</span>
+                </a>
+                <span class="tooltip">Web Languages</span>
+            </li>
+
+            <hr>
+
             <li class="profile">
                 <div class="profile-details">
                     <img class="" src="~/img/Banner/Logo.png" alt="Banner">
