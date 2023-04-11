@@ -1,0 +1,47 @@
+﻿@import '_variables.scss', '_mixins.scss';
+
+.pagination
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+
+    div
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+
+        &:last-child
+        {
+            margin-bottom: 0;
+        }
+
+        p
+        {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        a
+        {
+            @include button($primary, $light);
+            margin-right: 2rem;
+
+            &:last-child
+            {
+                margin-right: 0;
+            }
+
+            &.disabled
+            {
+                background-color: $terciary;
+                pointer-events: none;
+                cursor: not-allowed;
+            }
+        }
+    }
+}

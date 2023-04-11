@@ -102,7 +102,27 @@
             </table>
         </div>
 
+        <div class="pagination">
 
+            <div>
+                @if ( Model.CurrentPage > 1 )
+                {
+                    <!-- Previus Page -->
+                    <a asp-controller="AdminAuthor" asp-action="Authors" asp-route-page="@(Model.CurrentPage - 1)" asp-route-pageSize="@Model.PageSize">Previous</a>
+                }
+
+                @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
+                {
+                    <!-- Next page -->
+                    <a asp-controller="AdminAuthor" asp-action="Authors" asp-route-page="@(Model.CurrentPage + 1)" asp-route-pageSize="@Model.PageSize">Next</a>
+                }
+            </div>
+            <div>
+                <p>
+                    Page @Model.CurrentPage of @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.authorList.Count out of @Model.TotalItems)
+                  </p>
+            </div>
+        </div>
         
     </div>
 </main>

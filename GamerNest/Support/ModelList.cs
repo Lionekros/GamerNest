@@ -2,6 +2,11 @@
 {
     public class ModelList
     {
+        //Pagination
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
+        public int TotalItems { get; set; }
+
         public List<WebTextModel> webTextList { get; set; }
 
         public List<AuthorModel> authorList { get; set; }
