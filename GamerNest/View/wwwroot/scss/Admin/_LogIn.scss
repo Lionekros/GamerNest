@@ -67,19 +67,12 @@
 
             label
             {
-                display: block;
-                margin-bottom: 1rem;
-                font-weight: bold;
-                color: $primary;
+                @include label();
             }
 
             input
             {
-                width: 100%;
-                padding: 10px;
-                border-radius: 1rem;
-                border: 1px solid $dark;
-                margin-bottom: 2rem;
+                @include input();
             }
 
             .error

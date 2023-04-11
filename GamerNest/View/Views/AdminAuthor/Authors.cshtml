@@ -12,6 +12,33 @@
 
         <h3>This is the Users tab. all registered users information will be displayed here.</h3>
 
+        <div class="filter">
+            <h4>Filters:</h4>
+            <form asp-controller="AdminAuthor" asp-action="Authors">
+                <div class="form-row">
+                    <label for="id">ID:</label>
+                    <input type="number" id="id" name="id" pattern="[0-9]+" required>
+                </div>
+                <div class="form-row">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" pattern="[A-Za-z]+" required>
+                </div>
+                <div class="form-row">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-row">
+                    <label for="isAdmin">Is Admin:</label>
+                    <input type="checkbox" id="isAdmin" name="isAdmin">
+                </div>
+                <div class="form-row">
+                    <label for="isActive">Is Active:</label>
+                    <input type="checkbox" id="isActive" name="isActive">
+                </div>
+                <input class="filtButton" type="submit" value="Filter">
+            </form>
+        </div>
+
         <div class="adminTable">
             <table>
                 <tr>

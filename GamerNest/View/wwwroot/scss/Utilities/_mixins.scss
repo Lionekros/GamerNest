@@ -1,5 +1,21 @@
 @import 'variables';
 
+@mixin input($color: $dark)
+{
+    width: 100%;
+    padding: 10px;
+    border-radius: 1rem;
+    border: 1px solid $color;
+    margin-bottom: 2rem;
+}
+
+@mixin label($color: $primary)
+{
+    display: block;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: $color;
+}
 
 @mixin buttonWithIcon($backgroundColor, $fontColor)
 {

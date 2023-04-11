@@ -526,6 +526,71 @@ template {
   cursor: not-allowed;
 }
 
+.filter {
+  margin-top: 2rem;
+  font-size: 1rem;
+}
+.filter h4 {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #FCFCFC;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+.filter form {
+  display: flex;
+}
+.filter form .form-row {
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.filter form .form-row label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #FFB100;
+}
+.filter form .form-row input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 1rem;
+  border: 1px solid #292929;
+  margin-bottom: 2rem;
+}
+.filter form .form-row input[type=checkbox] {
+  margin-top: 0.3rem;
+  margin-left: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+}
+.filter form .filtButton {
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #FFB100;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .filter form .filtButton {
+    display: block;
+    width: 100%;
+  }
+}
+.filter form .filtButton:hover {
+  background-color: #e69f00;
+  color: #efefef;
+}
+
 html {
   font-size: 62.5%; /*For the rem*/
   box-sizing: border-box;

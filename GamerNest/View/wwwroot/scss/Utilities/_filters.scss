@@ -1,0 +1,51 @@
+﻿@import '_variables.scss', '_mixins.scss';
+
+.filter
+{
+    margin-top: 2rem;
+    font-size: 1rem;
+
+    h4
+    {
+        @include label($light);
+        font-size: 2rem;
+        text-transform: uppercase;
+    }
+
+    form
+    {
+        display: flex;
+
+        .form-row
+        {
+            margin-right: 10px;
+            display: flex;
+            flex-direction: column;
+
+            label
+            {
+                @include label();
+            }
+
+            input
+            {
+                @include input();
+            }
+
+            input[type="checkbox"]
+            {
+                margin-top: 0.3rem;
+                margin-left: 1.5rem;
+                width: 2rem;
+                height: 2rem;
+            }
+        }
+
+        .filtButton
+        {
+            @include button($primary, $light);
+        }
+    }
+}
+
+

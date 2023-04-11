@@ -34,6 +34,7 @@
 	  <SassFile Remove="wwwroot\scss\admin\_lateralMenu.scss" />
 	  <SassFile Remove="wwwroot\scss\Admin\_LogIn.scss" />
 	  <SassFile Remove="wwwroot\scss\Admin\_table.scss" />
+	  <SassFile Remove="wwwroot\scss\Utilities\_filters.scss" />
 	  <SassFile Remove="wwwroot\scss\utilities\_mixins.scss" />
 	  <SassFile Remove="wwwroot\scss\Utilities\_modal.scss" />
 	  <SassFile Remove="wwwroot\scss\Utilities\_pagination.scss" />
