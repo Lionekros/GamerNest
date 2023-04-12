@@ -1,12 +1,14 @@
 @import 'variables';
 
-@mixin input($color: $dark)
+@mixin input($color: $dark, $backgroundColor: $light, $marginBottom: 2rem)
 {
     width: 100%;
     padding: 10px;
     border-radius: 1rem;
     border: 1px solid $color;
-    margin-bottom: 2rem;
+    margin-bottom: $marginBottom;
+    background-color: $backgroundColor;
+    color: $color;
 }
 
 @mixin label($color: $primary)
@@ -65,7 +67,7 @@
 }
 
 
-@mixin outline($color)
+@mixin outline($color: $dark)
 {
     z-index: 1;
     overflow: hidden;

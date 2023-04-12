@@ -15,37 +15,97 @@
     form
     {
         display: flex;
+        align-items: center;
 
-        .form-row
+        div
         {
-            margin-right: 10px;
-            display: flex;
-            flex-direction: column;
-
-            label
-            {
-                @include label();
-            }
+            margin-right: 0.5rem;
 
             input
             {
-                @include input();
+                @include input($light, $secondary, 0);
+                border: none;
             }
 
-            input[type="checkbox"]
+            select
             {
-                margin-top: 0.3rem;
-                margin-left: 1.5rem;
-                width: 2rem;
-                height: 2rem;
+                @include input($light, $secondary, 0);
+                border: none;
+                color: $light;
+
+                option
+                {
+                    &[value='1']
+                    {
+                        font-family: 'FontAwesome', 'sans-serif';
+                        color: $green;
+                    }
+
+                    &[value='0']
+                    {
+                        font-family: 'FontAwesome', 'sans-serif';
+                        color: $red;
+                    }
+                }
+            }
+
+            .filtButton
+            {
+                margin-left: 1rem;
+                @include button($primary, $light, 100%, 0);
+                @include outline($dark);
+                padding: 0.4rem;
+                border-radius: 2rem;
+            }
+
+            .input-group
+            {
+                position: relative;
+                display: flex;
+                align-items: center;
+            }
+
+            .input-icon
+            {
+                position: absolute;
+                left: 0.5rem;
+                pointer-events: none;
+                color: $primary;
+            }
+
+            input[type="text"], input[type="email"], input[type="number"]
+            {
+                padding-left: 2.5rem; 
             }
         }
 
-        .filtButton
+        @media (max-width: 768px)
         {
-            @include button($primary, $light);
+            flex-direction: column;
+            align-items: stretch;
+            text-align: center;
+
+            div
+            {
+                margin-right: 0;
+
+                input,
+                select
+                {
+                    margin-bottom: 1rem;
+                }
+
+                .filtButton
+                {
+                    margin-left: 0;
+                }
+
+                .input-icon
+                {
+                    bottom: 1.5rem;
+                }
+            }
         }
     }
-}
-
+    }
 

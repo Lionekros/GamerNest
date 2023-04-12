@@ -1,13 +1,26 @@
 ﻿using Domain;
 using Google.Protobuf.Collections;
 using Microsoft.AspNetCore.Mvc;
+using Mysqlx.Crud;
 using Support;
 
 namespace View.Controllers
 {
     public class AdminAuthorController :BaseController
     {
-        public ActionResult Authors(int page = 1, int pageSize = 10)
+        public ActionResult Authors
+            (
+                  int       page            = 1
+                , int       pageSize        = 10
+                , int       id              = -1
+                , string    name            = ""
+                , string    firstLastName   = ""
+                , string    secondLastName  = ""
+                , string    email           = ""
+                , sbyte     isAdmin         = -1
+                , sbyte     isActive        = -1
+                , string    orderBy         = ""
+            )
         {
             SetDefaultViewDatas();
 
@@ -15,18 +28,27 @@ namespace View.Controllers
             {
                 return RedirectToAction( "LogInForm", "Admin" );
             }
-
-            GetAllAuthors();
-
+            GetAllAuthors( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
             Pagination(page, pageSize);
 
             return View( "Authors", lists );
         }
 
 
-        public void GetAllAuthors()
+        public void GetAllAuthors
+            (
+                  int       id              = -1
+                , string    name            = ""
+                , string    firstLastName   = ""
+                , string    secondLastName  = ""
+                , string    email           = ""
+                , sbyte     isAdmin         = -1
+                , sbyte     isActive        = -1
+                , string    orderBy         = ""
+                , int       limit           = -1
+            )
         {
-            lists.authorList = AuthorService.GetAllAuthors( "id" );
+            lists.authorList = AuthorService.GetAllAuthors(id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy, limit );
         }
         public void GetAuthor(string email)
         {

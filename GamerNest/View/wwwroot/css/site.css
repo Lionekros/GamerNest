@@ -540,35 +540,45 @@ template {
 }
 .filter form {
   display: flex;
+  align-items: center;
 }
-.filter form .form-row {
-  margin-right: 10px;
-  display: flex;
-  flex-direction: column;
+.filter form div {
+  margin-right: 0.5rem;
 }
-.filter form .form-row label {
-  display: block;
-  margin-bottom: 1rem;
-  font-weight: bold;
-  color: #FFB100;
-}
-.filter form .form-row input {
+.filter form div input {
   width: 100%;
   padding: 10px;
   border-radius: 1rem;
-  border: 1px solid #292929;
-  margin-bottom: 2rem;
+  border: 1px solid #FCFCFC;
+  margin-bottom: 0;
+  background-color: #1C1C1C;
+  color: #FCFCFC;
+  border: none;
 }
-.filter form .form-row input[type=checkbox] {
-  margin-top: 0.3rem;
-  margin-left: 1.5rem;
-  width: 2rem;
-  height: 2rem;
+.filter form div select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 1rem;
+  border: 1px solid #FCFCFC;
+  margin-bottom: 0;
+  background-color: #1C1C1C;
+  color: #FCFCFC;
+  border: none;
+  color: #FCFCFC;
 }
-.filter form .filtButton {
+.filter form div select option[value="1"] {
+  font-family: "FontAwesome", "sans-serif";
+  color: #3c763d;
+}
+.filter form div select option[value="0"] {
+  font-family: "FontAwesome", "sans-serif";
+  color: #a94442;
+}
+.filter form div .filtButton {
+  margin-left: 1rem;
   display: block;
   max-width: 100%;
-  padding: 1rem;
+  padding: 0;
   background-color: #FFB100;
   color: #FCFCFC;
   font-size: 1.5rem;
@@ -579,16 +589,55 @@ template {
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
+  z-index: 1;
+  overflow: hidden;
+  text-shadow: -1px -1px 0 #292929, 1px -1px 0 #292929, -1px 1px 0 #292929, 1px 1px 0 #292929;
+  padding: 0.4rem;
+  border-radius: 2rem;
 }
 @media (max-width: 767px) {
-  .filter form .filtButton {
+  .filter form div .filtButton {
     display: block;
     width: 100%;
   }
 }
-.filter form .filtButton:hover {
+.filter form div .filtButton:hover {
   background-color: #e69f00;
   color: #efefef;
+}
+.filter form div .input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.filter form div .input-icon {
+  position: absolute;
+  left: 0.5rem;
+  pointer-events: none;
+  color: #FFB100;
+}
+.filter form div input[type=text], .filter form div input[type=email], .filter form div input[type=number] {
+  padding-left: 2.5rem;
+}
+@media (max-width: 768px) {
+  .filter form {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .filter form div {
+    margin-right: 0;
+  }
+  .filter form div input,
+  .filter form div select {
+    margin-bottom: 1rem;
+  }
+  .filter form div .filtButton {
+    margin-left: 0;
+  }
+  .filter form div .input-icon {
+    bottom: 1.5rem;
+  }
 }
 
 html {
@@ -899,6 +948,8 @@ a {
   border-radius: 1rem;
   border: 1px solid #292929;
   margin-bottom: 2rem;
+  background-color: #FCFCFC;
+  color: #292929;
 }
 .AdminLogIn section .form .error {
   color: #FFB100;
@@ -976,6 +1027,10 @@ a {
 .adminTable {
   margin-top: 3rem;
   overflow-x: auto;
+}
+.adminTable h4 {
+  text-align: center;
+  text-decoration: underline;
 }
 .adminTable table {
   width: 100%;

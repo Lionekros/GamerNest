@@ -12,11 +12,22 @@ namespace Domain
 {
     public class AuthorService
     {
-        public static List<AuthorModel> GetAllAuthors(string orderBy = "", int limit = -1)
+        public static List<AuthorModel> GetAllAuthors
+            (
+                  int       id              = -1
+                , string    name            = ""
+                , string    firstLastName   = ""
+                , string    secondLastName  = ""
+                , string    email           = ""
+                , sbyte     isAdmin         = -1
+                , sbyte     isActive        = -1
+                , string    orderBy         = ""
+                , int       limit           = -1
+            )
         {
             try
             {
-                DataTable dt = AuthorRepository.GetAllAuthors(orderBy, limit);
+                DataTable dt = AuthorRepository.GetAllAuthors(id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy, limit);
                 List<AuthorModel> authorList = new List<AuthorModel>();
 
                 foreach ( DataRow row in dt.Rows )

@@ -14,120 +14,172 @@
 
         <div class="filter">
             <h4>Filters:</h4>
-            <form asp-controller="AdminAuthor" asp-action="Authors">
-                <div class="form-row">
-                    <label for="id">ID:</label>
-                    <input type="number" id="id" name="id" pattern="[0-9]+" required>
+            <form asp-controller="AdminAuthor" asp-action="Authors" method="get">
+                <div>
+                    <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="Search By ID">
                 </div>
-                <div class="form-row">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" pattern="[A-Za-z]+" required>
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="name" name="name" pattern="[A-Za-z]+" placeholder="Search By Name">
+                    </div>
                 </div>
-                <div class="form-row">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="firstLastName" name="firstLastName" pattern="[A-Za-z]+" placeholder="Search By Last Name">
+                    </div>
                 </div>
-                <div class="form-row">
-                    <label for="isAdmin">Is Admin:</label>
-                    <input type="checkbox" id="isAdmin" name="isAdmin">
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="secondLastName" name="secondLastName" pattern="[A-Za-z]+" placeholder="Search By Second Last Name">
+                    </div>
                 </div>
-                <div class="form-row">
-                    <label for="isActive">Is Active:</label>
-                    <input type="checkbox" id="isActive" name="isActive">
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="email" id="email" name="email" placeholder="Search By Email">
+                    </div>
                 </div>
-                <input class="filtButton" type="submit" value="Filter">
+                <div>
+                    <select id="isAdmin" name="isAdmin">
+                        <option value="">Is Admin</option>
+                        <option value="1">&#xf058;</option>
+                        <option value="0">&#xf057;</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="isActive" name="isActive">
+                        <option value="">Is Active</option>
+                        <option value="1">&#xf058;</option>
+                        <option value="0">&#xf057;</option>
+                    </select>
+                </div>
+                <div>
+                    <input class="filtButton" type="submit" value="Filter">
+                </div>
             </form>
         </div>
 
+        @if (Model.authorList.Count > 0)
+        {
+            <div class="filter">
+                <form asp-controller="AdminAuthor" asp-action="Authors" method="get">
+                    <div>
+                        <select id="orderBy" name="orderBy">
+                            <option value="">Order By</option>
+                            @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
+                            {
+                                <option value="@prop.Name">@prop.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <input class="filtButton" type="submit" value="Order Table">
+                    </div>
+                </form>
+            </div>
+        }
+
+
+
         <div class="adminTable">
-            <table>
-                <tr>
-                    <th>Actions</th> <!-- Added "Actions" column header -->
-                    @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
-                    {
-                        // Exclude "Password" column from table
-                        if ( prop.Name.ToLower() != "password" )
-                        {
-                            <th>@prop.Name</th>
-                        }
-                    }
-                </tr>
-                @foreach ( var item in Model.authorList )
-                {
+            @if ( Model.authorList.Count > 0 )
+            {
+                <table>
                     <tr>
-                        <td>
-                            <!-- Delete Author -->
-                            <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal(@item.id)">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </a>
-
-                            <!-- Edit Author -->
-                            <a asp-controller="AdminAuthor" asp-action="EditAuthor" asp-route-id="@item.id">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-
-                            <!-- Modal -->
-                            <div id="confirmationModal_@item.id" class="modal">
-                                <div class="modal-content">
-                                    <h2>Confirmation</h2>
-                                    <p>Are you sure you want to delete this row with id: @item.id?</p>
-                                    <div class="modal-actions">
-                                        <button id="confirmBtn_@item.id" asp-controller="AdminAuthor" asp-action="DeleteAuthor" data-row-id="@item.id">Delete</button>
-                                        <button id="cancelBtn_@item.id">Cancel</button>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                        </td>
-                        @foreach ( var prop in item.GetType().GetProperties() )
+                        <th>Actions</th>
+                        @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
                         {
                             // Exclude "Password" column from table
                             if ( prop.Name.ToLower() != "password" )
                             {
-                                <td>
-                                    @if (prop.PropertyType == typeof(bool))
-                                    {
-                                        @if ((bool)prop.GetValue(item))
-                                        {
-                                            <i class="far fa-circle-check checkmark-icon"></i>
-                                        }
-                                        else
-                                        {
-                                            <i class="far fa-circle-xmark xmark-icon"></i>
-                                        }
-                                    }
-                                    else if (prop.PropertyType == typeof(string) && ((string)prop.GetValue(item))?.StartsWith("/img/") == true)
-                                    {
-                                        <img class="image-cell" src="@prop.GetValue(item)" alt="Image">
-                                    }
-                                    else
-                                    {
-                                        var propValue = prop.GetValue(item)?.ToString();
-                                        if ( !string.IsNullOrEmpty( propValue ) )
-                                        {
-                                            if ( propValue == "ENG" )
-                                            {
-                                                <span class="fi fi-gb fis"></span>
-                                            }
-                                            else if ( propValue == "ESP" )
-                                            {
-                                                <span class="fi fi-es fis"></span>
-                                            }
-                                            else
-                                            {
-                                                @propValue
-                                            }
-                                        }
-                                    }
-                                </td>
+                                <th>@prop.Name</th>
                             }
                         }
                     </tr>
-                }
-            </table>
+                    @foreach ( var item in Model.authorList )
+                    {
+                        <tr>
+                            <td>
+                                <!-- Delete Author -->
+                                <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal(@item.id)">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+
+                                <!-- Edit Author -->
+                                <a asp-controller="AdminAuthor" asp-action="EditAuthor" asp-route-id="@item.id">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+
+                                <!-- Modal -->
+                                <div id="confirmationModal_@item.id" class="modal">
+                                    <div class="modal-content">
+                                        <h2>Confirmation</h2>
+                                        <p>Are you sure you want to delete this row with id: @item.id?</p>
+                                        <div class="modal-actions">
+                                            <button id="confirmBtn_@item.id" asp-controller="AdminAuthor" asp-action="DeleteAuthor" data-row-id="@item.id">Delete</button>
+                                            <button id="cancelBtn_@item.id">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            @foreach ( var prop in item.GetType().GetProperties() )
+                            {
+                                // Exclude "Password" column from table
+                                if ( prop.Name.ToLower() != "password" )
+                                {
+                                    <td>
+                                        @if ( prop.PropertyType == typeof( bool ) )
+                                        {
+                                            @if ( (bool) prop.GetValue( item ) )
+                                            {
+                                                <i class="far fa-circle-check checkmark-icon"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="far fa-circle-xmark xmark-icon"></i>
+                                            }
+                                        }
+                                        else if ( prop.PropertyType == typeof( string ) && ((string) prop.GetValue( item ))?.StartsWith( "/img/" ) == true )
+                                        {
+                                            <img class="image-cell" src="@prop.GetValue(item)" alt="Image">
+                                        }
+                                        else
+                                        {
+                                            var propValue = prop.GetValue(item)?.ToString();
+                                            if ( !string.IsNullOrEmpty( propValue ) )
+                                            {
+                                                if ( propValue == "ENG" )
+                                                {
+                                                    <span class="fi fi-gb fis"></span>
+                                                }
+                                                else if ( propValue == "ESP" )
+                                                {
+                                                    <span class="fi fi-es fis"></span>
+                                                }
+                                                else
+                                                {
+                                                    @propValue
+                                                }
+                                            }
+                                        }
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <h4>No data found</h4>
+            }
         </div>
+
+
 
         <div class="pagination">
 
