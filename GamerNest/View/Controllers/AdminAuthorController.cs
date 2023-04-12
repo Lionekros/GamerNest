@@ -3,6 +3,7 @@ using Google.Protobuf.Collections;
 using Microsoft.AspNetCore.Mvc;
 using Mysqlx.Crud;
 using Support;
+using System.Xml.Linq;
 
 namespace View.Controllers
 {
@@ -31,6 +32,8 @@ namespace View.Controllers
             GetAllAuthors( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
             Pagination(page, pageSize);
 
+            FiltersViewBag( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
+
             return View( "Authors", lists );
         }
 
@@ -55,7 +58,7 @@ namespace View.Controllers
             lists.authorList = AuthorService.GetAuthor( email );
         }
 
-        private void Pagination(int page, int pageSize)
+        public void Pagination(int page, int pageSize)
         {
             int totalAuthors = lists.authorList.Count;
 
@@ -66,6 +69,31 @@ namespace View.Controllers
             lists.PageSize = pageSize;
             lists.CurrentPage = page;
             lists.TotalItems = totalAuthors;
+        }
+
+        public void FiltersViewBag
+            (
+                  int id = -1
+                , string name = ""
+                , string firstLastName = ""
+                , string secondLastName = ""
+                , string email = ""
+                , sbyte isAdmin = -1
+                , sbyte isActive = -1
+                , string orderBy = ""
+            )
+        {
+            ViewBag.FormData = new
+            {
+                id = id,
+                name = name,
+                firstLastName = firstLastName,
+                secondLastName = secondLastName,
+                email = email,
+                isAdmin = isAdmin,
+                isActive = isActive,
+                orderBy = orderBy
+            };
         }
     }
 }

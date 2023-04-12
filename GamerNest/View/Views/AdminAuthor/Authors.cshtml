@@ -15,9 +15,26 @@
         <div class="filter">
             <h4>Filters:</h4>
             <form asp-controller="AdminAuthor" asp-action="Authors" method="get">
+                @if ( Model.authorList.Count > 0 )
+                {
+                    <div>
+                        <select id="orderBy" name="orderBy">
+                            <option value="">Order By</option>
+                            @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
+                            {
+                                if (prop.Name.ToLower() != "password")
+                                {
+                                    <option value="@prop.Name">@prop.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                }
                 <div>
-                    <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                    <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="Search By ID">
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="Search By ID">
+                    </div>
                 </div>
                 <div>
                     <div class="input-group">
@@ -60,28 +77,11 @@
                 <div>
                     <input class="filtButton" type="submit" value="Filter">
                 </div>
+
+                
             </form>
         </div>
-
-        @if (Model.authorList.Count > 0)
-        {
-            <div class="filter">
-                <form asp-controller="AdminAuthor" asp-action="Authors" method="get">
-                    <div>
-                        <select id="orderBy" name="orderBy">
-                            <option value="">Order By</option>
-                            @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
-                            {
-                                <option value="@prop.Name">@prop.Name</option>
-                            }
-                        </select>
-                    </div>
-                    <div>
-                        <input class="filtButton" type="submit" value="Order Table">
-                    </div>
-                </form>
-            </div>
-        }
+        
 
 
 
@@ -186,14 +186,38 @@
             <div>
                 @if ( Model.CurrentPage > 1 )
                 {
-                    <!-- Previus Page -->
-                    <a asp-controller="AdminAuthor" asp-action="Authors" asp-route-page="@(Model.CurrentPage - 1)" asp-route-pageSize="@Model.PageSize">Previous</a>
+                    <!-- Previous Page -->
+                    <a asp-controller="AdminAuthor" asp-action="Authors" 
+                        asp-route-page="@(Model.CurrentPage - 1)" 
+                        asp-route-pageSize="@Model.PageSize"
+                        asp-route-id="@ViewBag.FormData.id" 
+                        asp-route-name="@ViewBag.FormData.name" 
+                        asp-route-firstLastName="@ViewBag.FormData.firstLastName"
+                        asp-route-secondLastName="@ViewBag.FormData.secondLastName" 
+                        asp-route-email="@ViewBag.FormData.email"
+                        asp-route-isAdmin="@ViewBag.FormData.isAdmin" 
+                        asp-route-isActive="@ViewBag.FormData.isActive" 
+                        asp-route-orderBy="@ViewBag.FormData.orderBy">
+                            Previous
+                    </a>
                 }
 
                 @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
                 {
-                    <!-- Next page -->
-                    <a asp-controller="AdminAuthor" asp-action="Authors" asp-route-page="@(Model.CurrentPage + 1)" asp-route-pageSize="@Model.PageSize">Next</a>
+                    <!-- Next Page -->
+                    <a asp-controller="AdminAuthor" asp-action="Authors" 
+                        asp-route-page="@(Model.CurrentPage + 1)" 
+                        asp-route-pageSize="@Model.PageSize"
+                        asp-route-id="@ViewBag.FormData.id" 
+                        asp-route-name="@ViewBag.FormData.name" 
+                        asp-route-firstLastName="@ViewBag.FormData.firstLastName"
+                        asp-route-secondLastName="@ViewBag.FormData.secondLastName" 
+                        asp-route-email="@ViewBag.FormData.email"
+                        asp-route-isAdmin="@ViewBag.FormData.isAdmin" 
+                        asp-route-isActive="@ViewBag.FormData.isActive" 
+                        asp-route-orderBy="@ViewBag.FormData.orderBy">
+                            Next
+                    </a>
                 }
             </div>
             <div>
