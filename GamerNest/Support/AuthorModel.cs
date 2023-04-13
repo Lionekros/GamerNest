@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -9,20 +10,43 @@ namespace Support
 {
     public class AuthorModel
     {
+        [Required( ErrorMessage = "Required" )]
         public int id { get; set; }
+
+        [Required( ErrorMessage = "Required" )]
         public string name { get; set; }
+
+        [Required( ErrorMessage = "Required" )]
         public string firstLastName { get; set; }
         public string secondLastName { get; set; }
+
+        [Required( ErrorMessage = "Required" )]
         public string password { get; set; }
+
+        [Required( ErrorMessage = "Required" )]
         public string email { get; set; }
+
+        [Required( ErrorMessage = "Required" )]
         public string phone { get; set; }
         public string description { get; set; }
         public string avatar { get; set; }
+
+        [Required( ErrorMessage = "Required" )]
         public string preferedLanguage { get; set; }
+
+        [Required( ErrorMessage = "Required" )]
         public bool isAdmin { get; set; }
+
+        [Required( ErrorMessage = "Required" )]
         public bool canPublish { get; set; }
+
+        [Required( ErrorMessage = "Required" )]
         public bool isActive { get; set; }
+
+        [Required( ErrorMessage = "Required" )]
         public string birthday { get; set; }
+
+        [Required( ErrorMessage = "Required" )]
         public string startDate { get; set; }
         public string endDate { get; set; }
 

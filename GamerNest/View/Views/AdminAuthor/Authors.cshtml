@@ -10,9 +10,9 @@
     <div class="text">
         <h1>Authors</h1>
 
-        <h3>This is the Users tab. all registered users information will be displayed here.</h3>
+        <h3>This is the Author tab. all registered authors information will be displayed here. Recomended 80% zoom</h3>
 
-        <div class="filter">
+        <section class="filter">
             <h4>Filters:</h4>
             <form asp-controller="AdminAuthor" asp-action="Authors" method="get">
                 @if ( Model.authorList.Count > 0 )
@@ -22,7 +22,7 @@
                             <option value="">Order By</option>
                             @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
                             {
-                                if (prop.Name.ToLower() != "password")
+                                if ( prop.Name.ToLower() != "password" )
                                 {
                                     <option value="@prop.Name">@prop.Name</option>
                                 }
@@ -78,14 +78,18 @@
                     <input class="filtButton" type="submit" value="Filter">
                 </div>
 
-                
+
             </form>
-        </div>
-        
+        </section>
 
+        <section class="create">
+            <a asp-action="CreateForm" asp-controller="AdminAuthor">
+                <i class="fa-solid fa-plus"></i>
+                <span>New</span>
+            </a>
+        </section>
 
-
-        <div class="adminTable">
+        <section class="adminTable">
             @if ( Model.authorList.Count > 0 )
             {
                 <table>
@@ -177,55 +181,52 @@
             {
                 <h4>No data found</h4>
             }
-        </div>
+        </section>
 
-
-
-        <div class="pagination">
-
+        <section class="pagination">
             <div>
                 @if ( Model.CurrentPage > 1 )
                 {
                     <!-- Previous Page -->
-                    <a asp-controller="AdminAuthor" asp-action="Authors" 
-                        asp-route-page="@(Model.CurrentPage - 1)" 
-                        asp-route-pageSize="@Model.PageSize"
-                        asp-route-id="@ViewBag.FormData.id" 
-                        asp-route-name="@ViewBag.FormData.name" 
-                        asp-route-firstLastName="@ViewBag.FormData.firstLastName"
-                        asp-route-secondLastName="@ViewBag.FormData.secondLastName" 
-                        asp-route-email="@ViewBag.FormData.email"
-                        asp-route-isAdmin="@ViewBag.FormData.isAdmin" 
-                        asp-route-isActive="@ViewBag.FormData.isActive" 
-                        asp-route-orderBy="@ViewBag.FormData.orderBy">
-                            Previous
+                    <a asp-controller="AdminAuthor" asp-action="Authors"
+                   asp-route-page="@(Model.CurrentPage - 1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-id="@ViewBag.FormData.id"
+                   asp-route-name="@ViewBag.FormData.name"
+                   asp-route-firstLastName="@ViewBag.FormData.firstLastName"
+                   asp-route-secondLastName="@ViewBag.FormData.secondLastName"
+                   asp-route-email="@ViewBag.FormData.email"
+                   asp-route-isAdmin="@ViewBag.FormData.isAdmin"
+                   asp-route-isActive="@ViewBag.FormData.isActive"
+                   asp-route-orderBy="@ViewBag.FormData.orderBy">
+                        Previous
                     </a>
                 }
 
                 @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
                 {
                     <!-- Next Page -->
-                    <a asp-controller="AdminAuthor" asp-action="Authors" 
-                        asp-route-page="@(Model.CurrentPage + 1)" 
-                        asp-route-pageSize="@Model.PageSize"
-                        asp-route-id="@ViewBag.FormData.id" 
-                        asp-route-name="@ViewBag.FormData.name" 
-                        asp-route-firstLastName="@ViewBag.FormData.firstLastName"
-                        asp-route-secondLastName="@ViewBag.FormData.secondLastName" 
-                        asp-route-email="@ViewBag.FormData.email"
-                        asp-route-isAdmin="@ViewBag.FormData.isAdmin" 
-                        asp-route-isActive="@ViewBag.FormData.isActive" 
-                        asp-route-orderBy="@ViewBag.FormData.orderBy">
-                            Next
+                    <a asp-controller="AdminAuthor" asp-action="Authors"
+                   asp-route-page="@(Model.CurrentPage + 1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-id="@ViewBag.FormData.id"
+                   asp-route-name="@ViewBag.FormData.name"
+                   asp-route-firstLastName="@ViewBag.FormData.firstLastName"
+                   asp-route-secondLastName="@ViewBag.FormData.secondLastName"
+                   asp-route-email="@ViewBag.FormData.email"
+                   asp-route-isAdmin="@ViewBag.FormData.isAdmin"
+                   asp-route-isActive="@ViewBag.FormData.isActive"
+                   asp-route-orderBy="@ViewBag.FormData.orderBy">
+                        Next
                     </a>
                 }
             </div>
             <div>
                 <p>
                     Page @Model.CurrentPage of @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.authorList.Count out of @Model.TotalItems)
-                  </p>
+                </p>
             </div>
-        </div>
+        </section>
         
     </div>
 </main>

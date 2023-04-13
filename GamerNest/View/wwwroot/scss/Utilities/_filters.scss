@@ -52,7 +52,7 @@
             .filtButton
             {
                 margin-left: 1rem;
-                @include button($primary, $light, 100%, 0);
+                @include button($terciary, $light, 100%, 0);
                 @include outline($dark);
                 padding: 0.4rem;
                 border-radius: 2rem;

@@ -579,7 +579,7 @@ template {
   display: block;
   max-width: 100%;
   padding: 0;
-  background-color: #FFB100;
+  background-color: #555555;
   color: #FCFCFC;
   font-size: 1.5rem;
   font-weight: bold;
@@ -602,7 +602,7 @@ template {
   }
 }
 .filter form div .filtButton:hover {
-  background-color: #e69f00;
+  background-color: #484848;
   color: #efefef;
 }
 .filter form div .input-group {
@@ -1025,7 +1025,7 @@ a {
 }
 
 .adminTable {
-  margin-top: 3rem;
+  margin-top: 1rem;
   overflow-x: auto;
 }
 .adminTable h4 {
@@ -1085,6 +1085,128 @@ a {
   .adminTable td {
     padding: 5px;
   }
+}
+
+.create {
+  display: flex;
+}
+.create a {
+  margin-top: 2rem;
+  text-decoration: none;
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #FFB100;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  z-index: 1;
+  overflow: hidden;
+  text-shadow: -1px -1px 0 #292929, 1px -1px 0 #292929, -1px 1px 0 #292929, 1px 1px 0 #292929;
+  border-radius: 1rem;
+}
+@media (max-width: 767px) {
+  .create a {
+    display: block;
+    width: 100%;
+  }
+}
+.create a:hover {
+  background-color: #e69f00;
+  color: #efefef;
+}
+@media (max-width: 767px) {
+  .create a {
+    margin-top: 2rem;
+    max-width: 100%;
+  }
+}
+
+.Createform form div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  text-align: center;
+  gap: 0 2rem;
+}
+@media (max-width: 767px) {
+  .Createform form div {
+    flex-wrap: wrap;
+  }
+}
+.Createform form div div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.Createform form div div label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #FCFCFC;
+}
+.Createform form div div .required {
+  color: #FFB100;
+}
+.Createform form div div input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 1rem;
+  border: 1px solid #292929;
+  margin-bottom: 2rem;
+  background-color: #FCFCFC;
+  color: #292929;
+}
+.Createform form div div input[type=checkbox] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 1rem;
+  border: 1px solid #292929;
+  margin-bottom: 2rem;
+  background-color: #FCFCFC;
+  color: #292929;
+  width: 100%;
+  height: 3rem;
+}
+.Createform form div div select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 1rem;
+  border: 1px solid #292929;
+  margin-bottom: 2rem;
+  background-color: #FCFCFC;
+  color: #292929;
+}
+.Createform form div div button {
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #FFB100;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .Createform form div div button {
+    display: block;
+    width: 100%;
+  }
+}
+.Createform form div div button:hover {
+  background-color: #e69f00;
+  color: #efefef;
 }
 
 .home-section {

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Mysqlx.Crud;
 using Support;
 using System.Xml.Linq;
+using Support;
+using LogError;
 
 namespace View.Controllers
 {
@@ -12,7 +14,7 @@ namespace View.Controllers
         public ActionResult Authors
             (
                   int       page            = 1
-                , int       pageSize        = 10
+                , int       pageSize        = 5
                 , int       id              = -1
                 , string    name            = ""
                 , string    firstLastName   = ""
@@ -35,6 +37,36 @@ namespace View.Controllers
             FiltersViewBag( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
 
             return View( "Authors", lists );
+        }
+
+        public ActionResult CreateForm()
+        {
+            SetDefaultViewDatas();
+            return View("CreateAuthor");
+        }
+
+        public ActionResult Create(AuthorModel author)
+        {
+            try
+            {
+                if ( ModelState.IsValid )
+                {
+                    ViewBag.Inserted = "Author inserted correctly";
+                    return View("Authors");
+                }
+                else
+                {
+                    ViewBag.Message = "Fill all data";
+                    return View( "CreateAuthor", author );
+                }
+            }
+            catch ( Exception ex )
+            {
+                Log log = new Log();
+                log.Add( ex.Message );
+                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                return RedirectToAction( "Index", "Article" );
+            }
         }
 
 

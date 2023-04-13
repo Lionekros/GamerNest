@@ -1,0 +1,118 @@
+﻿@model Support.AuthorModel
+
+@{
+    ViewData[ "Title" ] = "Admin - Create Authors";
+}
+
+<partial name="_LateralMenu" />
+
+<main class="home-section">
+    <div class="text">
+        <h1>Authors</h1>
+        <h2>Create</h2>
+
+        <section class="Createform">
+            <form asp-controller="AdminAuthor" asp-action="Create" method="post" enctype="multipart/form-data">
+                @if ( ViewBag.UsuMessage != null )
+                {
+                    <p class="error">@ViewBag.UsuMessage</p>
+                }
+                else if ( ViewBag.Message != null )
+                {
+                    <p class="error">@ViewBag.Message</p>
+                }
+
+                <div>
+                    <div>
+                        <label asp-for="name" class="required">Name:</label>
+                        <input asp-for="name" placeholder="Name" />
+                    </div>
+                    <div>
+                        <label asp-for="firstLastName" class="required">First Last Name:</label>
+                        <input asp-for="firstLastName" placeholder="First Last Name" />
+                    </div>
+                    <div>
+                        <label asp-for="secondLastName">Second Last Name:</label>
+                        <input asp-for="secondLastName" placeholder="Second Last Name" />
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="password" class="required">Password:</label>
+                        <input asp-for="password" type="password" placeholder="Password" />
+                    </div>
+                    <div>
+                        <label asp-for="email" class="required">Email:</label>
+                        <input asp-for="email" placeholder="Email" />
+                    </div>
+                    <div>
+                        <label asp-for="phone" class="required">Phone:</label>
+                        <input asp-for="phone" placeholder="Phone" />
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="description">Description:</label>
+                        <textarea asp-for="description" id="mytextarea">Hello, World!</textarea>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="avatar">Avatar:</label>
+                        <input asp-for="avatar" type="file" />
+                    </div>
+                    <div>
+                        <label asp-for="preferedLanguage" class="required">Preferred Language:</label>
+                        <select asp-for="preferedLanguage">
+                            <option value="ENG">English</option>
+                            <option value="ESP">Español</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="isAdmin" class="required">Is Admin:</label>
+                        <input asp-for="isAdmin" type="checkbox" />
+                    </div>
+                    <div>
+                        <label asp-for="canPublish" class="required">Can Publish:</label>
+                        <input asp-for="canPublish" type="checkbox" />
+                    </div>
+                    <div>
+                        <label asp-for="isActive" class="required">Is Active:</label>
+                        <input asp-for="isActive" type="checkbox" />
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="birthday" class="required">Birthday:</label>
+                        <input asp-for="birthday" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div>
+                        <label asp-for="startDate" class="required">Start Date:</label>
+                        <input asp-for="startDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div>
+                        <label asp-for="endDate">End Date:</label>
+                        <input asp-for="endDate" type="date" />
+                    </div>
+                </div>
+                
+                <div>
+                    <div>
+                        <button type="submit" class="mainButton">Create</button>
+                    </div>
+                    
+                </div>
+
+            </form>
+        </section>
+
+
+    </div>
+</main>

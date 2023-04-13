@@ -22,6 +22,7 @@
 	<ItemGroup>
 	  <Content Remove="compilerconfig.json" />
 	  <Content Remove="wwwroot\scss\admin\_base.scss" />
+	  <Content Remove="wwwroot\scss\Admin\_create.scss" />
 	  <Content Remove="wwwroot\scss\admin\_lateralMenu.scss" />
 	  <Content Remove="wwwroot\scss\Admin\_LogIn.scss" />
 	  <Content Remove="wwwroot\scss\Admin\_table.scss" />
@@ -31,6 +32,7 @@
 
 	<ItemGroup>
 	  <SassFile Remove="wwwroot\scss\admin\_base.scss" />
+	  <SassFile Remove="wwwroot\scss\Admin\_create.scss" />
 	  <SassFile Remove="wwwroot\scss\admin\_lateralMenu.scss" />
 	  <SassFile Remove="wwwroot\scss\Admin\_LogIn.scss" />
 	  <SassFile Remove="wwwroot\scss\Admin\_table.scss" />
@@ -42,7 +44,46 @@
 
 	<ItemGroup>
 	  <None Include="compilerconfig.json" />
+	  <None Include="wwwroot\lib\tinymce\icons\default\icons.min.js" />
+	  <None Include="wwwroot\lib\tinymce\langs\README.md" />
+	  <None Include="wwwroot\lib\tinymce\models\dom\model.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\advlist\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\anchor\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\autolink\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\autoresize\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\autosave\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\charmap\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\codesample\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\code\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\directionality\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\emoticons\js\emojiimages.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\emoticons\js\emojiimages.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\emoticons\js\emojis.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\emoticons\js\emojis.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\emoticons\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\fullscreen\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\help\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\image\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\importcss\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\insertdatetime\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\link\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\lists\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\media\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\nonbreaking\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\pagebreak\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\preview\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\quickbars\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\save\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\searchreplace\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\table\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\template\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\visualblocks\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\visualchars\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\plugins\wordcount\plugin.min.js" />
+	  <None Include="wwwroot\lib\tinymce\themes\silver\theme.min.js" />
+	  <None Include="wwwroot\lib\tinymce\tinymce.min.js" />
 	  <None Include="wwwroot\scss\admin\_base.scss" />
+	  <None Include="wwwroot\scss\Admin\_create.scss" />
 	  <None Include="wwwroot\scss\Admin\_LogIn.scss" />
 	  <None Include="wwwroot\scss\admin\_lateralMenu.scss" />
 	  <None Include="wwwroot\scss\Admin\_table.scss" />
@@ -57,13 +98,18 @@
 	  <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-	  <PackageReference Include="MySql.Data" Version="8.0.32" />
+	  <PackageReference Include="MySql.Data" Version="8.0.32.1" />
+	  <PackageReference Include="TinyMCE" Version="6.4.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Domain\Domain.csproj" />
 	  <ProjectReference Include="..\LogError\LogError.csproj" />
 	  <ProjectReference Include="..\Support\Support.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <TypeScriptCompile Include="wwwroot\lib\tinymce\tinymce.d.ts" />
 	</ItemGroup>
 
 </Project>
