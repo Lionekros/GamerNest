@@ -18,7 +18,7 @@ namespace Support
 
         [Required( ErrorMessage = "Required" )]
         public string firstLastName { get; set; }
-        public string secondLastName { get; set; }
+        public string? secondLastName { get; set; }
 
         [Required( ErrorMessage = "Required" )]
         public string password { get; set; }
@@ -28,8 +28,8 @@ namespace Support
 
         [Required( ErrorMessage = "Required" )]
         public string phone { get; set; }
-        public string description { get; set; }
-        public string avatar { get; set; }
+        public string? description { get; set; }
+        public string? avatar { get; set; }
 
         [Required( ErrorMessage = "Required" )]
         public string preferedLanguage { get; set; }
@@ -48,7 +48,11 @@ namespace Support
 
         [Required( ErrorMessage = "Required" )]
         public string startDate { get; set; }
-        public string endDate { get; set; }
+        public string? endDate { get; set; }
+
+        public AuthorModel()
+        {
+        }
 
         public AuthorModel(DataRow row)
         {

@@ -91,7 +91,7 @@ namespace DBAccess
             }
 
         }
-        public static DataTable GetAuthor(string email)
+        public static DataTable GetAuthor(string emailOrPhone)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace DBAccess
                 {
                     cmd.CommandText = cmd.CommandText = "SELECT id, name, firstLastName, secondLastName, password, email, phone, description, avatar, preferedLanguage, isAdmin, canPublish, isActive, birthday, startDate, endDate"
                         + " FROM author"
-                        + " WHERE email = '" + email  + "'";
+                        + " WHERE email = '" + emailOrPhone  + "' OR phone = '" + emailOrPhone + "'";
                     return Data.ExecuteCommand( cmd );
                 }
 
@@ -112,6 +112,130 @@ namespace DBAccess
                 return dt;
             }
 
+        }
+
+        public static int CreateAuthor
+            (
+                  string    name                = ""
+                , string    firstLastName       = ""
+                , string    secondLastName      = ""
+                , string    password            = ""
+                , string    email               = ""
+                , string    phone               = ""
+                , string    description         = ""
+                , string    avatar              = ""
+                , string    preferedLanguage    = ""
+                , sbyte     isAdmin             = -1
+                , sbyte     canPublish          = -1
+                , sbyte     isActive            = -1
+                , DateTime  birthday            = default( DateTime )
+                , DateTime  startDate           = default( DateTime )
+                , DateTime  endDate             = default( DateTime )
+            )
+        {
+            try
+            {
+                MySqlCommand procedure = Data.CreateProcedure("CreateAuthor");
+
+                procedure.Parameters.AddWithValue( "@name", name );
+                procedure.Parameters.AddWithValue( "@firstLastName", firstLastName );
+                procedure.Parameters.AddWithValue( "@secondLastName", secondLastName );
+                procedure.Parameters.AddWithValue( "@password", password );
+                procedure.Parameters.AddWithValue( "@email", email );
+                procedure.Parameters.AddWithValue( "@phone", phone );
+                procedure.Parameters.AddWithValue( "@description", description );
+                procedure.Parameters.AddWithValue( "@avatar", avatar );
+                procedure.Parameters.AddWithValue( "@preferedLanguage", preferedLanguage );
+                procedure.Parameters.AddWithValue( "@isAdmin", isAdmin );
+                procedure.Parameters.AddWithValue( "@canPublish", canPublish );
+                procedure.Parameters.AddWithValue( "@isActive", isActive );
+                procedure.Parameters.AddWithValue( "@birthday", birthday );
+                procedure.Parameters.AddWithValue( "@startDate", startDate );
+                procedure.Parameters.AddWithValue( "@endDate", endDate );
+
+                return Data.ExecuteProcedure( procedure );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                return -1;
+
+            }
+        }
+
+        public static int EditAuthor
+            (
+                  int       id                  = -1
+                , string    name                = ""
+                , string    firstLastName       = ""
+                , string    secondLastName      = ""
+                , string    password            = ""
+                , string    email               = ""
+                , string    phone               = ""
+                , string    description         = ""
+                , string    avatar              = ""
+                , string    preferedLanguage    = ""
+                , sbyte     isAdmin             = -1
+                , sbyte     canPublish          = -1
+                , sbyte     isActive            = -1
+                , DateTime  birthday            = default( DateTime )
+                , DateTime  startDate           = default( DateTime )
+                , DateTime  endDate             = default( DateTime )
+            )
+        {
+            try
+            {
+                MySqlCommand procedure = Data.CreateProcedure("EditAuthor");
+
+                procedure.Parameters.AddWithValue( "@id", id );
+                procedure.Parameters.AddWithValue( "@name", name );
+                procedure.Parameters.AddWithValue( "@firstLastName", firstLastName );
+                procedure.Parameters.AddWithValue( "@secondLastName", secondLastName );
+                procedure.Parameters.AddWithValue( "@password", password );
+                procedure.Parameters.AddWithValue( "@email", email );
+                procedure.Parameters.AddWithValue( "@phone", phone );
+                procedure.Parameters.AddWithValue( "@description", description );
+                procedure.Parameters.AddWithValue( "@avatar", avatar );
+                procedure.Parameters.AddWithValue( "@preferedLanguage", preferedLanguage );
+                procedure.Parameters.AddWithValue( "@isAdmin", isAdmin );
+                procedure.Parameters.AddWithValue( "@canPublish", canPublish );
+                procedure.Parameters.AddWithValue( "@isActive", isActive );
+                procedure.Parameters.AddWithValue( "@birthday", birthday );
+                procedure.Parameters.AddWithValue( "@startDate", startDate );
+                procedure.Parameters.AddWithValue( "@endDate", endDate );
+
+                return Data.ExecuteProcedure( procedure );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                return -1;
+
+            }
+        }
+
+        public static int DeleteAuthor(int id = -1)
+        {
+            try
+            {
+                MySqlCommand procedure = Data.CreateProcedure("DeleteAuthor");
+
+                procedure.Parameters.AddWithValue( "@id", id );
+
+                return Data.ExecuteProcedure( procedure );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                return -1;
+
+            }
         }
     }
 }

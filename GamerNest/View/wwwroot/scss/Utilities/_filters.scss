@@ -31,23 +31,9 @@
             {
                 @include input($light, $secondary, 0);
                 border: none;
-                color: $light;
-
-                option
-                {
-                    &[value='1']
-                    {
-                        font-family: 'FontAwesome', 'sans-serif';
-                        color: $green;
-                    }
-
-                    &[value='0']
-                    {
-                        font-family: 'FontAwesome', 'sans-serif';
-                        color: $red;
-                    }
-                }
             }
+
+            @include select($light);
 
             .filtButton
             {

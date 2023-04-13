@@ -22,59 +22,66 @@
 
 .Createform
 {
-    form
+    div
     {
+        /* display: flex;
+        justify-content: flex-start;
+        margin-top: 1rem;
+        text-align: center;*/
+
+        @media (max-width: 767px)
+        {
+            flex-wrap: wrap;
+        }
+
+
+
         div
         {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1rem;
-            text-align: center;
-            gap: 0 2rem;
+            /*display: flex;
+            flex-direction: column;*/
+            /*width: 100%;
+            display: block;*/
 
-            @media (max-width: 767px)
+            label
             {
-                flex-wrap: wrap;
+                @include label($light);
             }
 
-            div
+            .required
             {
-                display: flex;
-                flex-direction: column;
+                color: $primary;
+            }
+
+
+            input
+            {
+                @include input();
+            }
+
+            input[type="checkbox"]
+            {
+                @include input();
+                height: 3rem;
+            }
+
+            select
+            {
+                @include input();
+            }
+
+            @include select();
+
+            button
+            {
+                @include button($primary, $light);
+            }
+
+            textarea
+            {
                 width: 100%;
-
-                label
-                {
-                    @include label($light);
-                }
-
-                .required
-                {
-                    color: $primary;
-                }
-
-
-                input
-                {
-                    @include input();
-                }
-
-                input[type="checkbox"]
-                {
-                    @include input();
-                    width: 100%;
-                    height: 3rem;
-                }
-
-                select
-                {
-                    @include input();
-                }
-
-                button
-                {
-                    @include button($primary, $light);
-                }
+                height: 100%;
+                resize: none;
             }
         }
     }

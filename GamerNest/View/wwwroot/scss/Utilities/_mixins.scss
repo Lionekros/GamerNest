@@ -86,3 +86,24 @@
     padding: 0.5rem;
     border-radius: 0.5rem;
 }
+
+@mixin select($normalColor: $dark)
+{
+    .normalSelect
+    {
+        font-family: Quantico, 'sans-serif';
+        color: $normalColor;
+    }
+
+    .redSelect
+    {
+        font-family: 'FontAwesome', 'sans-serif';
+        color: $red;
+    }
+
+    .greenSelect
+    {
+        font-family: 'FontAwesome', 'sans-serif';
+        color: $green;
+    }
+}

@@ -62,12 +62,14 @@ namespace View.Controllers
                     else
                     {
                         ViewBag.UsuMessage = "Incorrect email or password";
+                        WebText( "Login" );
                         return View( "Login", login );
                     }
                 }
                 else
                 {
                     ViewBag.Message = "Fill all data";
+                    WebText( "Login" );
                     return View( "Login", login );
                 }
             }
@@ -82,30 +84,28 @@ namespace View.Controllers
 
         public bool CheckIfEmailAndPasswordIsCorrect(string email, string password)
         {
-            bool correct = false;
-
             GetAuthor( email );
 
-            if ( lists.authorList[0].email == email )
+            if ( lists.authorList.Count > 0 )
             {
-                if ( Utility.VerifyPassword(password, lists.authorList[ 0 ].password ) )
+                if ( Utility.VerifyPassword( password, lists.authorList[ 0 ].password ) )
                 {
-                    correct = true;
+                    return true;
                 }
             }
-            return correct;
+
+            return false;
         }
         public bool CheckIfAuthorExist(string email)
         {
-            bool correct = false;
-
             GetAuthor( email );
 
-            if ( lists.authorList[ 0 ].email == email )
+            if ( lists.authorList.Count > 0 )
             {
-                correct = true;
+                return true;
             }
-            return correct;
+                
+            return false;
         }
 
         public void GetAuthor(string email)

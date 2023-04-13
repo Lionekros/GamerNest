@@ -12,7 +12,7 @@
         <h2>Create</h2>
 
         <section class="Createform">
-            <form asp-controller="AdminAuthor" asp-action="Create" method="post" enctype="multipart/form-data">
+            <form asp-controller="AdminAuthor" asp-action="CreateAuthor" method="post" enctype="multipart/form-data">
                 @if ( ViewBag.UsuMessage != null )
                 {
                     <p class="error">@ViewBag.UsuMessage</p>
@@ -55,7 +55,7 @@
                 <div>
                     <div>
                         <label asp-for="description">Description:</label>
-                        <textarea asp-for="description" id="mytextarea">Hello, World!</textarea>
+                        <textarea asp-for="description" id="mytextarea"></textarea>
                     </div>
                 </div>
 
@@ -75,16 +75,26 @@
 
                 <div>
                     <div>
-                        <label asp-for="isAdmin" class="required">Is Admin:</label>
-                        <input asp-for="isAdmin" type="checkbox" />
+                        <label asp-for="isAdmin" class="required" >Is Admin:</label>
+                        <select class="redSelect" onchange="selectColor(this)" asp-for="isAdmin">
+                            >
+                            <option class="redSelect" value="false">&#xf057;</option>
+                            <option class="greenSelect" value="true">&#xf058;</option>
+                        </select>
                     </div>
                     <div>
                         <label asp-for="canPublish" class="required">Can Publish:</label>
-                        <input asp-for="canPublish" type="checkbox" />
+                        <select class="redSelect" onchange="selectColor(this)" asp-for="canPublish">
+                            <option class="redSelect" value="false">&#xf057;</option>
+                            <option class="greenSelect" value="true">&#xf058;</option>
+                        </select>
                     </div>
                     <div>
                         <label asp-for="isActive" class="required">Is Active:</label>
-                        <input asp-for="isActive" type="checkbox" />
+                        <select class="greenSelect" onchange="selectColor(this)" asp-for="isActive">
+                            <option class="greenSelect" value="true">&#xf058;</option>
+                            <option class="redSelect" value="false">&#xf057;</option>
+                        </select>
                     </div>
                 </div>
 

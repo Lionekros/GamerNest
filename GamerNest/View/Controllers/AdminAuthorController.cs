@@ -6,6 +6,7 @@ using Support;
 using System.Xml.Linq;
 using Support;
 using LogError;
+using static Mysqlx.Expect.Open.Types;
 
 namespace View.Controllers
 {
@@ -37,6 +38,57 @@ namespace View.Controllers
             FiltersViewBag( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
 
             return View( "Authors", lists );
+        }
+
+        public ActionResult CreateAuthor(AuthorModel author)
+        {
+            try
+            {
+                bool emailExist = false;
+                bool phoneExist = false;
+                AuthorModel prueba = author;
+
+                if ( ModelState.IsValid )
+                {
+                    emailExist = EmailOrPhoneExist( author.email );
+                    phoneExist = EmailOrPhoneExist( author.phone );
+
+                    if (!emailExist)
+                    {
+                        if (!phoneExist)
+                        {
+                            CreateAuthorProcedure(author);
+                            return RedirectToAction( "Authors" );
+                        }
+                        else
+                        {
+                            SetDefaultViewDatas();
+                            ViewBag.Message = "Phone already in use";
+                            return View( "CreateAuthor", author );
+                        }
+                    }
+                    else
+                    {
+                        SetDefaultViewDatas();
+                        ViewBag.Message = "Email already in use";
+                        return View("CreateAuthor", author);
+                    }
+                }
+                else
+                {
+                    SetDefaultViewDatas();
+                    ViewBag.Message = "Fill all data";
+                    return View( "CreateAuthor", author );
+                }
+            }
+            catch ( Exception ex )
+            {
+                
+                Log log = new Log();
+                log.Add( ex.Message );
+                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                return RedirectToAction( "Index", "Admin" );
+            }
         }
 
         public ActionResult CreateForm()
@@ -101,6 +153,25 @@ namespace View.Controllers
             lists.PageSize = pageSize;
             lists.CurrentPage = page;
             lists.TotalItems = totalAuthors;
+        }
+
+        public bool EmailOrPhoneExist(string emailOrPhone)
+        {
+            GetAuthor( emailOrPhone );
+
+            if ( lists.authorList.Count > 0 )
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
+        public void CreateAuthorProcedure(AuthorModel author)
+        {
+            AuthorService.CreateAuthor(author.name, author.firstLastName, author.secondLastName, author.password, author.email, author.phone, author.description, author.avatar, author.preferedLanguage, author.isAdmin, author
+                .canPublish, author.isActive, author.birthday, author.startDate, author.endDate);
         }
 
         public void FiltersViewBag
