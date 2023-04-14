@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 10, 2023 at 12:04 AM
+-- Generation Time: Apr 14, 2023 at 09:30 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -20,6 +20,76 @@ SET time_zone = "+00:00";
 --
 -- Database: `gamer_nest`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateAuthor` (IN `pName` VARCHAR(45), IN `pFirstLastName` VARCHAR(45), IN `pSecondLastName` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pPhone` VARCHAR(20), IN `pDescription` TEXT, IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pIsAdmin` TINYINT, IN `pCanPublish` TINYINT, IN `pIsActive` TINYINT, IN `pBirthday` VARCHAR(10), IN `pStartDate` VARCHAR(10), IN `pEndDate` VARCHAR(10))   BEGIN
+    INSERT INTO `author` (
+        `name`,
+        `firstLastName`,
+        `secondLastName`,
+        `password`,
+        `email`,
+        `phone`,
+        `description`,
+        `avatar`,
+        `preferedLanguage`,
+        `isAdmin`,
+        `canPublish`,
+        `isActive`,
+        `birthday`,
+        `startDate`,
+        `endDate`
+    )
+    VALUES (
+        pName,
+        pFirstLastName,
+        pSecondLastName,
+        pPassword,
+        pEmail,
+        pPhone,
+        pDescription,
+        pAvatar,
+        pPreferedLanguage,
+        pIsAdmin,
+        pCanPublish,
+        pIsActive,
+        pBirthday,
+        pStartDate,
+        pEndDate
+    );
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteAuthor` (IN `pId` INT)   BEGIN
+    DELETE FROM `author`
+    WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateAuthor` (IN `pId` INT, IN `pName` VARCHAR(45), IN `pFirstLastName` VARCHAR(45), IN `pSecondLastName` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pPhone` VARCHAR(20), IN `pDescription` TEXT, IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pIsAdmin` TINYINT, IN `pCanPublish` TINYINT, IN `pIsActive` TINYINT, IN `pBirthday` VARCHAR(10), IN `pStartDate` VARCHAR(10), IN `pEndDate` VARCHAR(10))   BEGIN
+    UPDATE `author`
+    SET
+        `name` = pName,
+        `firstLastName` = pFirstLastName,
+        `secondLastName` = pSecondLastName,
+        `password` = pPassword,
+        `email` = pEmail,
+        `phone` = pPhone,
+        `description` = pDescription,
+        `avatar` = pAvatar,
+        `preferedLanguage` = pPreferedLanguage,
+        `isAdmin` = pIsAdmin,
+        `canPublish` = pCanPublish,
+        `isActive` = pIsActive,
+        `birthday` = pBirthday,
+        `startDate` = pStartDate,
+        `endDate` = pEndDate
+    WHERE
+        `id` = pId;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -60,9 +130,9 @@ CREATE TABLE `author` (
   `isAdmin` tinyint NOT NULL DEFAULT '0',
   `canPublish` tinyint NOT NULL DEFAULT '0',
   `isActive` tinyint NOT NULL DEFAULT '1',
-  `birthday` date NOT NULL,
-  `startDate` date NOT NULL,
-  `endDate` date DEFAULT NULL
+  `birthday` varchar(10) COLLATE utf8mb3_bin NOT NULL,
+  `startDate` varchar(10) COLLATE utf8mb3_bin NOT NULL,
+  `endDate` varchar(10) COLLATE utf8mb3_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
@@ -71,14 +141,14 @@ CREATE TABLE `author` (
 
 INSERT INTO `author` (`id`, `name`, `firstLastName`, `secondLastName`, `password`, `email`, `phone`, `description`, `avatar`, `preferedLanguage`, `isAdmin`, `canPublish`, `isActive`, `birthday`, `startDate`, `endDate`) VALUES
 (1, 'John', 'Doe', 'Smith', 'password123', 'john.doe@email.com', '1234567890', NULL, NULL, 'ENG', 0, 0, 1, '1990-01-01', '2022-01-01', NULL),
-(3, 'Sarah', 'Johnson', NULL, 'password456', 'sarah.johnson@email.com', '2345678901', NULL, NULL, 'ENG', 0, 0, 1, '1995-03-15', '2022-02-01', NULL),
+(3, 'Sarah', 'Johnson', NULL, '$2a$11$qXJFon5sXv0XKOA3FYcgX.zn4GHk5.4Nad8ji/D.QYDfpi.fi6qOu', 'sarah.johnson@email.com', 'a', '<p>adasd</p>', NULL, 'ENG', 0, 0, 1, '2023-04-14', '2023-04-14', NULL),
 (4, 'Michael', 'Chang', 'Wong', 'password789', 'michael.chang@email.com', '3456789012', NULL, NULL, 'ENG', 0, 0, 1, '1987-12-10', '2022-03-01', NULL),
 (5, 'Karen', 'Lee', 'Kim', 'password1234', 'karen.lee@email.com', '4567890123', NULL, NULL, 'ENG', 0, 1, 1, '1980-08-25', '2022-04-01', NULL),
 (6, 'David', 'Wu', NULL, 'password5678', 'david.wu@email.com', '5678901234', NULL, NULL, 'ESP', 1, 0, 1, '1992-05-20', '2022-05-01', NULL),
 (7, 'Sophia', 'Nguyen', 'Tran', 'password91011', 'sophia.nguyen@email.com', '6789012345', NULL, NULL, 'ENG', 0, 0, 1, '1999-11-30', '2022-06-01', NULL),
 (8, 'William', 'Park', 'Jung', 'password121314', 'william.park@email.com', '7890123456', NULL, NULL, 'ENG', 0, 0, 1, '1985-04-05', '2022-07-01', NULL),
-(9, 'Olivia', 'Garcia', NULL, 'password151617', 'olivia.garcia@email.com', '8901234567', NULL, NULL, 'ENG', 0, 0, 1, '1997-08-08', '2022-08-01', NULL),
-(10, 'Cristina', 'Carbonell', 'Matamoros', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'cristicarmat2@gmail.com', '965878965', 'AAAAAAAAA AAAAA A A A AAAAAAA AAAAAAAAA A AAAA A AAAAA A AA A A A A AA A A', '/img/Banner/Logo.png', 'ENG', 1, 1, 1, '2013-04-09', '2023-04-03', NULL);
+(10, 'Cristina', 'Carbonell', 'Matamoros', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'cristicarmat2@gmail.com', '965878965', 'AAAAAAAAA AAAAA A A A AAAAAAA AAAAAAAAA A AAAA A AAAAA A AA A A A A AA A A', '/img/Banner/Logo.png', 'ENG', 1, 1, 1, '2013-04-09', '2023-04-03', NULL),
+(12, 'Lidia', 'Echuaca', NULL, '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'lidia@gmail.com', '587698569', '<p>Hola &Aacute;ngeeeeeel <em><strong>yea</strong></em></p>', NULL, 'ESP', 0, 1, 1, '2023-04-14', '2023-04-14', NULL);
 
 -- --------------------------------------------------------
 
@@ -108,7 +178,8 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (13, 'PlayerType'),
 (14, 'Publisher'),
 (15, 'User'),
-(16, 'Login');
+(16, 'Login'),
+(17, 'Messages');
 
 -- --------------------------------------------------------
 
@@ -377,7 +448,7 @@ INSERT INTO `web_language` (`id`, `name`, `icon`) VALUES
 
 CREATE TABLE `web_text` (
   `id` int NOT NULL,
-  `title` varchar(255) COLLATE utf8mb3_bin NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `text` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `idCategory` int NOT NULL,
   `language` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL DEFAULT 'ENG'
@@ -397,7 +468,9 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (7, 'AdminLoginButtonAccess', 'Log In', 16, 'ENG'),
 (8, 'AdminLoginButtonAccess', 'Acceder', 16, 'ESP'),
 (9, 'AdminLoginButtonReturn', 'Return', 16, 'ENG'),
-(10, 'AdminLoginButtonReturn', 'Volver', 16, 'ESP');
+(10, 'AdminLoginButtonReturn', 'Volver', 16, 'ESP'),
+(11, 'EmailExist', 'Email already Exist', 17, 'ENG'),
+(12, 'EmailExist', 'El Email ya existe', 17, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -562,13 +635,13 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `dev`
@@ -617,6 +690,12 @@ ALTER TABLE `publisher`
 --
 ALTER TABLE `user`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `web_text`
+--
+ALTER TABLE `web_text`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

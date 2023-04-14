@@ -50,6 +50,10 @@ namespace Support
         public string startDate { get; set; }
         public string? endDate { get; set; }
 
+        public string? oldPassword { get; set; }
+        public string? newPassword { get; set; }
+        public string? confirmPassword { get; set; }
+
         public AuthorModel()
         {
         }

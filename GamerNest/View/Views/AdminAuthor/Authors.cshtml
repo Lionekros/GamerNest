@@ -100,7 +100,7 @@
                             @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
                             {
                                 // Exclude "Password" column from table
-                                if ( prop.Name.ToLower() != "password" )
+                                if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
                                 {
                                     <th>@prop.Name</th>
                                 }
@@ -116,7 +116,7 @@
                                     </a>
 
                                     <!-- Edit Author -->
-                                    <a asp-controller="AdminAuthor" asp-action="EditAuthor" asp-route-id="@item.id">
+                                    <a asp-controller="AdminAuthor" asp-action="UpdateForm" asp-route-email="@item.email">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
 
@@ -135,7 +135,7 @@
                                 @foreach ( var prop in item.GetType().GetProperties() )
                                 {
                                     // Exclude "Password" column from table
-                                    if ( prop.Name.ToLower() != "password" )
+                                    if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
                                     {
                                         <td>
                                             @if ( prop.PropertyType == typeof( bool ) )
@@ -246,7 +246,7 @@
                             @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
                             {
                                 // Exclude "Password" column from table
-                                if ( prop.Name.ToLower() != "password" )
+                                if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
                                 {
                                     <th>@prop.Name</th>
                                 }
@@ -257,14 +257,14 @@
                             <tr>
                                 <td>
                                     <!-- Edit Author -->
-                                    <a asp-controller="AdminAuthor" asp-action="EditAuthor" asp-route-id="@item.id">
+                                    <a asp-controller="AdminAuthor" asp-action="UpdateForm" asp-route-email="@item.email">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
                                 </td>
                                 @foreach ( var prop in item.GetType().GetProperties() )
                                 {
                                     // Exclude "Password" column from table
-                                    if ( prop.Name.ToLower() != "password" )
+                                    if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
                                     {
                                         <td>
                                             @if ( prop.PropertyType == typeof( bool ) )

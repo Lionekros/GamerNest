@@ -1,0 +1,264 @@
+﻿@model Support.AuthorModel
+
+@{
+    ViewData[ "Title" ] = "Admin - Update Authors";
+}
+
+<partial name="_LateralMenu" />
+
+<main class="home-section">
+    <div class="text">
+        <h1>Authors</h1>
+        <h2>Update</h2>
+
+        @if (ViewData["AdminType"].ToString() == "Admin")
+        {
+            <section class="Createform">
+                <form asp-controller="AdminAuthor" asp-action="Update" method="post" enctype="multipart/form-data">
+                    <partial name="_Error" />
+
+                    <div>
+                        <div>
+                            <label asp-for="id">ID:</label>
+                            <input asp-for="id" placeholder="id" readonly />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label asp-for="name">Name:</label>
+                            <input asp-for="name" placeholder="Name" />
+                        </div>
+                        <div>
+                            <label asp-for="firstLastName">First Last Name:</label>
+                            <input asp-for="firstLastName" placeholder="First Last Name" />
+                        </div>
+                        <div>
+                            <label asp-for="secondLastName">Second Last Name:</label>
+                            <input asp-for="secondLastName" placeholder="Second Last Name" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div hidden>
+                            <label asp-for="password">Password:</label>
+                            <input asp-for="password" type="text" placeholder="Password" />
+                        </div>
+                        <div>
+                            <label asp-for="password">Password:</label>
+                            <input asp-for="password" type="password" placeholder="Password" />
+                        </div>
+                        <div>
+                            <label asp-for="email">Email:</label>
+                            <input asp-for="email" placeholder="Email" />
+                        </div>
+                        <div>
+                            <label asp-for="phone">Phone:</label>
+                            <input asp-for="phone" placeholder="Phone" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label asp-for="description">Description:</label>
+                            <textarea asp-for="description" id="mytextarea" value="aaaaaaaaaaa"></textarea>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label asp-for="avatar">Avatar:</label>
+                            <input asp-for="avatar" type="file" />
+                        </div>
+                        <div>
+                            <label asp-for="preferedLanguage">Preferred Language:</label>
+                            <select asp-for="preferedLanguage" required>
+                                <option value="ENG">English</option>
+                                <option value="ESP">Español</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label asp-for="isAdmin">Is Admin:</label>
+                            <select class="redSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
+                                <option class="redSelect" value="false">&#xf057;</option>
+                                <option class="greenSelect" value="true">&#xf058;</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label asp-for="canPublish">Can Publish:</label>
+                            <select class="redSelect" onchange="selectColor(this)" asp-for="canPublish" required>
+                                <option class="redSelect" value="false">&#xf057;</option>
+                                <option class="greenSelect" value="true">&#xf058;</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label asp-for="isActive">Is Active:</label>
+                            <select class="greenSelect" onchange="selectColor(this)" asp-for="isActive" required>
+                                <option class="greenSelect" value="true">&#xf058;</option>
+                                <option class="redSelect" value="false">&#xf057;</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label asp-for="birthday">Birthday:</label>
+                            <input asp-for="birthday" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </div>
+                        <div>
+                            <label asp-for="startDate">Start Date:</label>
+                            <input asp-for="startDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </div>
+                        <div>
+                            <label asp-for="endDate">End Date:</label>
+                            <input asp-for="endDate" type="date" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <button type="submit" class="mainButton">Update</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </section>
+        }
+        else
+        {
+            <section class="Createform">
+                <form asp-controller="AdminAuthor" asp-action="Update" method="post" enctype="multipart/form-data">
+                    <partial name="_Error" />
+
+                    <div hidden>
+                        <div>
+                            <label asp-for="id">ID:</label>
+                            <input asp-for="id" placeholder="id" readonly />
+                        </div>
+                    </div>
+
+                    <div hidden>
+                        <div>
+                            <label asp-for="name">Name:</label>
+                            <input asp-for="name" placeholder="Name" />
+                        </div>
+                        <div>
+                            <label asp-for="firstLastName">First Last Name:</label>
+                            <input asp-for="firstLastName" placeholder="First Last Name" />
+                        </div>
+                        <div>
+                            <label asp-for="secondLastName">Second Last Name:</label>
+                            <input asp-for="secondLastName" placeholder="Second Last Name" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div hidden>
+                            <label asp-for="password">Password:</label>
+                            <input asp-for="password" type="text" placeholder="Password" />
+                        </div>
+                        <div>
+                            <label asp-for="oldPassword">Old Password:</label>
+                            <input asp-for="oldPassword" type="password" placeholder="Old Password" />
+                        </div>
+                        <div>
+                            <label asp-for="newPassword">New Password:</label>
+                            <input asp-for="newPassword" type="password" placeholder="New Password" />
+                        </div>
+                        <div>
+                            <label asp-for="confirmPassword">Confirm New Password:</label>
+                            <input asp-for="confirmPassword" type="password" placeholder="Confirm Password" />
+                        </div>
+                    </div>
+
+                    <div hidden>
+                        
+                        <div>
+                            <label asp-for="email">Email:</label>
+                            <input asp-for="email" placeholder="Email" />
+                        </div>
+                        <div>
+                            <label asp-for="phone">Phone:</label>
+                            <input asp-for="phone" placeholder="Phone" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label asp-for="description">Description:</label>
+                            <textarea asp-for="description" id="mytextarea" value="aaaaaaaaaaa"></textarea>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label asp-for="avatar">Avatar:</label>
+                            <input asp-for="avatar" type="file" />
+                        </div>
+                        <div>
+                            <label asp-for="preferedLanguage">Preferred Language:</label>
+                            <select asp-for="preferedLanguage" required>
+                                <option value="ENG">English</option>
+                                <option value="ESP">Español</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div hidden>
+                        <div>
+                            <label asp-for="isAdmin">Is Admin:</label>
+                            <select class="redSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
+                                <option class="redSelect" value="false">&#xf057;</option>
+                                <option class="greenSelect" value="true">&#xf058;</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label asp-for="canPublish">Can Publish:</label>
+                            <select class="redSelect" onchange="selectColor(this)" asp-for="canPublish" required>
+                                <option class="redSelect" value="false">&#xf057;</option>
+                                <option class="greenSelect" value="true">&#xf058;</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label asp-for="isActive">Is Active:</label>
+                            <select class="greenSelect" onchange="selectColor(this)" asp-for="isActive" required>
+                                <option class="greenSelect" value="true">&#xf058;</option>
+                                <option class="redSelect" value="false">&#xf057;</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div hidden>
+                        <div>
+                            <label asp-for="birthday">Birthday:</label>
+                            <input asp-for="birthday" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </div>
+                        <div>
+                            <label asp-for="startDate">Start Date:</label>
+                            <input asp-for="startDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </div>
+                        <div>
+                            <label asp-for="endDate">End Date:</label>
+                            <input asp-for="endDate" type="date" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <button type="submit" class="mainButton">Update</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </section>
+        }
+
+
+
+    </div>
+</main>

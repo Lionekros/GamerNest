@@ -48,5 +48,41 @@ namespace View.Controllers
                 return "Admin";
             }
         }
+
+        public bool ConfirmPassword(string newPassword, string confirmPassword)
+        {
+            if ( newPassword == confirmPassword && newPassword != null && confirmPassword != null )
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public string UploadImage(IFormFile avatar, int id, string path1, string path2 = "")
+        {
+            if ( avatar != null && avatar.Length > 0 )
+            {
+                string directoryPath;
+                if ( !string.IsNullOrEmpty( path2 ) )
+                {
+                    directoryPath = Path.Combine( Directory.GetCurrentDirectory(), "wwwroot", "img", path1, path2 );
+                }
+                else
+                {
+                    directoryPath = Path.Combine( Directory.GetCurrentDirectory(), "wwwroot", "img", path1 );
+                }
+                Directory.CreateDirectory( directoryPath );
+                string fileName = "avatar_" + id + Path.GetExtension(avatar.FileName);
+                string filePath = Path.Combine(directoryPath, fileName);
+                using ( var stream = new FileStream( filePath, FileMode.Create ) )
+                {
+                    avatar.CopyTo( stream );
+                }
+                return "/" + Path.Combine( "img", "Avatar", "Author", fileName ).Replace( '\\', '/' );
+            }
+
+            return "";
+        }
+
     }
 }

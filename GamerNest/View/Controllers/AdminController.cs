@@ -13,25 +13,61 @@ namespace View.Controllers
     {
         public ActionResult Index()
         {
-            SetDefaultViewDatas();
-
-            if ( HttpContext.Session.GetString( "AdminType" ) == null )
+            try
             {
-                return RedirectToAction( "LogInForm", "Admin" );
-            }
+                SetDefaultViewDatas();
 
-            return View();
+                if ( HttpContext.Session.GetString( "AdminType" ) == null )
+                {
+                    return RedirectToAction( "LogInForm", "Admin" );
+                }
+
+                return View();
+
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                return RedirectToAction( "Index", "Admin" );
+            }
         }
 
         public ActionResult LogInForm()
         {
-            WebText( "Login");
-            return View("Login");
+            try
+            {
+                WebText( "Login" );
+                return View( "Login" );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                return RedirectToAction( "Index", "Admin" );
+            }
+
         }
         public ActionResult LogOut()
         {
-            HttpContext.Session.Clear();
-            return RedirectToAction( "LogInForm", "Admin" );
+            try
+            {
+                HttpContext.Session.Clear();
+                return RedirectToAction( "LogInForm", "Admin" );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                return RedirectToAction( "Index", "Admin" );
+            }
+
         }
 
         [HttpPost]

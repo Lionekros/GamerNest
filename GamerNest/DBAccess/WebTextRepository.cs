@@ -52,7 +52,8 @@ namespace DBAccess
                     cmd.CommandText = cmd.CommandText = "SELECT wt.id AS 'wt.id', wt.title AS 'wt.title', wt.text AS 'wt.text', cat.name AS 'cat.name', wt.language AS 'wt.language'"
                         + " FROM web_text wt, category cat"
                         + " WHERE wt.idCategory = cat.id"
-                            + " AND cAT.name = '" + category + "'"
+                            + " AND cat.name = '" + category + "'"
+                            + " OR cat.name = 'Messages'"
                             + " AND wt.language = '" + language + "'";
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {

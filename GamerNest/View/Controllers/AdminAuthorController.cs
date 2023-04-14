@@ -21,40 +21,88 @@ namespace View.Controllers
                 , string    orderBy         = ""
             )
         {
-            SetDefaultViewDatas();
-
-            if ( HttpContext.Session.GetString( "AdminType" ) == null )
+            try
             {
-                return RedirectToAction( "LogInForm", "Admin" );
+                SetDefaultViewDatas();
+
+                if ( HttpContext.Session.GetString( "AdminType" ) == null )
+                {
+                    return RedirectToAction( "LogInForm", "Admin" );
+                }
+
+                if ( HttpContext.Session.GetString( "AdminType" ) == "Admin" )
+                {
+                    GetAllAuthors( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
+                    Pagination( page, pageSize );
+
+                    FiltersViewBag( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
+                }
+                else
+                {
+                    GetAuthor( HttpContext.Session.GetString( "AdminEmail" ) );
+                }
+
+
+                return View( "Authors", lists );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                return RedirectToAction( "Index", "Admin" );
             }
 
-            if ( HttpContext.Session.GetString( "AdminType" ) == "Admin" )
-            {
-                GetAllAuthors( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
-                Pagination( page, pageSize );
-
-                FiltersViewBag( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
-            }
-            else
-            {
-                GetAuthor( HttpContext.Session.GetString( "AdminEmail" ) );
-            }
-                
-
-            return View( "Authors", lists );
         }
 
         public ActionResult CreateForm()
         {
-            if ( HttpContext.Session.GetString( "AdminType" ) == null || HttpContext.Session.GetString( "AdminType" ) == "Author" )
+            try
             {
-                return RedirectToAction( "LogInForm", "Admin" );
+                if ( HttpContext.Session.GetString( "AdminType" ) == null || HttpContext.Session.GetString( "AdminType" ) == "Author" )
+                {
+                    return RedirectToAction( "LogInForm", "Admin" );
+                }
+                SetDefaultViewDatas();
+                return View( "CreateAuthor" );
             }
-            SetDefaultViewDatas();
-            return View( "CreateAuthor" );
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                return RedirectToAction( "Index", "Admin" );
+            }
+
         }
 
-        public ActionResult Create(AuthorModel author)
+        public ActionResult UpdateForm(string email)
+        {
+            try
+            {
+                if ( HttpContext.Session.GetString( "AdminType" ) == null )
+                {
+                    return RedirectToAction( "LogInForm", "Admin" );
+                }
+                SetDefaultViewDatas();
+                GetAuthor( email );
+                AuthorModel author = lists.authorList[0];
+                return View( "UpdateAuthor", author );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                return RedirectToAction( "Index", "Admin" );
+            }
+
+        }
+
+        public ActionResult Create(AuthorModel author, IFormFile avatar)
         {
             try
             {
@@ -64,8 +112,8 @@ namespace View.Controllers
 
                 if ( ModelState.IsValid )
                 {
-                    emailExist = EmailOrPhoneExist( author.email );
-                    phoneExist = EmailOrPhoneExist( author.phone );
+                    emailExist = EmailOrPhoneExist( author.email, author.id );
+                    phoneExist = EmailOrPhoneExist( author.phone, author.id );
 
                     if ( emailExist )
                     {
@@ -76,6 +124,8 @@ namespace View.Controllers
                     {
                         errorMessageList.Add( "Phone already in use" );
                     }
+
+                    author.avatar = UploadImage( avatar, author.id, "Avatar", "Author" );
 
                     if ( !emailExist && !phoneExist )
                     {
@@ -101,9 +151,82 @@ namespace View.Controllers
             }
         }
 
-        public ActionResult Update(AuthorModel author) 
+        public ActionResult Update(AuthorModel author, IFormFile avatar) 
         {
-            return View();
+            try
+            {
+                List<string> errorMessageList = new List<string>();
+                bool emailExist = false;
+                bool phoneExist = false;
+                bool confirmPass = false;
+                bool changedPassword = false;
+
+                if ( ModelState.IsValid )
+                {
+                    emailExist = EmailOrPhoneExist( author.email, author.id );
+                    phoneExist = EmailOrPhoneExist( author.phone, author.id );
+
+                    if ( emailExist )
+                    {
+                        errorMessageList.Add( "Email already in use" );
+                    }
+
+                    if ( phoneExist )
+                    {
+                        errorMessageList.Add( "Phone already in use" );
+                    }
+
+                    author.avatar = UploadImage( avatar, author.id, "Avatar", "Author" );
+
+                    if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
+                    {
+                        if ( CheckPasswordAuthor( author.email, author.oldPassword ) )
+                        {
+                            if ( ConfirmPassword( author.newPassword, author.confirmPassword ) )
+                            {
+                                author.password = author.newPassword;
+                                changedPassword = true;
+                                confirmPass = true;
+                            }
+                            else
+                            {
+                                errorMessageList.Add( "New password and Confirm password don't match" );
+                            }
+                        }
+                        else
+                        {
+                            errorMessageList.Add( "Incorrect Old Password" );
+                        }
+
+                        if ( !emailExist && !phoneExist && confirmPass )
+                        {
+                            UpdateAuthorProcedure( author, changedPassword );
+                            return RedirectToAction( "Authors" );
+                        }
+                    }
+
+                    if ( !emailExist && !phoneExist)
+                    {
+                        UpdateAuthorProcedure( author );
+                        return RedirectToAction( "Authors" );
+                    }
+                }
+                else
+                {
+                    errorMessageList.Add( "Fill all required data" );
+                }
+                SetDefaultViewDatas();
+                ViewBag.ErrorMessages = errorMessageList;
+                return View( "UpdateAuthor", author );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                return RedirectToAction( "Index", "Admin" );
+            }
         }
 
         public ActionResult Delete(int id)
@@ -146,15 +269,21 @@ namespace View.Controllers
             lists.TotalItems = totalAuthors;
         }
 
-        public bool EmailOrPhoneExist(string emailOrPhone)
+        public bool EmailOrPhoneExist(string emailOrPhone, int id)
         {
             GetAuthor( emailOrPhone );
 
             if ( lists.authorList.Count > 0 )
             {
-                return true;
+                if ( id == lists.authorList[ 0 ].id )
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
-
             return false;
 
         }
@@ -165,16 +294,19 @@ namespace View.Controllers
                 .canPublish, author.isActive, author.birthday, author.startDate, author.endDate);
         }
 
-        public void UpdateAuthorProcedure(AuthorModel author)
+        public bool CheckPasswordAuthor(string email, string password)
         {
-            bool changedPassword = false;
+            GetAuthor( email );
 
-            GetAuthor( author.email );
-
-            if ( !Utility.VerifyPassword(author.password, lists.authorList[0].password ) )
+            if ( Utility.VerifyPassword( password, lists.authorList[ 0 ].password ))
             {
-                changedPassword = true;
+                return true;
             }
+            return false;
+        }
+
+        public void UpdateAuthorProcedure(AuthorModel author, bool changedPassword = false)
+        {
 
             AuthorService.UpdateAuthor( author.id, author.name, author.firstLastName, author.secondLastName, author.password, changedPassword, author.email, author.phone, author.description, author.avatar, author.preferedLanguage, author.isAdmin, author
                 .canPublish, author.isActive, author.birthday, author.startDate, author.endDate );
