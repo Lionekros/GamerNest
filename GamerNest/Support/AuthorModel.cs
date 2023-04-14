@@ -69,12 +69,13 @@ namespace Support
             isAdmin = Utility.sByteToBool( row.Field<sbyte>( "isAdmin" ) );
             canPublish = Utility.sByteToBool( row.Field<sbyte>( "canPublish" ));
             isActive = Utility.sByteToBool( row.Field<sbyte>( "isActive" ));
-            birthday = Utility.DateTimeToString( row.Field<DateTime>( "birthday" ));
-            startDate = Utility.DateTimeToString( row.Field<DateTime>( "startDate" ));
-            if ( row[ "endDate" ] != DBNull.Value )
-                endDate = Utility.DateTimeToString( row.Field<DateTime>( "endDate" ) );
-            else
-                endDate = "";
+            birthday = row.Field<string>( "birthday" );
+            startDate = row.Field<string>( "startDate" );
+            //if ( row[ "endDate" ] != DBNull.Value )
+            //    endDate = row.Field<string>( "endDate" );
+            //else
+            //    endDate = "";
+            endDate = row.Field<string>( "endDate" );
         }
     }
 }

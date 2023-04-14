@@ -8,7 +8,7 @@ namespace View.Controllers
         {
             SetDefaultViewDatas();
 
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
+            if ( HttpContext.Session.GetString( "AdminType" ) == null )
             {
                 return RedirectToAction( "LogInForm", "Admin" );
             }

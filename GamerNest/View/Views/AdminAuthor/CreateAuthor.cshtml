@@ -13,23 +13,16 @@
 
         <section class="Createform">
             <form asp-controller="AdminAuthor" asp-action="CreateAuthor" method="post" enctype="multipart/form-data">
-                @if ( ViewBag.UsuMessage != null )
-                {
-                    <p class="error">@ViewBag.UsuMessage</p>
-                }
-                else if ( ViewBag.Message != null )
-                {
-                    <p class="error">@ViewBag.Message</p>
-                }
+                <partial name="_Error" />
 
                 <div>
                     <div>
                         <label asp-for="name" class="required">Name:</label>
-                        <input asp-for="name" placeholder="Name" />
+                        <input required asp-for="name" placeholder="Name" />
                     </div>
                     <div>
                         <label asp-for="firstLastName" class="required">First Last Name:</label>
-                        <input asp-for="firstLastName" placeholder="First Last Name" />
+                        <input required asp-for="firstLastName" placeholder="First Last Name" />
                     </div>
                     <div>
                         <label asp-for="secondLastName">Second Last Name:</label>
@@ -40,15 +33,15 @@
                 <div>
                     <div>
                         <label asp-for="password" class="required">Password:</label>
-                        <input asp-for="password" type="password" placeholder="Password" />
+                        <input required asp-for="password" type="password" placeholder="Password" />
                     </div>
                     <div>
                         <label asp-for="email" class="required">Email:</label>
-                        <input asp-for="email" placeholder="Email" />
+                        <input required asp-for="email" placeholder="Email" />
                     </div>
                     <div>
                         <label asp-for="phone" class="required">Phone:</label>
-                        <input asp-for="phone" placeholder="Phone" />
+                        <input required asp-for="phone" placeholder="Phone" />
                     </div>
                 </div>
 
@@ -66,7 +59,7 @@
                     </div>
                     <div>
                         <label asp-for="preferedLanguage" class="required">Preferred Language:</label>
-                        <select asp-for="preferedLanguage">
+                        <select asp-for="preferedLanguage" required>
                             <option value="ENG">English</option>
                             <option value="ESP">Español</option>
                         </select>
@@ -76,22 +69,21 @@
                 <div>
                     <div>
                         <label asp-for="isAdmin" class="required" >Is Admin:</label>
-                        <select class="redSelect" onchange="selectColor(this)" asp-for="isAdmin">
-                            >
+                        <select class="redSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
                             <option class="redSelect" value="false">&#xf057;</option>
                             <option class="greenSelect" value="true">&#xf058;</option>
                         </select>
                     </div>
                     <div>
                         <label asp-for="canPublish" class="required">Can Publish:</label>
-                        <select class="redSelect" onchange="selectColor(this)" asp-for="canPublish">
+                        <select class="redSelect" onchange="selectColor(this)" asp-for="canPublish" required>
                             <option class="redSelect" value="false">&#xf057;</option>
                             <option class="greenSelect" value="true">&#xf058;</option>
                         </select>
                     </div>
                     <div>
                         <label asp-for="isActive" class="required">Is Active:</label>
-                        <select class="greenSelect" onchange="selectColor(this)" asp-for="isActive">
+                        <select class="greenSelect" onchange="selectColor(this)" asp-for="isActive" required>
                             <option class="greenSelect" value="true">&#xf058;</option>
                             <option class="redSelect" value="false">&#xf057;</option>
                         </select>
@@ -101,11 +93,11 @@
                 <div>
                     <div>
                         <label asp-for="birthday" class="required">Birthday:</label>
-                        <input asp-for="birthday" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        <input required asp-for="birthday" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                     </div>
                     <div>
                         <label asp-for="startDate" class="required">Start Date:</label>
-                        <input asp-for="startDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        <input required asp-for="startDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                     </div>
                     <div>
                         <label asp-for="endDate">End Date:</label>

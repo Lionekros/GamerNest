@@ -74,17 +74,17 @@
     text-shadow: -1px -1px 0 $color, 1px -1px 0 $color, -1px 1px 0 $color, 1px 1px 0 $color;
 }
 
-@mixin error()
+@mixin error($fontSize:1.5rem)
 {
+    margin: 1rem 40rem;
     color: $primary;
-    margin-top: -10px;
-    margin-bottom: 10px;
-    font-size: 1.5rem;
+    font-size: $fontSize;
     background-color: $terciary;
     margin-bottom: 1rem;
     text-align: center;
     padding: 0.5rem;
     border-radius: 0.5rem;
+    list-style: none;
 }
 
 @mixin select($normalColor: $dark)

@@ -964,6 +964,7 @@ a {
   text-align: center;
   padding: 0.5rem;
   border-radius: 0.5rem;
+  list-style: none;
 }
 .AdminLogIn section .form .mainButton {
   display: block;
@@ -1131,6 +1132,17 @@ a {
   }
 }
 
+.Createform .error {
+  margin: 1rem 40rem;
+  color: #FFB100;
+  font-size: 1.5rem;
+  background-color: #555555;
+  margin-bottom: 1rem;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  list-style: none;
+}
 .Createform div {
   /* display: flex;
   justify-content: flex-start;

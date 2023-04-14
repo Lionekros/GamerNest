@@ -13,14 +13,7 @@
     <section>
         <div class="form">
             <form asp-controller="Admin" asp-action="LogIn" method="post">
-                @if (ViewBag.UsuMessage != null)
-                {
-                    <p class="error">@ViewBag.UsuMessage</p>
-                }
-                else if (ViewBag.Message != null)
-                {
-                    <p class="error">@ViewBag.Message</p>
-                }
+                <partial name="_Error" />
 
                 <div>
                     <label asp-for="email">@ViewData["AdminLoginEmail"]:</label>

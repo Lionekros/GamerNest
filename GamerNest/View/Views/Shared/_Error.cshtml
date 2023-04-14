@@ -1,0 +1,11 @@
+﻿@if ( ViewBag.ErrorMessages != null )
+{
+    <div>
+        <ul>
+            @foreach ( var error in ViewBag.ErrorMessages )
+            {
+                <li class="error">@error</li>
+            }
+        </ul>
+    </div>
+}

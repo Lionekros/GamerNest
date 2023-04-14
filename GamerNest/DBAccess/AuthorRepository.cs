@@ -128,30 +128,30 @@ namespace DBAccess
                 , sbyte     isAdmin             = -1
                 , sbyte     canPublish          = -1
                 , sbyte     isActive            = -1
-                , DateTime  birthday            = default( DateTime )
-                , DateTime  startDate           = default( DateTime )
-                , DateTime  endDate             = default( DateTime )
+                , string    birthday            = ""
+                , string    startDate           = ""
+                , string    endDate             = ""
             )
         {
             try
             {
                 MySqlCommand procedure = Data.CreateProcedure("CreateAuthor");
 
-                procedure.Parameters.AddWithValue( "@name", name );
-                procedure.Parameters.AddWithValue( "@firstLastName", firstLastName );
-                procedure.Parameters.AddWithValue( "@secondLastName", secondLastName );
-                procedure.Parameters.AddWithValue( "@password", password );
-                procedure.Parameters.AddWithValue( "@email", email );
-                procedure.Parameters.AddWithValue( "@phone", phone );
-                procedure.Parameters.AddWithValue( "@description", description );
-                procedure.Parameters.AddWithValue( "@avatar", avatar );
-                procedure.Parameters.AddWithValue( "@preferedLanguage", preferedLanguage );
-                procedure.Parameters.AddWithValue( "@isAdmin", isAdmin );
-                procedure.Parameters.AddWithValue( "@canPublish", canPublish );
-                procedure.Parameters.AddWithValue( "@isActive", isActive );
-                procedure.Parameters.AddWithValue( "@birthday", birthday );
-                procedure.Parameters.AddWithValue( "@startDate", startDate );
-                procedure.Parameters.AddWithValue( "@endDate", endDate );
+                procedure.Parameters.AddWithValue( "pName", name );
+                procedure.Parameters.AddWithValue( "pFirstLastName", firstLastName );
+                procedure.Parameters.AddWithValue( "pSecondLastName", secondLastName );
+                procedure.Parameters.AddWithValue( "pPassword", password );
+                procedure.Parameters.AddWithValue( "pEmail", email );
+                procedure.Parameters.AddWithValue( "pPhone", phone );
+                procedure.Parameters.AddWithValue( "pDescription", description );
+                procedure.Parameters.AddWithValue( "pAvatar", avatar );
+                procedure.Parameters.AddWithValue( "pPreferedLanguage", preferedLanguage );
+                procedure.Parameters.AddWithValue( "pIsAdmin", isAdmin );
+                procedure.Parameters.AddWithValue( "pCanPublish", canPublish );
+                procedure.Parameters.AddWithValue( "pIsActive", isActive );
+                procedure.Parameters.AddWithValue( "pBirthday", birthday );
+                procedure.Parameters.AddWithValue( "pStartDate", startDate );
+                procedure.Parameters.AddWithValue( "pEndDate", endDate );
 
                 return Data.ExecuteProcedure( procedure );
             }
@@ -180,9 +180,9 @@ namespace DBAccess
                 , sbyte     isAdmin             = -1
                 , sbyte     canPublish          = -1
                 , sbyte     isActive            = -1
-                , DateTime  birthday            = default( DateTime )
-                , DateTime  startDate           = default( DateTime )
-                , DateTime  endDate             = default( DateTime )
+                , string    birthday            = ""
+                , string    startDate           = ""
+                , string    endDate             = ""
             )
         {
             try

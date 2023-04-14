@@ -94,13 +94,9 @@ namespace Domain
             sbyte canPublish2 = Utility.BoolToSByte( canPublish );
             sbyte isActive2 = Utility.BoolToSByte( isActive );
 
-            DateTime birthday2 = Utility.StringToDateTime( birthday );
-            DateTime startDate2 = Utility.StringToDateTime( startDate );
-            DateTime endDate2 = Utility.StringToDateTime( endDate );
-
             password = Utility.EncriptPassword( password );
             
-            AuthorRepository.CreateAuthor(name, firstLastName, secondLastName, password, email, phone, description, avatar, preferedLanguage, isAdmin2, canPublish2, isActive2, birthday2, startDate2, endDate2);
+            AuthorRepository.CreateAuthor(name, firstLastName, secondLastName, password, email, phone, description, avatar, preferedLanguage, isAdmin2, canPublish2, isActive2, birthday, startDate, endDate);
         }
 
         public static void EditAuthor
@@ -128,16 +124,12 @@ namespace Domain
             sbyte canPublish2 = Utility.BoolToSByte( canPublish );
             sbyte isActive2 = Utility.BoolToSByte( isActive );
 
-            DateTime birthday2 = Utility.StringToDateTime( birthday );
-            DateTime startDate2 = Utility.StringToDateTime( startDate );
-            DateTime endDate2 = Utility.StringToDateTime( endDate );
-
             if (changedPassword)
             {
                 password = Utility.EncriptPassword( password );
             }
             
-            AuthorRepository.EditAuthor( id, name, firstLastName, secondLastName, password, email, phone, description, avatar, preferedLanguage, isAdmin2, canPublish2, isActive2, birthday2, startDate2, endDate2 );
+            AuthorRepository.EditAuthor( id, name, firstLastName, secondLastName, password, email, phone, description, avatar, preferedLanguage, isAdmin2, canPublish2, isActive2, birthday, startDate, endDate );
         }
 
         public static void DeleteAuthor( int id = -1)

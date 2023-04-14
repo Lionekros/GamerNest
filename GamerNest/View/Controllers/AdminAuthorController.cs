@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using Support;
 using LogError;
 using static Mysqlx.Expect.Open.Types;
+using MySqlX.XDevAPI;
 
 namespace View.Controllers
 {
@@ -28,14 +29,23 @@ namespace View.Controllers
         {
             SetDefaultViewDatas();
 
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
+            if ( HttpContext.Session.GetString( "AdminType" ) == null )
             {
                 return RedirectToAction( "LogInForm", "Admin" );
             }
-            GetAllAuthors( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
-            Pagination(page, pageSize);
 
-            FiltersViewBag( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
+            if ( HttpContext.Session.GetString( "AdminType" ) == "Admin" )
+            {
+                GetAllAuthors( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
+                Pagination( page, pageSize );
+
+                FiltersViewBag( id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy );
+            }
+            else
+            {
+                GetAuthor( HttpContext.Session.GetString( "AdminEmail" ) );
+            }
+                
 
             return View( "Authors", lists );
         }
@@ -44,42 +54,38 @@ namespace View.Controllers
         {
             try
             {
+                List<string> errorMessageList = new List<string>();
                 bool emailExist = false;
                 bool phoneExist = false;
-                AuthorModel prueba = author;
 
                 if ( ModelState.IsValid )
                 {
                     emailExist = EmailOrPhoneExist( author.email );
                     phoneExist = EmailOrPhoneExist( author.phone );
 
-                    if (!emailExist)
+                    if ( emailExist )
                     {
-                        if (!phoneExist)
-                        {
-                            CreateAuthorProcedure(author);
-                            return RedirectToAction( "Authors" );
-                        }
-                        else
-                        {
-                            SetDefaultViewDatas();
-                            ViewBag.Message = "Phone already in use";
-                            return View( "CreateAuthor", author );
-                        }
+                        errorMessageList.Add( "Email already in use" );
                     }
-                    else
+
+                    if ( phoneExist )
                     {
-                        SetDefaultViewDatas();
-                        ViewBag.Message = "Email already in use";
-                        return View("CreateAuthor", author);
+                        errorMessageList.Add( "Phone already in use" );
+                    }
+
+                    if ( !emailExist && !phoneExist )
+                    {
+                        CreateAuthorProcedure( author );
+                        return RedirectToAction( "Authors" );
                     }
                 }
                 else
                 {
-                    SetDefaultViewDatas();
-                    ViewBag.Message = "Fill all data";
-                    return View( "CreateAuthor", author );
+                    errorMessageList.Add( "Fill all required data" );
                 }
+                SetDefaultViewDatas();
+                ViewBag.ErrorMessages = errorMessageList;
+                return View( "CreateAuthor", author );
             }
             catch ( Exception ex )
             {
@@ -93,6 +99,10 @@ namespace View.Controllers
 
         public ActionResult CreateForm()
         {
+            if ( HttpContext.Session.GetString( "AdminType" ) == null || HttpContext.Session.GetString( "AdminType" ) == "Author")
+            {
+                return RedirectToAction( "LogInForm", "Admin" );
+            }
             SetDefaultViewDatas();
             return View("CreateAuthor");
         }

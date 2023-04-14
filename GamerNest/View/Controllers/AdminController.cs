@@ -15,7 +15,7 @@ namespace View.Controllers
         {
             SetDefaultViewDatas();
 
-            if ( HttpContext.Session.GetString( "AdminEmail" ) == null )
+            if ( HttpContext.Session.GetString( "AdminType" ) == null )
             {
                 return RedirectToAction( "LogInForm", "Admin" );
             }
@@ -39,6 +39,7 @@ namespace View.Controllers
         {
             try
             {
+                List<string> errorMessageList = new List<string>();
                 bool correctPassword = false;
 
                 if ( ModelState.IsValid )
@@ -51,7 +52,7 @@ namespace View.Controllers
                         // Get in sessions all the data that we will need in the future
                         HttpContext.Session.SetString( "AdminEmail", login.email );
                         HttpContext.Session.SetString( "AdminFullName", lists.authorList[ 0 ].name + " " + lists.authorList[ 0 ].firstLastName + " " + lists.authorList[ 0 ].secondLastName );
-                        HttpContext.Session.SetString( "AdminAvatar", lists.authorList[ 0 ].avatar );
+                        HttpContext.Session.SetString( "AdminAvatar", lists.authorList[ 0 ].avatar ?? string.Empty );
                         HttpContext.Session.SetString( "AdminType", FetchUserType( lists.authorList[ 0 ].isAdmin ) );
 
                         HttpContext.Session.SetString( "PageLanguage", lists.authorList[ 0 ].preferedLanguage );
@@ -61,17 +62,17 @@ namespace View.Controllers
                     }
                     else
                     {
-                        ViewBag.UsuMessage = "Incorrect email or password";
-                        WebText( "Login" );
-                        return View( "Login", login );
+                        errorMessageList.Add( "Incorrect email or password" );
                     }
                 }
                 else
                 {
-                    ViewBag.Message = "Fill all data";
-                    WebText( "Login" );
-                    return View( "Login", login );
+                    errorMessageList.Add( "Fill all required data" );
                 }
+                SetDefaultViewDatas();
+                ViewBag.ErrorMessages = errorMessageList;
+                WebText( "Login" );
+                return View( "Login", login );
             }
             catch ( Exception ex )
             {

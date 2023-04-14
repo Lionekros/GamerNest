@@ -22,6 +22,11 @@
 
 .Createform
 {
+    .error
+    {
+        @include error();
+    }
+
     div
     {
         /* display: flex;
