@@ -1,13 +1,7 @@
 ﻿using Domain;
-using Google.Protobuf.Collections;
 using Microsoft.AspNetCore.Mvc;
-using Mysqlx.Crud;
-using Support;
-using System.Xml.Linq;
 using Support;
 using LogError;
-using static Mysqlx.Expect.Open.Types;
-using MySqlX.XDevAPI;
 
 namespace View.Controllers
 {
@@ -50,7 +44,17 @@ namespace View.Controllers
             return View( "Authors", lists );
         }
 
-        public ActionResult CreateAuthor(AuthorModel author)
+        public ActionResult CreateForm()
+        {
+            if ( HttpContext.Session.GetString( "AdminType" ) == null || HttpContext.Session.GetString( "AdminType" ) == "Author" )
+            {
+                return RedirectToAction( "LogInForm", "Admin" );
+            }
+            SetDefaultViewDatas();
+            return View( "CreateAuthor" );
+        }
+
+        public ActionResult Create(AuthorModel author)
         {
             try
             {
@@ -97,40 +101,16 @@ namespace View.Controllers
             }
         }
 
-        public ActionResult CreateForm()
+        public ActionResult Update(AuthorModel author) 
         {
-            if ( HttpContext.Session.GetString( "AdminType" ) == null || HttpContext.Session.GetString( "AdminType" ) == "Author")
-            {
-                return RedirectToAction( "LogInForm", "Admin" );
-            }
-            SetDefaultViewDatas();
-            return View("CreateAuthor");
+            return View();
         }
 
-        public ActionResult Create(AuthorModel author)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                if ( ModelState.IsValid )
-                {
-                    ViewBag.Inserted = "Author inserted correctly";
-                    return View("Authors");
-                }
-                else
-                {
-                    ViewBag.Message = "Fill all data";
-                    return View( "CreateAuthor", author );
-                }
-            }
-            catch ( Exception ex )
-            {
-                Log log = new Log();
-                log.Add( ex.Message );
-                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
-                return RedirectToAction( "Index", "Article" );
-            }
+            DeleteAuthorProcedure( id );
+            return RedirectToAction( "Authors" );
         }
-
 
         public void GetAllAuthors
             (
@@ -147,6 +127,7 @@ namespace View.Controllers
         {
             lists.authorList = AuthorService.GetAllAuthors(id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy, limit );
         }
+
         public void GetAuthor(string email)
         {
             lists.authorList = AuthorService.GetAuthor( email );
@@ -182,6 +163,26 @@ namespace View.Controllers
         {
             AuthorService.CreateAuthor(author.name, author.firstLastName, author.secondLastName, author.password, author.email, author.phone, author.description, author.avatar, author.preferedLanguage, author.isAdmin, author
                 .canPublish, author.isActive, author.birthday, author.startDate, author.endDate);
+        }
+
+        public void UpdateAuthorProcedure(AuthorModel author)
+        {
+            bool changedPassword = false;
+
+            GetAuthor( author.email );
+
+            if ( !Utility.VerifyPassword(author.password, lists.authorList[0].password ) )
+            {
+                changedPassword = true;
+            }
+
+            AuthorService.UpdateAuthor( author.id, author.name, author.firstLastName, author.secondLastName, author.password, changedPassword, author.email, author.phone, author.description, author.avatar, author.preferedLanguage, author.isAdmin, author
+                .canPublish, author.isActive, author.birthday, author.startDate, author.endDate );
+        }
+
+        public void DeleteAuthorProcedure(int id) 
+        {
+            AuthorService.DeleteAuthor( id );
         }
 
         public void FiltersViewBag

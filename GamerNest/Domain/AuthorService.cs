@@ -99,7 +99,7 @@ namespace Domain
             AuthorRepository.CreateAuthor(name, firstLastName, secondLastName, password, email, phone, description, avatar, preferedLanguage, isAdmin2, canPublish2, isActive2, birthday, startDate, endDate);
         }
 
-        public static void EditAuthor
+        public static void UpdateAuthor
             (
                   int       id                  = -1
                 , string    name                = ""
@@ -129,7 +129,7 @@ namespace Domain
                 password = Utility.EncriptPassword( password );
             }
             
-            AuthorRepository.EditAuthor( id, name, firstLastName, secondLastName, password, email, phone, description, avatar, preferedLanguage, isAdmin2, canPublish2, isActive2, birthday, startDate, endDate );
+            AuthorRepository.UpdateAuthor( id, name, firstLastName, secondLastName, password, email, phone, description, avatar, preferedLanguage, isAdmin2, canPublish2, isActive2, birthday, startDate, endDate );
         }
 
         public static void DeleteAuthor( int id = -1)

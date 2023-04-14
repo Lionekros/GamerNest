@@ -1,6 +1,4 @@
-﻿function deleteModal(ItemId)
-{
-    var deleteAction = document.getElementById('deleteAction_' + ItemId);
+﻿function deleteModal(ItemId) {
 
     var modal = document.getElementById('confirmationModal_' + ItemId);
     var confirmBtn = document.getElementById('confirmBtn_' + ItemId);
@@ -9,6 +7,19 @@
     modal.style.display = 'flex';
 
     confirmBtn.addEventListener('click', function () {
+        var url = '/AdminAuthor/Delete/' + ItemId;
+        fetch(url, { method: 'POST' })
+            .then(function (response) {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    console.error('Error deleting author:', response.statusText);
+                }
+            })
+            .catch(function (error) {
+                console.error('Error deleting author:', error);
+            });
+
         modal.style.display = 'none';
     });
 
