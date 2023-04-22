@@ -4,8 +4,19 @@
 }
 
 <header class="AdminHeader">
-    <img src="~/img/Banner/Logo.png" alt="Logo" />
-    <p>Gamer Nest</p>
+    <div class="banner">
+        <img src="~/img/Banner/Logo.png" alt="Logo" />
+        <p>Gamer Nest</p>
+    </div>
+    <div class="flags">
+        <a asp-controller="Base" asp-action="ChangeLanguage" asp-route-lang="ENG" asp-route-cont="Admin" asp-route-act="LogInForm">
+            <span class="fi fi-gb fis"></span>
+        </a>
+        
+        <a asp-controller="Base" asp-action="ChangeLanguage" asp-route-lang="ESP" asp-route-cont="Admin" asp-route-act="LogInForm">
+            <span class="fi fi-es fis"></span>
+        </a>
+    </div>
 </header>
 
 <main class="AdminLogIn">

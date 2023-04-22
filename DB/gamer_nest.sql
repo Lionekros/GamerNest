@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 14, 2023 at 09:30 PM
+-- Generation Time: Apr 22, 2023 at 12:04 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -73,11 +73,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateAuthor` (IN `pId` INT, IN `pN
         `name` = pName,
         `firstLastName` = pFirstLastName,
         `secondLastName` = pSecondLastName,
-        `password` = pPassword,
+        `password` = IFNULL(NULLIF(pPassword, ''), `password`),
         `email` = pEmail,
         `phone` = pPhone,
         `description` = pDescription,
-        `avatar` = pAvatar,
+        `avatar` = IFNULL(NULLIF(pAvatar, ''), `avatar`),
         `preferedLanguage` = pPreferedLanguage,
         `isAdmin` = pIsAdmin,
         `canPublish` = pCanPublish,
@@ -140,15 +140,12 @@ CREATE TABLE `author` (
 --
 
 INSERT INTO `author` (`id`, `name`, `firstLastName`, `secondLastName`, `password`, `email`, `phone`, `description`, `avatar`, `preferedLanguage`, `isAdmin`, `canPublish`, `isActive`, `birthday`, `startDate`, `endDate`) VALUES
-(1, 'John', 'Doe', 'Smith', 'password123', 'john.doe@email.com', '1234567890', NULL, NULL, 'ENG', 0, 0, 1, '1990-01-01', '2022-01-01', NULL),
-(3, 'Sarah', 'Johnson', NULL, '$2a$11$qXJFon5sXv0XKOA3FYcgX.zn4GHk5.4Nad8ji/D.QYDfpi.fi6qOu', 'sarah.johnson@email.com', 'a', '<p>adasd</p>', NULL, 'ENG', 0, 0, 1, '2023-04-14', '2023-04-14', NULL),
-(4, 'Michael', 'Chang', 'Wong', 'password789', 'michael.chang@email.com', '3456789012', NULL, NULL, 'ENG', 0, 0, 1, '1987-12-10', '2022-03-01', NULL),
-(5, 'Karen', 'Lee', 'Kim', 'password1234', 'karen.lee@email.com', '4567890123', NULL, NULL, 'ENG', 0, 1, 1, '1980-08-25', '2022-04-01', NULL),
-(6, 'David', 'Wu', NULL, 'password5678', 'david.wu@email.com', '5678901234', NULL, NULL, 'ESP', 1, 0, 1, '1992-05-20', '2022-05-01', NULL),
-(7, 'Sophia', 'Nguyen', 'Tran', 'password91011', 'sophia.nguyen@email.com', '6789012345', NULL, NULL, 'ENG', 0, 0, 1, '1999-11-30', '2022-06-01', NULL),
-(8, 'William', 'Park', 'Jung', 'password121314', 'william.park@email.com', '7890123456', NULL, NULL, 'ENG', 0, 0, 1, '1985-04-05', '2022-07-01', NULL),
-(10, 'Cristina', 'Carbonell', 'Matamoros', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'cristicarmat2@gmail.com', '965878965', 'AAAAAAAAA AAAAA A A A AAAAAAA AAAAAAAAA A AAAA A AAAAA A AA A A A A AA A A', '/img/Banner/Logo.png', 'ENG', 1, 1, 1, '2013-04-09', '2023-04-03', NULL),
-(12, 'Lidia', 'Echuaca', NULL, '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'lidia@gmail.com', '587698569', '<p>Hola &Aacute;ngeeeeeel <em><strong>yea</strong></em></p>', NULL, 'ESP', 0, 1, 1, '2023-04-14', '2023-04-14', NULL);
+(3, 'Sarah', 'Johnson', NULL, '$2a$11$qXJFon5sXv0XKOA3FYcgX.zn4GHk5.4Nad8ji/D.QYDfpi.fi6qOu', 'sarah.johnson@email.com', 'a', '<p>adasd</p>', '/img/Avatar/Author/avatar_3.jpg', 'ENG', 0, 0, 1, '2023-04-21', '2023-04-21', NULL),
+(10, 'Cristina', 'Carbonell', 'Matamoros', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'cristicarmat2@gmail.com', '965878965', '<p>AAAAAAAAA AAAAA A A A AAAAAAA AAAAAAAAA A AAAA A AAAAA A AA A A A A AA A A</p>', '/img/Avatar/Author/avatar_10.jpeg', 'ENG', 1, 1, 1, '2023-04-21', '2023-04-21', NULL),
+(12, 'Lidia', 'Echuaca', NULL, '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'lidia@gmail.com', '587698569', '<p>Hola &Aacute;ngeeeeeel <em><strong>yea</strong></em></p>', '/img/Avatar/Author/avatar_12.png', 'ESP', 0, 1, 1, '2023-04-14', '2023-04-14', NULL),
+(13, 'Edu', 'Carbonell', 'Matamoros', '$2a$11$kfB1lJy5FsriRzPP659oqOPJv2UnZcPt0bes1Fe.b53YuRZ9XN5su', 'edu@gmail.com', '546896523', '<p>Pechuga</p>', '/img/Avatar/Author/avatar_0.jpeg', 'ESP', 0, 1, 1, '2008-10-11', '2023-04-21', NULL),
+(14, 'Ángel', 'Sánchez', 'Pastor', '$2a$11$tbjLxSXUXautTqagVujdm.C2uT0rcPFiK7npcQG3Hd0sZmMluRAWG', 'asp@gmail.com', '123456789', '<p>Me gustan las calculadoras y el Horizon. Tengo el record de hu&iacute;das de DAW.</p>', '/img/Avatar/Author/avatar_0.png', 'ENG', 1, 1, 1, '1987-06-09', '2023-04-21', NULL),
+(15, 'Adrián', 'Pérez', NULL, '$2a$11$Vhafab1MeBJiNnAKe.n/iuYq4zNVjyRa559Gv0rhxhpmC39ILv7Ge', 'adrianperez@gmail.com', '456137788', '<p>&iquest;Spiderman o Espaiderman?</p>', '/img/Avatar/Author/avatar_15.jpeg', 'ESP', 0, 0, 0, '2023-04-22', '2023-04-22', NULL);
 
 -- --------------------------------------------------------
 
@@ -635,7 +632,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `category`

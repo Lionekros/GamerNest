@@ -86,13 +86,7 @@ namespace View.Controllers
                         GetAuthor( login.email );
 
                         // Get in sessions all the data that we will need in the future
-                        HttpContext.Session.SetString( "AdminEmail", login.email );
-                        HttpContext.Session.SetString( "AdminFullName", lists.authorList[ 0 ].name + " " + lists.authorList[ 0 ].firstLastName + " " + lists.authorList[ 0 ].secondLastName );
-                        HttpContext.Session.SetString( "AdminAvatar", lists.authorList[ 0 ].avatar ?? string.Empty );
-                        HttpContext.Session.SetString( "AdminType", FetchUserType( lists.authorList[ 0 ].isAdmin ) );
-
-                        HttpContext.Session.SetString( "PageLanguage", lists.authorList[ 0 ].preferedLanguage );
-
+                        SetAdminSessions();
 
                         return RedirectToAction( "Index", "Admin" );
                     }

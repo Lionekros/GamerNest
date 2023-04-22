@@ -6,30 +6,64 @@
 {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: space-between;
     text-align: center;
     margin: 1rem;
 
-    img
+    .banner
     {
-        width: 5rem;
-        margin-right: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+
+        img
+        {
+            width: 5rem;
+            margin-right: 0.5rem;
+        }
+
+        p
+        {
+            font-size: 2rem;
+            text-transform: uppercase;
+            color: $primary;
+        }
     }
 
-    p
+    .flags
     {
-        font-size: 2rem;
-        text-transform: uppercase;
-        color: $primary;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+
+        a
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            margin-left: 1rem;
+            margin-right: 1rem;
+
+            .fi
+            {
+                font-size: 2rem;
+            }
+        }
     }
+
 
     @media (max-width: 767px)
     {
         flex-direction: row;
         justify-content: center;
+
     }
 }
+
 
 
 .AdminLogIn
@@ -45,6 +79,14 @@
         font-size: 5rem;
         text-transform: uppercase;
         text-align: center;
+    }
+
+    @media (max-width: 767px)
+    {
+        h1
+        {
+            font-size: 3rem;
+        }
     }
 
     section

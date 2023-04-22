@@ -890,19 +890,42 @@ a {
 .AdminHeader {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: space-between;
   text-align: center;
   margin: 1rem;
 }
-.AdminHeader img {
+.AdminHeader .banner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+.AdminHeader .banner img {
   width: 5rem;
   margin-right: 0.5rem;
 }
-.AdminHeader p {
+.AdminHeader .banner p {
   font-size: 2rem;
   text-transform: uppercase;
   color: #FFB100;
+}
+.AdminHeader .flags {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+.AdminHeader .flags a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.AdminHeader .flags a .fi {
+  font-size: 2rem;
 }
 @media (max-width: 767px) {
   .AdminHeader {
@@ -922,6 +945,11 @@ a {
   font-size: 5rem;
   text-transform: uppercase;
   text-align: center;
+}
+@media (max-width: 767px) {
+  .AdminLogIn h1 {
+    font-size: 3rem;
+  }
 }
 .AdminLogIn section {
   max-width: 50%;

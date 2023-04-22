@@ -1,4 +1,4 @@
-﻿@model Support.AuthorModel
+﻿@model Support.UpdateAuthorModel
 
 @{
     ViewData[ "Title" ] = "Admin - Update Authors";
@@ -40,13 +40,13 @@
                     </div>
 
                     <div>
-                        <div hidden>
-                            <label asp-for="password">Password:</label>
-                            <input asp-for="password" type="text" placeholder="Password" />
+                        <div>
+                            <label asp-for="oldPassword">Password:</label>
+                            <input asp-for="oldPassword" type="password" placeholder="Password" />
                         </div>
                         <div>
-                            <label asp-for="password">Password:</label>
-                            <input asp-for="password" type="password" placeholder="Password" />
+                            <label asp-for="confirmPassword">Confirm New Password:</label>
+                            <input asp-for="confirmPassword" type="password" placeholder="Confirm Password" />
                         </div>
                         <div>
                             <label asp-for="email">Email:</label>
@@ -80,27 +80,71 @@
                     </div>
 
                     <div>
-                        <div>
-                            <label asp-for="isAdmin">Is Admin:</label>
-                            <select class="redSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
-                                <option class="redSelect" value="false">&#xf057;</option>
-                                <option class="greenSelect" value="true">&#xf058;</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label asp-for="canPublish">Can Publish:</label>
-                            <select class="redSelect" onchange="selectColor(this)" asp-for="canPublish" required>
-                                <option class="redSelect" value="false">&#xf057;</option>
-                                <option class="greenSelect" value="true">&#xf058;</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label asp-for="isActive">Is Active:</label>
-                            <select class="greenSelect" onchange="selectColor(this)" asp-for="isActive" required>
-                                <option class="greenSelect" value="true">&#xf058;</option>
-                                <option class="redSelect" value="false">&#xf057;</option>
-                            </select>
-                        </div>
+                        @if ( Model.isAdmin )
+                        {
+                            <div>
+                                <label asp-for="isAdmin">Is Admin:</label>
+                                <select class="greenSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
+                                    <option class="redSelect" value="false">&#xf057;</option>
+                                    <option class="greenSelect" value="true">&#xf058;</option>
+                                </select>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <label asp-for="isAdmin">Is Admin:</label>
+                                <select class="redSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
+                                    <option class="redSelect" value="false">&#xf057;</option>
+                                    <option class="greenSelect" value="true">&#xf058;</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if ( Model.canPublish )
+                        {
+                            <div>
+                                <label asp-for="canPublish">Can Publish:</label>
+                                <select class="greenSelect" onchange="selectColor(this)" asp-for="canPublish" required>
+                                    <option class="redSelect" value="false">&#xf057;</option>
+                                    <option class="greenSelect" value="true">&#xf058;</option>
+                                </select>
+                            </div>
+                        }
+                        else
+                        {
+
+                            <div>
+                                <label asp-for="canPublish">Can Publish:</label>
+                                <select class="redSelect" onchange="selectColor(this)" asp-for="canPublish" required>
+                                    <option class="redSelect" value="false">&#xf057;</option>
+                                    <option class="greenSelect" value="true">&#xf058;</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if ( !Model.isActive )
+                        {
+                            <div>
+                                <label asp-for="isActive">Is Active:</label>
+                                <select class="redSelect" onchange="selectColor(this)" asp-for="isActive" required>
+                                    <option class="greenSelect" value="true">&#xf058;</option>
+                                    <option class="redSelect" value="false">&#xf057;</option>
+                                </select>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <label asp-for="isActive">Is Active:</label>
+                                <select class="greenSelect" onchange="selectColor(this)" asp-for="isActive" required>
+                                    <option class="greenSelect" value="true">&#xf058;</option>
+                                    <option class="redSelect" value="false">&#xf057;</option>
+                                </select>
+                            </div>
+
+                        }
+                        
                     </div>
 
                     <div>
@@ -157,10 +201,6 @@
                     </div>
 
                     <div>
-                        <div hidden>
-                            <label asp-for="password">Password:</label>
-                            <input asp-for="password" type="text" placeholder="Password" />
-                        </div>
                         <div>
                             <label asp-for="oldPassword">Old Password:</label>
                             <input asp-for="oldPassword" type="password" placeholder="Old Password" />

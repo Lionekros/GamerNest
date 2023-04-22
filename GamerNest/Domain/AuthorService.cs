@@ -71,6 +71,30 @@ namespace Domain
             }
         }
 
+        public static List<UpdateAuthorModel> GetAuthorUpdate(string emailOrPhone)
+        {
+            try
+            {
+                DataTable dt = AuthorRepository.GetAuthor(emailOrPhone);
+                List<UpdateAuthorModel> authorList = new List<UpdateAuthorModel>();
+
+                foreach ( DataRow row in dt.Rows )
+                {
+                    authorList.Add( new UpdateAuthorModel( row ) );
+                }
+
+                return authorList;
+            }
+            catch ( Exception ex )
+            {
+                List<UpdateAuthorModel> authorList = new List<UpdateAuthorModel>();
+                Log log = new Log();
+                log.Add( ex.Message );
+                return authorList;
+
+            }
+        }
+
         public static void CreateAuthor
             (
                   string    name                = ""

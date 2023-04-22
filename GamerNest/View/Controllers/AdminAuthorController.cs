@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Support;
 using LogError;
+using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
+using System.Text.RegularExpressions;
 
 namespace View.Controllers
 {
@@ -87,8 +90,8 @@ namespace View.Controllers
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
                 SetDefaultViewDatas();
-                GetAuthor( email );
-                AuthorModel author = lists.authorList[0];
+                GetAuthorUpdate( email );
+                UpdateAuthorModel author = lists.updateAuthorList[0];
                 return View( "UpdateAuthor", author );
             }
             catch ( Exception ex )
@@ -109,6 +112,8 @@ namespace View.Controllers
                 List<string> errorMessageList = new List<string>();
                 bool emailExist = false;
                 bool phoneExist = false;
+
+                ModelState.Remove( "avatar" );
 
                 if ( ModelState.IsValid )
                 {
@@ -151,15 +156,21 @@ namespace View.Controllers
             }
         }
 
-        public ActionResult Update(AuthorModel author, IFormFile avatar) 
+        public ActionResult Update(UpdateAuthorModel author, IFormFile avatar) 
         {
+
             try
             {
                 List<string> errorMessageList = new List<string>();
                 bool emailExist = false;
                 bool phoneExist = false;
+                string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&+])[A-Za-z\d@$!%*?&+]{8,}$";
+                bool isMatch = false;
                 bool confirmPass = false;
                 bool changedPassword = false;
+
+                ModelState.Remove( "avatar" );
+
 
                 if ( ModelState.IsValid )
                 {
@@ -176,39 +187,92 @@ namespace View.Controllers
                         errorMessageList.Add( "Phone already in use" );
                     }
 
-                    author.avatar = UploadImage( avatar, author.id, "Avatar", "Author" );
+                    if (avatar != null)
+                    {
+                        author.avatar = UploadImage( avatar, author.id, "Avatar", "Author" );
+                    }
+                    
 
                     if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
                     {
-                        if ( CheckPasswordAuthor( author.email, author.oldPassword ) )
+                        if ( author.oldPassword != "" && author.oldPassword != null )
                         {
-                            if ( ConfirmPassword( author.newPassword, author.confirmPassword ) )
+                            if ( CheckPasswordAuthor( author.email, author.oldPassword ) )
                             {
-                                author.password = author.newPassword;
-                                changedPassword = true;
-                                confirmPass = true;
+                                if ( ConfirmPassword( author.newPassword, author.confirmPassword ) )
+                                {
+                                    if ( !Regex.IsMatch( author.newPassword, passwordRegex ) )
+                                    {
+                                        errorMessageList.Add( "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol (@$!%*?&.)" );
+                                    }
+                                    else
+                                    {
+                                        isMatch = true;
+                                        author.oldPassword = author.newPassword;
+                                        changedPassword = true;
+                                        confirmPass = true;
+                                    }
+                                }
+                                else
+                                {
+                                    errorMessageList.Add( "Passwords don't match" );
+                                }
                             }
                             else
                             {
-                                errorMessageList.Add( "New password and Confirm password don't match" );
+                                errorMessageList.Add( "Incorrect Old Password" );
+                            }
+
+                            if ( !emailExist && !phoneExist && confirmPass && isMatch )
+                            {
+                                UpdateAuthorProcedure( author, changedPassword );
+                                GetAuthor( author.email );
+                                SetAdminSessions();
+                                return RedirectToAction( "Authors" );
                             }
                         }
                         else
                         {
-                            errorMessageList.Add( "Incorrect Old Password" );
-                        }
-
-                        if ( !emailExist && !phoneExist && confirmPass )
-                        {
-                            UpdateAuthorProcedure( author, changedPassword );
-                            return RedirectToAction( "Authors" );
+                            if ( !emailExist && !phoneExist)
+                            {
+                                UpdateAuthorProcedure( author, changedPassword );
+                                GetAuthor( author.email );
+                                SetAdminSessions();
+                                return RedirectToAction( "Authors" );
+                            }
                         }
                     }
-
-                    if ( !emailExist && !phoneExist)
+                    else
                     {
-                        UpdateAuthorProcedure( author );
-                        return RedirectToAction( "Authors" );
+                        if ( author.oldPassword != "" && author.oldPassword != null )
+                        {
+                            if ( ConfirmPassword( author.oldPassword, author.confirmPassword ) )
+                            {
+                                confirmPass = true;
+                                if ( !emailExist && !phoneExist && confirmPass )
+                                {
+                                    UpdateAuthorProcedure( author );
+                                    GetAuthor( author.email );
+                                    SetAdminSessions();
+                                    return RedirectToAction( "Authors" );
+                                }
+                            }
+                            else
+                            {
+                                errorMessageList.Add( "Passwords don't match" );
+                            }
+                        }
+                        else
+                        {
+                            if ( !emailExist && !phoneExist )
+                            {
+                                UpdateAuthorProcedure( author );
+                                GetAuthor( author.email );
+                                SetAdminSessions();
+                                return RedirectToAction( "Authors" );
+                            }
+                        }
+                        
                     }
                 }
                 else
@@ -254,6 +318,11 @@ namespace View.Controllers
         public void GetAuthor(string email)
         {
             lists.authorList = AuthorService.GetAuthor( email );
+        }
+
+        public void GetAuthorUpdate(string email)
+        {
+            lists.updateAuthorList = AuthorService.GetAuthorUpdate( email );
         }
 
         public void Pagination(int page, int pageSize)
@@ -305,10 +374,10 @@ namespace View.Controllers
             return false;
         }
 
-        public void UpdateAuthorProcedure(AuthorModel author, bool changedPassword = false)
+        public void UpdateAuthorProcedure(UpdateAuthorModel author, bool changedPassword = false)
         {
 
-            AuthorService.UpdateAuthor( author.id, author.name, author.firstLastName, author.secondLastName, author.password, changedPassword, author.email, author.phone, author.description, author.avatar, author.preferedLanguage, author.isAdmin, author
+            AuthorService.UpdateAuthor( author.id, author.name, author.firstLastName, author.secondLastName, author.oldPassword, changedPassword, author.email, author.phone, author.description, author.avatar, author.preferedLanguage, author.isAdmin, author
                 .canPublish, author.isActive, author.birthday, author.startDate, author.endDate );
         }
 

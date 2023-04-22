@@ -10,6 +10,7 @@
         public List<WebTextModel> webTextList { get; set; }
 
         public List<AuthorModel> authorList { get; set; }
+        public List<UpdateAuthorModel> updateAuthorList { get; set; }
 
         public List<GameExternalDataModel> devList { get; set; }
         public List<GameExternalDataModel> genreList { get; set; }

@@ -31,9 +31,9 @@
 
             <li class="profile">
                 <div class="profile-details">
-                    <img class="" src="~/img/Banner/Logo.png" alt="Banner">
+                    <img class="" src="@ViewData["AdminAvatar"]" alt="Banner">
                     <div class="name_job">
-                        <div class="name">@ViewData["AdminFullName"]</div>
+                        <div class="name">@ViewData["AdminEmail"]</div>
                         <div class="job">@ViewData["AdminType"]</div>
                     </div>
                 </div>
@@ -159,9 +159,9 @@ else
 
             <li class="profile">
                 <div class="profile-details">
-                    <img class="" src="~/img/Banner/Logo.png" alt="Banner">
+                    <img class="" src="@ViewData["AdminAvatar"]" alt="Banner">
                     <div class="name_job">
-                        <div class="name">@ViewData["AdminFullName"]</div>
+                        <div class="name">@ViewData["AdminEmail"]</div>
                         <div class="job">@ViewData["AdminType"]</div>
                     </div>
                 </div>

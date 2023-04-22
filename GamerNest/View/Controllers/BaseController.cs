@@ -1,4 +1,5 @@
 ﻿using Domain;
+using LogError;
 using Microsoft.AspNetCore.Mvc;
 using Support;
 
@@ -14,6 +15,22 @@ namespace View.Controllers
             ViewData[ "AdminType" ] = HttpContext.Session.GetString( "AdminType" );
             ViewData[ "AdminAvatar" ] = HttpContext.Session.GetString( "AdminAvatar" );
             ViewData[ "PageLanguage"] = HttpContext.Session.GetString( "PageLanguage" );
+        }
+
+        public void SetAdminSessions()
+        {
+            HttpContext.Session.SetString( "AdminEmail", lists.authorList[ 0 ].email );
+            HttpContext.Session.SetString( "AdminFullName", lists.authorList[ 0 ].name + " " + lists.authorList[ 0 ].firstLastName + " " + lists.authorList[ 0 ].secondLastName );
+            HttpContext.Session.SetString( "AdminAvatar", lists.authorList[ 0 ].avatar ?? string.Empty );
+            HttpContext.Session.SetString( "AdminType", FetchUserType( lists.authorList[ 0 ].isAdmin ) );
+
+            HttpContext.Session.SetString( "PageLanguage", lists.authorList[ 0 ].preferedLanguage );
+        }
+
+        public ActionResult ChangeLanguage(string lang, string cont, string act)
+        {
+            HttpContext.Session.SetString( "PageLanguage", lang );
+            return RedirectToAction( act, cont );
         }
 
         public void WebText(string cat)
