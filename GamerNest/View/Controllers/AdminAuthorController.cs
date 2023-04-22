@@ -45,6 +45,7 @@ namespace View.Controllers
                     GetAuthor( HttpContext.Session.GetString( "AdminEmail" ) );
                 }
 
+                WebText( "AdminAuthor" );
 
                 return View( "Authors", lists );
             }
@@ -53,7 +54,8 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                WebText( "AdminAuthor" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
 
@@ -68,6 +70,7 @@ namespace View.Controllers
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
                 SetDefaultViewDatas();
+                WebText("AdminAuthorForm");
                 return View( "CreateAuthor" );
             }
             catch ( Exception ex )
@@ -75,7 +78,8 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                WebText( "AdminAuthor" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
 
@@ -92,6 +96,7 @@ namespace View.Controllers
                 SetDefaultViewDatas();
                 GetAuthorUpdate( email );
                 UpdateAuthorModel author = lists.updateAuthorList[0];
+                WebText( "AdminAuthorForm" );
                 return View( "UpdateAuthor", author );
             }
             catch ( Exception ex )
@@ -99,7 +104,8 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                WebText( "AdminAuthor" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
 
@@ -109,6 +115,7 @@ namespace View.Controllers
         {
             try
             {
+                WebText( "Messages" );
                 List<string> errorMessageList = new List<string>();
                 bool emailExist = false;
                 bool phoneExist = false;
@@ -122,12 +129,12 @@ namespace View.Controllers
 
                     if ( emailExist )
                     {
-                        errorMessageList.Add( "Email already in use" );
+                        errorMessageList.Add( ViewData[ "EmailExist" ].ToString() );
                     }
 
                     if ( phoneExist )
                     {
-                        errorMessageList.Add( "Phone already in use" );
+                        errorMessageList.Add( ViewData[ "PhoneExist" ].ToString() );
                     }
 
                     author.avatar = UploadImage( avatar, author.id, "Avatar", "Author" );
@@ -140,7 +147,7 @@ namespace View.Controllers
                 }
                 else
                 {
-                    errorMessageList.Add( "Fill all required data" );
+                    errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
                 SetDefaultViewDatas();
                 ViewBag.ErrorMessages = errorMessageList;
@@ -151,7 +158,8 @@ namespace View.Controllers
                 
                 Log log = new Log();
                 log.Add( ex.Message );
-                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                WebText( "AdminAuthor" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
         }
@@ -161,6 +169,8 @@ namespace View.Controllers
 
             try
             {
+                WebText( "Messages" );
+
                 List<string> errorMessageList = new List<string>();
                 bool emailExist = false;
                 bool phoneExist = false;
@@ -179,12 +189,12 @@ namespace View.Controllers
 
                     if ( emailExist )
                     {
-                        errorMessageList.Add( "Email already in use" );
+                        errorMessageList.Add( ViewData[ "EmailExist" ].ToString() );
                     }
 
                     if ( phoneExist )
                     {
-                        errorMessageList.Add( "Phone already in use" );
+                        errorMessageList.Add( ViewData[ "PhoneExist" ].ToString() );
                     }
 
                     if (avatar != null)
@@ -203,7 +213,7 @@ namespace View.Controllers
                                 {
                                     if ( !Regex.IsMatch( author.newPassword, passwordRegex ) )
                                     {
-                                        errorMessageList.Add( "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol (@$!%*?&.)" );
+                                        errorMessageList.Add( ViewData[ "InvalidPassword" ].ToString() );
                                     }
                                     else
                                     {
@@ -215,12 +225,12 @@ namespace View.Controllers
                                 }
                                 else
                                 {
-                                    errorMessageList.Add( "Passwords don't match" );
+                                    errorMessageList.Add( ViewData[ "MismatchPasswords" ].ToString() );
                                 }
                             }
                             else
                             {
-                                errorMessageList.Add( "Incorrect Old Password" );
+                                errorMessageList.Add( ViewData[ "ErrorOldPassword" ].ToString() );
                             }
 
                             if ( !emailExist && !phoneExist && confirmPass && isMatch )
@@ -259,7 +269,7 @@ namespace View.Controllers
                             }
                             else
                             {
-                                errorMessageList.Add( "Passwords don't match" );
+                                errorMessageList.Add( ViewData[ "MismatchPasswords" ].ToString() );
                             }
                         }
                         else
@@ -277,7 +287,7 @@ namespace View.Controllers
                 }
                 else
                 {
-                    errorMessageList.Add( "Fill all required data" );
+                    errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
                 SetDefaultViewDatas();
                 ViewBag.ErrorMessages = errorMessageList;
@@ -288,7 +298,8 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                WebText( "AdminAuthor" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
         }

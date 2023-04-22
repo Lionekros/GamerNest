@@ -9,7 +9,7 @@
 <main class="home-section">
     <div class="text">
         <h1>Authors</h1>
-        <h2>Update</h2>
+        <h2>@ViewData[ "TitleUpdate" ]</h2>
 
         @if (ViewData["AdminType"].ToString() == "Admin")
         {
@@ -202,16 +202,16 @@
 
                     <div>
                         <div>
-                            <label asp-for="oldPassword">Old Password:</label>
-                            <input asp-for="oldPassword" type="password" placeholder="Old Password" />
+                            <label asp-for="oldPassword">@ViewData[ "OldPassword" ]:</label>
+                            <input asp-for="oldPassword" type="password" placeholder="@ViewData[ "OldPassword" ]" />
                         </div>
                         <div>
-                            <label asp-for="newPassword">New Password:</label>
-                            <input asp-for="newPassword" type="password" placeholder="New Password" />
+                            <label asp-for="newPassword">@ViewData[ "NewPassword" ]:</label>
+                            <input asp-for="newPassword" type="password" placeholder="@ViewData[ "NewPassword" ]" />
                         </div>
                         <div>
-                            <label asp-for="confirmPassword">Confirm New Password:</label>
-                            <input asp-for="confirmPassword" type="password" placeholder="Confirm Password" />
+                            <label asp-for="confirmPassword">@ViewData[ "ConfirmPassword" ]:</label>
+                            <input asp-for="confirmPassword" type="password" placeholder="@ViewData[ "ConfirmPassword" ]" />
                         </div>
                     </div>
 
@@ -229,7 +229,7 @@
 
                     <div>
                         <div>
-                            <label asp-for="description">Description:</label>
+                            <label asp-for="description">@ViewData[ "Description" ]:</label>
                             <textarea asp-for="description" id="mytextarea" value="aaaaaaaaaaa"></textarea>
                         </div>
                     </div>
@@ -240,7 +240,7 @@
                             <input asp-for="avatar" type="file" />
                         </div>
                         <div>
-                            <label asp-for="preferedLanguage">Preferred Language:</label>
+                            <label asp-for="preferedLanguage">@ViewData[ "PreferedLanguage" ]:</label>
                             <select asp-for="preferedLanguage" required>
                                 <option value="ENG">English</option>
                                 <option value="ESP">Español</option>
@@ -289,7 +289,7 @@
 
                     <div>
                         <div>
-                            <button type="submit" class="mainButton">Update</button>
+                            <button type="submit" class="mainButton">@ViewData[ "ButtonUpdate" ]</button>
                         </div>
 
                     </div>

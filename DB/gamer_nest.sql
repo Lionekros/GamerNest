@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2023 at 12:04 AM
+-- Generation Time: Apr 22, 2023 at 01:55 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -130,9 +130,9 @@ CREATE TABLE `author` (
   `isAdmin` tinyint NOT NULL DEFAULT '0',
   `canPublish` tinyint NOT NULL DEFAULT '0',
   `isActive` tinyint NOT NULL DEFAULT '1',
-  `birthday` varchar(10) COLLATE utf8mb3_bin NOT NULL,
-  `startDate` varchar(10) COLLATE utf8mb3_bin NOT NULL,
-  `endDate` varchar(10) COLLATE utf8mb3_bin DEFAULT NULL
+  `birthday` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `startDate` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `endDate` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
@@ -144,7 +144,7 @@ INSERT INTO `author` (`id`, `name`, `firstLastName`, `secondLastName`, `password
 (10, 'Cristina', 'Carbonell', 'Matamoros', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'cristicarmat2@gmail.com', '965878965', '<p>AAAAAAAAA AAAAA A A A AAAAAAA AAAAAAAAA A AAAA A AAAAA A AA A A A A AA A A</p>', '/img/Avatar/Author/avatar_10.jpeg', 'ENG', 1, 1, 1, '2023-04-21', '2023-04-21', NULL),
 (12, 'Lidia', 'Echuaca', NULL, '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'lidia@gmail.com', '587698569', '<p>Hola &Aacute;ngeeeeeel <em><strong>yea</strong></em></p>', '/img/Avatar/Author/avatar_12.png', 'ESP', 0, 1, 1, '2023-04-14', '2023-04-14', NULL),
 (13, 'Edu', 'Carbonell', 'Matamoros', '$2a$11$kfB1lJy5FsriRzPP659oqOPJv2UnZcPt0bes1Fe.b53YuRZ9XN5su', 'edu@gmail.com', '546896523', '<p>Pechuga</p>', '/img/Avatar/Author/avatar_0.jpeg', 'ESP', 0, 1, 1, '2008-10-11', '2023-04-21', NULL),
-(14, 'Ángel', 'Sánchez', 'Pastor', '$2a$11$tbjLxSXUXautTqagVujdm.C2uT0rcPFiK7npcQG3Hd0sZmMluRAWG', 'asp@gmail.com', '123456789', '<p>Me gustan las calculadoras y el Horizon. Tengo el record de hu&iacute;das de DAW.</p>', '/img/Avatar/Author/avatar_0.png', 'ENG', 1, 1, 1, '1987-06-09', '2023-04-21', NULL),
+(14, 'Ángel', 'Sánchez', 'Pastor', '$2a$11$tbjLxSXUXautTqagVujdm.C2uT0rcPFiK7npcQG3Hd0sZmMluRAWG', 'asp@gmail.com', '123456789', '<p>Me gustan las calculadoras y el Horizon. Tengo el record de hu&iacute;das de DAW.</p>', '/img/Avatar/Author/avatar_0.png', 'ESP', 1, 1, 1, '2023-04-22', '2023-04-22', NULL),
 (15, 'Adrián', 'Pérez', NULL, '$2a$11$Vhafab1MeBJiNnAKe.n/iuYq4zNVjyRa559Gv0rhxhpmC39ILv7Ge', 'adrianperez@gmail.com', '456137788', '<p>&iquest;Spiderman o Espaiderman?</p>', '/img/Avatar/Author/avatar_15.jpeg', 'ESP', 0, 0, 0, '2023-04-22', '2023-04-22', NULL);
 
 -- --------------------------------------------------------
@@ -164,19 +164,20 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`id`, `name`) VALUES
 (3, 'Admin'),
-(5, 'Article'),
-(6, 'Author'),
-(7, 'Dev'),
-(8, 'Game'),
-(9, 'Genre'),
-(10, 'Language (Game)'),
+(5, 'AdminArticle'),
+(6, 'AdminAuthor'),
+(7, 'AdminDev'),
+(8, 'AdminGame'),
+(9, 'AdminGenre'),
+(10, 'AdminLanguage (Game)'),
 (11, 'Language (Web)'),
-(12, 'Platform'),
-(13, 'PlayerType'),
-(14, 'Publisher'),
-(15, 'User'),
+(12, 'AdminPlatform'),
+(13, 'AdminPlayerType'),
+(14, 'AdminPublisher'),
+(15, 'AdminUser'),
 (16, 'Login'),
-(17, 'Messages');
+(17, 'Messages'),
+(19, 'AdminAuthorForm');
 
 -- --------------------------------------------------------
 
@@ -467,7 +468,81 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (9, 'AdminLoginButtonReturn', 'Return', 16, 'ENG'),
 (10, 'AdminLoginButtonReturn', 'Volver', 16, 'ESP'),
 (11, 'EmailExist', 'Email already Exist', 17, 'ENG'),
-(12, 'EmailExist', 'El Email ya existe', 17, 'ESP');
+(12, 'EmailExist', 'El Email ya existe', 17, 'ESP'),
+(13, 'IncorrectEmailOrPassword', 'Incorrect Email or Password', 17, 'ENG'),
+(14, 'IncorrectEmailOrPassword', 'Email o contraseña incorrectos', 17, 'ESP'),
+(15, 'FillAllData', 'Fill all required data', 17, 'ENG'),
+(16, 'FillAllData', 'Rellena todos los campos', 17, 'ESP'),
+(17, 'ErrorOccurred', 'An error occurred, try again later', 17, 'ENG'),
+(18, 'ErrorOccurred', 'Ha ocurrido un error, por favor intente de nuevo más tarde', 17, 'ESP'),
+(19, 'PhoneExist', 'Phone already exist', 17, 'ENG'),
+(20, 'PhoneExist', 'Teléfono ya existe', 17, 'ESP'),
+(21, 'InvalidPassword', 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol (@$!%*?&.)', 17, 'ENG'),
+(22, 'InvalidPassword', 'La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una letra minúscula, un dígito y un símbolo (@$!%*?&.)', 17, 'ESP'),
+(23, 'MismatchPasswords', 'Passwords don\'t match', 17, 'ENG'),
+(24, 'MismatchPasswords', 'Las contraseñas no coinciden', 17, 'ESP'),
+(25, 'ErrorOldPassword', 'Incorrect Old Password', 17, 'ENG'),
+(26, 'ErrorOldPassword', 'Contraseña vieja incorrecta', 17, 'ESP'),
+(27, 'Welcome', 'Welcome', 3, 'ENG'),
+(28, 'Welcome', 'Bienvenid@', 3, 'ESP'),
+(29, 'UserNotActive', 'Your user is not active, please contact an administrator', 17, 'ENG'),
+(30, 'UserNotActive', 'Su usuario se encuentra inactivo, por favor contacte con un administrador', 17, 'ESP'),
+(31, 'Description', 'This is the Author tab. all registered authors information will be displayed here. Recomended 80% zoom', 6, 'ENG'),
+(32, 'Description', 'Esta es la pestaña de Autores. Aquí se mostrará la información de todos los autores registrados. Se recomienda un zoom del 80%', 6, 'ESP'),
+(33, 'FilterTitle', 'Filters', 6, 'ENG'),
+(34, 'FilterTitle', 'Filtros', 6, 'ESP'),
+(35, 'fOrderBy', 'Order By', 6, 'ENG'),
+(36, 'fOrderBy', 'Ordenar por', 6, 'ESP'),
+(37, 'fSearchId', 'Search By ID', 6, 'ENG'),
+(38, 'fSearchId', 'Buscar por ID', 6, 'ESP'),
+(39, 'fSearchName', 'Search By Name', 6, 'ENG'),
+(40, 'fSearchName', 'Buscar Por Nombre', 6, 'ESP'),
+(41, 'fSearchLastName', 'Search By Last Name', 6, 'ENG'),
+(42, 'fSearchLastName', 'Buscar Por Primer Apellido', 6, 'ESP'),
+(43, 'fSearchSecondLastName', 'Search By Second Last Name', 6, 'ENG'),
+(44, 'fSearchSecondLastName', 'Buscar Por Segundo Apellido', 6, 'ESP'),
+(45, 'fSearchEmail', 'Search By Email', 6, 'ENG'),
+(46, 'fSearchEmail', 'Buscar Por Email', 6, 'ESP'),
+(47, 'fIsAdmin', 'Is Admin', 6, 'ENG'),
+(48, 'fIsAdmin', 'Es Admin', 6, 'ESP'),
+(49, 'fIsActive', 'Is Active', 6, 'ENG'),
+(50, 'fIsActive', 'Está Activo', 6, 'ESP'),
+(51, 'ButtonFilter', 'Filter', 6, 'ENG'),
+(52, 'ButtonFilter', 'Filtrar', 6, 'ESP'),
+(53, 'ButtonNew', 'New', 6, 'ENG'),
+(54, 'ButtonNew', 'Nuevo', 6, 'ESP'),
+(55, 'ButtonNext', 'Next', 6, 'ENG'),
+(56, 'ButtonNext', 'Siguiente', 6, 'ESP'),
+(57, 'ButtonPrevious', 'Previous', 6, 'ENG'),
+(58, 'ButtonPrevious', 'Anterior', 6, 'ESP'),
+(59, 'Actions', 'Actions', 6, 'ENG'),
+(60, 'Actions', 'Acciones', 6, 'ESP'),
+(61, 'Page', 'Page', 6, 'ENG'),
+(62, 'Page', 'Página', 6, 'ESP'),
+(63, 'Of', 'of', 6, 'ENG'),
+(64, 'Of', 'de', 6, 'ESP'),
+(65, 'Outof', 'out of', 6, 'ENG'),
+(66, 'Outof', 'de', 6, 'ESP'),
+(67, 'NoData', 'No data found', 6, 'ENG'),
+(68, 'NoData', 'No se encontraron datos', 6, 'ESP'),
+(69, 'TitleCreate', 'Create', 19, 'ENG'),
+(70, 'TitleCreate', 'Crear', 19, 'ESP'),
+(71, 'TitleUpdate', 'Update', 19, 'ENG'),
+(72, 'TitleUpdate', 'Actualizar', 19, 'ESP'),
+(73, 'ButtonCreate', 'Create', 19, 'ENG'),
+(74, 'ButtonCreate', 'Crear', 19, 'ESP'),
+(75, 'ButtonUpdate', 'Update', 19, 'ENG'),
+(76, 'ButtonUpdate', 'Actualizar', 19, 'ESP'),
+(77, 'OldPassword', 'Old Password', 19, 'ENG'),
+(78, 'OldPassword', 'Contraseña Antigua', 19, 'ESP'),
+(79, 'NewPassword', 'New Password', 19, 'ENG'),
+(80, 'NewPassword', 'Nueva Contraseña', 19, 'ESP'),
+(81, 'ConfirmPassword', 'Old Password', 19, 'ENG'),
+(82, 'ConfirmPassword', 'Confirmar Contraseña', 19, 'ESP'),
+(83, 'Description', 'Description', 19, 'ENG'),
+(84, 'Description', 'Descripción', 19, 'ESP'),
+(85, 'PreferedLanguage', 'Preferred Language', 19, 'ENG'),
+(86, 'PreferedLanguage', 'Idioma Preferido', 19, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -638,7 +713,7 @@ ALTER TABLE `author`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `dev`
@@ -692,7 +767,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `web_text`
 --
 ALTER TABLE `web_text`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- Constraints for dumped tables

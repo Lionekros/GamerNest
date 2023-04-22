@@ -10,18 +10,18 @@
     <div class="text">
         <h1>Authors</h1>
 
-        <h3>This is the Author tab. all registered authors information will be displayed here. Recomended 80% zoom</h3>
+        <h3>@ViewData[ "Description" ]</h3>
 
         @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
         {
             <section class="filter">
-                <h4>Filters:</h4>
+                <h4>@ViewData[ "FilterTitle" ]:</h4>
                 <form asp-controller="AdminAuthor" asp-action="Authors" method="get">
                     @if ( Model.authorList.Count > 0 )
                     {
                         <div>
                             <select id="orderBy" name="orderBy">
-                                <option value="">Order By</option>
+                                <option value="">@ViewData[ "fOrderBy" ]</option>
                                 @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
                                 {
                                     if ( prop.Name.ToLower() != "password" )
@@ -35,49 +35,49 @@
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="Search By ID">
+                            <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="@ViewData[ "fSearchId" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="name" name="name" pattern="[A-Za-z]+" placeholder="Search By Name">
+                            <input type="text" id="name" name="name" pattern="[A-Za-z]+" placeholder="@ViewData[ "fSearchName" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="firstLastName" name="firstLastName" pattern="[A-Za-z]+" placeholder="Search By Last Name">
+                            <input type="text" id="firstLastName" name="firstLastName" pattern="[A-Za-z]+" placeholder="@ViewData[ "fSearchLastName" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="secondLastName" name="secondLastName" pattern="[A-Za-z]+" placeholder="Search By Second Last Name">
+                            <input type="text" id="secondLastName" name="secondLastName" pattern="[A-Za-z]+" placeholder="@ViewData[ "fSearchSecondLastName" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="email" id="email" name="email" placeholder="Search By Email">
+                            <input type="email" id="email" name="email" placeholder="@ViewData[ "fSearchEmail" ]">
                         </div>
                     </div>
                     <div>
                         <select class="normalSelect" onchange="selectColor(this)" id="isAdmin" name="isAdmin">
-                            <option class="normalSelect" value="">Is Admin</option>
+                            <option class="normalSelect" value="">@ViewData[ "fIsAdmin" ]</option>
                             <option class="greenSelect" value="1">&#xf058;</option>
                             <option class="redSelect" value="0">&#xf057;</option>
                         </select>
                     </div>
                     <div>
                         <select class="normalSelect" onchange="selectColor(this)" id="isActive" name="isActive">
-                            <option class="normalSelect" value="">Is Active</option>
+                            <option class="normalSelect" value="">@ViewData[ "fIsActive" ]</option>
                             <option class="greenSelect" value="1">&#xf058;</option>
                             <option class="redSelect" value="0">&#xf057;</option>
                         </select>
                     </div>
                     <div>
-                        <input class="filtButton" type="submit" value="Filter">
+                        <input class="filtButton" type="submit" value="@ViewData[ "ButtonFilter" ]">
                     </div>
 
 
@@ -87,7 +87,7 @@
             <section class="create">
                 <a asp-action="CreateForm" asp-controller="AdminAuthor">
                     <i class="fa-solid fa-plus"></i>
-                    <span>New</span>
+                    <span>@ViewData[ "ButtonNew" ]</span>
                 </a>
             </section>
 
@@ -96,7 +96,7 @@
                 {
                     <table>
                         <tr>
-                            <th>Actions</th>
+                            <th>@ViewData[ "Actions" ]</th>
                             @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
                             {
                                 // Exclude "Password" column from table
@@ -186,7 +186,7 @@
                 }
                 else
                 {
-                    <h4>No data found</h4>
+                    <h4>@ViewData[ "NoData" ]</h4>
                 }
             </section>
 
@@ -206,7 +206,7 @@
                    asp-route-isAdmin="@ViewBag.FormData.isAdmin"
                    asp-route-isActive="@ViewBag.FormData.isActive"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
-                            Previous
+                            @ViewData[ "ButtonPrevious" ]
                         </a>
                     }
 
@@ -224,13 +224,13 @@
                    asp-route-isAdmin="@ViewBag.FormData.isAdmin"
                    asp-route-isActive="@ViewBag.FormData.isActive"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
-                            Next
+                            @ViewData[ "ButtonNext" ]
                         </a>
                     }
                 </div>
                 <div>
                     <p>
-                        Page @Model.CurrentPage of @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.authorList.Count out of @Model.TotalItems)
+                        @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.authorList.Count @ViewData[ "OutOf" ] @Model.TotalItems)
                     </p>
                 </div>
             </section>
@@ -242,7 +242,7 @@
                 {
                     <table>
                         <tr>
-                            <th>Actions</th>
+                            <th>@ViewData[ "Actions" ]</th>
                             @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
                             {
                                 // Exclude "Password" column from table
@@ -315,7 +315,7 @@
                 }
                 else
                 {
-                    <h4>No data found</h4>
+                    <h4>@ViewData[ "NoData" ]</h4>
                 }
             </section>
         }

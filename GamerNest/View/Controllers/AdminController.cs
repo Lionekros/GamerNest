@@ -22,6 +22,8 @@ namespace View.Controllers
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
 
+                WebText("Admin");
+
                 return View();
 
             }
@@ -44,10 +46,11 @@ namespace View.Controllers
             }
             catch ( Exception ex )
             {
-
+                
                 Log log = new Log();
                 log.Add( ex.Message );
-                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                WebText( "Login" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
 
@@ -64,7 +67,8 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                WebText( "Login" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
 
@@ -75,6 +79,7 @@ namespace View.Controllers
         {
             try
             {
+                WebText( "Messages" );
                 List<string> errorMessageList = new List<string>();
                 bool correctPassword = false;
 
@@ -85,19 +90,27 @@ namespace View.Controllers
                     {
                         GetAuthor( login.email );
 
-                        // Get in sessions all the data that we will need in the future
-                        SetAdminSessions();
+                        if ( !lists.authorList[ 0 ].isActive )
+                        {
+                            errorMessageList.Add( ViewData[ "UserNotActive" ].ToString() );
+                        }
+                        else
+                        {
+                            // Get in sessions all the data that we will need in the future
+                            SetAdminSessions();
 
-                        return RedirectToAction( "Index", "Admin" );
+                            return RedirectToAction( "Index", "Admin" );
+                        }
+                        
                     }
                     else
                     {
-                        errorMessageList.Add( "Incorrect email or password" );
+                        errorMessageList.Add( ViewData[ "IncorrectEmailOrPassword" ].ToString() );
                     }
                 }
                 else
                 {
-                    errorMessageList.Add( "Fill all required data" );
+                    errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
                 SetDefaultViewDatas();
                 ViewBag.ErrorMessages = errorMessageList;
@@ -108,7 +121,8 @@ namespace View.Controllers
             {
                 Log log = new Log();
                 log.Add( ex.Message );
-                ViewBag.ErrorTryCatch = "An error ocurred, try again later";
+                WebText( "Login" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Article" );
             }
         }

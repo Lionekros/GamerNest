@@ -53,7 +53,6 @@ namespace DBAccess
                         + " FROM web_text wt, category cat"
                         + " WHERE wt.idCategory = cat.id"
                             + " AND cat.name = '" + category + "'"
-                            + " OR cat.name = 'Messages'"
                             + " AND wt.language = '" + language + "'";
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
