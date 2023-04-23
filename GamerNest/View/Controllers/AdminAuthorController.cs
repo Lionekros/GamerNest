@@ -150,7 +150,9 @@ namespace View.Controllers
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
                 SetDefaultViewDatas();
+                
                 ViewBag.ErrorMessages = errorMessageList;
+                WebText( "AdminAuthorForm" );
                 return View( "CreateAuthor", author );
             }
             catch ( Exception ex )
@@ -237,7 +239,11 @@ namespace View.Controllers
                             {
                                 UpdateAuthorProcedure( author, changedPassword );
                                 GetAuthor( author.email );
-                                SetAdminSessions();
+                                if ( HttpContext.Session.GetString( "AdminEmail" ) == author.email )
+                                {
+                                    SetAdminSessions();
+                                }
+                                
                                 return RedirectToAction( "Authors" );
                             }
                         }
@@ -247,7 +253,10 @@ namespace View.Controllers
                             {
                                 UpdateAuthorProcedure( author, changedPassword );
                                 GetAuthor( author.email );
-                                SetAdminSessions();
+                                if ( HttpContext.Session.GetString( "AdminEmail" ) == author.email )
+                                {
+                                    SetAdminSessions();
+                                }
                                 return RedirectToAction( "Authors" );
                             }
                         }
@@ -263,7 +272,10 @@ namespace View.Controllers
                                 {
                                     UpdateAuthorProcedure( author );
                                     GetAuthor( author.email );
-                                    SetAdminSessions();
+                                    if ( HttpContext.Session.GetString( "AdminEmail" ) == author.email )
+                                    {
+                                        SetAdminSessions();
+                                    }
                                     return RedirectToAction( "Authors" );
                                 }
                             }
@@ -278,7 +290,10 @@ namespace View.Controllers
                             {
                                 UpdateAuthorProcedure( author );
                                 GetAuthor( author.email );
-                                SetAdminSessions();
+                                if ( HttpContext.Session.GetString( "AdminEmail" ) == author.email )
+                                {
+                                    SetAdminSessions();
+                                }
                                 return RedirectToAction( "Authors" );
                             }
                         }
@@ -291,6 +306,7 @@ namespace View.Controllers
                 }
                 SetDefaultViewDatas();
                 ViewBag.ErrorMessages = errorMessageList;
+                WebText( "AdminAuthorForm" );
                 return View( "UpdateAuthor", author );
             }
             catch ( Exception ex )
