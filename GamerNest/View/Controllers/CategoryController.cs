@@ -2,11 +2,9 @@
 
 namespace View.Controllers
 {
-    public class WebTextController :BaseController
+    public class CategoryController :BaseController
     {
-       
-
-        public ActionResult WebTextC()
+        public ActionResult Categories()
         {
             SetDefaultViewDatas();
 
@@ -19,9 +17,7 @@ namespace View.Controllers
                 return RedirectToAction( "Index", "Admin" );
             }
 
-            return View("WebText");
+            return View();
         }
-
-        
     }
 }

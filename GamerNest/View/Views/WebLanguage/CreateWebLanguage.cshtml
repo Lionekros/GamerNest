@@ -1,0 +1,42 @@
+﻿@model Support.WebLanguageModel
+
+@{
+    ViewData[ "Title" ] = "Admin - Create Web Languages";
+}
+<main class="home-section">
+    <div class="text">
+        <h1>Languages for the Web</h1>
+        <h2>@ViewData[ "TitleCreate" ]</h2>
+
+        <section class="Createform">
+            <form asp-controller="WebLanguage" asp-action="Create" method="post" enctype="multipart/form-data">
+                <partial name="_Error" />
+
+                <div>
+                    <div>
+                        <label asp-for="name">ID:</label>
+                        <input asp-for="id" placeholder="id" />
+                    </div>
+                    <div>
+                        <label asp-for="name" class="required">Name:</label>
+                        <input required asp-for="name" placeholder="Name" />
+                    </div>
+                    <div>
+                        <label asp-for="icon" class="required">Icon:</label>
+                        <input required asp-for="icon" placeholder="flag icon" />
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <button type="submit" class="mainButton">@ViewData[ "ButtonCreate" ]</button>
+                    </div>
+
+                </div>
+
+            </form>
+        </section>
+
+
+    </div>
+</main>

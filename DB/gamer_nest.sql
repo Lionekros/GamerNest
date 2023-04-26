@@ -544,6 +544,44 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (85, 'PreferedLanguage', 'Preferred Language', 19, 'ENG'),
 (86, 'PreferedLanguage', 'Idioma Preferido', 19, 'ESP');
 
+
+('Description', 'This is the page Language tab. all the pages languages will be displayed here', 11, 'ENG'),
+('Description', 'Esta es la pestaña de idiomas de la web. Aquí se mostrará la información de todos los idiomas disponibles en la web', 11, 'ESP'),
+('FilterTitle', 'Filters', 11, 'ENG'),
+('FilterTitle', 'Filtros', 11, 'ESP'),
+('fOrderBy', 'Order By', 11, 'ENG'),
+('fOrderBy', 'Ordenar por', 11, 'ESP'),
+('fSearchId', 'Search By ID', 11, 'ENG'),
+('fSearchId', 'Buscar por ID', 11, 'ESP'),
+('fSearchName', 'Search By Name', 11, 'ENG'),
+('fSearchName', 'Buscar Por Nombre', 11, 'ESP'),
+('ButtonFilter', 'Filter', 11, 'ENG'),
+('ButtonFilter', 'Filtrar', 11, 'ESP'),
+('ButtonNew', 'New', 11, 'ENG'),
+('ButtonNew', 'Nuevo', 11, 'ESP'),
+('ButtonNext', 'Next', 11, 'ENG'),
+('ButtonNext', 'Siguiente', 11, 'ESP'),
+('ButtonPrevious', 'Previous', 11, 'ENG'),
+('ButtonPrevious', 'Anterior', 11, 'ESP'),
+('Actions', 'Actions', 11, 'ENG'),
+('Actions', 'Acciones', 11, 'ESP'),
+('Page', 'Page', 11, 'ENG'),
+('Page', 'Página', 11, 'ESP'),
+('Of', 'of', 11, 'ENG'),
+('Of', 'de', 11, 'ESP'),
+('Outof', 'out of', 11, 'ENG'),
+('Outof', 'de', 11, 'ESP'),
+('NoData', 'No data found', 11, 'ENG'),
+('NoData', 'No se encontraron datos', 11, 'ESP'),
+('TitleCreate', 'Create', 20, 'ENG'),
+('TitleCreate', 'Crear', 20, 'ESP'),
+('TitleUpdate', 'Update', 20, 'ENG'),
+('TitleUpdate', 'Actualizar', 20, 'ESP'),
+('ButtonCreate', 'Create', 20, 'ENG'),
+('ButtonCreate', 'Crear', 20, 'ESP'),
+('ButtonUpdate', 'Update', 20, 'ENG'),
+('ButtonUpdate', 'Actualizar', 20, 'ESP')
+
 --
 -- Indexes for dumped tables
 --

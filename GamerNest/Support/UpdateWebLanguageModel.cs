@@ -2,17 +2,17 @@
 
 namespace Support
 {
-    public class WebLanguageModel
+    public class UpdateWebLanguageModel
     {
         public string id { get; set; }
         public string name { get; set; }
         public string icon { get; set; }
 
-        public WebLanguageModel()
+        public UpdateWebLanguageModel()
         {
         }
 
-    public WebLanguageModel(DataRow row)
+        public UpdateWebLanguageModel(DataRow row)
         {
             id = row.Field<string>( "id" );
             name = row.Field<string>( "name" );

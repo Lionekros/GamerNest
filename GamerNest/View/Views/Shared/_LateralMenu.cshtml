@@ -134,7 +134,7 @@ else
             <hr>
 
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Category") ? "linkActive" : "")">
-                <a asp-controller="WebText" asp-action="Category">
+                <a asp-controller="Category" asp-action="Categories">
                     <i class="fa-regular fa-folder-open"></i>
                     <span class="links_name">Categories</span>
                 </a>
@@ -148,7 +148,7 @@ else
                 <span class="tooltip">Web Text</span>
             </li>
             <li class="@((ViewContext.RouteData.Values["action"].ToString() == "WebLanguage") ? "linkActive" : "")">
-                <a asp-controller="WebText" asp-action="WebLanguage">
+                <a asp-controller="WebLanguage" asp-action="WebLanguages">
                     <i class="fa-solid fa-comment"></i>
                     <span class="links_name">Web Languages</span>
                 </a>

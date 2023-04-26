@@ -28,21 +28,21 @@ namespace Domain
             try
             {
                 DataTable dt = AuthorRepository.GetAllAuthors(id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy, limit);
-                List<AuthorModel> authorList = new List<AuthorModel>();
+                List<AuthorModel> list = new List<AuthorModel>();
 
                 foreach ( DataRow row in dt.Rows )
                 {
-                    authorList.Add( new AuthorModel( row ) );
+                    list.Add( new AuthorModel( row ) );
                 }
 
-                return authorList;
+                return list;
             }
             catch ( Exception ex )
             {
-                List<AuthorModel> authorList = new List<AuthorModel>();
+                List<AuthorModel> list = new List<AuthorModel>();
                 Log log = new Log();
                 log.Add( ex.Message );
-                return authorList;
+                return list;
 
             }
         }
@@ -52,21 +52,21 @@ namespace Domain
             try
             {
                 DataTable dt = AuthorRepository.GetAuthor(emailOrPhone);
-                List<AuthorModel> authorList = new List<AuthorModel>();
+                List<AuthorModel> list = new List<AuthorModel>();
 
                 foreach ( DataRow row in dt.Rows )
                 {
-                    authorList.Add( new AuthorModel( row ) );
+                    list.Add( new AuthorModel( row ) );
                 }
 
-                return authorList;
+                return list;
             }
             catch ( Exception ex )
             {
-                List<AuthorModel> authorList = new List<AuthorModel>();
+                List<AuthorModel> list = new List<AuthorModel>();
                 Log log = new Log();
                 log.Add( ex.Message );
-                return authorList;
+                return list;
 
             }
         }
@@ -76,21 +76,21 @@ namespace Domain
             try
             {
                 DataTable dt = AuthorRepository.GetAuthor(emailOrPhone);
-                List<UpdateAuthorModel> authorList = new List<UpdateAuthorModel>();
+                List<UpdateAuthorModel> list = new List<UpdateAuthorModel>();
 
                 foreach ( DataRow row in dt.Rows )
                 {
-                    authorList.Add( new UpdateAuthorModel( row ) );
+                    list.Add( new UpdateAuthorModel( row ) );
                 }
 
-                return authorList;
+                return list;
             }
             catch ( Exception ex )
             {
-                List<UpdateAuthorModel> authorList = new List<UpdateAuthorModel>();
+                List<UpdateAuthorModel> list = new List<UpdateAuthorModel>();
                 Log log = new Log();
                 log.Add( ex.Message );
-                return authorList;
+                return list;
 
             }
         }

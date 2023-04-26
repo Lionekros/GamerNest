@@ -3,9 +3,6 @@
     ViewData["Title"] = "Admin - Authors";
 }
 
-<partial name="_LateralMenu"/>
-
-
 <main class="home-section">
     <div class="text">
         <h1>Authors</h1>
@@ -41,19 +38,19 @@
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="name" name="name" pattern="[A-Za-z]+" placeholder="@ViewData[ "fSearchName" ]">
+                            <input type="text" id="name" name="name" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchName" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="firstLastName" name="firstLastName" pattern="[A-Za-z]+" placeholder="@ViewData[ "fSearchLastName" ]">
+                            <input type="text" id="firstLastName" name="firstLastName" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchLastName" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="secondLastName" name="secondLastName" pattern="[A-Za-z]+" placeholder="@ViewData[ "fSearchSecondLastName" ]">
+                            <input type="text" id="secondLastName" name="secondLastName" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchSecondLastName" ]">
                         </div>
                     </div>
                     <div>
@@ -111,7 +108,7 @@
                             <tr>
                                 <td>
                                     <!-- Delete Author -->
-                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal(@item.id)">
+                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal(@item.id, 'AdminAuthor')">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
 

@@ -1,4 +1,4 @@
-﻿function deleteModal(ItemId) {
+﻿function deleteModal(ItemId, controllerName) {
 
     var modal = document.getElementById('confirmationModal_' + ItemId);
     var confirmBtn = document.getElementById('confirmBtn_' + ItemId);
@@ -7,17 +7,17 @@
     modal.style.display = 'flex';
 
     confirmBtn.addEventListener('click', function () {
-        var url = '/AdminAuthor/Delete/' + ItemId;
+        var url = '/' + controllerName + '/Delete/' + ItemId;
         fetch(url, { method: 'POST' })
             .then(function (response) {
                 if (response.ok) {
                     location.reload();
                 } else {
-                    console.error('Error deleting author:', response.statusText);
+                    console.error('Error deleting', response.statusText);
                 }
             })
             .catch(function (error) {
-                console.error('Error deleting author:', error);
+                console.error('Error deleting', error);
             });
 
         modal.style.display = 'none';

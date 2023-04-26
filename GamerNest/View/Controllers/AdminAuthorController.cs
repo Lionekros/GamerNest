@@ -54,7 +54,7 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                WebText( "AdminAuthor" );
+                WebText( "Messages" );
                 ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
@@ -78,7 +78,7 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                WebText( "AdminAuthor" );
+                WebText( "Messages" );
                 ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
@@ -104,7 +104,7 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                WebText( "AdminAuthor" );
+                WebText( "Messages" );
                 ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
@@ -160,7 +160,7 @@ namespace View.Controllers
                 
                 Log log = new Log();
                 log.Add( ex.Message );
-                WebText( "AdminAuthor" );
+                WebText( "Messages" );
                 ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
@@ -314,7 +314,7 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                WebText( "AdminAuthor" );
+                WebText( "Messages" );
                 ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
