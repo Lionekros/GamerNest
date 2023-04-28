@@ -44,44 +44,6 @@
 
 	<ItemGroup>
 	  <None Include="compilerconfig.json" />
-	  <None Include="wwwroot\lib\tinymce\icons\default\icons.min.js" />
-	  <None Include="wwwroot\lib\tinymce\langs\README.md" />
-	  <None Include="wwwroot\lib\tinymce\models\dom\model.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\advlist\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\anchor\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\autolink\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\autoresize\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\autosave\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\charmap\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\codesample\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\code\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\directionality\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\emoticons\js\emojiimages.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\emoticons\js\emojiimages.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\emoticons\js\emojis.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\emoticons\js\emojis.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\emoticons\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\fullscreen\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\help\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\image\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\importcss\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\insertdatetime\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\link\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\lists\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\media\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\nonbreaking\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\pagebreak\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\preview\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\quickbars\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\save\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\searchreplace\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\table\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\template\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\visualblocks\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\visualchars\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\plugins\wordcount\plugin.min.js" />
-	  <None Include="wwwroot\lib\tinymce\themes\silver\theme.min.js" />
-	  <None Include="wwwroot\lib\tinymce\tinymce.min.js" />
 	  <None Include="wwwroot\scss\admin\_base.scss" />
 	  <None Include="wwwroot\scss\Admin\_create.scss" />
 	  <None Include="wwwroot\scss\Admin\_LogIn.scss" />
@@ -106,10 +68,6 @@
 	  <ProjectReference Include="..\Domain\Domain.csproj" />
 	  <ProjectReference Include="..\LogError\LogError.csproj" />
 	  <ProjectReference Include="..\Support\Support.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <TypeScriptCompile Include="wwwroot\lib\tinymce\tinymce.d.ts" />
 	</ItemGroup>
 
 </Project>

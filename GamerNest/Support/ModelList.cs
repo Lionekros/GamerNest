@@ -12,6 +12,9 @@
         public List<WebLanguageModel> webLanguageList { get; set; }
         public List<UpdateWebLanguageModel> updateWebLanguageList { get; set; }
 
+        public List<CategoryModel> categoryList { get; set; }
+        public List<UpdateCategoryModel> updateCategoryList { get; set; }
+
         public List<AuthorModel> authorList { get; set; }
         public List<UpdateAuthorModel> updateAuthorList { get; set; }
 

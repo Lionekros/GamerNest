@@ -1,20 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Support
 {
-    public class CategoryModel
+    public class UpdateCategoryModel
     {
         public int id { get; set; }
-
-        [Required( ErrorMessage = "Required" )]
         public string name { get; set; }
 
-        public CategoryModel()
+        public UpdateCategoryModel()
         {
         }
 
-        public CategoryModel(DataRow row)
+        public UpdateCategoryModel(DataRow row)
         {
             id = row.Field<int>( "id" );
             name = row.Field<string>( "name" );

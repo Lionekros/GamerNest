@@ -13,7 +13,9 @@ namespace View.Controllers
     {
         public ActionResult WebLanguages
             (
-                string id = ""
+                  int page = 1
+                , int pageSize = 5
+                , string id = ""
                 , string name = ""
                 , string orderBy = ""
             )
@@ -31,6 +33,8 @@ namespace View.Controllers
                     return RedirectToAction( "Index", "Admin" );
                 }
                 GetAllWebLanguages(id, name, orderBy);
+                Pagination( page, pageSize );
+                FiltersViewBag( id, name, orderBy );
                 WebText( "AdminWebLanguage" );
                 return View("WebLanguage", lists);
             }

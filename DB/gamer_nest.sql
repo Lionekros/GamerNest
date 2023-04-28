@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2023 at 01:55 AM
+-- Generation Time: Apr 28, 2023 at 11:48 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -62,9 +62,27 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateAuthor` (IN `pName` VARCHAR(4
     );
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateCategory` (IN `pName` VARCHAR(255))   BEGIN
+    INSERT INTO `category` (`name`) VALUES (pName);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateWebLanguage` (IN `pId` CHAR(3), IN `pName` VARCHAR(255), IN `pIcon` VARCHAR(255))   BEGIN
+  INSERT INTO web_language(id, name, icon)
+  VALUES(pId, pName, pIcon);
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteAuthor` (IN `pId` INT)   BEGIN
     DELETE FROM `author`
     WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteCategory` (IN `pId` INT)   BEGIN
+    DELETE FROM `category` WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteWebLanguage` (IN `pId` CHAR(3))   BEGIN
+  DELETE FROM web_language
+  WHERE id = pId;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateAuthor` (IN `pId` INT, IN `pName` VARCHAR(45), IN `pFirstLastName` VARCHAR(45), IN `pSecondLastName` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pPhone` VARCHAR(20), IN `pDescription` TEXT, IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pIsAdmin` TINYINT, IN `pCanPublish` TINYINT, IN `pIsActive` TINYINT, IN `pBirthday` VARCHAR(10), IN `pStartDate` VARCHAR(10), IN `pEndDate` VARCHAR(10))   BEGIN
@@ -87,6 +105,17 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateAuthor` (IN `pId` INT, IN `pN
         `endDate` = pEndDate
     WHERE
         `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateCategory` (IN `pId` INT, IN `pName` VARCHAR(255))   BEGIN
+    UPDATE `category` SET `name` = pName WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateWebLanguage` (IN `pId` CHAR(3), IN `pName` VARCHAR(255), IN `pIcon` VARCHAR(255))   BEGIN
+  UPDATE web_language
+  SET name = pName,
+      icon = pIcon
+  WHERE id = pId;
 END$$
 
 DELIMITER ;
@@ -140,12 +169,12 @@ CREATE TABLE `author` (
 --
 
 INSERT INTO `author` (`id`, `name`, `firstLastName`, `secondLastName`, `password`, `email`, `phone`, `description`, `avatar`, `preferedLanguage`, `isAdmin`, `canPublish`, `isActive`, `birthday`, `startDate`, `endDate`) VALUES
-(3, 'Sarah', 'Johnson', NULL, '$2a$11$qXJFon5sXv0XKOA3FYcgX.zn4GHk5.4Nad8ji/D.QYDfpi.fi6qOu', 'sarah.johnson@email.com', 'a', '<p>adasd</p>', '/img/Avatar/Author/avatar_3.jpg', 'ENG', 0, 0, 1, '2023-04-21', '2023-04-21', NULL),
 (10, 'Cristina', 'Carbonell', 'Matamoros', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'cristicarmat2@gmail.com', '965878965', '<p>AAAAAAAAA AAAAA A A A AAAAAAA AAAAAAAAA A AAAA A AAAAA A AA A A A A AA A A</p>', '/img/Avatar/Author/avatar_10.jpeg', 'ENG', 1, 1, 1, '2023-04-21', '2023-04-21', NULL),
-(12, 'Lidia', 'Echuaca', NULL, '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'lidia@gmail.com', '587698569', '<p>Hola &Aacute;ngeeeeeel <em><strong>yea</strong></em></p>', '/img/Avatar/Author/avatar_12.png', 'ESP', 0, 1, 1, '2023-04-14', '2023-04-14', NULL),
+(12, 'Lidia', 'Echuaca', NULL, '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'lidia@gmail.com', '587698569', '<p>si leeis esto es un mensaje de ayuda cristiana me tiene secuestrada soy una esclava auxilio &aacute;NGEL</p>', '/img/Avatar/Author/avatar_12.jpg', 'ESP', 0, 1, 1, '2023-04-22', '2023-04-22', NULL),
 (13, 'Edu', 'Carbonell', 'Matamoros', '$2a$11$kfB1lJy5FsriRzPP659oqOPJv2UnZcPt0bes1Fe.b53YuRZ9XN5su', 'edu@gmail.com', '546896523', '<p>Pechuga</p>', '/img/Avatar/Author/avatar_0.jpeg', 'ESP', 0, 1, 1, '2008-10-11', '2023-04-21', NULL),
 (14, 'Ángel', 'Sánchez', 'Pastor', '$2a$11$tbjLxSXUXautTqagVujdm.C2uT0rcPFiK7npcQG3Hd0sZmMluRAWG', 'asp@gmail.com', '123456789', '<p>Me gustan las calculadoras y el Horizon. Tengo el record de hu&iacute;das de DAW.</p>', '/img/Avatar/Author/avatar_0.png', 'ESP', 1, 1, 1, '2023-04-22', '2023-04-22', NULL),
-(15, 'Adrián', 'Pérez', NULL, '$2a$11$Vhafab1MeBJiNnAKe.n/iuYq4zNVjyRa559Gv0rhxhpmC39ILv7Ge', 'adrianperez@gmail.com', '456137788', '<p>&iquest;Spiderman o Espaiderman?</p>', '/img/Avatar/Author/avatar_15.jpeg', 'ESP', 0, 0, 0, '2023-04-22', '2023-04-22', NULL);
+(15, 'Adrián', 'Pérez', NULL, '$2a$11$Vhafab1MeBJiNnAKe.n/iuYq4zNVjyRa559Gv0rhxhpmC39ILv7Ge', 'adrianperez@gmail.com', '456137788', '<p>&iquest;Spiderman o Espaiderman?</p>', '/img/Avatar/Author/avatar_15.jpeg', 'ESP', 0, 0, 0, '2023-04-22', '2023-04-22', NULL),
+(16, 'Raquel', 'Pomares', 'Bleda', '123456', 'raquel@gmail.com', '41257968', '<p>Cristina, &iquest;que haces metiendome en esta p&aacute;gina de <strong>mierdaaa?</strong></p>', '/img/Avatar/Author/avatar_16.jpg', 'ENG', 0, 0, 1, '2023-04-23', '2023-04-23', NULL);
 
 -- --------------------------------------------------------
 
@@ -170,14 +199,17 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (8, 'AdminGame'),
 (9, 'AdminGenre'),
 (10, 'AdminLanguage (Game)'),
-(11, 'Language (Web)'),
+(11, 'AdminWebLanguage'),
 (12, 'AdminPlatform'),
 (13, 'AdminPlayerType'),
 (14, 'AdminPublisher'),
 (15, 'AdminUser'),
 (16, 'Login'),
 (17, 'Messages'),
-(19, 'AdminAuthorForm');
+(19, 'AdminAuthorForm'),
+(20, 'AdminWebLanguageForm'),
+(21, 'AdminCategory'),
+(22, 'AdminCategoryForm');
 
 -- --------------------------------------------------------
 
@@ -542,45 +574,102 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (83, 'Description', 'Description', 19, 'ENG'),
 (84, 'Description', 'Descripción', 19, 'ESP'),
 (85, 'PreferedLanguage', 'Preferred Language', 19, 'ENG'),
-(86, 'PreferedLanguage', 'Idioma Preferido', 19, 'ESP');
-
-
-('Description', 'This is the page Language tab. all the pages languages will be displayed here', 11, 'ENG'),
-('Description', 'Esta es la pestaña de idiomas de la web. Aquí se mostrará la información de todos los idiomas disponibles en la web', 11, 'ESP'),
-('FilterTitle', 'Filters', 11, 'ENG'),
-('FilterTitle', 'Filtros', 11, 'ESP'),
-('fOrderBy', 'Order By', 11, 'ENG'),
-('fOrderBy', 'Ordenar por', 11, 'ESP'),
-('fSearchId', 'Search By ID', 11, 'ENG'),
-('fSearchId', 'Buscar por ID', 11, 'ESP'),
-('fSearchName', 'Search By Name', 11, 'ENG'),
-('fSearchName', 'Buscar Por Nombre', 11, 'ESP'),
-('ButtonFilter', 'Filter', 11, 'ENG'),
-('ButtonFilter', 'Filtrar', 11, 'ESP'),
-('ButtonNew', 'New', 11, 'ENG'),
-('ButtonNew', 'Nuevo', 11, 'ESP'),
-('ButtonNext', 'Next', 11, 'ENG'),
-('ButtonNext', 'Siguiente', 11, 'ESP'),
-('ButtonPrevious', 'Previous', 11, 'ENG'),
-('ButtonPrevious', 'Anterior', 11, 'ESP'),
-('Actions', 'Actions', 11, 'ENG'),
-('Actions', 'Acciones', 11, 'ESP'),
-('Page', 'Page', 11, 'ENG'),
-('Page', 'Página', 11, 'ESP'),
-('Of', 'of', 11, 'ENG'),
-('Of', 'de', 11, 'ESP'),
-('Outof', 'out of', 11, 'ENG'),
-('Outof', 'de', 11, 'ESP'),
-('NoData', 'No data found', 11, 'ENG'),
-('NoData', 'No se encontraron datos', 11, 'ESP'),
-('TitleCreate', 'Create', 20, 'ENG'),
-('TitleCreate', 'Crear', 20, 'ESP'),
-('TitleUpdate', 'Update', 20, 'ENG'),
-('TitleUpdate', 'Actualizar', 20, 'ESP'),
-('ButtonCreate', 'Create', 20, 'ENG'),
-('ButtonCreate', 'Crear', 20, 'ESP'),
-('ButtonUpdate', 'Update', 20, 'ENG'),
-('ButtonUpdate', 'Actualizar', 20, 'ESP')
+(86, 'PreferedLanguage', 'Idioma Preferido', 19, 'ESP'),
+(87, 'Description', 'This is the page Language tab. all the pages languages will be displayed here', 11, 'ENG'),
+(88, 'Description', 'Esta es la pestaña de idiomas de la web. Aquí se mostrará la información de todos los idiomas disponibles en la web', 11, 'ESP'),
+(89, 'FilterTitle', 'Filters', 11, 'ENG'),
+(90, 'FilterTitle', 'Filtros', 11, 'ESP'),
+(91, 'fOrderBy', 'Order By', 11, 'ENG'),
+(92, 'fOrderBy', 'Ordenar por', 11, 'ESP'),
+(93, 'fSearchId', 'Search By ID', 11, 'ENG'),
+(94, 'fSearchId', 'Buscar por ID', 11, 'ESP'),
+(95, 'fSearchName', 'Search By Name', 11, 'ENG'),
+(96, 'fSearchName', 'Buscar Por Nombre', 11, 'ESP'),
+(97, 'ButtonFilter', 'Filter', 11, 'ENG'),
+(98, 'ButtonFilter', 'Filtrar', 11, 'ESP'),
+(99, 'ButtonNew', 'New', 11, 'ENG'),
+(100, 'ButtonNew', 'Nuevo', 11, 'ESP'),
+(101, 'ButtonNext', 'Next', 11, 'ENG'),
+(102, 'ButtonNext', 'Siguiente', 11, 'ESP'),
+(103, 'ButtonPrevious', 'Previous', 11, 'ENG'),
+(104, 'ButtonPrevious', 'Anterior', 11, 'ESP'),
+(105, 'Actions', 'Actions', 11, 'ENG'),
+(106, 'Actions', 'Acciones', 11, 'ESP'),
+(107, 'Page', 'Page', 11, 'ENG'),
+(108, 'Page', 'Página', 11, 'ESP'),
+(109, 'Of', 'of', 11, 'ENG'),
+(110, 'Of', 'de', 11, 'ESP'),
+(111, 'Outof', 'out of', 11, 'ENG'),
+(112, 'Outof', 'de', 11, 'ESP'),
+(113, 'NoData', 'No data found', 11, 'ENG'),
+(114, 'NoData', 'No se encontraron datos', 11, 'ESP'),
+(115, 'TitleCreate', 'Create', 20, 'ENG'),
+(116, 'TitleCreate', 'Crear', 20, 'ESP'),
+(117, 'TitleUpdate', 'Update', 20, 'ENG'),
+(118, 'TitleUpdate', 'Actualizar', 20, 'ESP'),
+(119, 'ButtonCreate', 'Create', 20, 'ENG'),
+(120, 'ButtonCreate', 'Crear', 20, 'ESP'),
+(121, 'ButtonUpdate', 'Update', 20, 'ENG'),
+(122, 'ButtonUpdate', 'Actualizar', 20, 'ESP'),
+(123, 'ModalTitle', 'Confirmation', 6, 'ENG'),
+(124, 'ModalTitle', 'Confirmación', 6, 'ESP'),
+(125, 'ModalText', 'Are you sure you want to delete this row with id', 6, 'ENG'),
+(126, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 6, 'ESP'),
+(127, 'ModalButtonDelete', 'Delete', 6, 'ENG'),
+(128, 'ModalButtonDelete', 'Eliminar', 6, 'ESP'),
+(129, 'ModalButtonCancelar', 'Cancel', 6, 'ENG'),
+(130, 'ModalButtonCancelar', 'Cancelar', 6, 'ESP'),
+(131, 'ModalTitle', 'Confirmation', 11, 'ENG'),
+(132, 'ModalTitle', 'Confirmación', 11, 'ESP'),
+(133, 'ModalText', 'Are you sure you want to delete this row with id', 11, 'ENG'),
+(134, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 11, 'ESP'),
+(135, 'ModalButtonDelete', 'Delete', 11, 'ENG'),
+(136, 'ModalButtonDelete', 'Eliminar', 11, 'ESP'),
+(137, 'ModalButtonCancelar', 'Cancel', 11, 'ENG'),
+(138, 'ModalButtonCancelar', 'Cancelar', 11, 'ESP'),
+(139, 'Description', 'This is the Category tab. all categories for the web text information will be displayed here', 21, 'ENG'),
+(140, 'Description', 'Esta es la pestaña de Categorías. Aquí se mostrará la información de todas las categorías del texto de la web. ', 21, 'ESP'),
+(141, 'FilterTitle', 'Filters', 21, 'ENG'),
+(142, 'FilterTitle', 'Filtros', 21, 'ESP'),
+(143, 'fOrderBy', 'Order By', 21, 'ENG'),
+(144, 'fOrderBy', 'Ordenar por', 21, 'ESP'),
+(145, 'fSearchId', 'Search By ID', 21, 'ENG'),
+(146, 'fSearchId', 'Buscar por ID', 21, 'ESP'),
+(147, 'fSearchName', 'Search By Name', 21, 'ENG'),
+(148, 'ButtonFilter', 'Filter', 21, 'ENG'),
+(149, 'ButtonFilter', 'Filtrar', 21, 'ESP'),
+(150, 'ButtonNew', 'New', 21, 'ENG'),
+(151, 'ButtonNew', 'Nuevo', 21, 'ESP'),
+(152, 'ButtonNext', 'Next', 21, 'ENG'),
+(153, 'ButtonNext', 'Siguiente', 21, 'ESP'),
+(154, 'ButtonPrevious', 'Previous', 21, 'ENG'),
+(155, 'ButtonPrevious', 'Anterior', 21, 'ESP'),
+(156, 'Actions', 'Actions', 21, 'ENG'),
+(157, 'Actions', 'Acciones', 21, 'ESP'),
+(158, 'Page', 'Page', 21, 'ENG'),
+(159, 'Page', 'Página', 21, 'ESP'),
+(160, 'Of', 'of', 21, 'ENG'),
+(161, 'Of', 'de', 21, 'ESP'),
+(162, 'Outof', 'out of', 21, 'ENG'),
+(163, 'Outof', 'de', 21, 'ESP'),
+(164, 'NoData', 'No data found', 21, 'ENG'),
+(165, 'NoData', 'No se encontraron datos', 21, 'ESP'),
+(166, 'TitleCreate', 'Create', 22, 'ENG'),
+(167, 'TitleCreate', 'Crear', 22, 'ESP'),
+(168, 'TitleUpdate', 'Update', 22, 'ENG'),
+(169, 'TitleUpdate', 'Actualizar', 22, 'ESP'),
+(170, 'ButtonCreate', 'Create', 22, 'ENG'),
+(171, 'ButtonCreate', 'Crear', 22, 'ESP'),
+(172, 'ButtonUpdate', 'Update', 22, 'ENG'),
+(173, 'ButtonUpdate', 'Actualizar', 22, 'ESP'),
+(174, 'ModalTitle', 'Confirmation', 21, 'ENG'),
+(175, 'ModalTitle', 'Confirmación', 21, 'ESP'),
+(176, 'ModalText', 'Are you sure you want to delete this row with id', 21, 'ENG'),
+(177, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 21, 'ESP'),
+(178, 'ModalButtonDelete', 'Delete', 21, 'ENG'),
+(179, 'ModalButtonDelete', 'Eliminar', 21, 'ESP'),
+(180, 'ModalButtonCancelar', 'Cancel', 21, 'ENG'),
+(181, 'ModalButtonCancelar', 'Cancelar', 21, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -745,13 +834,13 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `dev`
@@ -805,7 +894,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `web_text`
 --
 ALTER TABLE `web_text`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
 -- Constraints for dumped tables
