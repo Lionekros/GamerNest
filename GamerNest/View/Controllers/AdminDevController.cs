@@ -2,7 +2,7 @@
 
 namespace View.Controllers
 {
-    public class AdminDevController :BaseController
+    public class AdminDevController :MethodBaseController
     {
         public ActionResult Devs()
         {

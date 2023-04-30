@@ -17,12 +17,11 @@ namespace Domain
                   int id = -1
                 , string name = ""
                 , string orderBy = ""
-                , int limit = -1
             )
         {
             try
             {
-                DataTable dt = CategoryRepository.GetAllCategories(id, name, orderBy, limit);
+                DataTable dt = CategoryRepository.GetAllCategories(id, name, orderBy);
                 List<CategoryModel> list = new List<CategoryModel>();
 
                 foreach ( DataRow row in dt.Rows )

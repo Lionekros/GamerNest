@@ -7,11 +7,11 @@ namespace Domain
 {
     public class PlatformService
     {
-        public static List<GameExternalDataModel> GetAllPlatforms(string orderBy = "", int limit = -1)
+        public static List<GameExternalDataModel> GetAllPlatforms(string orderBy = "" )
         {
             try
             {
-                DataTable dt = PlatformRepository.GetAllPlatforms(orderBy, limit);
+                DataTable dt = PlatformRepository.GetAllPlatforms(orderBy);
 
                 List<GameExternalDataModel> platformList = new List<GameExternalDataModel>();
 

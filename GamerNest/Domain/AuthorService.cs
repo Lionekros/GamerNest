@@ -22,12 +22,12 @@ namespace Domain
                 , sbyte     isAdmin         = -1
                 , sbyte     isActive        = -1
                 , string    orderBy         = ""
-                , int       limit           = -1
+                
             )
         {
             try
             {
-                DataTable dt = AuthorRepository.GetAllAuthors(id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy, limit);
+                DataTable dt = AuthorRepository.GetAllAuthors(id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy);
                 List<AuthorModel> list = new List<AuthorModel>();
 
                 foreach ( DataRow row in dt.Rows )

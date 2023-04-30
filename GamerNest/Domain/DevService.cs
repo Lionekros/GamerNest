@@ -7,11 +7,11 @@ namespace Domain
 {
     public class DevService
     {
-        public static List<GameExternalDataModel> GetAllDevs(string orderBy = "", int limit = -1)
+        public static List<GameExternalDataModel> GetAllDevs(string orderBy = "" )
         {
             try
             {
-                DataTable dt = DevRepository.GetAllDevs(orderBy, limit);
+                DataTable dt = DevRepository.GetAllDevs(orderBy);
                 List<GameExternalDataModel> platformList = new List<GameExternalDataModel>();
 
                 foreach ( DataRow row in dt.Rows )

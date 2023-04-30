@@ -11,7 +11,7 @@ namespace DBAccess
 {
     public class ArticleRepository
     {
-        public static DataTable GetAllArticles(string language = "ENG", string orderBy = "", int limit = -1)
+        public static DataTable GetAllArticles(string language = "ENG", string orderBy = "")
         {
             try
             {
@@ -23,10 +23,6 @@ namespace DBAccess
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
                         cmd.CommandText += " ORDER BY " + orderBy;
-                    }
-                    if ( limit > 0 )
-                    {
-                        cmd.CommandText += " LIMIT " + limit;
                     }
                     return Data.ExecuteCommand( cmd );
                 }

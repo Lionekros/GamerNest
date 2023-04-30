@@ -2,7 +2,7 @@
 
 namespace View.Controllers
 {
-    public class AdminPlatformController :BaseController
+    public class AdminPlatformController :MethodBaseController
     {
         public ActionResult Platforms()
         {

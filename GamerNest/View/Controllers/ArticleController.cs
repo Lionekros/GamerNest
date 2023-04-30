@@ -37,7 +37,7 @@ namespace View.Controllers
 
         public void GetAllPlatforms()
         {
-            lists.platformList = PlatformService.GetAllPlatforms( "name", 5 );
+            lists.platformList = PlatformService.GetAllPlatforms( "name");
         }
 
         public void GetAllAuthors()

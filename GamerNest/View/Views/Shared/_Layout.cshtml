@@ -16,6 +16,7 @@
             selector: '#mytextarea'
         });
     </script>
+
 </head>
 <body>
     @if (ViewData["AdminType"] != null)
@@ -24,9 +25,14 @@
     }
     
     @RenderBody()
+
+    @if ( ViewData[ "AdminType" ] != null )
+    {
+        <script src="~/js/lateralMenu.js"></script>
+        <script src="~/js/deleteModal.js"></script>
+        @*<script src="~/js/select2Mine.js"></script>*@
+    }
     <script src="https://kit.fontawesome.com/cad62e36d9.js" crossorigin="anonymous"></script>
-    <script src="~/js/lateralMenu.js"></script>
-    <script src="~/js/deleteModal.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
     <script src="~/js/site.js" asp-append-version="true"></script>

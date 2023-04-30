@@ -11,7 +11,7 @@ namespace DBAccess
 {
     public class UserRepository
     {
-        public static DataTable GetAllUsers(string orderBy = "", int limit = -1)
+        public static DataTable GetAllUsers(string orderBy = "" )
         {
             try
             {
@@ -22,10 +22,6 @@ namespace DBAccess
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
                         cmd.CommandText += " ORDER BY " + orderBy;
-                    }
-                    if ( limit > 0 )
-                    {
-                        cmd.CommandText += " LIMIT " + limit;
                     }
                     return Data.ExecuteCommand( cmd );
                 }

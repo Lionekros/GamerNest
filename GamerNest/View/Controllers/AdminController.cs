@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace View.Controllers
 {
-    public class AdminController :BaseController
+    public class AdminController :MethodBaseController
     {
         public ActionResult Index()
         {
@@ -151,11 +151,6 @@ namespace View.Controllers
             }
                 
             return false;
-        }
-
-        public void GetAuthor(string email)
-        {
-            lists.authorList = AuthorService.GetAuthor( email );
         }
 
     }

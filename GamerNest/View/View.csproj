@@ -60,8 +60,9 @@
 	  <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-	  <PackageReference Include="MySql.Data" Version="8.0.32.1" />
-	  <PackageReference Include="TinyMCE" Version="6.4.1" />
+	  <PackageReference Include="MySql.Data" Version="8.0.33" />
+	  <PackageReference Include="Select2.js" Version="4.0.13" />
+	  <PackageReference Include="TinyMCE" Version="6.4.2" />
 	</ItemGroup>
 
 	<ItemGroup>

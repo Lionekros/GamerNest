@@ -2,7 +2,7 @@
 
 namespace View.Controllers
 {
-    public class AdminPlayerTypeController :BaseController
+    public class AdminPlayerTypeController :MethodBaseController
     {
         public ActionResult PlayerTypes()
         {

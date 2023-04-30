@@ -12,11 +12,11 @@ namespace Domain
 {
     public class UserFavGameService
     {
-        public static List<UserFavGameModel> GetAllFavs(long idUser, long idGame, string orderBy = "", int limit = -1)
+        public static List<UserFavGameModel> GetAllFavs(long idUser, long idGame, string orderBy = "" )
         {
             try
             {
-                DataTable dt = UserFavGameRepository.GetAllFavs(idUser, idGame, orderBy, limit);
+                DataTable dt = UserFavGameRepository.GetAllFavs(idUser, idGame, orderBy);
                 List<UserFavGameModel> list = new List<UserFavGameModel>();
 
                 foreach ( DataRow row in dt.Rows )

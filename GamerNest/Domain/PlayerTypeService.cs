@@ -8,11 +8,11 @@ namespace Domain
 {
     public class PlayerTypeService
     {
-        public static List<GameExternalDataModel> GetAllPlayerTypes(string language = "ENG", string orderBy = "", int limit = -1)
+        public static List<GameExternalDataModel> GetAllPlayerTypes(string language = "ENG", string orderBy = "" )
         {
             try
             {
-                DataTable dt = PlayerTypeRepository.GetAllPlayerTypes(language, orderBy, limit);
+                DataTable dt = PlayerTypeRepository.GetAllPlayerTypes(language, orderBy);
 
                 List<GameExternalDataModel> platerTypesList = new List<GameExternalDataModel>();
 

@@ -2,7 +2,7 @@
 
 namespace View.Controllers
 {
-    public class AdminLanguageController :BaseController
+    public class AdminLanguageController :MethodBaseController
     {
         public ActionResult Languages()
         {

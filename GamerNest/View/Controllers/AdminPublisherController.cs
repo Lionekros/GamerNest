@@ -2,7 +2,7 @@
 
 namespace View.Controllers
 {
-    public class AdminPublisherController :BaseController
+    public class AdminPublisherController :MethodBaseController
     {
         public ActionResult Publishers()
         {

@@ -12,11 +12,11 @@ namespace Domain
 {
     public class GameService
     {
-        public static List<GameModel> GetAllGames(string language = "ENG", string orderBy = "", int limit = -1)
+        public static List<GameModel> GetAllGames(string language = "ENG", string orderBy = "" )
         {
             try
             {
-                DataTable dt = GameRepository.GetAllGames(language, orderBy, limit);
+                DataTable dt = GameRepository.GetAllGames(language, orderBy);
                 List<GameModel> list = new List<GameModel>();
 
                 foreach ( DataRow row in dt.Rows )

@@ -1,13 +1,187 @@
 ﻿@model Support.ModelList
 @{
-    ViewData[ "Title" ] = "Admin - Text for Web";
+    ViewData[ "Title" ] = "Admin - Text for the web";
 }
-
 
 <main class="home-section">
     <div class="text">
         <h1>Text for the Web</h1>
 
-        <h3>This is the Users tab. all registered users information will be displayed here.</h3>
+        <h3>@ViewData[ "Description" ]</h3>
+
+        @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
+        {
+            <section class="filter">
+                <h4>@ViewData[ "FilterTitle" ]:</h4>
+                <form asp-controller="WebText" asp-action="Texts" method="get">
+                    @if ( Model.webTextList.Count > 0 )
+                    {
+                        <div>
+                            <select id="orderBy" name="orderBy">
+                                <option value="">@ViewData[ "fOrderBy" ]</option>
+                                @foreach ( var prop in Model.webTextList.First().GetType().GetProperties() )
+                                {
+                                    <option value="@prop.Name">@prop.Name</option>
+                                }
+                            </select>
+                        </div>
+                    }
+                    <div>
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" id="id" name="id" pattern="[0-9]+" placeholder="@ViewData[ "fSearchId" ]">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" id="title" name="title" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchTitle" ]">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" id="text" name="text" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchText" ]">
+                        </div>
+                    </div>
+                    <div>
+                        <select name="idCategory" id="idCategory" class="js-example-basic-single" data-placeholder="@ViewData[ "fSearchCategory" ]">
+                            <option></option>
+                            @foreach ( var item in Model.categoryList )
+                            {
+                                <option value="@item.id">@item.name</option>
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <select name="language" id="language">
+                            <option value="AAA">@ViewData[ "fSearchLanguage" ]</option>
+                            <option value="ENG">ENG</option>
+                            <option value="ESP">ESP</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <input class="filtButton" type="submit" value="@ViewData[ "ButtonFilter" ]">
+                    </div>
+
+
+                </form>
+            </section>
+
+            <section class="create">
+                <a asp-action="CreateForm" asp-controller="WebText">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>@ViewData[ "ButtonNew" ]</span>
+                </a>
+            </section>
+
+            <section class="adminTable">
+                @if ( Model.webTextList.Count > 0 )
+                {
+                    <table>
+                        <tr>
+                            <th>@ViewData[ "Actions" ]</th>
+                            @foreach ( var prop in Model.webTextList.First().GetType().GetProperties() )
+                            {
+                                // Exclude "Password" column from table
+                                if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
+                                {
+                                    <th>@prop.Name</th>
+                                }
+                            }
+                        </tr>
+                        @foreach ( var item in Model.webTextList )
+                        {
+                            <tr>
+                                <td>
+                                    <!-- Delete WebText -->
+                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'WebText')">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+
+                                    <!-- Edit WebText -->
+                                    <a asp-controller="WebText" asp-action="UpdateForm" asp-route-id="@item.id">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+
+                                    <!-- Modal -->
+                                    <div id="confirmationModal_@item.id" class="modal">
+                                        <div class="modal-content">
+                                            <h2>@ViewData[ "ModalTitle" ]</h2>
+                                            <p>@ViewData[ "ModalText" ]: @item.id?</p>
+                                            <div class="modal-actions">
+                                                <button id="confirmBtn_@item.id" asp-controller="WebText" asp-action="Delete" asp-route-id="@item.id">@ViewData[ "ModalButtonDelete" ]</button>
+                                                <button id="cancelBtn_@item.id">@ViewData[ "ModalButtonCancelar" ]</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                @foreach ( var prop in item.GetType().GetProperties() )
+                                {
+                                    // Exclude "Password" column from table
+                                    if ( prop.Name.ToLower() != "icon" )
+                                    {
+                                        <td>
+                                            @prop.GetValue(item)
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Html.Raw(prop.GetValue(item))
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <h4>@ViewData[ "NoData" ]</h4>
+                }
+            </section>
+
+            <section class="pagination">
+                <div>
+                    @if ( Model.CurrentPage > 1 )
+                    {
+                        <!-- Previous Page -->
+                        <a asp-controller="WebText" asp-action="Texts"
+                   asp-route-page="@(Model.CurrentPage - 1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-id="@ViewBag.FormData.id"
+                   asp-route-title="@ViewBag.FormData.title"
+                   asp-route-idCategory="@ViewBag.FormData.idCategory"
+                   asp-route-language="@ViewBag.FormData.language"
+                   asp-route-orderBy="@ViewBag.FormData.orderBy">
+                            @ViewData[ "ButtonPrevious" ]
+                        </a>
+                    }
+
+                    @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
+                    {
+                        <!-- Next Page -->
+                        <a asp-controller="WebText" asp-action="Texts"
+                   asp-route-page="@(Model.CurrentPage + 1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-id="@ViewBag.FormData.id"
+                   asp-route-title="@ViewBag.FormData.title"
+                   asp-route-idCategory="@ViewBag.FormData.idCategory"
+                   asp-route-language="@ViewBag.FormData.language"
+                   asp-route-orderBy="@ViewBag.FormData.orderBy">
+                            @ViewData[ "ButtonNext" ]
+                        </a>
+                    }
+                </div>
+                <div>
+                    <p>
+                        @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.webTextList.Count @ViewData[ "OutOf" ] @Model.TotalItems)
+                    </p>
+                </div>
+            </section>
+        }
+
     </div>
 </main>

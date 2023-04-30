@@ -8,11 +8,11 @@ namespace Domain
 {
     public class GenreService
     {
-        public static List<GameExternalDataModel> GetAllGenres(string language = "ENG", string orderBy = "", int limit = -1)
+        public static List<GameExternalDataModel> GetAllGenres(string language = "ENG", string orderBy = "" )
         {
             try
             {
-                DataTable dt = GenreRepository.GetAllGenres(language, orderBy, limit);
+                DataTable dt = GenreRepository.GetAllGenres(language, orderBy);
 
                 List<GameExternalDataModel> genreList = new List<GameExternalDataModel>();
 

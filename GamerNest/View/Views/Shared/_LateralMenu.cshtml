@@ -133,15 +133,15 @@ else
 
             <hr>
 
-            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Category") ? "linkActive" : "")">
+            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Categories") ? "linkActive" : "")">
                 <a asp-controller="Category" asp-action="Categories">
                     <i class="fa-regular fa-folder-open"></i>
                     <span class="links_name">Categories</span>
                 </a>
                 <span class="tooltip">Categories</span>
             </li>
-            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "WebTextC") ? "linkActive" : "")">
-                <a asp-controller="WebText" asp-action="WebTextC">
+            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Texts") ? "linkActive" : "")">
+                <a asp-controller="WebText" asp-action="Texts">
                     <i class="fa-solid fa-font"></i>
                     <span class="links_name">Web Text</span>
                 </a>

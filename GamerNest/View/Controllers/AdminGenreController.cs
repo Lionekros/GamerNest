@@ -2,7 +2,7 @@
 
 namespace View.Controllers
 {
-    public class AdminGenreController :BaseController
+    public class AdminGenreController :MethodBaseController
     {
         public ActionResult Genres()
         {

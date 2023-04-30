@@ -17,12 +17,11 @@ namespace Domain
                   string id = ""
                 , string name = ""
                 , string orderBy = ""
-                , int limit = -1
             )
         {
             try
             {
-                DataTable dt = WebLanguageRepository.GetAllWebLanguages(id, name, orderBy, limit);
+                DataTable dt = WebLanguageRepository.GetAllWebLanguages(id, name, orderBy);
                 List<WebLanguageModel> list = new List<WebLanguageModel>();
 
                 foreach ( DataRow row in dt.Rows )

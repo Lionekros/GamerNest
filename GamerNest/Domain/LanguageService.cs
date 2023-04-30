@@ -8,11 +8,11 @@ namespace Domain
 {
     public class LanguageService
     {
-        public static List<GameExternalDataModel> GetAllLanguages(string language = "ENG", string orderBy = "", int limit = -1)
+        public static List<GameExternalDataModel> GetAllLanguages(string language = "ENG", string orderBy = "" )
         {
             try
             {
-                DataTable dt = LanguageRepository.GetAllLanguages(language, orderBy, limit);
+                DataTable dt = LanguageRepository.GetAllLanguages(language, orderBy);
 
                 List<GameExternalDataModel> languageList = new List<GameExternalDataModel>();
 

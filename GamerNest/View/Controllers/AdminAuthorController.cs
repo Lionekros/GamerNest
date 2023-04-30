@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace View.Controllers
 {
-    public class AdminAuthorController :BaseController
+    public class AdminAuthorController :MethodBaseController
     {
         public ActionResult Authors
             (
@@ -326,32 +326,6 @@ namespace View.Controllers
             return RedirectToAction( "Authors" );
         }
 
-        public void GetAllAuthors
-            (
-                  int       id              = -1
-                , string    name            = ""
-                , string    firstLastName   = ""
-                , string    secondLastName  = ""
-                , string    email           = ""
-                , sbyte     isAdmin         = -1
-                , sbyte     isActive        = -1
-                , string    orderBy         = ""
-                , int       limit           = -1
-            )
-        {
-            lists.authorList = AuthorService.GetAllAuthors(id, name, firstLastName, secondLastName, email, isAdmin, isActive, orderBy, limit );
-        }
-
-        public void GetAuthor(string email)
-        {
-            lists.authorList = AuthorService.GetAuthor( email );
-        }
-
-        public void GetAuthorUpdate(string email)
-        {
-            lists.updateAuthorList = AuthorService.GetAuthorUpdate( email );
-        }
-
         public void Pagination(int page, int pageSize)
         {
             int totalAuthors = lists.authorList.Count;
@@ -384,21 +358,21 @@ namespace View.Controllers
 
         }
 
-        public void CreateAuthorProcedure(AuthorModel author)
-        {
-            AuthorService.CreateAuthor(author.name, author.firstLastName, author.secondLastName, author.password, author.email, author.phone, author.description, author.avatar, author.preferedLanguage, author.isAdmin, author
-                .canPublish, author.isActive, author.birthday, author.startDate, author.endDate);
-        }
-
         public bool CheckPasswordAuthor(string email, string password)
         {
             GetAuthor( email );
 
-            if ( Utility.VerifyPassword( password, lists.authorList[ 0 ].password ))
+            if ( Utility.VerifyPassword( password, lists.authorList[ 0 ].password ) )
             {
                 return true;
             }
             return false;
+        }
+
+        public void CreateAuthorProcedure(AuthorModel author)
+        {
+            AuthorService.CreateAuthor(author.name, author.firstLastName, author.secondLastName, author.password, author.email, author.phone, author.description, author.avatar, author.preferedLanguage, author.isAdmin, author
+                .canPublish, author.isActive, author.birthday, author.startDate, author.endDate);
         }
 
         public void UpdateAuthorProcedure(UpdateAuthorModel author, bool changedPassword = false)

@@ -5,9 +5,8 @@ using Support;
 
 namespace View.Controllers
 {
-    public class BaseController :Controller
+    public class MethodBaseController :GetBaseController
     {
-        public ModelList lists = new ModelList();
         public void SetDefaultViewDatas()
         {
             ViewData[ "AdminEmail" ] = HttpContext.Session.GetString( "AdminEmail" );
@@ -41,14 +40,9 @@ namespace View.Controllers
             WebTextViewData();
         }
 
-        public void GetAllTextsByCategory(string cat, string lang = "ENG")
-        {
-            lists.webTextList = WebTextService.GetAllTextsByCategory( cat, lang );
-        }
-
         public void WebTextViewData()
         {
-            foreach ( var item in lists.webTextList )
+            foreach ( var item in lists.textList )
             {
                 ViewData[ item.title ] = item.text;
             }

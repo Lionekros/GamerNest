@@ -8,11 +8,11 @@ namespace Domain
 {
     public class PublisherService
     {
-        public static List<GameExternalDataModel> GetAllPublishers(string orderBy = "", int limit = -1)
+        public static List<GameExternalDataModel> GetAllPublishers(string orderBy = "" )
         {
             try
             {
-                DataTable dt = PublisherRepository.GetAllPublishers(orderBy, limit);
+                DataTable dt = PublisherRepository.GetAllPublishers(orderBy);
 
                 List<GameExternalDataModel> publisherList = new List<GameExternalDataModel>();
 

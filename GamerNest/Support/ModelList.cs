@@ -7,7 +7,12 @@
         public int PageSize { get; set; }
         public int TotalItems { get; set; }
 
+        public List<WebTextModel> textList { get; set; }
+
+
+        WebTextModel textModel { get; set; }
         public List<WebTextModel> webTextList { get; set; }
+        public List<UpdateWebTextModel> updateWebTextList { get; set; }
 
         public List<WebLanguageModel> webLanguageList { get; set; }
         public List<UpdateWebLanguageModel> updateWebLanguageList { get; set; }

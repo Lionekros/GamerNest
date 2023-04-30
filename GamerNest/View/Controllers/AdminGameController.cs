@@ -2,7 +2,7 @@
 
 namespace View.Controllers
 {
-    public class AdminGameController :BaseController
+    public class AdminGameController :MethodBaseController
     {
         public ActionResult Games()
         {

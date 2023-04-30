@@ -16,7 +16,6 @@ namespace DBAccess
                   int id = -1
                 , string name = ""
                 , string orderBy = ""
-                , int limit = -1
             )
         {
             try
@@ -47,10 +46,6 @@ namespace DBAccess
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
                         queryBuilder.Append( " ORDER BY " + orderBy );
-                    }
-                    if ( limit > 0 )
-                    {
-                        queryBuilder.Append( " LIMIT " + limit );
                     }
 
                     cmd.CommandText = queryBuilder.ToString();

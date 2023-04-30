@@ -5,7 +5,7 @@ using Support;
 
 namespace View.Controllers
 {
-    public class AdminArticleController : BaseController
+    public class AdminArticleController : MethodBaseController
     {
         public ActionResult Articles()
         {

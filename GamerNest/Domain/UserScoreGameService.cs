@@ -12,11 +12,11 @@ namespace Domain
 {
     public class UserScoreGameService
     {
-        public static List<UserScoreGameModel> GetAllScores(long idUser, long idGame, string orderBy = "", int limit = -1)
+        public static List<UserScoreGameModel> GetAllScores(long idUser, long idGame, string orderBy = "" )
         {
             try
             {
-                DataTable dt = UserScoreGameRepository.GetAllScores(idUser, idGame, orderBy, limit);
+                DataTable dt = UserScoreGameRepository.GetAllScores(idUser, idGame, orderBy);
                 List<UserScoreGameModel> list = new List<UserScoreGameModel>();
 
                 foreach ( DataRow row in dt.Rows )

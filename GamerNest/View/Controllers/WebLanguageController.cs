@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace View.Controllers
 {
-    public class WebLanguageController :BaseController
+    public class WebLanguageController :MethodBaseController
     {
         public ActionResult WebLanguages
             (
@@ -170,27 +170,6 @@ namespace View.Controllers
         {
             DeleteWebLanguageProcedure( id );
             return RedirectToAction( "WebLanguages" );
-        }
-
-        public void GetAllWebLanguages
-            (
-                  string id = ""
-                , string name = ""
-                , string orderBy = ""
-                , int limit = -1
-            )
-        {
-            lists.webLanguageList = WebLanguageService.GetAllWebLanguages( id, name, orderBy, limit );
-        }
-
-        public void GetWebLanguage(string email)
-        {
-            lists.webLanguageList = WebLanguageService.GetWebLanguage( email );
-        }
-
-        public void GetWebLanguageUpdate(string email)
-        {
-            lists.updateWebLanguageList = WebLanguageService.GetWebLanguageUpdate( email );
         }
 
         public void Pagination(int page, int pageSize)

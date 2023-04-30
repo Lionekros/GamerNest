@@ -2,7 +2,7 @@
 
 namespace View.Controllers
 {
-    public class AdminUserController :BaseController
+    public class AdminUserController :MethodBaseController
     {
         public ActionResult Users()
         {

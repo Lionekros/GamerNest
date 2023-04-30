@@ -5,7 +5,7 @@ using Support;
 
 namespace View.Controllers
 {
-    public class CategoryController :BaseController
+    public class CategoryController :MethodBaseController
     {
         public ActionResult Categories
             (
@@ -166,27 +166,6 @@ namespace View.Controllers
         {
             DeleteCategoryProcedure( id );
             return RedirectToAction( "Categories" );
-        }
-
-        public void GetAllCategories
-            (
-                  int id = -1
-                , string name = ""
-                , string orderBy = ""
-                , int limit = -1
-            )
-        {
-            lists.categoryList = CategoryService.GetAllCategories( id, name, orderBy, limit );
-        }
-
-        public void GetCategory(int id)
-        {
-            lists.categoryList = CategoryService.GetCategory( id );
-        }
-
-        public void GetCategoryUpdate(int id)
-        {
-            lists.updateCategoryList = CategoryService.GetCategoryUpdate( id );
         }
 
         public void Pagination(int page, int pageSize)
