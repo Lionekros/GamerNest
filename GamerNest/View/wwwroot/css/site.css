@@ -659,6 +659,13 @@ a {
   text-decoration: none;
 }
 
+.select2Single {
+  all: unset !important;
+}
+.select2Single * {
+  all: unset !important;
+}
+
 * {
   margin: 0;
   padding: 0;

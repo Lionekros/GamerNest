@@ -18,3 +18,13 @@ a
 {
     text-decoration: none;
 }
+
+.select2Single
+{
+    all: unset !important;
+    // Target all children of select2Single and unset their styles
+    & *
+    {
+        all: unset !important;
+    }
+}

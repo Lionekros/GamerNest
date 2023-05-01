@@ -45,20 +45,24 @@
                         </div>
                     </div>
                     <div>
-                        <select name="idCategory" id="idCategory" class="js-example-basic-single" data-placeholder="@ViewData[ "fSearchCategory" ]">
-                            <option></option>
-                            @foreach ( var item in Model.categoryList )
-                            {
-                                <option value="@item.id">@item.name</option>
-                            }
-                        </select>
+                        <div class="input-group">
+                            <select name="idCategory" id="idCategory" class="select2Single">
+                                <option></option>
+                                @foreach ( var item in Model.categoryList )
+                                {
+                                    <option value="@item.id">@item.name</option>
+                                }
+                            </select>
+                        </div>
                     </div>
                     <div>
-                        <select name="language" id="language">
-                            <option value="AAA">@ViewData[ "fSearchLanguage" ]</option>
-                            <option value="ENG">ENG</option>
-                            <option value="ESP">ESP</option>
-                        </select>
+                        <div class="input-group">
+                            <select name="language" id="language">
+                                <option value="AAA">@ViewData[ "fSearchLanguage" ]</option>
+                                <option value="ENG">ENG</option>
+                                <option value="ESP">ESP</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div>
