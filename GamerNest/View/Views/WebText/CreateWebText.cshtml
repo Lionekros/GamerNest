@@ -1,4 +1,4 @@
-﻿@model Support.WebLanguageModel
+﻿@model Support.ModelList
 
 @{
     ViewData[ "Title" ] = "Admin - Create Text for the web";
@@ -10,21 +10,33 @@
         <h2>@ViewData[ "TitleCreate" ]</h2>
 
         <section class="Createform">
-            <form asp-controller="WebLanguage" asp-action="Create" method="post" enctype="multipart/form-data">
+            <form asp-controller="WebText" asp-action="Create" method="post" enctype="multipart/form-data">
                 <partial name="_Error" />
 
                 <div>
                     <div>
-                        <label asp-for="name">ID:</label>
-                        <input asp-for="id" placeholder="id" required />
+                        <label asp-for="textModel.title" class="required">Title:</label>
+                        <input required asp-for="textModel.title" placeholder="Title" />
                     </div>
                     <div>
-                        <label asp-for="name" class="required">Name:</label>
-                        <input required asp-for="name" placeholder="Name" />
+                        <label asp-for="textModel.text" class="required">Text:</label>
+                        <input required asp-for="textModel.text" placeholder="Text" />
                     </div>
                     <div>
-                        <label asp-for="icon" class="required">Icon:</label>
-                        <input required asp-for="icon" placeholder="flag icon" />
+                        <label asp-for="textModel.idCategory" class="required">Category:</label>
+                        <select asp-for="textModel.idCategory" class="select2SingleForm" required>
+                            @foreach ( var item in Model.categoryList )
+                            {
+                                <option value="@item.id">@item.name</option>
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <label asp-for="textModel.language" class="required">Language:</label>
+                        <select asp-for="textModel.language" required>
+                            <option value="ENG">English</option>
+                            <option value="ESP">Español</option>
+                        </select>
                     </div>
                 </div>
 

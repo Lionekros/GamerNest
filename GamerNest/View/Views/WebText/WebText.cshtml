@@ -18,10 +18,18 @@
                     {
                         <div>
                             <select id="orderBy" name="orderBy">
-                                <option value="">@ViewData[ "fOrderBy" ]</option>
+                                <option value="wt.id">@ViewData[ "fOrderBy" ]</option>
                                 @foreach ( var prop in Model.webTextList.First().GetType().GetProperties() )
                                 {
-                                    <option value="@prop.Name">@prop.Name</option>
+                                    @if ( prop.Name == "category")
+                                    {
+                                        <option value="cat.@prop.Name">@prop.Name</option>
+                                    }
+                                    else if ( prop.Name != "idCategory" )
+                                    {
+                                        <option value="wt.@prop.Name">@prop.Name</option>
+                                    }
+                                    
                                 }
                             </select>
                         </div>
@@ -47,7 +55,7 @@
                     <div>
                         <div class="input-group">
                             <select name="idCategory" id="idCategory" class="select2Single">
-                                <option></option>
+                                <option>@ViewData[ "fSearchCategory" ]</option>
                                 @foreach ( var item in Model.categoryList )
                                 {
                                     <option value="@item.id">@item.name</option>
@@ -58,7 +66,7 @@
                     <div>
                         <div class="input-group">
                             <select name="language" id="language">
-                                <option value="AAA">@ViewData[ "fSearchLanguage" ]</option>
+                                <option value="">@ViewData[ "fSearchLanguage" ]</option>
                                 <option value="ENG">ENG</option>
                                 <option value="ESP">ESP</option>
                             </select>
@@ -89,7 +97,7 @@
                             @foreach ( var prop in Model.webTextList.First().GetType().GetProperties() )
                             {
                                 // Exclude "Password" column from table
-                                if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
+                                if ( prop.Name.ToLower() != "idcategory" )
                                 {
                                     <th>@prop.Name</th>
                                 }
@@ -123,19 +131,28 @@
                                 </td>
                                 @foreach ( var prop in item.GetType().GetProperties() )
                                 {
-                                    // Exclude "Password" column from table
-                                    if ( prop.Name.ToLower() != "icon" )
-                                    {
+                                    
+                                        @if ( prop.Name.ToLower() != "idcategory" )
+                                        {
                                         <td>
-                                            @prop.GetValue(item)
+                                            @if ( !string.IsNullOrEmpty( prop.GetValue( item )?.ToString() ) )
+                                            {
+                                                if ( prop.GetValue( item )?.ToString() == "ENG" )
+                                                {
+                                                    <span class="fi fi-gb fis"></span>
+                                                }
+                                                else if ( prop.GetValue( item )?.ToString() == "ESP" )
+                                                {
+                                                    <span class="fi fi-es fis"></span>
+                                                }
+                                                else
+                                                {
+                                                    @prop.GetValue( item )?.ToString()
+                                                }
+                                            }
                                         </td>
-                                    }
-                                    else
-                                    {
-                                        <td>
-                                            @Html.Raw(prop.GetValue(item))
-                                        </td>
-                                    }
+                                        }
+                                    
                                 }
                             </tr>
                         }

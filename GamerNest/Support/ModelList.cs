@@ -10,7 +10,8 @@
         public List<WebTextModel> textList { get; set; }
 
 
-        WebTextModel textModel { get; set; }
+        public WebTextModel textModel { get; set; }
+        public UpdateWebTextModel updateTextModel { get; set; }
         public List<WebTextModel> webTextList { get; set; }
         public List<UpdateWebTextModel> updateWebTextList { get; set; }
 

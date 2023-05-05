@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 28, 2023 at 11:48 PM
+-- Generation Time: May 01, 2023 at 06:52 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -71,6 +71,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateWebLanguage` (IN `pId` CHAR(3
   VALUES(pId, pName, pIcon);
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateWebText` (IN `pTitle` VARCHAR(255), IN `pText` TEXT, IN `pIdCategory` INT, IN `pLanguage` CHAR(3))   BEGIN
+  INSERT INTO `web_text` (`title`, `text`, `idCategory`, `language`)
+  VALUES (pTitle, pText, pIdCategory, pLanguage);
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteAuthor` (IN `pId` INT)   BEGIN
     DELETE FROM `author`
     WHERE `id` = pId;
@@ -83,6 +88,11 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteWebLanguage` (IN `pId` CHAR(3))   BEGIN
   DELETE FROM web_language
   WHERE id = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteWebText` (IN `pId` INT)   BEGIN
+  DELETE FROM `web_text`
+  WHERE `id` = pId;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateAuthor` (IN `pId` INT, IN `pName` VARCHAR(45), IN `pFirstLastName` VARCHAR(45), IN `pSecondLastName` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pPhone` VARCHAR(20), IN `pDescription` TEXT, IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pIsAdmin` TINYINT, IN `pCanPublish` TINYINT, IN `pIsActive` TINYINT, IN `pBirthday` VARCHAR(10), IN `pStartDate` VARCHAR(10), IN `pEndDate` VARCHAR(10))   BEGIN
@@ -116,6 +126,15 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateWebLanguage` (IN `pId` CHAR(3
   SET name = pName,
       icon = pIcon
   WHERE id = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateWebText` (IN `pId` INT, IN `pTitle` VARCHAR(255), IN `pText` TEXT, IN `pIdCategory` INT, IN `pLanguage` CHAR(3))   BEGIN
+  UPDATE `web_text`
+  SET `title` = pTitle,
+      `text` = pText,
+      `idCategory` = pIdCategory,
+      `language` = pLanguage
+  WHERE `id` = pId;
 END$$
 
 DELIMITER ;
@@ -209,7 +228,9 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (19, 'AdminAuthorForm'),
 (20, 'AdminWebLanguageForm'),
 (21, 'AdminCategory'),
-(22, 'AdminCategoryForm');
+(22, 'AdminCategoryForm'),
+(25, 'AdminText'),
+(26, 'AdminTextForm');
 
 -- --------------------------------------------------------
 
@@ -669,7 +690,58 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (178, 'ModalButtonDelete', 'Delete', 21, 'ENG'),
 (179, 'ModalButtonDelete', 'Eliminar', 21, 'ESP'),
 (180, 'ModalButtonCancelar', 'Cancel', 21, 'ENG'),
-(181, 'ModalButtonCancelar', 'Cancelar', 21, 'ESP');
+(181, 'ModalButtonCancelar', 'Cancelar', 21, 'ESP'),
+(182, 'fSearchName', 'Buscar por Nombre', 21, 'ESP'),
+(183, 'Description', 'This is the Web Text tab. all texts for the web text information will be displayed here', 25, 'ENG'),
+(184, 'Description', 'Esta es la pestaña de Texto. Aquí se mostrará la información de todo el texto de la web. ', 25, 'ESP'),
+(185, 'FilterTitle', 'Filters', 25, 'ENG'),
+(186, 'FilterTitle', 'Filtros', 25, 'ESP'),
+(187, 'fOrderBy', 'Order By', 25, 'ENG'),
+(188, 'fOrderBy', 'Ordenar por', 25, 'ESP'),
+(189, 'fSearchId', 'Search By ID', 25, 'ENG'),
+(190, 'fSearchId', 'Buscar por ID', 25, 'ESP'),
+(191, 'fSearchTitle', 'Search By Title', 25, 'ENG'),
+(192, 'fSearchTitle', 'Buscar por Título', 25, 'ESP'),
+(193, 'fSearchText', 'Search By Text', 25, 'ENG'),
+(194, 'fSearchText', 'Buscar por Texto', 25, 'ESP'),
+(195, 'fSearchCategory', 'Search By Category', 25, 'ENG'),
+(196, 'fSearchCategory', 'Buscar por Categoría', 25, 'ESP'),
+(197, 'fSearchLanguage', 'Search By Language', 25, 'ENG'),
+(198, 'fSearchLanguage', 'Buscar por Idioma', 25, 'ESP'),
+(199, 'ButtonFilter', 'Filter', 25, 'ENG'),
+(200, 'ButtonFilter', 'Filtrar', 25, 'ESP'),
+(201, 'ButtonNew', 'New', 25, 'ENG'),
+(202, 'ButtonNew', 'Nuevo', 25, 'ESP'),
+(203, 'ButtonNext', 'Next', 25, 'ENG'),
+(204, 'ButtonNext', 'Siguiente', 25, 'ESP'),
+(205, 'ButtonPrevious', 'Previous', 25, 'ENG'),
+(206, 'ButtonPrevious', 'Anterior', 25, 'ESP'),
+(207, 'Actions', 'Actions', 25, 'ENG'),
+(208, 'Actions', 'Acciones', 25, 'ESP'),
+(209, 'Page', 'Page', 25, 'ENG'),
+(210, 'Page', 'Página', 25, 'ESP'),
+(211, 'Of', 'of', 25, 'ENG'),
+(212, 'Of', 'de', 25, 'ESP'),
+(213, 'Outof', 'out of', 25, 'ENG'),
+(214, 'Outof', 'de', 25, 'ESP'),
+(215, 'NoData', 'No data found', 25, 'ENG'),
+(216, 'NoData', 'No se encontraron datos', 25, 'ESP'),
+(217, 'TitleCreate', 'Create', 26, 'ENG'),
+(218, 'TitleCreate', 'Crear', 26, 'ESP'),
+(219, 'TitleUpdate', 'Update', 26, 'ENG'),
+(220, 'TitleUpdate', 'Actualizar', 26, 'ESP'),
+(221, 'ButtonCreate', 'Create', 26, 'ENG'),
+(222, 'ButtonCreate', 'Crear', 26, 'ESP'),
+(223, 'ButtonUpdate', 'Update', 26, 'ENG'),
+(224, 'ButtonUpdate', 'Actualizar', 26, 'ESP'),
+(225, 'ModalTitle', 'Confirmation', 25, 'ENG'),
+(226, 'ModalTitle', 'Confirmación', 25, 'ESP'),
+(227, 'ModalText', 'Are you sure you want to delete this row with id', 25, 'ENG'),
+(228, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 25, 'ESP'),
+(229, 'ModalButtonDelete', 'Delete', 25, 'ENG'),
+(230, 'ModalButtonDelete', 'Eliminar', 25, 'ESP'),
+(231, 'ModalButtonCancelar', 'Cancel', 25, 'ENG'),
+(232, 'ModalButtonCancelar', 'Cancelar', 25, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -840,7 +912,7 @@ ALTER TABLE `author`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `dev`
@@ -894,7 +966,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `web_text`
 --
 ALTER TABLE `web_text`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
 
 --
 -- Constraints for dumped tables

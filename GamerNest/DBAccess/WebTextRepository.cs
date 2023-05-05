@@ -11,7 +11,7 @@ namespace DBAccess
 {
     public class WebTextRepository
     {
-        public static DataTable GetAllTexts(int id = -1, string title = "", int idCategory = -1, string language = "", string orderBy = "" )
+        public static DataTable GetAllTexts(int id = -1, string title = "", int idCategory = -1, string language = "", string orderBy = "wt.id" )
         {
             try
             {
@@ -111,7 +111,7 @@ namespace DBAccess
         {
             try
             {
-                MySqlCommand procedure = Data.CreateProcedure("CreateText");
+                MySqlCommand procedure = Data.CreateProcedure("CreateWebText");
 
                 procedure.Parameters.AddWithValue( "pTitle", title );
                 procedure.Parameters.AddWithValue( "pText", text );
@@ -134,7 +134,7 @@ namespace DBAccess
         {
             try
             {
-                MySqlCommand procedure = Data.CreateProcedure("UpdateText");
+                MySqlCommand procedure = Data.CreateProcedure("UpdateWebText");
 
                 procedure.Parameters.AddWithValue( "pId", id );
                 procedure.Parameters.AddWithValue( "pTitle", title );
@@ -158,7 +158,7 @@ namespace DBAccess
         {
             try
             {
-                MySqlCommand procedure = Data.CreateProcedure("DeleteText");
+                MySqlCommand procedure = Data.CreateProcedure("DeleteWebText");
 
                 procedure.Parameters.AddWithValue( "pId", id );
 

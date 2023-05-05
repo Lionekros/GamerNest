@@ -1,4 +1,4 @@
-﻿@model Support.UpdateWebLanguageModel
+﻿@model Support.ModelList
 
 @{
     ViewData[ "Title" ] = "Admin - Update Text for the web";
@@ -12,24 +12,40 @@
         @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
         {
             <section class="Createform">
-                <form asp-controller="WebLanguage" asp-action="Update" method="post" enctype="multipart/form-data">
+                <form asp-controller="WebText" asp-action="Update" method="post" enctype="multipart/form-data">
                     <partial name="_Error" />
 
                     <div>
                         <div>
-                            <label asp-for="id">ID:</label>
-                            <input asp-for="id" placeholder="id" readonly />
+                            <label asp-for="updateTextModel.id">ID:</label>
+                            <input asp-for="updateTextModel.id" placeholder="id" readonly />
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="name">Name:</label>
-                            <input asp-for="name" placeholder="Name" />
+                            <label asp-for="updateTextModel.title" class="required">Title:</label>
+                            <input required asp-for="updateTextModel.title" placeholder="Title" />
                         </div>
                         <div>
-                            <label asp-for="icon">Icon:</label>
-                            <input required asp-for="icon" placeholder="flag icon" />
+                            <label asp-for="updateTextModel.text" class="required">Text:</label>
+                            <input required asp-for="updateTextModel.text" placeholder="Text" />
+                        </div>
+                        <div>
+                            <label asp-for="updateTextModel.idCategory" class="required">Category:</label>
+                            <select asp-for="updateTextModel.idCategory" class="select2SingleForm" required>
+                                @foreach ( var item in Model.categoryList )
+                                {
+                                    <option value="@item.id">@item.name</option>
+                                }
+                            </select>
+                        </div>
+                        <div>
+                            <label asp-for="updateTextModel.language" class="required">Language:</label>
+                            <select asp-for="updateTextModel.language" required>
+                                <option value="ENG">English</option>
+                                <option value="ESP">Español</option>
+                            </select>
                         </div>
                     </div>
                     <div>
