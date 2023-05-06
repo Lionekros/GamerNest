@@ -142,6 +142,43 @@ namespace View.Controllers
             lists.updateGenreList = GenreService.GetGenreUpdate( id );
         }
 
+        public void GetAllDevs(int id = -1, string name = "", string orderBy = "")
+        {
+            lists.devList = DevService.GetAllDevs(id, name, orderBy );
+        }
+
+        // Retrieves a single web language based on its ID
+        public void GetDev(int id)
+        {
+            lists.devList = DevService.GetDev( id );
+        }
+
+        // Retrieves a single web language based on its ID and returns additional update data
+        public void GetDevUpdate(int id)
+        {
+            lists.updateDevList = DevService.GetDevUpdate( id );
+        }
+
+
+
+        public void GetAllPublishers(int id = -1, string name = "", string orderBy = "")
+        {
+            lists.publisherList = PublisherService.GetAllPublishers( id, name, orderBy );
+        }
+
+        // Retrieves a single web language based on its ID
+        public void GetPublisher(int id)
+        {
+            lists.publisherList = PublisherService.GetPublisher( id );
+        }
+
+        // Retrieves a single web language based on its ID and returns additional update data
+        public void GetPublisherUpdate(int id)
+        {
+            lists.updatePublisherList = PublisherService.GetPublisherUpdate( id );
+        }
+
+
         // WEB TEXT METHODS
 
         // Retrieves a list of web texts based on specified parameters

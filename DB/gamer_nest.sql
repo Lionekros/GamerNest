@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 01, 2023 at 06:52 PM
+-- Generation Time: May 06, 2023 at 03:36 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -66,6 +66,36 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateCategory` (IN `pName` VARCHAR
     INSERT INTO `category` (`name`) VALUES (pName);
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateDev` (IN `pName` VARCHAR(45))   BEGIN
+  INSERT INTO `dev` (`name`)
+  VALUES (pName);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateGenre` (IN `pName` VARCHAR(45), IN `pLanguage` CHAR(3))   BEGIN
+  INSERT INTO `genre` (`name`, `language`)
+  VALUES (pName, pLanguage);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateLanguage` (IN `pName` VARCHAR(45), IN `pLanguage` CHAR(3))   BEGIN
+  INSERT INTO `language` (`name`, `language`)
+  VALUES (pName, pLanguage);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreatePlatform` (IN `pName` VARCHAR(45), IN `pIcon` VARCHAR(255))   BEGIN
+  INSERT INTO `platform` (`name`, `icon`)
+  VALUES (pName, pIcon);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreatePlayerType` (IN `pName` VARCHAR(45), IN `pLanguage` CHAR(3))   BEGIN
+  INSERT INTO `player_type` (`name`, `language`)
+  VALUES (pName, pLanguage);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreatePublisher` (IN `pName` VARCHAR(45))   BEGIN
+  INSERT INTO `publisher` (`name`)
+  VALUES (pName);
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateWebLanguage` (IN `pId` CHAR(3), IN `pName` VARCHAR(255), IN `pIcon` VARCHAR(255))   BEGIN
   INSERT INTO web_language(id, name, icon)
   VALUES(pId, pName, pIcon);
@@ -83,6 +113,36 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteCategory` (IN `pId` INT)   BEGIN
     DELETE FROM `category` WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteDev` (IN `pId` INT)   BEGIN
+  DELETE FROM `dev`
+  WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteGenre` (IN `pId` INT)   BEGIN
+  DELETE FROM `genre`
+  WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteLanguage` (IN `pId` INT)   BEGIN
+  DELETE FROM `language`
+  WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletePlatform` (IN `pId` INT)   BEGIN
+  DELETE FROM `platform`
+  WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletePlayerType` (IN `pId` INT)   BEGIN
+  DELETE FROM `player_type`
+  WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletePublisher` (IN `pId` INT)   BEGIN
+  DELETE FROM `publisher`
+  WHERE `id` = pId;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteWebLanguage` (IN `pId` CHAR(3))   BEGIN
@@ -119,6 +179,46 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateCategory` (IN `pId` INT, IN `pName` VARCHAR(255))   BEGIN
     UPDATE `category` SET `name` = pName WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateDev` (IN `pId` INT, IN `pName` VARCHAR(45))   BEGIN
+  UPDATE `dev`
+  SET `name` = pName
+  WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateGenre` (IN `pId` INT, IN `pName` VARCHAR(45), IN `pLanguage` CHAR(3))   BEGIN
+  UPDATE `genre`
+  SET `name` = pName,
+      `language` = pLanguage
+  WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateLanguage` (IN `pId` INT, IN `pName` VARCHAR(45), IN `pLanguage` CHAR(3))   BEGIN
+  UPDATE `language`
+  SET `name` = pName,
+      `language` = pLanguage
+  WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdatePlatform` (IN `pId` INT, IN `pName` VARCHAR(45), IN `pIcon` VARCHAR(255))   BEGIN
+  UPDATE `platform`
+  SET `name` = pName,
+      `icon` = pIcon
+  WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdatePlayerType` (IN `pId` INT, IN `pName` VARCHAR(45), IN `pLanguage` CHAR(3))   BEGIN
+  UPDATE `player_type`
+  SET `name` = pName,
+      `language` = pLanguage
+  WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdatePublisher` (IN `pId` INT, IN `pName` VARCHAR(45))   BEGIN
+  UPDATE `publisher`
+  SET `name` = pName
+  WHERE `id` = pId;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateWebLanguage` (IN `pId` CHAR(3), IN `pName` VARCHAR(255), IN `pIcon` VARCHAR(255))   BEGIN
@@ -217,7 +317,7 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (7, 'AdminDev'),
 (8, 'AdminGame'),
 (9, 'AdminGenre'),
-(10, 'AdminLanguage (Game)'),
+(10, 'AdminLanguage'),
 (11, 'AdminWebLanguage'),
 (12, 'AdminPlatform'),
 (13, 'AdminPlayerType'),
@@ -230,7 +330,13 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (21, 'AdminCategory'),
 (22, 'AdminCategoryForm'),
 (25, 'AdminText'),
-(26, 'AdminTextForm');
+(26, 'AdminTextForm'),
+(27, 'AdminPlayerTypeForm'),
+(29, 'AdminLanguageForm'),
+(30, 'AdminGenreForm'),
+(31, 'AdminDevForm'),
+(32, 'AdminPublisherForm'),
+(33, 'AdminPlatformForm');
 
 -- --------------------------------------------------------
 
@@ -375,6 +481,16 @@ CREATE TABLE `language` (
   `language` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
+--
+-- Dumping data for table `language`
+--
+
+INSERT INTO `language` (`id`, `name`, `language`) VALUES
+(1, 'Español', 'ESP'),
+(4, 'Spanish', 'ENG'),
+(5, 'Inglés', 'ESP'),
+(6, 'English', 'ENG');
+
 -- --------------------------------------------------------
 
 --
@@ -418,6 +534,18 @@ CREATE TABLE `player_type` (
   `language` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
+--
+-- Dumping data for table `player_type`
+--
+
+INSERT INTO `player_type` (`id`, `name`, `language`) VALUES
+(1, 'Singleplayer', 'ENG'),
+(2, 'Cooperative', 'ENG'),
+(3, 'Multiplayer', 'ENG'),
+(4, 'Un Jugador', 'ESP'),
+(5, 'Multijugador', 'ESP'),
+(6, 'Cooperativo', 'ESP');
+
 -- --------------------------------------------------------
 
 --
@@ -428,6 +556,13 @@ CREATE TABLE `publisher` (
   `id` int NOT NULL,
   `name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Dumping data for table `publisher`
+--
+
+INSERT INTO `publisher` (`id`, `name`) VALUES
+(1, 'Rockstar Games');
 
 -- --------------------------------------------------------
 
@@ -741,7 +876,277 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (229, 'ModalButtonDelete', 'Delete', 25, 'ENG'),
 (230, 'ModalButtonDelete', 'Eliminar', 25, 'ESP'),
 (231, 'ModalButtonCancelar', 'Cancel', 25, 'ENG'),
-(232, 'ModalButtonCancelar', 'Cancelar', 25, 'ESP');
+(232, 'ModalButtonCancelar', 'Cancelar', 25, 'ESP'),
+(242, 'Description', 'This is the Player Types  tab. all player types information will be displayed here. Remember to create both English and Spanish player type', 13, 'ENG'),
+(243, 'Description', 'Esta es la pestaña de Tipos de jugador. Aquí se mostrará la información de los tipos de juego. Recuerda crear tanto el tipo en inglés como en español,. ', 13, 'ESP'),
+(244, 'FilterTitle', 'Filters', 13, 'ENG'),
+(245, 'FilterTitle', 'Filtros', 13, 'ESP'),
+(246, 'fOrderBy', 'Order By', 13, 'ENG'),
+(247, 'fOrderBy', 'Ordenar por', 13, 'ESP'),
+(248, 'fSearchId', 'Search By ID', 13, 'ENG'),
+(249, 'fSearchId', 'Buscar por ID', 13, 'ESP'),
+(250, 'fSearchName', 'Search By Name', 13, 'ENG'),
+(251, 'fSearchName', 'Buscar por Nombre', 13, 'ESP'),
+(252, 'fSearchLanguage', 'Search By Language', 13, 'ENG'),
+(253, 'fSearchLanguage', 'Buscar por Idioma', 13, 'ESP'),
+(254, 'ButtonFilter', 'Filter', 13, 'ENG'),
+(255, 'ButtonFilter', 'Filtrar', 13, 'ESP'),
+(256, 'ButtonNew', 'New', 13, 'ENG'),
+(257, 'ButtonNew', 'Nuevo', 13, 'ESP'),
+(258, 'ButtonNext', 'Next', 13, 'ENG'),
+(259, 'ButtonNext', 'Siguiente', 13, 'ESP'),
+(260, 'ButtonPrevious', 'Previous', 13, 'ENG'),
+(261, 'ButtonPrevious', 'Anterior', 13, 'ESP'),
+(262, 'Actions', 'Actions', 13, 'ENG'),
+(263, 'Actions', 'Acciones', 13, 'ESP'),
+(264, 'Page', 'Page', 13, 'ENG'),
+(265, 'Page', 'Página', 13, 'ESP'),
+(266, 'Of', 'of', 13, 'ENG'),
+(267, 'Of', 'de', 13, 'ESP'),
+(268, 'Outof', 'out of', 13, 'ENG'),
+(269, 'Outof', 'de', 13, 'ESP'),
+(270, 'NoData', 'No data found', 13, 'ENG'),
+(271, 'NoData', 'No se encontraron datos', 13, 'ESP'),
+(272, 'ModalTitle', 'Confirmation', 13, 'ENG'),
+(273, 'ModalTitle', 'Confirmación', 13, 'ESP'),
+(274, 'ModalText', 'Are you sure you want to delete this row with id', 13, 'ENG'),
+(275, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 13, 'ESP'),
+(276, 'ModalButtonDelete', 'Delete', 13, 'ENG'),
+(277, 'ModalButtonDelete', 'Eliminar', 13, 'ESP'),
+(278, 'ModalButtonCancelar', 'Cancel', 13, 'ENG'),
+(279, 'ModalButtonCancelar', 'Cancelar', 13, 'ESP'),
+(280, 'TitleCreate', 'Create', 27, 'ENG'),
+(281, 'TitleCreate', 'Crear', 27, 'ESP'),
+(282, 'TitleUpdate', 'Update', 27, 'ENG'),
+(283, 'TitleUpdate', 'Actualizar', 27, 'ESP'),
+(284, 'ButtonCreate', 'Create', 27, 'ENG'),
+(285, 'ButtonCreate', 'Crear', 27, 'ESP'),
+(286, 'ButtonUpdate', 'Update', 27, 'ENG'),
+(287, 'ButtonUpdate', 'Actualizar', 27, 'ESP'),
+(289, 'Description', 'This is the Language (Games)  tab. all game\'s possible languages information will be displayed here. Remember to create both English and Spanish', 10, 'ENG'),
+(290, 'Description', 'Esta es la pestaña de Idiomas. Aquí se mostrará la información de los idiomas disponibles en los juegos. Recuerda crear tanto en inglés como en español,. ', 10, 'ESP'),
+(291, 'FilterTitle', 'Filters', 10, 'ENG'),
+(292, 'FilterTitle', 'Filtros', 10, 'ESP'),
+(293, 'fOrderBy', 'Order By', 10, 'ENG'),
+(294, 'fOrderBy', 'Ordenar por', 10, 'ESP'),
+(295, 'fSearchId', 'Search By ID', 10, 'ENG'),
+(296, 'fSearchId', 'Buscar por ID', 10, 'ESP'),
+(297, 'fSearchName', 'Search By Name', 10, 'ENG'),
+(298, 'fSearchName', 'Buscar por Nombre', 10, 'ESP'),
+(299, 'fSearchLanguage', 'Search By Language', 10, 'ENG'),
+(300, 'fSearchLanguage', 'Buscar por Idioma', 10, 'ESP'),
+(301, 'ButtonFilter', 'Filter', 10, 'ENG'),
+(302, 'ButtonFilter', 'Filtrar', 10, 'ESP'),
+(303, 'ButtonNew', 'New', 10, 'ENG'),
+(304, 'ButtonNew', 'Nuevo', 10, 'ESP'),
+(305, 'ButtonNext', 'Next', 10, 'ENG'),
+(306, 'ButtonNext', 'Siguiente', 10, 'ESP'),
+(307, 'ButtonPrevious', 'Previous', 10, 'ENG'),
+(308, 'ButtonPrevious', 'Anterior', 10, 'ESP'),
+(309, 'Actions', 'Actions', 10, 'ENG'),
+(310, 'Actions', 'Acciones', 10, 'ESP'),
+(311, 'Page', 'Page', 10, 'ENG'),
+(312, 'Page', 'Página', 10, 'ESP'),
+(313, 'Of', 'of', 10, 'ENG'),
+(314, 'Of', 'de', 10, 'ESP'),
+(315, 'Outof', 'out of', 10, 'ENG'),
+(316, 'Outof', 'de', 10, 'ESP'),
+(317, 'NoData', 'No data found', 10, 'ENG'),
+(318, 'NoData', 'No se encontraron datos', 10, 'ESP'),
+(319, 'ModalTitle', 'Confirmation', 10, 'ENG'),
+(320, 'ModalTitle', 'Confirmación', 10, 'ESP'),
+(321, 'ModalText', 'Are you sure you want to delete this row with id', 10, 'ENG'),
+(322, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 10, 'ESP'),
+(323, 'ModalButtonDelete', 'Delete', 10, 'ENG'),
+(324, 'ModalButtonDelete', 'Eliminar', 10, 'ESP'),
+(325, 'ModalButtonCancelar', 'Cancel', 10, 'ENG'),
+(326, 'ModalButtonCancelar', 'Cancelar', 10, 'ESP'),
+(327, 'TitleCreate', 'Create', 29, 'ENG'),
+(328, 'TitleCreate', 'Crear', 29, 'ESP'),
+(329, 'TitleUpdate', 'Update', 29, 'ENG'),
+(330, 'TitleUpdate', 'Actualizar', 29, 'ESP'),
+(331, 'ButtonCreate', 'Create', 29, 'ENG'),
+(332, 'ButtonCreate', 'Crear', 29, 'ESP'),
+(333, 'ButtonUpdate', 'Update', 29, 'ENG'),
+(334, 'ButtonUpdate', 'Actualizar', 29, 'ESP'),
+(335, 'Description', 'This is the Genre  tab. all game\'s genres information will be displayed here. Remember to create both English and Spanish', 9, 'ENG'),
+(336, 'Description', 'Esta es la pestaña de Generos. Aquí se mostrará la información de los generos en los juegos. Recuerda crear tanto en inglés como en español,. ', 9, 'ESP'),
+(337, 'FilterTitle', 'Filters', 9, 'ENG'),
+(338, 'FilterTitle', 'Filtros', 9, 'ESP'),
+(339, 'fOrderBy', 'Order By', 9, 'ENG'),
+(340, 'fOrderBy', 'Ordenar por', 9, 'ESP'),
+(341, 'fSearchId', 'Search By ID', 9, 'ENG'),
+(342, 'fSearchId', 'Buscar por ID', 9, 'ESP'),
+(343, 'fSearchName', 'Search By Name', 9, 'ENG'),
+(344, 'fSearchName', 'Buscar por Nombre', 9, 'ESP'),
+(345, 'fSearchLanguage', 'Search By Language', 9, 'ENG'),
+(346, 'fSearchLanguage', 'Buscar por Idioma', 9, 'ESP'),
+(347, 'ButtonFilter', 'Filter', 9, 'ENG'),
+(348, 'ButtonFilter', 'Filtrar', 9, 'ESP'),
+(349, 'ButtonNew', 'New', 9, 'ENG'),
+(350, 'ButtonNew', 'Nuevo', 9, 'ESP'),
+(351, 'ButtonNext', 'Next', 9, 'ENG'),
+(352, 'ButtonNext', 'Siguiente', 9, 'ESP'),
+(353, 'ButtonPrevious', 'Previous', 9, 'ENG'),
+(354, 'ButtonPrevious', 'Anterior', 9, 'ESP'),
+(355, 'Actions', 'Actions', 9, 'ENG'),
+(356, 'Actions', 'Acciones', 9, 'ESP'),
+(357, 'Page', 'Page', 9, 'ENG'),
+(358, 'Page', 'Página', 9, 'ESP'),
+(359, 'Of', 'of', 9, 'ENG'),
+(360, 'Of', 'de', 9, 'ESP'),
+(361, 'Outof', 'out of', 9, 'ENG'),
+(362, 'Outof', 'de', 9, 'ESP'),
+(363, 'NoData', 'No data found', 9, 'ENG'),
+(364, 'NoData', 'No se encontraron datos', 9, 'ESP'),
+(365, 'ModalTitle', 'Confirmation', 9, 'ENG'),
+(366, 'ModalTitle', 'Confirmación', 9, 'ESP'),
+(367, 'ModalText', 'Are you sure you want to delete this row with id', 9, 'ENG'),
+(368, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 9, 'ESP'),
+(369, 'ModalButtonDelete', 'Delete', 9, 'ENG'),
+(370, 'ModalButtonDelete', 'Eliminar', 9, 'ESP'),
+(371, 'ModalButtonCancelar', 'Cancel', 9, 'ENG'),
+(372, 'ModalButtonCancelar', 'Cancelar', 9, 'ESP'),
+(373, 'TitleCreate', 'Create', 30, 'ENG'),
+(374, 'TitleCreate', 'Crear', 30, 'ESP'),
+(375, 'TitleUpdate', 'Update', 30, 'ENG'),
+(376, 'TitleUpdate', 'Actualizar', 30, 'ESP'),
+(377, 'ButtonCreate', 'Create', 30, 'ENG'),
+(378, 'ButtonCreate', 'Crear', 30, 'ESP'),
+(379, 'ButtonUpdate', 'Update', 30, 'ENG'),
+(380, 'ButtonUpdate', 'Actualizar', 30, 'ESP'),
+(381, 'Description', 'This is the Publisher tab. all publishers information will be displayed here.', 14, 'ENG'),
+(382, 'Description', 'Esta es la pestaña de Editoras. Aquí se mostrará la información de las editoras.', 14, 'ESP'),
+(383, 'FilterTitle', 'Filters', 7, 'ENG'),
+(384, 'FilterTitle', 'Filtros', 7, 'ESP'),
+(385, 'fOrderBy', 'Order By', 7, 'ENG'),
+(386, 'fOrderBy', 'Ordenar por', 7, 'ESP'),
+(387, 'fSearchId', 'Search By ID', 7, 'ENG'),
+(388, 'fSearchId', 'Buscar por ID', 7, 'ESP'),
+(389, 'fSearchName', 'Search By Name', 7, 'ENG'),
+(390, 'fSearchName', 'Buscar por Nombre', 7, 'ESP'),
+(391, 'ButtonFilter', 'Filter', 7, 'ENG'),
+(392, 'ButtonFilter', 'Filtrar', 7, 'ESP'),
+(393, 'ButtonNew', 'New', 7, 'ENG'),
+(394, 'ButtonNew', 'Nuevo', 7, 'ESP'),
+(395, 'ButtonNext', 'Next', 7, 'ENG'),
+(396, 'ButtonNext', 'Siguiente', 7, 'ESP'),
+(397, 'ButtonPrevious', 'Previous', 7, 'ENG'),
+(398, 'ButtonPrevious', 'Anterior', 7, 'ESP'),
+(399, 'Actions', 'Actions', 7, 'ENG'),
+(400, 'Actions', 'Acciones', 7, 'ESP'),
+(401, 'Page', 'Page', 7, 'ENG'),
+(402, 'Page', 'Página', 7, 'ESP'),
+(403, 'Of', 'of', 7, 'ENG'),
+(404, 'Of', 'de', 7, 'ESP'),
+(405, 'Outof', 'out of', 7, 'ENG'),
+(406, 'Outof', 'de', 7, 'ESP'),
+(407, 'NoData', 'No data found', 7, 'ENG'),
+(408, 'NoData', 'No se encontraron datos', 7, 'ESP'),
+(409, 'ModalTitle', 'Confirmation', 7, 'ENG'),
+(410, 'ModalTitle', 'Confirmación', 7, 'ESP'),
+(411, 'ModalText', 'Are you sure you want to delete this row with id', 7, 'ENG'),
+(412, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 7, 'ESP'),
+(413, 'ModalButtonDelete', 'Delete', 7, 'ENG'),
+(414, 'ModalButtonDelete', 'Eliminar', 7, 'ESP'),
+(415, 'ModalButtonCancelar', 'Cancel', 7, 'ENG'),
+(416, 'ModalButtonCancelar', 'Cancelar', 7, 'ESP'),
+(417, 'TitleCreate', 'Create', 31, 'ENG'),
+(418, 'TitleCreate', 'Crear', 31, 'ESP'),
+(419, 'TitleUpdate', 'Update', 31, 'ENG'),
+(420, 'TitleUpdate', 'Actualizar', 31, 'ESP'),
+(421, 'ButtonCreate', 'Create', 31, 'ENG'),
+(422, 'ButtonCreate', 'Crear', 31, 'ESP'),
+(423, 'ButtonUpdate', 'Update', 31, 'ENG'),
+(424, 'ButtonUpdate', 'Actualizar', 31, 'ESP'),
+(425, 'Description', 'This is the Dev  tab. all devs information will be displayed here.', 7, 'ENG'),
+(426, 'Description', 'Esta es la pestaña de Desarrolladores. Aquí se mostrará la información de los desarrolladores.', 7, 'ESP'),
+(427, 'FilterTitle', 'Filters', 14, 'ENG'),
+(428, 'FilterTitle', 'Filtros', 14, 'ESP'),
+(429, 'fOrderBy', 'Order By', 14, 'ENG'),
+(430, 'fOrderBy', 'Ordenar por', 14, 'ESP'),
+(431, 'fSearchId', 'Search By ID', 14, 'ENG'),
+(432, 'fSearchId', 'Buscar por ID', 14, 'ESP'),
+(433, 'fSearchName', 'Search By Name', 14, 'ENG'),
+(434, 'fSearchName', 'Buscar por Nombre', 14, 'ESP'),
+(435, 'ButtonFilter', 'Filter', 14, 'ENG'),
+(436, 'ButtonFilter', 'Filtrar', 14, 'ESP'),
+(437, 'ButtonNew', 'New', 14, 'ENG'),
+(438, 'ButtonNew', 'Nuevo', 14, 'ESP'),
+(439, 'ButtonNext', 'Next', 14, 'ENG'),
+(440, 'ButtonNext', 'Siguiente', 14, 'ESP'),
+(441, 'ButtonPrevious', 'Previous', 14, 'ENG'),
+(442, 'ButtonPrevious', 'Anterior', 14, 'ESP'),
+(443, 'Actions', 'Actions', 14, 'ENG'),
+(444, 'Actions', 'Acciones', 14, 'ESP'),
+(445, 'Page', 'Page', 14, 'ENG'),
+(446, 'Page', 'Página', 14, 'ESP'),
+(447, 'Of', 'of', 14, 'ENG'),
+(448, 'Of', 'de', 14, 'ESP'),
+(449, 'Outof', 'out of', 14, 'ENG'),
+(450, 'Outof', 'de', 14, 'ESP'),
+(451, 'NoData', 'No data found', 14, 'ENG'),
+(452, 'NoData', 'No se encontraron datos', 14, 'ESP'),
+(453, 'ModalTitle', 'Confirmation', 14, 'ENG'),
+(454, 'ModalTitle', 'Confirmación', 14, 'ESP'),
+(455, 'ModalText', 'Are you sure you want to delete this row with id', 14, 'ENG'),
+(456, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 14, 'ESP'),
+(457, 'ModalButtonDelete', 'Delete', 14, 'ENG'),
+(458, 'ModalButtonDelete', 'Eliminar', 14, 'ESP'),
+(459, 'ModalButtonCancelar', 'Cancel', 14, 'ENG'),
+(460, 'ModalButtonCancelar', 'Cancelar', 14, 'ESP'),
+(461, 'TitleCreate', 'Create', 32, 'ENG'),
+(462, 'TitleCreate', 'Crear', 32, 'ESP'),
+(463, 'TitleUpdate', 'Update', 32, 'ENG'),
+(464, 'TitleUpdate', 'Actualizar', 32, 'ESP'),
+(465, 'ButtonCreate', 'Create', 32, 'ENG'),
+(466, 'ButtonCreate', 'Crear', 32, 'ESP'),
+(467, 'ButtonUpdate', 'Update', 32, 'ENG'),
+(468, 'ButtonUpdate', 'Actualizar', 32, 'ESP'),
+(469, 'Description', 'This is the Platform tab. all platforms information will be displayed here.', 12, 'ENG'),
+(470, 'Description', 'Esta es la pestaña de las Plataformas. Aquí se mostrará la información de las Plataformas.', 12, 'ESP'),
+(471, 'FilterTitle', 'Filters', 12, 'ENG'),
+(472, 'FilterTitle', 'Filtros', 12, 'ESP'),
+(473, 'fOrderBy', 'Order By', 12, 'ENG'),
+(474, 'fOrderBy', 'Ordenar por', 12, 'ESP'),
+(475, 'fSearchId', 'Search By ID', 12, 'ENG'),
+(476, 'fSearchId', 'Buscar por ID', 12, 'ESP'),
+(477, 'fSearchName', 'Search By Name', 12, 'ENG'),
+(478, 'fSearchName', 'Buscar por Nombre', 12, 'ESP'),
+(479, 'ButtonFilter', 'Filter', 12, 'ENG'),
+(480, 'ButtonFilter', 'Filtrar', 12, 'ESP'),
+(481, 'ButtonNew', 'New', 12, 'ENG'),
+(482, 'ButtonNew', 'Nuevo', 12, 'ESP'),
+(483, 'ButtonNext', 'Next', 12, 'ENG'),
+(484, 'ButtonNext', 'Siguiente', 12, 'ESP'),
+(485, 'ButtonPrevious', 'Previous', 12, 'ENG'),
+(486, 'ButtonPrevious', 'Anterior', 12, 'ESP'),
+(487, 'Actions', 'Actions', 12, 'ENG'),
+(488, 'Actions', 'Acciones', 12, 'ESP'),
+(489, 'Page', 'Page', 12, 'ENG'),
+(490, 'Page', 'Página', 12, 'ESP'),
+(491, 'Of', 'of', 12, 'ENG'),
+(492, 'Of', 'de', 12, 'ESP'),
+(493, 'Outof', 'out of', 12, 'ENG'),
+(494, 'Outof', 'de', 12, 'ESP'),
+(495, 'NoData', 'No data found', 12, 'ENG'),
+(496, 'NoData', 'No se encontraron datos', 12, 'ESP'),
+(497, 'ModalTitle', 'Confirmation', 12, 'ENG'),
+(498, 'ModalTitle', 'Confirmación', 12, 'ESP'),
+(499, 'ModalText', 'Are you sure you want to delete this row with id', 12, 'ENG'),
+(500, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 12, 'ESP'),
+(501, 'ModalButtonDelete', 'Delete', 12, 'ENG'),
+(502, 'ModalButtonDelete', 'Eliminar', 12, 'ESP'),
+(503, 'ModalButtonCancelar', 'Cancel', 12, 'ENG'),
+(504, 'ModalButtonCancelar', 'Cancelar', 12, 'ESP'),
+(505, 'TitleCreate', 'Create', 33, 'ENG'),
+(506, 'TitleCreate', 'Crear', 33, 'ESP'),
+(507, 'TitleUpdate', 'Update', 33, 'ENG'),
+(508, 'TitleUpdate', 'Actualizar', 33, 'ESP'),
+(509, 'ButtonCreate', 'Create', 33, 'ENG'),
+(510, 'ButtonCreate', 'Crear', 33, 'ESP'),
+(511, 'ButtonUpdate', 'Update', 33, 'ENG'),
+(512, 'ButtonUpdate', 'Actualizar', 33, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -912,13 +1317,13 @@ ALTER TABLE `author`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `dev`
 --
 ALTER TABLE `dev`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `game`
@@ -930,13 +1335,13 @@ ALTER TABLE `game`
 -- AUTO_INCREMENT for table `genre`
 --
 ALTER TABLE `genre`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `language`
 --
 ALTER TABLE `language`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `platform`
@@ -948,13 +1353,13 @@ ALTER TABLE `platform`
 -- AUTO_INCREMENT for table `player_type`
 --
 ALTER TABLE `player_type`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `publisher`
 --
 ALTER TABLE `publisher`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -966,7 +1371,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `web_text`
 --
 ALTER TABLE `web_text`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=513;
 
 --
 -- Constraints for dumped tables
