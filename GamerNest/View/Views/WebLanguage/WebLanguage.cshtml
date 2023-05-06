@@ -13,7 +13,7 @@
         {
             <section class="filter">
                 <h4>@ViewData[ "FilterTitle" ]:</h4>
-                <form asp-controller="WebLanguage" asp-action="WebLanguages" method="get">
+                <form asp-controller="WebLanguage" asp-action="WebLanguages" method="post">
                     @if ( Model.webLanguageList.Count > 0 )
                     {
                         <div>

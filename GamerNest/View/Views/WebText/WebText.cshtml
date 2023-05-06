@@ -13,7 +13,7 @@
         {
             <section class="filter">
                 <h4>@ViewData[ "FilterTitle" ]:</h4>
-                <form asp-controller="WebText" asp-action="Texts" method="get">
+                <form asp-controller="WebText" asp-action="Texts" method="post">
                     @if ( Model.webTextList.Count > 0 )
                     {
                         <div>

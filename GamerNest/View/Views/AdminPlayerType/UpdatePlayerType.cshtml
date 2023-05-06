@@ -1,0 +1,50 @@
+﻿@model Support.UpdateGenreTypeLanguageModel
+
+@{
+    ViewData[ "Title" ] = "Admin - Update Player Type";
+}
+
+
+<main class="home-section">
+    <div class="text">
+        <h1>Player Type</h1>
+        <h2>@ViewData[ "TitleUpdate" ]</h2>
+
+        @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
+        {
+            <section class="Createform">
+                <form asp-controller="AdminPlayerType" asp-action="Update" method="post" enctype="multipart/form-data">
+                    <partial name="_Error" />
+
+                    <div>
+                        <div>
+                            <label asp-for="id">ID:</label>
+                            <input asp-for="id" placeholder="id" readonly />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label asp-for="name">Name:</label>
+                            <input asp-for="name" placeholder="Name" />
+                        </div>
+                        <div>
+                            <label asp-for="language">Language:</label>
+                            <select asp-for="language">
+                                <option value="ENG">English</option>
+                                <option value="ESP">Español</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <button type="submit" class="mainButton">@ViewData[ "ButtonUpdate" ]</button>
+                        </div>
+                    </div>
+
+                </form>
+            </section>
+        }
+
+    </div>
+</main>

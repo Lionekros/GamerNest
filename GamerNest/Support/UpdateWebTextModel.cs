@@ -1,14 +1,18 @@
-﻿using System.Data;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data;
 
 namespace Support
 {
     public class UpdateWebTextModel
     {
+        [Required( ErrorMessage = "Required" )]
         public int id { get; set; }
         public string title { get; set; }
         public string text { get; set; }
         public int idCategory { get; set; }
         public string language { get; set; }
+
+        public List<CategoryModel>? categoryList { get; set; }
 
         public UpdateWebTextModel() { }
 

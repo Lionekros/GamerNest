@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Support
 {
     public class UpdateCategoryModel
     {
+        [Required( ErrorMessage = "Required" )]
         public int id { get; set; }
         public string name { get; set; }
 

@@ -2,6 +2,7 @@
 using LogError;
 using Microsoft.AspNetCore.Mvc;
 using Support;
+using System.Xml.Linq;
 
 namespace View.Controllers
 {
@@ -53,9 +54,10 @@ namespace View.Controllers
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
                 SetDefaultViewDatas();
-                GetAllCategories();
+                WebTextModel model = new WebTextModel();
+                model.categoryList = CategoryService.GetAllCategories();
                 WebText( "AdminTextForm" );
-                return View( "CreateWebText", lists );
+                return View( "CreateWebText", model );
             }
             catch ( Exception ex )
             {
@@ -79,10 +81,10 @@ namespace View.Controllers
                 }
                 SetDefaultViewDatas();
                 GetTextUpdate( id );
-                lists.updateTextModel = lists.updateWebTextList[0];
-                GetAllCategories();
+                UpdateWebTextModel model = lists.updateWebTextList[0];
+                model.categoryList = CategoryService.GetAllCategories();
                 WebText( "AdminTextForm" );
-                return View( "UpdateWebText", lists );
+                return View( "UpdateWebText", model );
             }
             catch ( Exception ex )
             {
@@ -96,18 +98,18 @@ namespace View.Controllers
 
         }
 
-        public ActionResult Create(ModelList model)
+        public ActionResult Create(WebTextModel model)
         {
             try
             {
                 WebText( "Messages" );
                 List<string> errorMessageList = new List<string>();
 
-                WebTextModel a = model.textModel;
+                ModelState.Remove( "category" );
 
-                if ( a.title != null && a.text != null && a.idCategory != null && a.language != null)
+                if ( ModelState.IsValid )
                 {
-                    CreateTextProcedure( model.textModel );
+                    CreateTextProcedure( model );
                     return RedirectToAction( "Texts" );
                 }
                 else
@@ -118,9 +120,8 @@ namespace View.Controllers
 
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminTextForm" );
-                lists.textModel = model.textModel;
-                GetAllCategories();
-                return View( "CreateWebText", lists );
+                model.categoryList = lists.categoryList = CategoryService.GetAllCategories( );
+                return View( "CreateWebText", model );
             }
             catch ( Exception ex )
             {
@@ -133,7 +134,7 @@ namespace View.Controllers
             }
         }
 
-        public ActionResult Update(ModelList model)
+        public ActionResult Update(UpdateWebTextModel model)
         {
 
             try
@@ -142,11 +143,11 @@ namespace View.Controllers
 
                 List<string> errorMessageList = new List<string>();
 
-                UpdateWebTextModel a = model.updateTextModel;
+                ModelState.Remove( "category" );
 
-                if (a.id != null && a.title != null && a.text != null && a.idCategory != null && a.language != null )
+                if ( ModelState.IsValid )
                 {
-                    UpdateTextProcedure( model.updateTextModel );
+                    UpdateTextProcedure( model );
                     return RedirectToAction( "Texts" );
                 }
                 else
@@ -156,8 +157,7 @@ namespace View.Controllers
                 SetDefaultViewDatas();
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminTextForm" );
-                lists.updateTextModel = model.updateTextModel;
-                GetAllCategories();
+                model.categoryList = lists.categoryList = CategoryService.GetAllCategories();
                 return View( "UpdateWebText", model );
             }
             catch ( Exception ex )

@@ -24,12 +24,23 @@
         public List<AuthorModel> authorList { get; set; }
         public List<UpdateAuthorModel> updateAuthorList { get; set; }
 
-        public List<GameExternalDataModel> devList { get; set; }
-        public List<GameExternalDataModel> genreList { get; set; }
-        public List<GameExternalDataModel> languageList { get; set; }
-        public List<GameExternalDataModel> platformList { get; set; }
-        public List<GameExternalDataModel> playerTypeList { get; set; }
-        public List<GameExternalDataModel> publisherList { get; set; }
+        public List<DevPublisherModel> devList { get; set; }
+        public List<UpdateDevPublisherModel> updateDevList { get; set; }
+
+        public List<GenreTypeLanguageModel> genreList { get; set; }
+        public List<UpdateGenreTypeLanguageModel> updateGenreList { get; set; }
+
+        public List<GenreTypeLanguageModel> languageList { get; set; }
+        public List<UpdateGenreTypeLanguageModel> updateLanguageList { get; set; }
+
+        public List<PlatformModel> platformList { get; set; }
+        public List<UpdatePlatformModel> updatePlatformList { get; set; }
+
+        public List<GenreTypeLanguageModel> playerTypeList { get; set; }
+        public List<UpdateGenreTypeLanguageModel> updatePlayerTypeList { get; set; }
+
+        public List<DevPublisherModel> publisherList { get; set; }
+        public List<UpdateDevPublisherModel> updatePublisherList { get; set; }
 
     }
 }

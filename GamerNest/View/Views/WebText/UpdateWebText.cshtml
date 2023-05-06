@@ -1,4 +1,4 @@
-﻿@model Support.ModelList
+﻿@model Support.UpdateWebTextModel
 
 @{
     ViewData[ "Title" ] = "Admin - Update Text for the web";
@@ -17,23 +17,23 @@
 
                     <div>
                         <div>
-                            <label asp-for="updateTextModel.id">ID:</label>
-                            <input asp-for="updateTextModel.id" placeholder="id" readonly />
+                            <label asp-for="id">ID:</label>
+                            <input asp-for="id" placeholder="id" readonly />
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="updateTextModel.title" class="required">Title:</label>
-                            <input required asp-for="updateTextModel.title" placeholder="Title" />
+                            <label asp-for="title" class="required">Title:</label>
+                            <input required asp-for="title" placeholder="Title" />
                         </div>
                         <div>
-                            <label asp-for="updateTextModel.text" class="required">Text:</label>
-                            <input required asp-for="updateTextModel.text" placeholder="Text" />
+                            <label asp-for="text" class="required">Text:</label>
+                            <input required asp-for="text" placeholder="Text" />
                         </div>
                         <div>
-                            <label asp-for="updateTextModel.idCategory" class="required">Category:</label>
-                            <select asp-for="updateTextModel.idCategory" class="select2SingleForm" required>
+                            <label asp-for="idCategory" class="required">Category:</label>
+                            <select asp-for="idCategory" class="select2SingleForm" required>
                                 @foreach ( var item in Model.categoryList )
                                 {
                                     <option value="@item.id">@item.name</option>
@@ -41,8 +41,8 @@
                             </select>
                         </div>
                         <div>
-                            <label asp-for="updateTextModel.language" class="required">Language:</label>
-                            <select asp-for="updateTextModel.language" required>
+                            <label asp-for="language" class="required">Language:</label>
+                            <select asp-for="language" required>
                                 <option value="ENG">English</option>
                                 <option value="ESP">Español</option>
                             </select>

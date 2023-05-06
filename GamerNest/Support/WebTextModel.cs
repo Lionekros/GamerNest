@@ -20,6 +20,8 @@ namespace Support
         [Required( ErrorMessage = "Required" )]
         public string language { get; set; }
 
+        public List<CategoryModel>? categoryList { get; set; }
+
         public WebTextModel() { }
 
         public WebTextModel(DataRow row)

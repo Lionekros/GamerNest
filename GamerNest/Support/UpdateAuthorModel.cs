@@ -10,6 +10,7 @@ namespace Support
 {
     public class UpdateAuthorModel
     {
+        [Required( ErrorMessage = "Required" )]
         public int id { get; set; }
         public string name { get; set; }
         public string firstLastName { get; set; }

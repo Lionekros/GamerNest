@@ -90,6 +90,24 @@ namespace View.Controllers
             lists.updateWebLanguageList = WebLanguageService.GetWebLanguageUpdate( email );
         }
 
+        // Retrieves a list of web languages based on specified parameters
+        public void GetAllPlayerTypes(string language = "", int idGame = -1, int id = -1, string name = "", string orderBy = "")
+        {
+            lists.playerTypeList = PlayerTypeService.GetAllPlayerTypes( language, idGame, id, name, orderBy);
+        }
+
+        // Retrieves a single web language based on its ID
+        public void GetPlayerType(int id)
+        {
+            lists.playerTypeList = PlayerTypeService.GetPlayerType( id );
+        }
+
+        // Retrieves a single web language based on its ID and returns additional update data
+        public void GetPlayerTypeUpdate(int id)
+        {
+            lists.updatePlayerTypeList = PlayerTypeService.GetPlayerTypeUpdate( id );
+        }
+
         // WEB TEXT METHODS
 
         // Retrieves a list of web texts based on specified parameters

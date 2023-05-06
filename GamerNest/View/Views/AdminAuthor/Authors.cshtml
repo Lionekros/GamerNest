@@ -13,7 +13,7 @@
         {
             <section class="filter">
                 <h4>@ViewData[ "FilterTitle" ]:</h4>
-                <form asp-controller="AdminAuthor" asp-action="Authors" method="get">
+                <form asp-controller="AdminAuthor" asp-action="Authors" method="post">
                     @if ( Model.authorList.Count > 0 )
                     {
                         <div>
