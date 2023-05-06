@@ -1,11 +1,11 @@
 ﻿@model Support.ModelList
 @{
-    ViewData[ "Title" ] = "Admin - Languages for Web";
+    ViewData[ "Title" ] = "Admin - Genre";
 }
 
 <main class="home-section">
     <div class="text">
-        <h1>Languages for the Web</h1>
+        <h1>Genre</h1>
 
         <h3>@ViewData[ "Description" ]</h3>
 
@@ -13,13 +13,13 @@
         {
             <section class="filter">
                 <h4>@ViewData[ "FilterTitle" ]:</h4>
-                <form asp-controller="WebLanguage" asp-action="WebLanguages" method="post">
-                    @if ( Model.webLanguageList?.Count > 0 )
+                <form asp-controller="AdminGenre" asp-action="Genres" method="post">
+                    @if ( Model.genreList?.Count > 0 )
                     {
                         <div>
                             <select id="orderBy" name="orderBy">
                                 <option value="">@ViewData[ "fOrderBy" ]</option>
-                                @foreach ( var prop in Model.webLanguageList.First().GetType().GetProperties() )
+                                @foreach ( var prop in Model.genreList.First().GetType().GetProperties() )
                                 {
                                     <option value="@prop.Name">@prop.Name</option>
                                 }
@@ -29,13 +29,22 @@
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="id" name="id" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchId" ]">
+                            <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="@ViewData[ "fSearchId" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
                             <input type="text" id="name" name="name" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchName" ]">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-group">
+                            <select name="language" id="language">
+                                <option value="">@ViewData[ "fSearchLanguage" ]</option>
+                                <option value="ENG">ENG</option>
+                                <option value="ESP">ESP</option>
+                            </select>
                         </div>
                     </div>
 
@@ -48,38 +57,34 @@
             </section>
 
             <section class="create">
-                <a asp-action="CreateForm" asp-controller="WebLanguage">
+                <a asp-action="CreateForm" asp-controller="AdminGenre">
                     <i class="fa-solid fa-plus"></i>
                     <span>@ViewData[ "ButtonNew" ]</span>
                 </a>
             </section>
 
             <section class="adminTable">
-                @if ( Model.webLanguageList?.Count > 0 )
+                @if ( Model.genreList?.Count > 0 )
                 {
                     <table>
                         <tr>
                             <th>@ViewData[ "Actions" ]</th>
-                            @foreach ( var prop in Model.webLanguageList.First().GetType().GetProperties() )
+                            @foreach ( var prop in Model.genreList.First().GetType().GetProperties() )
                             {
-                                // Exclude "Password" column from table
-                                if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
-                                {
-                                    <th>@prop.Name</th>
-                                }
+                                <th>@prop.Name</th>
                             }
                         </tr>
-                        @foreach ( var item in Model.webLanguageList )
+                        @foreach ( var item in Model.genreList )
                         {
                             <tr>
                                 <td>
-                                    <!-- Delete WebLanguage -->
-                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'WebLanguage')">
+                                    <!-- Delete Genre -->
+                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'AdminGenre')">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
 
-                                    <!-- Edit WebLanguage -->
-                                    <a asp-controller="WebLanguage" asp-action="UpdateForm" asp-route-id="@item.id">
+                                    <!-- Edit Genre -->
+                                    <a asp-controller="AdminGenre" asp-action="UpdateForm" asp-route-id="@item.id">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
 
@@ -89,7 +94,8 @@
                                             <h2>@ViewData[ "ModalTitle" ]</h2>
                                             <p>@ViewData[ "ModalText" ]: @item.id?</p>
                                             <div class="modal-actions">
-                                                <button id="confirmBtn_@item.id" asp-controller="WebLanguage" asp-action="Delete" asp-route-id="@item.id">@ViewData[ "ModalButtonDelete" ]</button>
+                                                <button id="confirmBtn_@item.id" asp-controller="AdminGenre" asp-action="Delete" asp-route-id="@item.id">@ViewData[ "ModalButtonDelete" ]</button>
+
                                                 <button id="cancelBtn_@item.id">@ViewData[ "ModalButtonCancelar" ]</button>
                                             </div>
                                         </div>
@@ -97,19 +103,23 @@
                                 </td>
                                 @foreach ( var prop in item.GetType().GetProperties() )
                                 {
-                                    // Exclude "Password" column from table
-                                    if ( prop.Name.ToLower() != "icon" )
-                                    {
-                                        <td>
-                                            @prop.GetValue(item)
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td>
-                                            @Html.Raw(prop.GetValue(item))
-                                        </td>
-                                    }
+                                    <td>
+                                        @if ( !string.IsNullOrEmpty( prop.GetValue( item )?.ToString() ) )
+                                        {
+                                            if ( prop.GetValue( item )?.ToString() == "ENG" )
+                                            {
+                                                <span class="fi fi-gb fis"></span>
+                                            }
+                                            else if ( prop.GetValue( item )?.ToString() == "ESP" )
+                                            {
+                                                <span class="fi fi-es fis"></span>
+                                            }
+                                            else
+                                            {
+                                                @prop.GetValue( item )?.ToString()
+                                            }
+                                        }
+                                    </td>
                                 }
                             </tr>
                         }
@@ -126,9 +136,11 @@
                     @if ( Model.CurrentPage > 1 )
                     {
                         <!-- Previous Page -->
-                        <a asp-controller="WebLanguage" asp-action="WebLanguages"
+                        <a asp-controller="AdminGenre" asp-action="Genres"
                    asp-route-page="@(Model.CurrentPage - 1)"
                    asp-route-pageSize="@Model.PageSize"
+                   asp-route-language="@ViewBag.FormData.language"
+                   asp-route-idGame="@ViewBag.FormData.idGame"
                    asp-route-id="@ViewBag.FormData.id"
                    asp-route-name="@ViewBag.FormData.name"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
@@ -139,9 +151,11 @@
                     @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
                     {
                         <!-- Next Page -->
-                        <a asp-controller="WebLanguage" asp-action="WebLanguages"
+                        <a asp-controller="AdminGenre" asp-action="Genres"
                    asp-route-page="@(Model.CurrentPage + 1)"
                    asp-route-pageSize="@Model.PageSize"
+                   asp-route-language="@ViewBag.FormData.language"
+                   asp-route-idGame="@ViewBag.FormData.idGame"
                    asp-route-id="@ViewBag.FormData.id"
                    asp-route-name="@ViewBag.FormData.name"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
@@ -151,7 +165,7 @@
                 </div>
                 <div>
                     <p>
-                        @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.webLanguageList?.Count @ViewData[ "OutOf" ] @Model.TotalItems)
+                        @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.genreList?.Count @ViewData[ "OutOf" ] @Model.TotalItems)
                     </p>
                 </div>
             </section>

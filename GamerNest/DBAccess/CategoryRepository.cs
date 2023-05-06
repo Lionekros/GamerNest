@@ -37,7 +37,7 @@ namespace DBAccess
                         conditions.Add( "LOWER(name) LIKE '%" + name.ToLower() + "%'" );
                     }
 
-                    if ( conditions.Count > 0 )
+                    if ( conditions?.Count > 0 )
                     {
                         queryBuilder.Append( " WHERE " );
                         queryBuilder.Append( string.Join( " AND ", conditions ) );

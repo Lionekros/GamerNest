@@ -170,15 +170,18 @@ namespace View.Controllers
 
         public void Pagination(int page, int pageSize)
         {
-            int totalCategory = lists.categoryList.Count;
+            if ( lists.categoryList != null )
+            {
+                int totalCategory = lists.categoryList.Count;
 
-            int skippedCategory = (page - 1) * pageSize;
+                int skippedCategory = (page - 1) * pageSize;
 
-            lists.categoryList = lists.categoryList.Skip( skippedCategory ).Take( pageSize ).ToList();
+                lists.categoryList = lists.categoryList.Skip( skippedCategory ).Take( pageSize ).ToList();
 
-            lists.PageSize = pageSize;
-            lists.CurrentPage = page;
-            lists.TotalItems = totalCategory;
+                lists.PageSize = pageSize;
+                lists.CurrentPage = page;
+                lists.TotalItems = totalCategory;
+            }
         }
 
         public void CreateCategoryProcedure(CategoryModel cat)

@@ -62,7 +62,7 @@ namespace DBAccess
                         conditions.Add( "isActive = '" + isActive + "'" );
                     }
 
-                    if ( conditions.Count > 0 )
+                    if ( conditions?.Count > 0 )
                     {
                         queryBuilder.Append( " WHERE " );
                         queryBuilder.Append( string.Join( " AND ", conditions ) );

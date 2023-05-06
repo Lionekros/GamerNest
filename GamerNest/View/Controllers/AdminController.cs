@@ -131,7 +131,7 @@ namespace View.Controllers
         {
             GetAuthor( email );
 
-            if ( lists.authorList.Count > 0 )
+            if ( lists.authorList?.Count > 0 )
             {
                 if ( Utility.VerifyPassword( password, lists.authorList[ 0 ].password ) )
                 {
@@ -145,7 +145,7 @@ namespace View.Controllers
         {
             GetAuthor( email );
 
-            if ( lists.authorList.Count > 0 )
+            if ( lists.authorList?.Count > 0 )
             {
                 return true;
             }

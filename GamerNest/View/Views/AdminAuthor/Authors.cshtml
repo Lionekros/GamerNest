@@ -14,7 +14,7 @@
             <section class="filter">
                 <h4>@ViewData[ "FilterTitle" ]:</h4>
                 <form asp-controller="AdminAuthor" asp-action="Authors" method="post">
-                    @if ( Model.authorList.Count > 0 )
+                    @if ( Model.authorList?.Count > 0 )
                     {
                         <div>
                             <select id="orderBy" name="orderBy">
@@ -89,7 +89,7 @@
             </section>
 
             <section class="adminTable">
-                @if ( Model.authorList.Count > 0 )
+                @if ( Model.authorList?.Count > 0 )
                 {
                     <table>
                         <tr>
@@ -227,7 +227,7 @@
                 </div>
                 <div>
                     <p>
-                        @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.authorList.Count @ViewData[ "OutOf" ] @Model.TotalItems)
+                        @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.authorList?.Count @ViewData[ "OutOf" ] @Model.TotalItems)
                     </p>
                 </div>
             </section>
@@ -235,7 +235,7 @@
         else
         {
             <section class="adminTable">
-                @if ( Model.authorList.Count > 0 )
+                @if ( Model.authorList?.Count > 0 )
                 {
                     <table>
                         <tr>

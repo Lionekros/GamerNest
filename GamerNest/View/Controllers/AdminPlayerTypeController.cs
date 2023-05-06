@@ -168,15 +168,18 @@ namespace View.Controllers
 
         public void Pagination(int page, int pageSize)
         {
-            int totalPlayerTypes = lists.playerTypeList.Count;
+            if ( lists.playerTypeList != null )
+            {
+                int totalPlayerTypes = lists.playerTypeList.Count;
 
-            int skippedPlayerTypes = (page - 1) * pageSize;
+                int skippedPlayerTypes = (page - 1) * pageSize;
 
-            lists.playerTypeList = lists.playerTypeList.Skip( skippedPlayerTypes ).Take( pageSize ).ToList();
+                lists.playerTypeList = lists.playerTypeList.Skip( skippedPlayerTypes ).Take( pageSize ).ToList();
 
-            lists.PageSize = pageSize;
-            lists.CurrentPage = page;
-            lists.TotalItems = totalPlayerTypes;
+                lists.PageSize = pageSize;
+                lists.CurrentPage = page;
+                lists.TotalItems = totalPlayerTypes;
+            }
         }
 
         public void CreatePlayerTypeProcedure(GenreTypeLanguageModel model)

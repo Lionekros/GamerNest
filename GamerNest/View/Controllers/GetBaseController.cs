@@ -108,6 +108,40 @@ namespace View.Controllers
             lists.updatePlayerTypeList = PlayerTypeService.GetPlayerTypeUpdate( id );
         }
 
+        public void GetAllLanguages(string language = "", int idGame = -1, int id = -1, string name = "", string orderBy = "")
+        {
+            lists.languageList = LanguageService.GetAllLanguages( language, idGame, id, name, orderBy );
+        }
+
+        // Retrieves a single web language based on its ID
+        public void GetLanguage(int id)
+        {
+            lists.languageList = LanguageService.GetLanguage( id );
+        }
+
+        // Retrieves a single web language based on its ID and returns additional update data
+        public void GetLanguageUpdate(int id)
+        {
+            lists.updateLanguageList = LanguageService.GetLanguageUpdate( id );
+        }
+
+        public void GetAllGenres(string language = "", int idGame = -1, int id = -1, string name = "", string orderBy = "")
+        {
+            lists.genreList = GenreService.GetAllGenres( language, idGame, id, name, orderBy );
+        }
+
+        // Retrieves a single web language based on its ID
+        public void GetGenre(int id)
+        {
+            lists.genreList = GenreService.GetGenre( id );
+        }
+
+        // Retrieves a single web language based on its ID and returns additional update data
+        public void GetGenreUpdate(int id)
+        {
+            lists.updateGenreList = GenreService.GetGenreUpdate( id );
+        }
+
         // WEB TEXT METHODS
 
         // Retrieves a list of web texts based on specified parameters

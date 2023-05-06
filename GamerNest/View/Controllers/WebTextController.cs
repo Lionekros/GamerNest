@@ -179,15 +179,18 @@ namespace View.Controllers
 
         public void Pagination(int page, int pageSize)
         {
-            int totalTexts = lists.webTextList.Count;
+            if ( lists.authorList != null )
+            {
+                int totalTexts = lists.webTextList.Count;
 
-            int skippedTexts = (page - 1) * pageSize;
+                int skippedTexts = (page - 1) * pageSize;
 
-            lists.webTextList = lists.webTextList.Skip( skippedTexts ).Take( pageSize ).ToList();
+                lists.webTextList = lists.webTextList.Skip( skippedTexts ).Take( pageSize ).ToList();
 
-            lists.PageSize = pageSize;
-            lists.CurrentPage = page;
-            lists.TotalItems = totalTexts;
+                lists.PageSize = pageSize;
+                lists.CurrentPage = page;
+                lists.TotalItems = totalTexts;
+            } 
         }
 
         public void CreateTextProcedure(WebTextModel model)

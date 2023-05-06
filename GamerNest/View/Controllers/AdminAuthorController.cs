@@ -328,22 +328,25 @@ namespace View.Controllers
 
         public void Pagination(int page, int pageSize)
         {
-            int totalAuthors = lists.authorList.Count;
+            if ( lists.authorList != null )
+            {
+                int totalAuthors = lists.authorList.Count;
 
-            int skippedAuthors = (page - 1) * pageSize;
+                int skippedAuthors = (page - 1) * pageSize;
 
-            lists.authorList = lists.authorList.Skip( skippedAuthors ).Take( pageSize ).ToList();
+                lists.authorList = lists.authorList.Skip( skippedAuthors ).Take( pageSize ).ToList();
 
-            lists.PageSize = pageSize;
-            lists.CurrentPage = page;
-            lists.TotalItems = totalAuthors;
+                lists.PageSize = pageSize;
+                lists.CurrentPage = page;
+                lists.TotalItems = totalAuthors;
+            }
         }
 
         public bool EmailOrPhoneExist(string emailOrPhone, int id)
         {
             GetAuthor( emailOrPhone );
 
-            if ( lists.authorList.Count > 0 )
+            if ( lists.authorList?.Count > 0 )
             {
                 if ( id == lists.authorList[ 0 ].id )
                 {

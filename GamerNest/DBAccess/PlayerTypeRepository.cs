@@ -41,7 +41,7 @@ namespace DBAccess
                         conditions.Add( "player_type.id = gpt.idPlayerType AND gpt.idGame = " + idGame );
                     }
 
-                    if ( conditions.Count > 0 )
+                    if ( conditions?.Count > 0 )
                     {
                         queryBuilder.Append( " WHERE " );
                         queryBuilder.Append( string.Join( " AND ", conditions ) );

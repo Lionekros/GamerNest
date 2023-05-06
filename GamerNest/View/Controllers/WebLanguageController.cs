@@ -174,15 +174,18 @@ namespace View.Controllers
 
         public void Pagination(int page, int pageSize)
         {
-            int totalWebLanguages = lists.webLanguageList.Count;
+            if ( lists.webLanguageList != null )
+            {
+                int totalWebLanguages = lists.webLanguageList.Count;
 
-            int skippedWebLanguages = (page - 1) * pageSize;
+                int skippedWebLanguages = (page - 1) * pageSize;
 
-            lists.webLanguageList = lists.webLanguageList.Skip( skippedWebLanguages ).Take( pageSize ).ToList();
+                lists.webLanguageList = lists.webLanguageList.Skip( skippedWebLanguages ).Take( pageSize ).ToList();
 
-            lists.PageSize = pageSize;
-            lists.CurrentPage = page;
-            lists.TotalItems = totalWebLanguages;
+                lists.PageSize = pageSize;
+                lists.CurrentPage = page;
+                lists.TotalItems = totalWebLanguages;
+            }
         }
 
         public void CreateWebLanguageProcedure(WebLanguageModel webLang)
