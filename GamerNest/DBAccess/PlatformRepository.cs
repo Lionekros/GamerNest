@@ -1,23 +1,51 @@
 ﻿using LogError;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Text;
 
 namespace DBAccess
 {
     public class PlatformRepository
     {
-        public static DataTable GetAllPlatforms(string orderBy = "" )
+        public static DataTable GetAllPlatforms(int id = -1, string name = "", string icon = "", string orderBy = "")
         {
             try
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = "SELECT 3 as selector, id as idPlatform, name, icon"
-                                + " FROM platform";
+                    StringBuilder queryBuilder = new StringBuilder();
+                    queryBuilder.Append( "SELECT id, name, icon" );
+                    queryBuilder.Append( " FROM platform" );
+
+                    List<string> conditions = new List<string>();
+
+                    if ( id != -1 )
+                    {
+                        conditions.Add( "id = " + id );
+                    }
+
+                    if ( !string.IsNullOrEmpty( name ) )
+                    {
+                        conditions.Add( "LOWER(name) LIKE '%" + name.ToLower() + "%'" );
+                    }
+
+                    if ( !string.IsNullOrEmpty( icon ) )
+                    {
+                        conditions.Add( "LOWER(icon) LIKE '%" + icon.ToLower() + "%'" );
+                    }
+
+                    if ( conditions?.Count > 0 )
+                    {
+                        queryBuilder.Append( " WHERE " );
+                        queryBuilder.Append( string.Join( " AND ", conditions ) );
+                    }
+
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
-                        cmd.CommandText += " ORDER BY " + orderBy;
+                        queryBuilder.Append( " ORDER BY " + orderBy );
                     }
+
+                    cmd.CommandText = queryBuilder.ToString();
                     return Data.ExecuteCommand( cmd );
                 }
             }
@@ -27,6 +55,90 @@ namespace DBAccess
                 Log log = new Log();
                 log.Add( ex.Message );
                 return dt;
+            }
+        }
+
+        public static DataTable GetPlatform(int id)
+        {
+            try
+            {
+                using ( MySqlCommand cmd = Data.CreateCommand() )
+                {
+                    cmd.CommandText = "SELECT id, name, icon"
+                                        + " FROM platform"
+                                        + " WHERE id = " + id;
+                    return Data.ExecuteCommand( cmd );
+                }
+            }
+            catch ( MySqlException ex )
+            {
+                DataTable dt = new DataTable();
+                Log log = new Log();
+                log.Add( ex.Message );
+                return dt;
+            }
+        }
+
+        public static int CreatePlatform(string name = "", string icon = "")
+        {
+            try
+            {
+                MySqlCommand procedure = Data.CreateProcedure("CreatePlatform");
+
+                procedure.Parameters.AddWithValue( "pName", name );
+                procedure.Parameters.AddWithValue( "pIcon", icon );
+
+                return Data.ExecuteProcedure( procedure );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                return -1;
+
+            }
+        }
+
+        public static int UpdatePlatform(int id = -1, string name = "", string icon = "")
+        {
+            try
+            {
+                MySqlCommand procedure = Data.CreateProcedure("UpdatePlatform");
+
+                procedure.Parameters.AddWithValue( "pId", id );
+                procedure.Parameters.AddWithValue( "pName", name );
+                procedure.Parameters.AddWithValue( "pIcon", icon );
+
+                return Data.ExecuteProcedure( procedure );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                return -1;
+
+            }
+        }
+
+        public static int DeletePlatform(int id = -1)
+        {
+            try
+            {
+                MySqlCommand procedure = Data.CreateProcedure("DeletePlatform");
+
+                procedure.Parameters.AddWithValue( "pId", id );
+
+                return Data.ExecuteProcedure( procedure );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                return -1;
+
             }
         }
     }

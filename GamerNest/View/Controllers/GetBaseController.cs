@@ -159,7 +159,22 @@ namespace View.Controllers
             lists.updateDevList = DevService.GetDevUpdate( id );
         }
 
+        public void GetAllPlatforms(int id = -1, string name = "", string icon = "", string orderBy = "")
+        {
+            lists.platformList = PlatformService.GetAllPlatforms( id, name, icon, orderBy );
+        }
 
+        // Retrieves a single web language based on its ID
+        public void GetPlatform(int id)
+        {
+            lists.platformList = PlatformService.GetPlatform( id );
+        }
+
+        // Retrieves a single web language based on its ID and returns additional update data
+        public void GetPlatformUpdate(int id)
+        {
+            lists.updatePlatformList = PlatformService.GetPlatformUpdate( id );
+        }
 
         public void GetAllPublishers(int id = -1, string name = "", string orderBy = "")
         {

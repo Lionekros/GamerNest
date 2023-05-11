@@ -1,0 +1,38 @@
+﻿@model Support.PlatformModel
+
+@{
+    ViewData[ "Title" ] = "Admin - Create Platform";
+}
+<main class="home-section">
+    <div class="text">
+        <h1>Platform</h1>
+        <h2>@ViewData[ "TitleCreate" ]</h2>
+
+        <section class="Createform">
+            <form asp-controller="AdminPlatform" asp-action="Create" method="post" enctype="multipart/form-data">
+                <partial name="_Error" />
+
+                <div>
+                    <div>
+                        <label asp-for="name" class="required">Name:</label>
+                        <input required asp-for="name" placeholder="Name" />
+                    </div>
+                    <div>
+                            <label asp-for="icon" class="required">Icon:</label>
+                            <input asp-for="icon" placeholder="Icon" />
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <button type="submit" class="mainButton">@ViewData[ "ButtonCreate" ]</button>
+                    </div>
+
+                </div>
+
+            </form>
+        </section>
+
+
+    </div>
+</main>
