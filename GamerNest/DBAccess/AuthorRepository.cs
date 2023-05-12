@@ -118,7 +118,7 @@ namespace DBAccess
                 , string    email               = ""
                 , string    phone               = ""
                 , string    description         = ""
-                , string    avatar              = ""
+                , string    avatar              = "/img/Avatar/Author/Default.png"
                 , string    preferedLanguage    = ""
                 , sbyte     isAdmin             = -1
                 , sbyte     canPublish          = -1

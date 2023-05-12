@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 06, 2023 at 03:36 AM
+-- Generation Time: May 12, 2023 at 02:15 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -96,6 +96,26 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreatePublisher` (IN `pName` VARCHA
   VALUES (pName);
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateUser` (IN `pUsername` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pBirthday` VARCHAR(10), IN `pCreationDate` VARCHAR(10))   BEGIN
+    INSERT INTO `user` (
+        `username`,
+        `password`,
+        `email`,
+        `avatar`,
+        `preferedLanguage`,
+        `birthday`,
+        `creationDate`
+    ) VALUES (
+        pUsername,
+        pPassword,
+        pEmail,
+        pAvatar,
+        pPreferedLanguage,
+        pBirthday,
+        pCreationDate
+    );
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateWebLanguage` (IN `pId` CHAR(3), IN `pName` VARCHAR(255), IN `pIcon` VARCHAR(255))   BEGIN
   INSERT INTO web_language(id, name, icon)
   VALUES(pId, pName, pIcon);
@@ -143,6 +163,11 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletePublisher` (IN `pId` INT)   BEGIN
   DELETE FROM `publisher`
   WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteUser` (IN `pId` BIGINT)   BEGIN
+    DELETE FROM `user`
+    WHERE `id` = pId;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteWebLanguage` (IN `pId` CHAR(3))   BEGIN
@@ -219,6 +244,20 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdatePublisher` (IN `pId` INT, IN 
   UPDATE `publisher`
   SET `name` = pName
   WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateUser` (IN `pId` INT, IN `pUsername` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pBirthday` VARCHAR(10), IN `pCreationDate` VARCHAR(10))   BEGIN
+    UPDATE `user`
+    SET
+        `username` = pUsername,
+        `password` = IFNULL(NULLIF(pPassword, ''), `password`),
+        `email` = pEmail,
+        `avatar` = IFNULL(NULLIF(pAvatar, ''), `avatar`),
+        `preferedLanguage` = pPreferedLanguage,
+        `birthday` = pBirthday,
+        `creationDate` = pCreationDate
+    WHERE
+        `id` = pId;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateWebLanguage` (IN `pId` CHAR(3), IN `pName` VARCHAR(255), IN `pIcon` VARCHAR(255))   BEGIN
@@ -336,7 +375,8 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (30, 'AdminGenreForm'),
 (31, 'AdminDevForm'),
 (32, 'AdminPublisherForm'),
-(33, 'AdminPlatformForm');
+(33, 'AdminPlatformForm'),
+(34, 'AdminUserForm');
 
 -- --------------------------------------------------------
 
@@ -378,7 +418,7 @@ CREATE TABLE `game` (
   `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `language` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `cover` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `releaseDate` date NOT NULL,
+  `releaseDate` varchar(10) COLLATE utf8mb3_bin NOT NULL,
   `totalScore` tinyint NOT NULL DEFAULT '0',
   `isApproved` tinyint NOT NULL DEFAULT '0',
   `isFav` tinyint NOT NULL DEFAULT '0',
@@ -386,6 +426,22 @@ CREATE TABLE `game` (
   `idPlatform` int NOT NULL,
   `idPublisher` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Dumping data for table `game`
+--
+
+INSERT INTO `game` (`id`, `title`, `subtitle`, `description`, `language`, `cover`, `releaseDate`, `totalScore`, `isApproved`, `isFav`, `idDev`, `idPlatform`, `idPublisher`) VALUES
+(1, 'Game 1', 'Subtitle 1', 'Description 1', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 1, 2, 1),
+(2, 'Game 2', 'Subtitle 2', 'Description 2', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 2, 1, 1),
+(3, 'Game 3', 'Subtitle 3', 'Description 3', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 3, 2, 1),
+(4, 'Game 4', 'Subtitle 4', 'Description 4', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 1, 3, 1),
+(5, 'Game 5', 'Subtitle 5', 'Description 5', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 2, 1, 1),
+(6, 'Game 6', 'Subtitle 6', 'Description 6', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 3, 2, 1),
+(7, 'Game 7', 'Subtitle 7', 'Description 7', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 1, 2, 1),
+(8, 'Game 8', 'Subtitle 8', 'Description 8', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 2, 1, 1),
+(9, 'Game 9', 'Subtitle 9', 'Description 9', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 3, 2, 1),
+(10, 'Game 10', 'Subtitle 10', 'Description 10', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 1, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -575,13 +631,25 @@ CREATE TABLE `user` (
   `username` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `avatar` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT '0',
+  `avatar` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT '/img/Avatar/User/Default.png',
   `preferedLanguage` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `isConfirmed` tinyint NOT NULL DEFAULT '1',
-  `birthday` date NOT NULL,
-  `creationDate` datetime NOT NULL,
-  `token` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL
+  `birthday` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `creationDate` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `avatar`, `preferedLanguage`, `birthday`, `creationDate`) VALUES
+(1, 'user1', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user1@email.com', '/img/Avatar/User/Default.png', 'ENG', '1991-02-03', '2021-10-10'),
+(2, 'user2', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user2@email.com', '/img/Avatar/User/Default.png', 'ESP', '1992-03-04', '2021-08-22'),
+(3, 'user3', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user3@email.com', '/img/Avatar/User/Default.png', 'ENG', '1993-04-05', '2022-01-05'),
+(4, 'user4', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user4@email.com', '/img/Avatar/User/Default.png', 'ESP', '1994-05-06', '2022-03-17'),
+(5, 'user5', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user5@email.com', '/img/Avatar/User/Default.png', 'ENG', '1995-06-07', '2021-11-29'),
+(6, 'user6', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user6@email.com', '/img/Avatar/User/Default.png', 'ESP', '1996-07-08', '2022-04-23'),
+(7, 'user7', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user7@email.com', '/img/Avatar/User/Default.png', 'ENG', '1997-08-09', '2022-02-13'),
+(8, 'user8', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user8@email.com', '/img/Avatar/User/Default.png', 'ESP', '1998-09-10', '2023-01-11');
 
 -- --------------------------------------------------------
 
@@ -593,6 +661,19 @@ CREATE TABLE `user_fav_game` (
   `idUser` bigint NOT NULL,
   `idGame` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Dumping data for table `user_fav_game`
+--
+
+INSERT INTO `user_fav_game` (`idUser`, `idGame`) VALUES
+(1, 1),
+(1, 5),
+(1, 8),
+(2, 1),
+(2, 2),
+(3, 3),
+(5, 3);
 
 -- --------------------------------------------------------
 
@@ -1146,7 +1227,53 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (509, 'ButtonCreate', 'Create', 33, 'ENG'),
 (510, 'ButtonCreate', 'Crear', 33, 'ESP'),
 (511, 'ButtonUpdate', 'Update', 33, 'ENG'),
-(512, 'ButtonUpdate', 'Actualizar', 33, 'ESP');
+(512, 'ButtonUpdate', 'Actualizar', 33, 'ESP'),
+(513, 'Description', 'This is the User tab. all users information will be displayed here.', 15, 'ENG'),
+(514, 'Description', 'Esta es la pestaña de las Usuarios. Aquí se mostrará la información de los Usuarios.', 15, 'ESP'),
+(515, 'FilterTitle', 'Filters', 15, 'ENG'),
+(516, 'FilterTitle', 'Filtros', 15, 'ESP'),
+(517, 'fOrderBy', 'Order By', 15, 'ENG'),
+(518, 'fOrderBy', 'Ordenar por', 15, 'ESP'),
+(519, 'fSearchId', 'Search By ID', 15, 'ENG'),
+(520, 'fSearchId', 'Buscar por ID', 15, 'ESP'),
+(521, 'fSearchUsername', 'Search By Username', 15, 'ENG'),
+(522, 'fSearchUsername', 'Buscar por Alias', 15, 'ESP'),
+(523, 'fSearchEmail', 'Search By Email', 15, 'ENG'),
+(524, 'fSearchEmail', 'Buscar por Correo', 15, 'ESP'),
+(525, 'ButtonFilter', 'Filter', 15, 'ENG'),
+(526, 'ButtonFilter', 'Filtrar', 15, 'ESP'),
+(527, 'ButtonNew', 'New', 15, 'ENG'),
+(528, 'ButtonNew', 'Nuevo', 15, 'ESP'),
+(529, 'ButtonNext', 'Next', 15, 'ENG'),
+(530, 'ButtonNext', 'Siguiente', 15, 'ESP'),
+(531, 'ButtonPrevious', 'Previous', 15, 'ENG'),
+(532, 'ButtonPrevious', 'Anterior', 15, 'ESP'),
+(533, 'Actions', 'Actions', 15, 'ENG'),
+(534, 'Actions', 'Acciones', 15, 'ESP'),
+(535, 'Page', 'Page', 15, 'ENG'),
+(536, 'Page', 'Página', 15, 'ESP'),
+(537, 'Of', 'of', 15, 'ENG'),
+(538, 'Of', 'de', 15, 'ESP'),
+(539, 'Outof', 'out of', 15, 'ENG'),
+(540, 'Outof', 'de', 15, 'ESP'),
+(541, 'NoData', 'No data found', 15, 'ENG'),
+(542, 'NoData', 'No se encontraron datos', 15, 'ESP'),
+(543, 'ModalTitle', 'Confirmation', 15, 'ENG'),
+(544, 'ModalTitle', 'Confirmación', 15, 'ESP'),
+(545, 'ModalText', 'Are you sure you want to delete this row with id', 15, 'ENG'),
+(546, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 15, 'ESP'),
+(547, 'ModalButtonDelete', 'Delete', 15, 'ENG'),
+(548, 'ModalButtonDelete', 'Eliminar', 15, 'ESP'),
+(549, 'ModalButtonCancelar', 'Cancel', 15, 'ENG'),
+(550, 'ModalButtonCancelar', 'Cancelar', 15, 'ESP'),
+(551, 'TitleCreate', 'Create', 34, 'ENG'),
+(552, 'TitleCreate', 'Crear', 34, 'ESP'),
+(553, 'TitleUpdate', 'Update', 34, 'ENG'),
+(554, 'TitleUpdate', 'Actualizar', 34, 'ESP'),
+(555, 'ButtonCreate', 'Create', 34, 'ENG'),
+(556, 'ButtonCreate', 'Crear', 34, 'ESP'),
+(557, 'ButtonUpdate', 'Update', 34, 'ENG'),
+(558, 'ButtonUpdate', 'Actualizar', 34, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -1317,7 +1444,7 @@ ALTER TABLE `author`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `dev`
@@ -1329,7 +1456,7 @@ ALTER TABLE `dev`
 -- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `genre`
@@ -1347,7 +1474,7 @@ ALTER TABLE `language`
 -- AUTO_INCREMENT for table `platform`
 --
 ALTER TABLE `platform`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `player_type`
@@ -1365,13 +1492,13 @@ ALTER TABLE `publisher`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `web_text`
 --
 ALTER TABLE `web_text`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=513;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=559;
 
 --
 -- Constraints for dumped tables

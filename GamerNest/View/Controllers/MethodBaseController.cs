@@ -69,7 +69,7 @@ namespace View.Controllers
             return false;
         }
 
-        public string UploadImage(IFormFile avatar, int id, string path1, string path2 = "")
+        public string UploadImage(IFormFile avatar, long id, string path1, string path2 = "")
         {
             if ( avatar != null && avatar.Length > 0 )
             {
@@ -89,7 +89,7 @@ namespace View.Controllers
                 {
                     avatar.CopyTo( stream );
                 }
-                return "/" + Path.Combine( "img", "Avatar", "Author", fileName ).Replace( '\\', '/' );
+                return "/" + Path.Combine( "img", path1, path2, fileName ).Replace( '\\', '/' );
             }
 
             return "";

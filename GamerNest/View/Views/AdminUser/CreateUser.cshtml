@@ -1,0 +1,67 @@
+﻿@model Support.UserModel
+
+@{
+    ViewData[ "Title" ] = "Admin - Create Users";
+}
+
+<main class="home-section">
+    <div class="text">
+        <h1>Users</h1>
+        <h2>@ViewData[ "TitleCreate" ]</h2>
+
+        <section class="Createform">
+            <form asp-controller="AdminUser" asp-action="Create" method="post" enctype="multipart/form-data">
+                <partial name="_Error" />
+
+                <div>
+                    <div>
+                        <label asp-for="username" class="required">Username:</label>
+                        <input required asp-for="username" placeholder="Username" />
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="password" class="required">Password:</label>
+                        <input required asp-for="password" type="password" placeholder="Password" />
+                    </div>
+                    <div>
+                        <label asp-for="email" class="required">Email:</label>
+                        <input required asp-for="email" placeholder="Email" />
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="avatar">Avatar:</label>
+                        <input asp-for="avatar" type="file" />
+                    </div>
+                    <div>
+                        <label asp-for="preferedLanguage" class="required">Preferred Language:</label>
+                        <select asp-for="preferedLanguage" required>
+                            <option value="ENG">English</option>
+                            <option value="ESP">Español</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="birthday" class="required">Birthday:</label>
+                        <input required asp-for="birthday" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    </div>
+                </div>
+                
+                <div>
+                    <div>
+                        <button type="submit" class="mainButton">@ViewData[ "ButtonCreate" ]</button>
+                    </div>
+                    
+                </div>
+
+            </form>
+        </section>
+
+
+    </div>
+</main>

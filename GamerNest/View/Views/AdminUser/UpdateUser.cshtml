@@ -1,0 +1,75 @@
+﻿@model Support.UpdateUserModel
+
+@{
+    ViewData[ "Title" ] = "Admin - Update Users";
+}
+
+<main class="home-section">
+    <div class="text">
+        <h1>Users</h1>
+        <h2>@ViewData[ "TitleUpdate" ]</h2>
+
+        @if (ViewData["AdminType"].ToString() == "Admin")
+        {
+            <section class="Createform">
+                <form asp-controller="AdminUser" asp-action="Update" method="post" enctype="multipart/form-data">
+                    <partial name="_Error" />
+
+                    <div>
+                        <div>
+                            <label asp-for="id">ID:</label>
+                            <input asp-for="id" placeholder="id" readonly />
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label asp-for="username">Username:</label>
+                            <input asp-for="username" placeholder="Username" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label asp-for="password">Password:</label>
+                            <input asp-for="password" type="password" placeholder="Password" />
+                        </div>
+                        <div>
+                            <label asp-for="email">Email:</label>
+                            <input asp-for="email" placeholder="Email" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label asp-for="avatar">Avatar:</label>
+                            <input asp-for="avatar" type="file" />
+                        </div>
+                        <div>
+                            <label asp-for="preferedLanguage">Preferred Language:</label>
+                            <select asp-for="preferedLanguage">
+                                <option value="ENG">English</option>
+                                <option value="ESP">Español</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label asp-for="birthday">Birthday:</label>
+                            <input asp-for="birthday" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <button type="submit" class="mainButton">Update</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </section>
+        }
+
+    </div>
+</main>

@@ -24,6 +24,9 @@
         public List<AuthorModel> authorList { get; set; }
         public List<UpdateAuthorModel> updateAuthorList { get; set; }
 
+        public List<UserModel> userList { get; set; }
+        public List<UpdateUserModel> updateUserList { get; set; }
+
         public List<DevPublisherModel> devList { get; set; }
         public List<UpdateDevPublisherModel> updateDevList { get; set; }
 
