@@ -511,11 +511,11 @@
 {
     background-color: var(--light-color);
     border: 1px solid #aaa;
-    border-radius: 4px;
+    border-radius: 1rem;
     cursor: text;
     outline: 0;
-    padding-bottom: 5px;
-    padding-right: 5px;
+    padding: 1rem;
+    margin-bottom: 2rem;
 }
 
     .select2-container--classic .select2-selection--multiple:focus
@@ -533,10 +533,10 @@
         background-color: var(--light-color);
         border: 1px solid #aaa;
         border-radius: 4px;
-        display: inline-block;
         margin-left: 5px;
         margin-top: 5px;
         padding: 0;
+        color: var(--secondary-color)
     }
 
     .select2-container--classic .select2-selection--multiple .select2-selection__choice__display

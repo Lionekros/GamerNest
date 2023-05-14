@@ -1,0 +1,210 @@
+﻿@model Support.ModelList
+@{
+    ViewData[ "Title" ] = "Admin - Article";
+}
+
+<main class="home-section">
+    <div class="text">
+        <h1>Article</h1>
+
+        <h3>@ViewData[ "Description" ]</h3>
+
+        <section class="filter">
+            <h4>@ViewData[ "FilterTitle" ]:</h4>
+            <form asp-controller="AdminArticle" asp-action="Articles" method="post">
+                @if ( Model.articleList?.Count > 0 )
+                {
+                    <div>
+                        <select id="orderBy" name="orderBy">
+                            <option value="">@ViewData[ "fOrderBy" ]</option>
+                            @foreach ( var prop in Model.articleList.First().GetType().GetProperties() )
+                            {
+                                <option value="@prop.Name">@prop.Name</option>
+                            }
+                        </select>
+                    </div>
+                }
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="@ViewData[ "fSearchId" ]">
+                    </div>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="headline" name="headline" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchHeadline" ]">
+                    </div>
+                </div>
+                @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
+                {
+                    <div>
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" id="author" name="author" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchAuthor" ]">
+                        </div>
+                    </div>
+                }
+                <div>
+                    <select class="normalSelect" onchange="selectColor(this)" id="isPublished" name="isPublished">
+                        <option class="normalSelect" value="">@ViewData[ "fSearchIsPublished" ]</option>
+                        <option class="greenSelect" value="1">&#xf058;</option>
+                        <option class="redSelect" value="0">&#xf057;</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <select name="language" id="language">
+                            <option value="">@ViewData[ "fSearchLanguage" ]</option>
+                            <option value="ENG">ENG</option>
+                            <option value="ESP">ESP</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <input class="filtButton" type="submit" value="@ViewData[ "ButtonFilter" ]">
+                </div>
+
+
+            </form>
+        </section>
+
+        <section class="create">
+            <a asp-action="CreateForm" asp-controller="AdminArticle">
+                <i class="fa-solid fa-plus"></i>
+                <span>@ViewData[ "ButtonNew" ]</span>
+            </a>
+        </section>
+
+        <section class="adminTable">
+            @if ( Model.articleList?.Count > 0 )
+            {
+                <table>
+                    <tr>
+                        <th>@ViewData[ "Actions" ]</th>
+                        @foreach ( var prop in Model.articleList.First().GetType().GetProperties() )
+                        {
+                            if ( @prop.Name != "idGameList" && @prop.Name != "gameList" )
+                            {
+                                <th>@prop.Name</th>
+                            }
+                        }
+                    </tr>
+                    @foreach ( var item in Model.articleList )
+                    {
+                        <tr>
+                            <td>
+                                <!-- Delete Article -->
+                                <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'AdminArticle')">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+
+                                <!-- Edit Article -->
+                                <a asp-controller="AdminArticle" asp-action="UpdateForm" asp-route-id="@item.id">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+
+                                <!-- Modal -->
+                                <div id="confirmationModal_@item.id" class="modal">
+                                    <div class="modal-content">
+                                        <h2>@ViewData[ "ModalTitle" ]</h2>
+                                        <p>@ViewData[ "ModalText" ]: @item.id?</p>
+                                        <div class="modal-actions">
+                                            <button id="confirmBtn_@item.id" asp-controller="AdminArticle" asp-action="Delete" asp-route-id="@item.id">@ViewData[ "ModalButtonDelete" ]</button>
+
+                                            <button id="cancelBtn_@item.id">@ViewData[ "ModalButtonCancelar" ]</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            @foreach ( var prop in item.GetType().GetProperties() )
+                            {
+                                if ( @prop.Name != "idGameList" && @prop.Name != "gameList" )
+                                {
+                                    <td>
+                                        @if ( !string.IsNullOrEmpty( prop.GetValue( item )?.ToString() ) )
+                                        {
+                                            if ( prop.GetValue( item )?.ToString() == "ENG" )
+                                            {
+                                                <span class="fi fi-gb fis"></span>
+                                            }
+                                            else if ( prop.GetValue( item )?.ToString() == "ESP" )
+                                            {
+                                                <span class="fi fi-es fis"></span>
+                                            }
+                                            else if ( prop.PropertyType == typeof( string ) && ((string) prop.GetValue( item ))?.StartsWith( "/img/" ) == true )
+                                            {
+                                                <img class="image-cell" src="@prop.GetValue(item)" alt="Image">
+                                            }
+                                            else if ( prop.GetValue( item )?.ToString() == "True" )
+                                            {
+                                                <i class="far fa-circle-check checkmark-icon"></i>
+                                            }
+                                            else if ( prop.GetValue( item )?.ToString() == "False" )
+                                            {
+                                                <i class="far fa-circle-xmark xmark-icon"></i>
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw(@prop.GetValue( item )?.ToString())
+                                            }
+                                        }
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <h4>@ViewData[ "NoData" ]</h4>
+            }
+        </section>
+
+        <section class="pagination">
+            <div>
+                @if ( Model.CurrentPage > 1 )
+                {
+                    <!-- Previous Page -->
+                    <a asp-controller="AdminArticle" asp-action="Articles"
+                   asp-route-page="@(Model.CurrentPage - 1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-language="@ViewBag.FormData.language"
+                   asp-route-idAuthor="@ViewBag.FormData.author"
+                   asp-route-idGame="@ViewBag.FormData.idGame"
+                   asp-route-id="@ViewBag.FormData.id"
+                   asp-route-headline="@ViewBag.FormData.headline"
+                   asp-route-isPublished="@ViewBag.FormData.isPublished"
+                   asp-route-orderBy="@ViewBag.FormData.orderBy">
+                        @ViewData[ "ButtonPrevious" ]
+                    </a>
+                }
+
+                @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
+                {
+                    <!-- Next Page -->
+                    <a asp-controller="AdminArticle" asp-action="Articles"
+                   asp-route-page="@(Model.CurrentPage + 1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-language="@ViewBag.FormData.language"
+                   asp-route-idAuthor="@ViewBag.FormData.author"
+                   asp-route-idGame="@ViewBag.FormData.idGame"
+                   asp-route-id="@ViewBag.FormData.id"
+                   asp-route-headline="@ViewBag.FormData.headline"
+                   asp-route-isPublished="@ViewBag.FormData.isPublished"
+                   asp-route-orderBy="@ViewBag.FormData.orderBy">
+                        @ViewData[ "ButtonNext" ]
+                    </a>
+                }
+            </div>
+            <div>
+                <p>
+                    @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.articleList?.Count @ViewData[ "OutOf" ] @Model.TotalItems)
+                </p>
+            </div>
+        </section>
+
+    </div>
+</main>

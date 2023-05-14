@@ -137,7 +137,7 @@ namespace View.Controllers
                         errorMessageList.Add( ViewData[ "PhoneExist" ].ToString() );
                     }
 
-                    author.avatar = UploadImage( avatar, author.id, "Avatar", "Author" );
+                    author.avatar = UploadImage( avatar, author.id, "Avatar", "Author", "avatar" );
 
                     if ( !emailExist && !phoneExist )
                     {
@@ -201,7 +201,7 @@ namespace View.Controllers
 
                     if (avatar != null)
                     {
-                        author.avatar = UploadImage( avatar, author.id, "Avatar", "Author" );
+                        author.avatar = UploadImage( avatar, author.id, "Avatar", "Author", "avatar" );
                     }
                     
 

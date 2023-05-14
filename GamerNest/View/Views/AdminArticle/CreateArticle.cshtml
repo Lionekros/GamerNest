@@ -1,0 +1,100 @@
+﻿@model Support.ArticleModel
+
+@{
+    ViewData[ "Title" ] = "Admin - Create Article";
+}
+<main class="home-section">
+    <div class="text">
+        <h1>Article</h1>
+        <h2>@ViewData[ "TitleCreate" ]</h2>
+
+        <section class="Createform">
+            <form asp-controller="AdminArticle" asp-action="Create" method="post" enctype="multipart/form-data">
+                <partial name="_Error" />
+
+                <div>
+                    <div>
+                        <label asp-for="author" class="required">Author:</label>
+                        <input required asp-for="author" placeholder="Author" readonly />
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="headline" class="required">Headline:</label>
+                        <input required asp-for="headline" placeholder="Headline" />
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label asp-for="summary">Summary:</label>
+                        <textarea asp-for="summary" id="mytextarea"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label asp-for="body">Body:</label>
+                        <textarea asp-for="body" id="mytextarea"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label asp-for="cover">Cover:</label>
+                        <input asp-for="cover" type="file" />
+                    </div>
+                </div>
+                @if ( ViewData[ "AdminCanPublish" ].ToString() == "True" )
+                {
+                    <div>
+                        <div>
+                            <label asp-for="isPublished" class="required">Publish:</label>
+                            <select class="redSelect" onchange="selectColor(this)" asp-for="isPublished" required>
+                                <option class="redSelect" value="false">&#xf057;</option>
+                                <option class="greenSelect" value="true">&#xf058;</option>
+                            </select>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <div>
+                            <label asp-for="isPublished" class="required">Publish:</label>
+                            <input asp-for="isPublished" value="false" readonly hidden />
+                        </div>
+                    </div>
+                }
+                
+                <div>
+                    <div>
+                        <label asp-for="language" class="required">Language:</label>
+                        <select asp-for="language" required>
+                            <option value="ENG">English</option>
+                            <option value="ESP">Español</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label asp-for="idGameList" class="required">Games:</label>
+                        <select asp-for="idGameList" class="select2SingleForm" required multiple="multiple">
+                            @foreach ( var item in Model.gameList )
+                            {
+                                <option value="@item.id">@item.title @item.subtitle @item.platform</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <button type="submit" class="mainButton">@ViewData[ "ButtonCreate" ]</button>
+                    </div>
+                </div>
+
+            </form>
+        </section>
+
+
+    </div>
+</main>

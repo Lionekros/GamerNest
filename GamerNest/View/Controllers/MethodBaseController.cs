@@ -10,6 +10,7 @@ namespace View.Controllers
         public void SetDefaultViewDatas()
         {
             ViewData[ "AdminEmail" ] = HttpContext.Session.GetString( "AdminEmail" );
+            ViewData[ "AdminCanPublish" ] = HttpContext.Session.GetString( "AdminCanPublish" );
             ViewData[ "AdminFullName" ] = HttpContext.Session.GetString( "AdminFullName" );
             ViewData[ "AdminType" ] = HttpContext.Session.GetString( "AdminType" );
             ViewData[ "AdminAvatar" ] = HttpContext.Session.GetString( "AdminAvatar" );
@@ -19,6 +20,7 @@ namespace View.Controllers
         public void SetAdminSessions()
         {
             HttpContext.Session.SetString( "AdminEmail", lists.authorList[ 0 ].email );
+            HttpContext.Session.SetString( "AdminCanPublish", lists.authorList[ 0 ].canPublish.ToString() );
             HttpContext.Session.SetString( "AdminFullName", lists.authorList[ 0 ].name + " " + lists.authorList[ 0 ].firstLastName + " " + lists.authorList[ 0 ].secondLastName );
             HttpContext.Session.SetString( "AdminAvatar", lists.authorList[ 0 ].avatar ?? string.Empty );
             HttpContext.Session.SetString( "AdminType", FetchUserType( lists.authorList[ 0 ].isAdmin ) );
@@ -69,7 +71,7 @@ namespace View.Controllers
             return false;
         }
 
-        public string UploadImage(IFormFile avatar, long id, string path1, string path2 = "")
+        public string UploadImage(IFormFile avatar, long id, string path1, string path2 = "", string name = "")
         {
             if ( avatar != null && avatar.Length > 0 )
             {
@@ -83,7 +85,7 @@ namespace View.Controllers
                     directoryPath = Path.Combine( Directory.GetCurrentDirectory(), "wwwroot", "img", path1 );
                 }
                 Directory.CreateDirectory( directoryPath );
-                string fileName = "avatar_" + id + Path.GetExtension(avatar.FileName);
+                string fileName = name + "_" + id + Path.GetExtension(avatar.FileName);
                 string filePath = Path.Combine(directoryPath, fileName);
                 using ( var stream = new FileStream( filePath, FileMode.Create ) )
                 {

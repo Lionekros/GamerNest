@@ -105,7 +105,7 @@ namespace View.Controllers
 
                 if ( ModelState.IsValid )
                 {
-                    model.avatar = UploadImage( avatar, model.id, "Avatar", "User" );
+                    model.avatar = UploadImage( avatar, model.id, "Avatar", "User", "avatar" );
                     CreateUserProcedure( model );
                     return RedirectToAction( "Users" );
                 }
@@ -143,7 +143,7 @@ namespace View.Controllers
 
                 if ( ModelState.IsValid )
                 {
-                    model.avatar = UploadImage( avatar, model.id, "Avatar", "User" );
+                    model.avatar = UploadImage( avatar, model.id, "Avatar", "User", "avatar" );
                     UpdateUserProcedure( model );
                     return RedirectToAction( "Users" );
                 }

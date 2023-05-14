@@ -11,7 +11,7 @@ namespace View.Controllers
         public ActionResult Texts
             (
                   int page = 1
-                , int pageSize = 5
+                , int pageSize = 10
                 , int id = -1, string title = "", int idCategory = -1, string language = "", string orderBy = "wt.id"
             )
         {
@@ -179,7 +179,7 @@ namespace View.Controllers
 
         public void Pagination(int page, int pageSize)
         {
-            if ( lists.authorList != null )
+            if ( lists.webTextList != null )
             {
                 int totalTexts = lists.webTextList.Count;
 

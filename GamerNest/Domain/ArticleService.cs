@@ -12,11 +12,35 @@ namespace Domain
 {
     public class ArticleService
     {
-        public static List<ArticleModel> GetAllArticles(string language = "ENG", string orderBy = "" )
+        public static List<ArticleModel> GetAllArticles(string language = "", string author = "", int idGame = -1, int id = -1, string headline = "", sbyte isPublished = -1, string orderBy = "")
         {
             try
             {
-                DataTable dt = ArticleRepository.GetAllArticles(language, orderBy);
+                DataTable dt = ArticleRepository.GetAllArticles(language, author, idGame, id, headline, isPublished, orderBy);
+                List<ArticleModel> ArticleList = new List<ArticleModel>();
+
+                foreach ( DataRow row in dt.Rows )
+                {
+                    ArticleList.Add( new ArticleModel( row ) );
+                }
+
+                return ArticleList;
+            }
+            catch ( Exception ex )
+            {
+                List<ArticleModel> ArticleList = new List<ArticleModel>();
+                Log log = new Log();
+                log.Add( ex.Message );
+                return ArticleList;
+
+            }
+        }
+
+        public static List<ArticleModel> GetArticle(int id)
+        {
+            try
+            {
+                DataTable dt = ArticleRepository.GetArticle(id);
                 List<ArticleModel> list = new List<ArticleModel>();
 
                 foreach ( DataRow row in dt.Rows )
@@ -34,6 +58,49 @@ namespace Domain
                 return list;
 
             }
+        }
+
+        public static List<UpdateArticleModel> GetArticleUpdate(int id)
+        {
+            try
+            {
+                DataTable dt = ArticleRepository.GetArticle(id);
+                List<UpdateArticleModel> list = new List<UpdateArticleModel>();
+
+                foreach ( DataRow row in dt.Rows )
+                {
+                    list.Add( new UpdateArticleModel( row ) );
+                }
+
+                return list;
+            }
+            catch ( Exception ex )
+            {
+                List<UpdateArticleModel> list = new List<UpdateArticleModel>();
+                Log log = new Log();
+                log.Add( ex.Message );
+                return list;
+
+            }
+        }
+
+        public static void CreateArticle(string headline = "", string summary = "", string body = "", string cover = "", bool isPublished = false, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<long> idGame = null)
+        {
+            sbyte isPublished2 = Utility.BoolToSByte( isPublished );
+
+            ArticleRepository.CreateArticle( headline, summary, body, cover, isPublished2, createdDate, idAuthor, language, updatedDate, idGame);
+        }
+
+        public static void UpdateArticle(long id = -1, string headline = "", string summary = "", string body = "", string cover = "", bool isPublished = false, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<long> idGame = null)
+        {
+            sbyte isPublished2 = Utility.BoolToSByte( isPublished );
+
+            ArticleRepository.UpdateArticle( id, headline, summary, body, cover, isPublished2, createdDate, idAuthor, language, updatedDate, idGame );
+        }
+
+        public static void DeleteArticle(int id = -1)
+        {
+            ArticleRepository.DeleteArticle( id );
         }
     }
 }

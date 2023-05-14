@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 12, 2023 at 02:15 AM
+-- Generation Time: May 14, 2023 at 08:38 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -25,6 +25,36 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateArticle` (IN `pHeadline` VARCHAR(255), IN `pSummary` TEXT, IN `pBody` MEDIUMTEXT, IN `pCover` VARCHAR(255), IN `pIsPublished` TINYINT, IN `pCreatedDate` VARCHAR(19), IN `pUpdatedDate` VARCHAR(19), IN `pIdAuthor` INT, IN `pLanguage` CHAR(3), IN `pIdGame` TEXT)   BEGIN
+  -- Drop the temporary table if it already exists
+  DROP TEMPORARY TABLE IF EXISTS temp_game_ids;
+  
+  -- Create a temporary table to store the list of game ids
+  CREATE TEMPORARY TABLE temp_game_ids (
+    id INT NOT NULL
+  );
+  
+  -- Insert the game ids into the temporary table
+  SET @sql = CONCAT('INSERT INTO temp_game_ids (id) VALUES (', REPLACE(pIdGame, ',', '), ('), ')');
+  PREPARE stmt FROM @sql;
+  EXECUTE stmt;
+  
+  -- Insert the article into the article table
+  INSERT INTO article(headline, summary, body, cover, isPublished, createdDate, updatedDate, idAuthor, language)
+  VALUES (pHeadline, pSummary, pBody, pCover, pIsPublished, pCreatedDate, pUpdatedDate, pIdAuthor, pLanguage);
+  
+  -- Get the id of the newly inserted article
+  SET @article_id = LAST_INSERT_ID();
+  
+  -- Insert the game-article associations into the game_article table
+  INSERT INTO game_article(idArticle, idGame)
+  SELECT @article_id, id
+  FROM temp_game_ids;
+  
+  -- Drop the temporary table
+  DROP TEMPORARY TABLE IF EXISTS temp_game_ids;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateAuthor` (IN `pName` VARCHAR(45), IN `pFirstLastName` VARCHAR(45), IN `pSecondLastName` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pPhone` VARCHAR(20), IN `pDescription` TEXT, IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pIsAdmin` TINYINT, IN `pCanPublish` TINYINT, IN `pIsActive` TINYINT, IN `pBirthday` VARCHAR(10), IN `pStartDate` VARCHAR(10), IN `pEndDate` VARCHAR(10))   BEGIN
     INSERT INTO `author` (
         `name`,
@@ -126,6 +156,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateWebText` (IN `pTitle` VARCHAR
   VALUES (pTitle, pText, pIdCategory, pLanguage);
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteArticle` (IN `pId` BIGINT)   BEGIN
+  DELETE FROM game_article WHERE idArticle = pId;
+  DELETE FROM article WHERE id = pId;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteAuthor` (IN `pId` INT)   BEGIN
     DELETE FROM `author`
     WHERE `id` = pId;
@@ -178,6 +213,47 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteWebText` (IN `pId` INT)   BEGIN
   DELETE FROM `web_text`
   WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateArticle` (IN `pId` BIGINT, IN `pHeadline` VARCHAR(255), IN `pSummary` TEXT, IN `pBody` MEDIUMTEXT, IN `pCover` VARCHAR(255), IN `pIsPublished` TINYINT, IN `pCreatedDate` VARCHAR(19), IN `pUpdatedDate` VARCHAR(19), IN `pIdAuthor` INT, IN `pLanguage` CHAR(3), IN `pIdGame` TEXT)   BEGIN
+  
+  -- Update the article in the article table
+  UPDATE article
+  SET 
+    headline = pHeadline,
+    summary = pSummary,
+    body = pBody,
+    isPublished = pIsPublished,
+    createdDate = pCreatedDate,
+    updatedDate = pUpdatedDate,
+    idAuthor = pIdAuthor,
+    language = pLanguage,
+     `cover` = IFNULL(NULLIF(pCover, ''), `cover`)
+  WHERE id = pId;
+  
+  -- Delete all game-article associations for the given article
+  DELETE FROM game_article WHERE idArticle = pId;
+  
+  -- Drop the temporary table if it already exists
+  DROP TEMPORARY TABLE IF EXISTS temp_game_ids;
+  
+  -- Create a temporary table to store the list of game ids
+  CREATE TEMPORARY TABLE temp_game_ids (
+    id INT NOT NULL
+  );
+  
+  -- Insert the game ids into the temporary table
+  SET @sql = CONCAT('INSERT INTO temp_game_ids (id) VALUES (', REPLACE(pIdGame, ',', '), ('), ')');
+  PREPARE stmt FROM @sql;
+  EXECUTE stmt;
+  
+  -- Insert the game-article associations into the game_article table
+  INSERT INTO game_article(idArticle, idGame)
+  SELECT pId, id
+  FROM temp_game_ids;
+  
+  -- Drop the temporary table
+  DROP TEMPORARY TABLE IF EXISTS temp_game_ids;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateAuthor` (IN `pId` INT, IN `pName` VARCHAR(45), IN `pFirstLastName` VARCHAR(45), IN `pSecondLastName` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pPhone` VARCHAR(20), IN `pDescription` TEXT, IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pIsAdmin` TINYINT, IN `pCanPublish` TINYINT, IN `pIsActive` TINYINT, IN `pBirthday` VARCHAR(10), IN `pStartDate` VARCHAR(10), IN `pEndDate` VARCHAR(10))   BEGIN
@@ -289,13 +365,28 @@ CREATE TABLE `article` (
   `headline` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `summary` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `body` mediumtext CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `cover` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `cover` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `isPublished` tinyint NOT NULL,
-  `createdDate` datetime NOT NULL,
-  `updatedDate` datetime DEFAULT NULL,
+  `createdDate` varchar(19) COLLATE utf8mb3_bin NOT NULL,
+  `updatedDate` varchar(19) COLLATE utf8mb3_bin DEFAULT NULL,
   `idAuthor` int NOT NULL,
   `language` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Dumping data for table `article`
+--
+
+INSERT INTO `article` (`id`, `headline`, `summary`, `body`, `cover`, `isPublished`, `createdDate`, `updatedDate`, `idAuthor`, `language`) VALUES
+(9, 'Headline1', 'Summary1', 'Body1', '/img/Cover/Article/Default.png', 0, '2023-05-12 13:04:10', NULL, 10, 'ESP'),
+(10, 'Headline2', 'Summary2', 'Body2', '/img/Cover/Article/Default.png', 1, '2023-05-12 13:04:10', NULL, 12, 'ENG'),
+(11, 'Headline3', 'Summary3', 'Body3', '/img/Cover/Article/Default.png', 0, '2023-05-12 13:04:10', NULL, 12, 'ESP'),
+(12, 'Headline4', 'Summary4', 'Body4', '/img/Cover/Article/Default.png', 0, '2023-05-12 13:04:10', NULL, 13, 'ESP'),
+(13, 'Headline5', 'Summary5', 'Body5', '/img/Cover/Article/Default.png', 1, '2023-05-12 13:04:10', NULL, 15, 'ENG'),
+(14, 'Headline6', 'Summary6', 'Body6', '/img/Cover/Article/Default.png', 1, '2023-05-12 13:04:10', NULL, 16, 'ESP'),
+(15, 'Headline7', 'Summary7', 'Body7', '/img/Cover/Article/Default.png', 1, '2023-05-12 13:04:10', NULL, 10, 'ESP'),
+(16, 'Headline8', 'Summary8', 'Body8', '/img/Cover/Article/Default.png', 0, '2023-05-12 13:04:10', NULL, 10, 'ENG'),
+(31, 'AAAAAA', '<p>asdasd</p>', '<p>asdasd</p>', '/img/Cover/Article/cover_31.webp', 0, '2023-05-14 22:31:48', NULL, 10, 'ENG');
 
 -- --------------------------------------------------------
 
@@ -328,7 +419,7 @@ CREATE TABLE `author` (
 
 INSERT INTO `author` (`id`, `name`, `firstLastName`, `secondLastName`, `password`, `email`, `phone`, `description`, `avatar`, `preferedLanguage`, `isAdmin`, `canPublish`, `isActive`, `birthday`, `startDate`, `endDate`) VALUES
 (10, 'Cristina', 'Carbonell', 'Matamoros', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'cristicarmat2@gmail.com', '965878965', '<p>AAAAAAAAA AAAAA A A A AAAAAAA AAAAAAAAA A AAAA A AAAAA A AA A A A A AA A A</p>', '/img/Avatar/Author/avatar_10.jpeg', 'ENG', 1, 1, 1, '2023-04-21', '2023-04-21', NULL),
-(12, 'Lidia', 'Echuaca', NULL, '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'lidia@gmail.com', '587698569', '<p>si leeis esto es un mensaje de ayuda cristiana me tiene secuestrada soy una esclava auxilio &aacute;NGEL</p>', '/img/Avatar/Author/avatar_12.jpg', 'ESP', 0, 1, 1, '2023-04-22', '2023-04-22', NULL),
+(12, 'Lidia', 'Echuaca', NULL, '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'lidia@gmail.com', '587698569', '<p>si leeis esto es un mensaje de ayuda cristiana me tiene secuestrada soy una esclava auxilio &aacute;NGEL</p>', '/img/Avatar/Author/avatar_12.jpg', 'ESP', 0, 1, 1, '2023-05-14', '2023-05-14', NULL),
 (13, 'Edu', 'Carbonell', 'Matamoros', '$2a$11$kfB1lJy5FsriRzPP659oqOPJv2UnZcPt0bes1Fe.b53YuRZ9XN5su', 'edu@gmail.com', '546896523', '<p>Pechuga</p>', '/img/Avatar/Author/avatar_0.jpeg', 'ESP', 0, 1, 1, '2008-10-11', '2023-04-21', NULL),
 (14, 'Ángel', 'Sánchez', 'Pastor', '$2a$11$tbjLxSXUXautTqagVujdm.C2uT0rcPFiK7npcQG3Hd0sZmMluRAWG', 'asp@gmail.com', '123456789', '<p>Me gustan las calculadoras y el Horizon. Tengo el record de hu&iacute;das de DAW.</p>', '/img/Avatar/Author/avatar_0.png', 'ESP', 1, 1, 1, '2023-04-22', '2023-04-22', NULL),
 (15, 'Adrián', 'Pérez', NULL, '$2a$11$Vhafab1MeBJiNnAKe.n/iuYq4zNVjyRa559Gv0rhxhpmC39ILv7Ge', 'adrianperez@gmail.com', '456137788', '<p>&iquest;Spiderman o Espaiderman?</p>', '/img/Avatar/Author/avatar_15.jpeg', 'ESP', 0, 0, 0, '2023-04-22', '2023-04-22', NULL),
@@ -376,7 +467,8 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (31, 'AdminDevForm'),
 (32, 'AdminPublisherForm'),
 (33, 'AdminPlatformForm'),
-(34, 'AdminUserForm');
+(34, 'AdminUserForm'),
+(35, 'AdminArticleForm');
 
 -- --------------------------------------------------------
 
@@ -418,9 +510,8 @@ CREATE TABLE `game` (
   `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `language` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `cover` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `releaseDate` varchar(10) COLLATE utf8mb3_bin NOT NULL,
+  `releaseDate` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `totalScore` tinyint NOT NULL DEFAULT '0',
-  `isApproved` tinyint NOT NULL DEFAULT '0',
   `isFav` tinyint NOT NULL DEFAULT '0',
   `idDev` int NOT NULL,
   `idPlatform` int NOT NULL,
@@ -431,17 +522,17 @@ CREATE TABLE `game` (
 -- Dumping data for table `game`
 --
 
-INSERT INTO `game` (`id`, `title`, `subtitle`, `description`, `language`, `cover`, `releaseDate`, `totalScore`, `isApproved`, `isFav`, `idDev`, `idPlatform`, `idPublisher`) VALUES
-(1, 'Game 1', 'Subtitle 1', 'Description 1', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 1, 2, 1),
-(2, 'Game 2', 'Subtitle 2', 'Description 2', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 2, 1, 1),
-(3, 'Game 3', 'Subtitle 3', 'Description 3', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 3, 2, 1),
-(4, 'Game 4', 'Subtitle 4', 'Description 4', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 1, 3, 1),
-(5, 'Game 5', 'Subtitle 5', 'Description 5', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 2, 1, 1),
-(6, 'Game 6', 'Subtitle 6', 'Description 6', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 3, 2, 1),
-(7, 'Game 7', 'Subtitle 7', 'Description 7', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 1, 2, 1),
-(8, 'Game 8', 'Subtitle 8', 'Description 8', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 2, 1, 1),
-(9, 'Game 9', 'Subtitle 9', 'Description 9', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 3, 2, 1),
-(10, 'Game 10', 'Subtitle 10', 'Description 10', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 0, 1, 3, 1);
+INSERT INTO `game` (`id`, `title`, `subtitle`, `description`, `language`, `cover`, `releaseDate`, `totalScore`, `isFav`, `idDev`, `idPlatform`, `idPublisher`) VALUES
+(1, 'Game 1', 'Subtitle 1', 'Description 1', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 1, 2, 1),
+(2, 'Game 2', 'Subtitle 2', 'Description 2', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 2, 1, 1),
+(3, 'Game 3', 'Subtitle 3', 'Description 3', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 3, 2, 1),
+(4, 'Game 4', 'Subtitle 4', 'Description 4', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 1, 3, 1),
+(5, 'Game 5', 'Subtitle 5', 'Description 5', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 2, 1, 1),
+(6, 'Game 6', 'Subtitle 6', 'Description 6', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 3, 2, 1),
+(7, 'Game 7', 'Subtitle 7', 'Description 7', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 1, 2, 1),
+(8, 'Game 8', 'Subtitle 8', 'Description 8', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 2, 1, 1),
+(9, 'Game 9', 'Subtitle 9', 'Description 9', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 3, 2, 1),
+(10, 'Game 10', 'Subtitle 10', 'Description 10', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 1, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -453,6 +544,14 @@ CREATE TABLE `game_article` (
   `idGame` bigint NOT NULL,
   `idArticle` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Dumping data for table `game_article`
+--
+
+INSERT INTO `game_article` (`idGame`, `idArticle`) VALUES
+(3, 31),
+(7, 31);
 
 -- --------------------------------------------------------
 
@@ -648,7 +747,7 @@ INSERT INTO `user` (`id`, `username`, `password`, `email`, `avatar`, `preferedLa
 (4, 'user4', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user4@email.com', '/img/Avatar/User/Default.png', 'ESP', '1994-05-06', '2022-03-17'),
 (5, 'user5', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user5@email.com', '/img/Avatar/User/Default.png', 'ENG', '1995-06-07', '2021-11-29'),
 (6, 'user6', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user6@email.com', '/img/Avatar/User/Default.png', 'ESP', '1996-07-08', '2022-04-23'),
-(7, 'user7', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user7@email.com', '/img/Avatar/User/Default.png', 'ENG', '1997-08-09', '2022-02-13'),
+(7, 'user77', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user7@email.com', '/img/Avatar/User/Default.png', 'ENG', '2023-05-14', ''),
 (8, 'user8', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user8@email.com', '/img/Avatar/User/Default.png', 'ESP', '1998-09-10', '2023-01-11');
 
 -- --------------------------------------------------------
@@ -686,6 +785,15 @@ CREATE TABLE `user_score_game` (
   `idGame` bigint NOT NULL,
   `score` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Dumping data for table `user_score_game`
+--
+
+INSERT INTO `user_score_game` (`idUser`, `idGame`, `score`) VALUES
+(1, 1, 1),
+(1, 2, 5),
+(2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -1273,7 +1381,57 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (555, 'ButtonCreate', 'Create', 34, 'ENG'),
 (556, 'ButtonCreate', 'Crear', 34, 'ESP'),
 (557, 'ButtonUpdate', 'Update', 34, 'ENG'),
-(558, 'ButtonUpdate', 'Actualizar', 34, 'ESP');
+(558, 'ButtonUpdate', 'Actualizar', 34, 'ESP'),
+(559, 'Description', 'This is the Article tab. all the articles information will be displayed here.', 5, 'ENG'),
+(560, 'Description', 'Esta es la pestaña de las Noticias. Aquí se mostrará la información de las Noticias.', 5, 'ESP'),
+(561, 'FilterTitle', 'Filters', 5, 'ENG'),
+(562, 'FilterTitle', 'Filtros', 5, 'ESP'),
+(563, 'fOrderBy', 'Order By', 5, 'ENG'),
+(564, 'fOrderBy', 'Ordenar por', 5, 'ESP'),
+(565, 'fSearchId', 'Search By ID', 5, 'ENG'),
+(566, 'fSearchId', 'Buscar por ID', 5, 'ESP'),
+(567, 'fSearchHeadline', 'Search By Headline', 5, 'ENG'),
+(568, 'fSearchHeadline', 'Buscar por Título', 5, 'ESP'),
+(569, 'fSearchAuthor', 'Search By Author', 5, 'ENG'),
+(570, 'fSearchAuthor', 'Buscar por Autor', 5, 'ESP'),
+(571, 'fSearchIsPublished', 'is published', 5, 'ENG'),
+(572, 'fSearchIsPublished', 'está published', 5, 'ESP'),
+(573, 'fSearchLanguage', 'language', 5, 'ENG'),
+(574, 'fSearchLanguage', 'idioma', 5, 'ESP'),
+(575, 'ButtonFilter', 'Filter', 5, 'ENG'),
+(576, 'ButtonFilter', 'Filtrar', 5, 'ESP'),
+(577, 'ButtonNew', 'New', 5, 'ENG'),
+(578, 'ButtonNew', 'Nuevo', 5, 'ESP'),
+(579, 'ButtonNext', 'Next', 5, 'ENG'),
+(580, 'ButtonNext', 'Siguiente', 5, 'ESP'),
+(581, 'ButtonPrevious', 'Previous', 5, 'ENG'),
+(582, 'ButtonPrevious', 'Anterior', 5, 'ESP'),
+(583, 'Actions', 'Actions', 5, 'ENG'),
+(584, 'Actions', 'Acciones', 5, 'ESP'),
+(585, 'Page', 'Page', 5, 'ENG'),
+(586, 'Page', 'Página', 5, 'ESP'),
+(587, 'Of', 'of', 5, 'ENG'),
+(588, 'Of', 'de', 5, 'ESP'),
+(589, 'Outof', 'out of', 5, 'ENG'),
+(590, 'Outof', 'de', 5, 'ESP'),
+(591, 'NoData', 'No data found', 5, 'ENG'),
+(592, 'NoData', 'No se encontraron datos', 5, 'ESP'),
+(593, 'ModalTitle', 'Confirmation', 5, 'ENG'),
+(594, 'ModalTitle', 'Confirmación', 5, 'ESP'),
+(595, 'ModalText', 'Are you sure you want to delete this row with id', 5, 'ENG'),
+(596, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 5, 'ESP'),
+(597, 'ModalButtonDelete', 'Delete', 5, 'ENG'),
+(598, 'ModalButtonDelete', 'Eliminar', 5, 'ESP'),
+(599, 'ModalButtonCancelar', 'Cancel', 5, 'ENG'),
+(600, 'ModalButtonCancelar', 'Cancelar', 5, 'ESP'),
+(601, 'TitleCreate', 'Create', 35, 'ENG'),
+(602, 'TitleCreate', 'Crear', 35, 'ESP'),
+(603, 'TitleUpdate', 'Update', 35, 'ENG'),
+(604, 'TitleUpdate', 'Actualizar', 35, 'ESP'),
+(605, 'ButtonCreate', 'Create', 35, 'ENG'),
+(606, 'ButtonCreate', 'Crear', 35, 'ESP'),
+(607, 'ButtonUpdate', 'Update', 35, 'ENG'),
+(608, 'ButtonUpdate', 'Actualizar', 35, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -1432,7 +1590,7 @@ ALTER TABLE `web_text`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `author`
@@ -1444,7 +1602,7 @@ ALTER TABLE `author`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `dev`
@@ -1498,7 +1656,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `web_text`
 --
 ALTER TABLE `web_text`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=559;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=609;
 
 --
 -- Constraints for dumped tables

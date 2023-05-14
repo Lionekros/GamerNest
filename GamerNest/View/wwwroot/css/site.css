@@ -1167,6 +1167,9 @@ a {
   }
 }
 
+.Createform .tox:not([dir=rtl]) {
+  margin-bottom: 2rem;
+}
 .Createform .error {
   margin: 1rem 40rem;
   color: #FFB100;

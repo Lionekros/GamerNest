@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -8,45 +7,30 @@ using System.Threading.Tasks;
 
 namespace Support
 {
-    public class GameModel
+    public class UpdateGameModel
     {
         public long id { get; set; }
-        [Required]
         public string title { get; set; }
-        public string? subtitle { get; set; }
-        [Required]
+        public string subtitle { get; set; }
         public string description { get; set; }
-        [Required]
         public string cover { get; set; }
-        [Required]
         public string language { get; set; }
         public string? releaseDate { get; set; }
-        public sbyte? totalScore { get; set; }
-        public sbyte? isFav { get; set; }
-        [Required]
+        public sbyte totalScore { get; set; }
+        public sbyte isFav { get; set; }
         public int idDev { get; set; }
         public string? dev { get; set; }
-        [Required]
         public int idPlatform { get; set; }
         public string? platform { get; set; }
         public string? platformIcon { get; set; }
-        [Required]
         public int idPublisher { get; set; }
         public string? publisher { get; set; }
 
-        List<int> idGenre { get; set; }
-        List<int> idPlayerType { get; set; }
-        List<int> idLanguageGame { get; set; }
-
-        List<GenreTypeLanguageModel> genreList { get; set; }
-        List<GenreTypeLanguageModel> playerTypeList { get; set; }
-        List<GenreTypeLanguageModel> LanguageGameList { get; set; }
-
-        public GameModel()
+        public UpdateGameModel()
         {
         }
 
-        public GameModel(DataRow row)
+        public UpdateGameModel(DataRow row)
         {
             id = row.Field<long>( "id" );
             title = row.Field<string>( "title" );
@@ -56,7 +40,7 @@ namespace Support
             language = row.Field<string>( "language" );
             releaseDate = row.Field<string>( "releaseDate" );
             totalScore = row.Field<sbyte>( "totalScore" );
-            //isFav = row.Field<sbyte>( "isFav" );
+            isFav = row.Field<sbyte>( "isFav" );
             idDev = row.Field<int>( "idDev" );
             dev = row.Field<string?>( "dev" );
             idPlatform = row.Field<int>( "idPlatform" );

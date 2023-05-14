@@ -22,6 +22,11 @@
 
 .Createform
 {
+    .tox:not([dir=rtl])
+    {
+        margin-bottom: 2rem;
+    }
+
     .error
     {
         @include error();

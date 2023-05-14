@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -8,39 +7,29 @@ using System.Threading.Tasks;
 
 namespace Support
 {
-    public class ArticleModel
+    public class UpdateArticleModel
     {
         public long id { get; set; }
-
-        [Required( ErrorMessage = "Required" )]
         public string headline { get; set; }
-
-        [Required( ErrorMessage = "Required" )]
         public string summary { get; set; }
-
-        [Required( ErrorMessage = "Required" )]
         public string body { get; set; }
         public string cover { get; set; }
         public bool isPublished { get; set; }
-        public string? createdDate { get; set; }
+        public string createdDate { get; set; }
         public string? updatedDate { get; set; }
-
         public int idAuthor { get; set; }
-        public string? author { get; set; }
-        public bool? authorCanPublish { get; set; }
-
-        [Required( ErrorMessage = "Required" )]
         public string language { get; set; }
 
+        public string? author { get; set; }
 
         public List<GameModel>? gameList { get; set; }
         public List<long>? idGameList { get; set; }
 
-        public ArticleModel()
+        public UpdateArticleModel()
         {
         }
 
-        public ArticleModel(DataRow row)
+        public UpdateArticleModel(DataRow row)
         {
             id = row.Field<long>( "id" );
             headline = row.Field<string>( "headline" );
@@ -51,9 +40,8 @@ namespace Support
             createdDate = row.Field<string>( "createdDate" );
             updatedDate = row.Field<string?>( "updatedDate" );
             idAuthor = row.Field<int>( "idAuthor" );
-            author = row.Field<string>( "author" );
-            authorCanPublish = Utility.sByteToBool( row.Field<sbyte>( "authorCanPublish" ) );
             language = row.Field<string>( "language" );
+            author = row.Field<string>( "author" );
         }
     }
 }

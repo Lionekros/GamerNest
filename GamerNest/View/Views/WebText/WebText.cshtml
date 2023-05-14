@@ -97,7 +97,7 @@
                             @foreach ( var prop in Model.webTextList.First().GetType().GetProperties() )
                             {
                                 // Exclude "Password" column from table
-                                if ( prop.Name.ToLower() != "idcategory" )
+                                if ( prop.Name.ToLower() != "idcategory" && prop.Name.ToLower() != "categorylist" )
                                 {
                                     <th>@prop.Name</th>
                                 }
@@ -131,8 +131,8 @@
                                 </td>
                                 @foreach ( var prop in item.GetType().GetProperties() )
                                 {
-                                    
-                                        @if ( prop.Name.ToLower() != "idcategory" )
+
+                                    @if ( prop.Name.ToLower() != "idcategory" && prop.Name.ToLower() != "categorylist" )
                                         {
                                         <td>
                                             @if ( !string.IsNullOrEmpty( prop.GetValue( item )?.ToString() ) )

@@ -8,6 +8,23 @@ namespace View.Controllers
     {
         public ModelList lists = new ModelList();
 
+        #region Article
+        public void GetAllArticles(string language = "", string author = "", int idGame = -1, int id = -1, string headline = "", sbyte isPublished = -1, string orderBy = "")
+        {
+            lists.articleList = ArticleService.GetAllArticles( language, author, idGame, id, headline, isPublished, orderBy );
+        }
+
+        public void GetArticle(int id = -1)
+        {
+            lists.articleList = ArticleService.GetArticle( id );
+        }
+
+        public void GetArticleUpdate(int id = -1)
+        {
+            lists.updateArticleList = ArticleService.GetArticleUpdate( id );
+        }
+        #endregion
+
         #region Author
         public void GetAllAuthors(
             int id = -1,
@@ -66,6 +83,28 @@ namespace View.Controllers
             {
                 lists.updateDevList = DevService.GetDevUpdate( id );
             }
+        #endregion
+
+        #region Game
+        public void GetAllGames(string language = "", string user = "", int idArticle = -1, int id = -1, string title = "", string subtitle = "", string orderBy = "")
+        {
+            lists.gameList = GameService.GetAllGames( language, user, idArticle, id, title, subtitle, orderBy );
+        }
+
+        public void GetGame(int id = -1)
+        {
+            lists.gameList = GameService.GetGame( id );
+        }
+
+        public void GetGameScore(int idArticle = -1, string user = "", string orderBy = "")
+        {
+            lists.gameScoreList = GameService.GetGameScore( idArticle, user, orderBy );
+        }
+
+        public void GetGameUpdate(int id = -1)
+        {
+            lists.updateGameList = GameService.GetGameUpdate( id );
+        }
         #endregion
 
         #region Genre
