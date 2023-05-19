@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 14, 2023 at 08:38 PM
+-- Generation Time: May 19, 2023 at 09:23 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -101,6 +101,68 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateDev` (IN `pName` VARCHAR(45))
   VALUES (pName);
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateGame` (IN `pTitle` VARCHAR(255), IN `pSubtitle` VARCHAR(255), IN `pDescription` TEXT, IN `pLanguage` CHAR(3), IN `pCover` VARCHAR(255), IN `pReleaseDate` VARCHAR(10), IN `pTotalScore` TINYINT, IN `pIsFav` TINYINT, IN `pIdDev` INT, IN `pIdPlatform` INT, IN `pIdPublisher` INT, IN `pIdGenre` TEXT, IN `pIdPlayerType` TEXT, IN `pIdLanguage` TEXT)   BEGIN
+  -- Drop the temporary tables if they already exist
+  DROP TEMPORARY TABLE IF EXISTS temp_genre_ids;
+  DROP TEMPORARY TABLE IF EXISTS temp_player_type_ids;
+  DROP TEMPORARY TABLE IF EXISTS temp_language_ids;
+  
+  -- Create temporary tables to store the list of genre, player type, and language ids
+  CREATE TEMPORARY TABLE temp_genre_ids (
+    id INT NOT NULL
+  );
+  
+  CREATE TEMPORARY TABLE temp_player_type_ids (
+    id INT NOT NULL
+  );
+  
+  CREATE TEMPORARY TABLE temp_language_ids (
+    id INT NOT NULL
+  );
+  
+  -- Insert the genre ids into the temporary table
+  SET @genre_sql = CONCAT('INSERT INTO temp_genre_ids (id) VALUES (', REPLACE(pIdGenre, ',', '), ('), ')');
+  PREPARE genre_stmt FROM @genre_sql;
+  EXECUTE genre_stmt;
+  
+  -- Insert the player type ids into the temporary table
+  SET @player_type_sql = CONCAT('INSERT INTO temp_player_type_ids (id) VALUES (', REPLACE(pIdPlayerType, ',', '), ('), ')');
+  PREPARE player_type_stmt FROM @player_type_sql;
+  EXECUTE player_type_stmt;
+  
+  -- Insert the language ids into the temporary table
+  SET @language_sql = CONCAT('INSERT INTO temp_language_ids (id) VALUES (', REPLACE(pIdLanguage, ',', '), ('), ')');
+  PREPARE language_stmt FROM @language_sql;
+  EXECUTE language_stmt;
+  
+  -- Insert the game into the game table
+  INSERT INTO game(title, subtitle, description, language, cover, releaseDate, totalScore, isFav, idDev, idPlatform, idPublisher)
+  VALUES (pTitle, pSubtitle, pDescription, pLanguage, pCover, pReleaseDate, pTotalScore, pIsFav, pIdDev, pIdPlatform, pIdPublisher);
+  
+  -- Get the id of the newly inserted game
+  SET @game_id = LAST_INSERT_ID();
+  
+  -- Insert the genre-game associations into the game_genre table
+  INSERT INTO game_genre(idGame, idGenre)
+  SELECT @game_id, id
+  FROM temp_genre_ids;
+  
+  -- Insert the player type-game associations into the game_player_type table
+  INSERT INTO game_player_type(idGame, idPlayerType)
+  SELECT @game_id, id
+  FROM temp_player_type_ids;
+  
+  -- Insert the language-game associations into the game_language table
+  INSERT INTO game_language(idGame, idLanguage)
+  SELECT @game_id, id
+  FROM temp_language_ids;
+  
+  -- Drop the temporary tables
+  DROP TEMPORARY TABLE IF EXISTS temp_genre_ids;
+  DROP TEMPORARY TABLE IF EXISTS temp_player_type_ids;
+  DROP TEMPORARY TABLE IF EXISTS temp_language_ids;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateGenre` (IN `pName` VARCHAR(45), IN `pLanguage` CHAR(3))   BEGIN
   INSERT INTO `genre` (`name`, `language`)
   VALUES (pName, pLanguage);
@@ -175,6 +237,18 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteDev` (IN `pId` INT)   BEGIN
   WHERE `id` = pId;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteGame` (IN `pId` BIGINT)   BEGIN
+  DELETE FROM game_genre WHERE idGame = pId;
+  DELETE FROM game_player_type WHERE idGame = pId;
+  DELETE FROM game_language WHERE idGame = pId;
+  DELETE FROM user_fav_game WHERE idGame = pId;
+  DELETE FROM user_score_game WHERE idGame = pId;
+  DELETE FROM game_article  WHERE idGame = pId;
+
+  DELETE FROM game WHERE id = pId;
+ 
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteGenre` (IN `pId` INT)   BEGIN
   DELETE FROM `genre`
   WHERE `id` = pId;
@@ -200,9 +274,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletePublisher` (IN `pId` INT)   B
   WHERE `id` = pId;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteUser` (IN `pId` BIGINT)   BEGIN
-    DELETE FROM `user`
-    WHERE `id` = pId;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteUser` (IN `pId` BIGINT)   begin
+	 DELETE FROM user_fav_game  WHERE idUser = pId;
+	DELETE FROM user_score_game  WHERE idUser = pId;
+DELETE FROM user WHERE id = pId;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteWebLanguage` (IN `pId` CHAR(3))   BEGIN
@@ -286,6 +361,82 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateDev` (IN `pId` INT, IN `pName
   UPDATE `dev`
   SET `name` = pName
   WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateGame` (IN `pId` BIGINT, IN `pTitle` VARCHAR(255), IN `pSubtitle` VARCHAR(255), IN `pDescription` TEXT, IN `pLanguage` CHAR(3), IN `pCover` VARCHAR(255), IN `pReleaseDate` VARCHAR(10), IN `pTotalScore` TINYINT, IN `pIsFav` TINYINT, IN `pIdDev` INT, IN `pIdPlatform` INT, IN `pIdPublisher` INT, IN `pIdGenre` TEXT, IN `pIdPlayerType` TEXT, IN `pIdLanguage` TEXT)   BEGIN
+  
+  -- Update the article in the article table
+  UPDATE `game`
+SET `title` = pTitle,
+    `subtitle` = pSubtitle,
+    `description` = pDescription,
+    `language` = pLanguage,
+    `cover` = pCover,
+    `releaseDate` = pReleaseDate,
+    `totalScore` = pTotalScore,
+    `isFav` = pIsFav,
+    `idDev` = pIdDev,
+    `idPlatform` = pIdPlatform,
+    `idPublisher` = pIdPublisher
+WHERE `id` = pId;
+
+  
+  -- Delete all game-article associations for the given article
+  DELETE FROM game_genre WHERE idGame = pId;
+  DELETE FROM game_player_type WHERE idGame = pId;
+  DELETE FROM game_language WHERE idGame = pId;
+  
+DROP TEMPORARY TABLE IF EXISTS temp_genre_ids;
+  DROP TEMPORARY TABLE IF EXISTS temp_player_type_ids;
+  DROP TEMPORARY TABLE IF EXISTS temp_language_ids;
+  
+  -- Create temporary tables to store the list of genre, player type, and language ids
+  CREATE TEMPORARY TABLE temp_genre_ids (
+    id INT NOT NULL
+  );
+  
+  CREATE TEMPORARY TABLE temp_player_type_ids (
+    id INT NOT NULL
+  );
+  
+  CREATE TEMPORARY TABLE temp_language_ids (
+    id INT NOT NULL
+  );
+  
+  
+  -- Insert the genre ids into the temporary table
+  SET @genre_sql = CONCAT('INSERT INTO temp_genre_ids (id) VALUES (', REPLACE(pIdGenre, ',', '), ('), ')');
+  PREPARE genre_stmt FROM @genre_sql;
+  EXECUTE genre_stmt;
+  
+  -- Insert the player type ids into the temporary table
+  SET @player_type_sql = CONCAT('INSERT INTO temp_player_type_ids (id) VALUES (', REPLACE(pIdPlayerType, ',', '), ('), ')');
+  PREPARE player_type_stmt FROM @player_type_sql;
+  EXECUTE player_type_stmt;
+  
+  -- Insert the language ids into the temporary table
+  SET @language_sql = CONCAT('INSERT INTO temp_language_ids (id) VALUES (', REPLACE(pIdLanguage, ',', '), ('), ')');
+  PREPARE language_stmt FROM @language_sql;
+  EXECUTE language_stmt;
+  
+ INSERT INTO game_genre(idGame, idGenre)
+  SELECT pId, id
+  FROM temp_genre_ids;
+  
+  -- Insert the player type-game associations into the game_player_type table
+  INSERT INTO game_player_type(idGame, idPlayerType)
+  SELECT pId, id
+  FROM temp_player_type_ids;
+  
+  -- Insert the language-game associations into the game_language table
+  INSERT INTO game_language(idGame, idLanguage)
+  SELECT pId, id
+  FROM temp_language_ids;
+  
+  -- Drop the temporary tables
+  DROP TEMPORARY TABLE IF EXISTS temp_genre_ids;
+  DROP TEMPORARY TABLE IF EXISTS temp_player_type_ids;
+  DROP TEMPORARY TABLE IF EXISTS temp_language_ids;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateGenre` (IN `pId` INT, IN `pName` VARCHAR(45), IN `pLanguage` CHAR(3))   BEGIN
@@ -384,8 +535,6 @@ INSERT INTO `article` (`id`, `headline`, `summary`, `body`, `cover`, `isPublishe
 (12, 'Headline4', 'Summary4', 'Body4', '/img/Cover/Article/Default.png', 0, '2023-05-12 13:04:10', NULL, 13, 'ESP'),
 (13, 'Headline5', 'Summary5', 'Body5', '/img/Cover/Article/Default.png', 1, '2023-05-12 13:04:10', NULL, 15, 'ENG'),
 (14, 'Headline6', 'Summary6', 'Body6', '/img/Cover/Article/Default.png', 1, '2023-05-12 13:04:10', NULL, 16, 'ESP'),
-(15, 'Headline7', 'Summary7', 'Body7', '/img/Cover/Article/Default.png', 1, '2023-05-12 13:04:10', NULL, 10, 'ESP'),
-(16, 'Headline8', 'Summary8', 'Body8', '/img/Cover/Article/Default.png', 0, '2023-05-12 13:04:10', NULL, 10, 'ENG'),
 (31, 'AAAAAA', '<p>asdasd</p>', '<p>asdasd</p>', '/img/Cover/Article/cover_31.webp', 0, '2023-05-14 22:31:48', NULL, 10, 'ENG');
 
 -- --------------------------------------------------------
@@ -468,7 +617,8 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (32, 'AdminPublisherForm'),
 (33, 'AdminPlatformForm'),
 (34, 'AdminUserForm'),
-(35, 'AdminArticleForm');
+(35, 'AdminArticleForm'),
+(36, 'AdminGameForm');
 
 -- --------------------------------------------------------
 
@@ -509,7 +659,7 @@ CREATE TABLE `game` (
   `subtitle` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `language` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `cover` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `cover` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT '/img/Cover/Game/Default.png',
   `releaseDate` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `totalScore` tinyint NOT NULL DEFAULT '0',
   `isFav` tinyint NOT NULL DEFAULT '0',
@@ -523,16 +673,11 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`id`, `title`, `subtitle`, `description`, `language`, `cover`, `releaseDate`, `totalScore`, `isFav`, `idDev`, `idPlatform`, `idPublisher`) VALUES
-(1, 'Game 1', 'Subtitle 1', 'Description 1', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 1, 2, 1),
+(1, 'Gameaa 1', 'Subtitle 1', '<p>Description 1</p>', 'ENG', '', '2023-05-19', 0, 0, 1, 2, 1),
 (2, 'Game 2', 'Subtitle 2', 'Description 2', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 2, 1, 1),
 (3, 'Game 3', 'Subtitle 3', 'Description 3', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 3, 2, 1),
 (4, 'Game 4', 'Subtitle 4', 'Description 4', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 1, 3, 1),
-(5, 'Game 5', 'Subtitle 5', 'Description 5', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 2, 1, 1),
-(6, 'Game 6', 'Subtitle 6', 'Description 6', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 3, 2, 1),
-(7, 'Game 7', 'Subtitle 7', 'Description 7', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 1, 2, 1),
-(8, 'Game 8', 'Subtitle 8', 'Description 8', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 2, 1, 1),
-(9, 'Game 9', 'Subtitle 9', 'Description 9', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 3, 2, 1),
-(10, 'Game 10', 'Subtitle 10', 'Description 10', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 1, 3, 1);
+(6, 'Game 6', 'Subtitle 6', 'Description 6', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 3, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -550,8 +695,7 @@ CREATE TABLE `game_article` (
 --
 
 INSERT INTO `game_article` (`idGame`, `idArticle`) VALUES
-(3, 31),
-(7, 31);
+(3, 31);
 
 -- --------------------------------------------------------
 
@@ -564,6 +708,19 @@ CREATE TABLE `game_genre` (
   `idGenre` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
+--
+-- Dumping data for table `game_genre`
+--
+
+INSERT INTO `game_genre` (`idGame`, `idGenre`) VALUES
+(1, 1),
+(2, 2),
+(1, 3),
+(2, 4),
+(4, 4),
+(4, 6),
+(4, 8);
+
 -- --------------------------------------------------------
 
 --
@@ -575,6 +732,20 @@ CREATE TABLE `game_language` (
   `idLanguage` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
+--
+-- Dumping data for table `game_language`
+--
+
+INSERT INTO `game_language` (`idGame`, `idLanguage`) VALUES
+(2, 1),
+(4, 1),
+(1, 4),
+(3, 4),
+(4, 4),
+(4, 5),
+(1, 6),
+(4, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -585,6 +756,18 @@ CREATE TABLE `game_player_type` (
   `idGame` bigint NOT NULL,
   `idPlayerType` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Dumping data for table `game_player_type`
+--
+
+INSERT INTO `game_player_type` (`idGame`, `idPlayerType`) VALUES
+(1, 1),
+(4, 1),
+(2, 2),
+(4, 2),
+(3, 3),
+(4, 3);
 
 -- --------------------------------------------------------
 
@@ -741,7 +924,6 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `avatar`, `preferedLanguage`, `birthday`, `creationDate`) VALUES
-(1, 'user1', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user1@email.com', '/img/Avatar/User/Default.png', 'ENG', '1991-02-03', '2021-10-10'),
 (2, 'user2', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user2@email.com', '/img/Avatar/User/Default.png', 'ESP', '1992-03-04', '2021-08-22'),
 (3, 'user3', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user3@email.com', '/img/Avatar/User/Default.png', 'ENG', '1993-04-05', '2022-01-05'),
 (4, 'user4', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user4@email.com', '/img/Avatar/User/Default.png', 'ESP', '1994-05-06', '2022-03-17'),
@@ -766,9 +948,6 @@ CREATE TABLE `user_fav_game` (
 --
 
 INSERT INTO `user_fav_game` (`idUser`, `idGame`) VALUES
-(1, 1),
-(1, 5),
-(1, 8),
 (2, 1),
 (2, 2),
 (3, 3),
@@ -791,8 +970,6 @@ CREATE TABLE `user_score_game` (
 --
 
 INSERT INTO `user_score_game` (`idUser`, `idGame`, `score`) VALUES
-(1, 1, 1),
-(1, 2, 5),
 (2, 1, 2);
 
 -- --------------------------------------------------------
@@ -1431,7 +1608,55 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (605, 'ButtonCreate', 'Create', 35, 'ENG'),
 (606, 'ButtonCreate', 'Crear', 35, 'ESP'),
 (607, 'ButtonUpdate', 'Update', 35, 'ENG'),
-(608, 'ButtonUpdate', 'Actualizar', 35, 'ESP');
+(608, 'ButtonUpdate', 'Actualizar', 35, 'ESP'),
+(609, 'Description', 'This is the Game tab. all the games information will be displayed here.', 8, 'ENG'),
+(610, 'Description', 'Esta es la pestaña de Juegos Aquí se mostrará la información de laos Juegos.', 8, 'ESP'),
+(611, 'FilterTitle', 'Filters', 8, 'ENG'),
+(612, 'FilterTitle', 'Filtros', 8, 'ESP'),
+(613, 'fOrderBy', 'Order By', 8, 'ENG'),
+(614, 'fOrderBy', 'Ordenar por', 8, 'ESP'),
+(615, 'fSearchId', 'Search By ID', 8, 'ENG'),
+(616, 'fSearchId', 'Buscar por ID', 8, 'ESP'),
+(617, 'fSearchTitle', 'Search By Title', 8, 'ENG'),
+(618, 'fSearchTitle', 'Buscar por Título', 8, 'ESP'),
+(619, 'fSearchSubtitle', 'Search By Subtitle', 8, 'ENG'),
+(620, 'fSearchSubtitle', 'Buscar por Subtítulo', 8, 'ESP'),
+(621, 'fSearchLanguage', 'language', 8, 'ENG'),
+(622, 'fSearchLanguage', 'idioma', 8, 'ESP'),
+(623, 'ButtonFilter', 'Filter', 8, 'ENG'),
+(624, 'ButtonFilter', 'Filtrar', 8, 'ESP'),
+(625, 'ButtonNew', 'New', 8, 'ENG'),
+(626, 'ButtonNew', 'Nuevo', 8, 'ESP'),
+(627, 'ButtonNext', 'Next', 8, 'ENG'),
+(628, 'ButtonNext', 'Siguiente', 8, 'ESP'),
+(629, 'ButtonPrevious', 'Previous', 8, 'ENG'),
+(630, 'ButtonPrevious', 'Anterior', 8, 'ESP'),
+(631, 'Actions', 'Actions', 8, 'ENG'),
+(632, 'Actions', 'Acciones', 8, 'ESP'),
+(633, 'Page', 'Page', 8, 'ENG'),
+(634, 'Page', 'Página', 8, 'ESP'),
+(635, 'Of', 'of', 8, 'ENG'),
+(636, 'Of', 'de', 8, 'ESP'),
+(637, 'Outof', 'out of', 8, 'ENG'),
+(638, 'Outof', 'de', 8, 'ESP'),
+(639, 'NoData', 'No data found', 8, 'ENG'),
+(640, 'NoData', 'No se encontraron datos', 8, 'ESP'),
+(641, 'ModalTitle', 'Confirmation', 8, 'ENG'),
+(642, 'ModalTitle', 'Confirmación', 8, 'ESP'),
+(643, 'ModalText', 'Are you sure you want to delete this row with id', 8, 'ENG'),
+(644, 'ModalText', '¿Estas seguro de que quieres eliminar la fila con el id', 8, 'ESP'),
+(645, 'ModalButtonDelete', 'Delete', 8, 'ENG'),
+(646, 'ModalButtonDelete', 'Eliminar', 8, 'ESP'),
+(647, 'ModalButtonCancelar', 'Cancel', 8, 'ENG'),
+(648, 'ModalButtonCancelar', 'Cancelar', 8, 'ESP'),
+(649, 'TitleCreate', 'Create', 36, 'ENG'),
+(650, 'TitleCreate', 'Crear', 36, 'ESP'),
+(651, 'TitleUpdate', 'Update', 36, 'ENG'),
+(652, 'TitleUpdate', 'Actualizar', 36, 'ESP'),
+(653, 'ButtonCreate', 'Create', 36, 'ENG'),
+(654, 'ButtonCreate', 'Crear', 36, 'ESP'),
+(655, 'ButtonUpdate', 'Update', 36, 'ENG'),
+(656, 'ButtonUpdate', 'Actualizar', 36, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -1602,7 +1827,7 @@ ALTER TABLE `author`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `dev`
@@ -1614,7 +1839,7 @@ ALTER TABLE `dev`
 -- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `genre`
@@ -1656,7 +1881,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `web_text`
 --
 ALTER TABLE `web_text`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=609;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=657;
 
 --
 -- Constraints for dumped tables

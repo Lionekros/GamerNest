@@ -73,27 +73,11 @@
                         {
                             <tr>
                                 <td>
-                                    <!-- Delete WebLanguage -->
-                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'WebLanguage')">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </a>
 
                                     <!-- Edit WebLanguage -->
                                     <a asp-controller="WebLanguage" asp-action="UpdateForm" asp-route-id="@item.id">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
-
-                                    <!-- Modal -->
-                                    <div id="confirmationModal_@item.id" class="modal">
-                                        <div class="modal-content">
-                                            <h2>@ViewData[ "ModalTitle" ]</h2>
-                                            <p>@ViewData[ "ModalText" ]: @item.id?</p>
-                                            <div class="modal-actions">
-                                                <button id="confirmBtn_@item.id" asp-controller="WebLanguage" asp-action="Delete" asp-route-id="@item.id">@ViewData[ "ModalButtonDelete" ]</button>
-                                                <button id="cancelBtn_@item.id">@ViewData[ "ModalButtonCancelar" ]</button>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </td>
                                 @foreach ( var prop in item.GetType().GetProperties() )
                                 {

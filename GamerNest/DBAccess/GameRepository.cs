@@ -39,7 +39,7 @@ namespace DBAccess
                         queryBuilder.Append( " AND game.idPublisher = publisher.id" );
                         queryBuilder.Append( " AND game.id = user_fav_game.idGame" );
                         queryBuilder.Append( " AND user_fav_game.idUser = user.id" );
-                        queryBuilder.Append( " AND user.username = " + user );
+                        queryBuilder.Append( " AND user.username = '" + user + "'");
                     }
                     else
                     {
@@ -105,8 +105,8 @@ namespace DBAccess
                                         + " FROM game, dev, publisher, platform"
                                         + " WHERE game.idDev = dev.id"
                                         + " AND game.idPublisher = publisher.id"
-                                        + " game.idPlatform = platform.id"
-                                        + " AND id = " + id;
+                                        + " AND game.idPlatform = platform.id"
+                                        + " AND game.id = " + id;
 
                     return Data.ExecuteCommand( cmd );
                 }
@@ -161,83 +161,89 @@ namespace DBAccess
             }
         }
 
-        //public static int CreateGame(string headline = "", string summary = "", string body = "", string cover = "", int isPublished = -1, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<int> idGenre = null)
-        //{
-        //    try
-        //    {
-        //        MySqlCommand procedure = Data.CreateProcedure("CreateGame");
+        public static int CreateGame(string title = "", string subtitle = "", string description = "", string language = "", string cover = "/img/Cover/Game/Default.png", string releaseDate = "", sbyte totalScore = 0, sbyte isFav = 0, int idDev = -1, int idPlatform = -1, int idPublisher = -1, List<int> idGenre = null, List<int> idPlayerType = null, List<int> idLanguageGame = null)
+        {
+            try
+            {
+                MySqlCommand procedure = Data.CreateProcedure("CreateGame");
 
-        //        procedure.Parameters.AddWithValue( "pHeadline", headline );
-        //        procedure.Parameters.AddWithValue( "pSummary", summary );
-        //        procedure.Parameters.AddWithValue( "pBody", body );
-        //        procedure.Parameters.AddWithValue( "pCover", cover );
-        //        procedure.Parameters.AddWithValue( "pIsPublished", isPublished );
-        //        procedure.Parameters.AddWithValue( "pCreatedDate", createdDate );
-        //        procedure.Parameters.AddWithValue( "pUpdatedDate", updatedDate );
-        //        procedure.Parameters.AddWithValue( "pIdAuthor", idAuthor );
-        //        procedure.Parameters.AddWithValue( "pLanguage", language );
-        //        procedure.Parameters.AddWithValue( "pIdGame", string.Join( ",", idGame ) );
+                procedure.Parameters.AddWithValue( "pTitle", title );
+                procedure.Parameters.AddWithValue( "pSubtitle", subtitle );
+                procedure.Parameters.AddWithValue( "pDescription", description );
+                procedure.Parameters.AddWithValue( "pLanguage", language );
+                procedure.Parameters.AddWithValue( "pCover", cover );
+                procedure.Parameters.AddWithValue( "pReleaseDate", releaseDate );
+                procedure.Parameters.AddWithValue( "pTotalScore", totalScore );
+                procedure.Parameters.AddWithValue( "pIsFav", isFav );
+                procedure.Parameters.AddWithValue( "pIdDev", idDev );
+                procedure.Parameters.AddWithValue( "pIdPlatform", idPlatform );
+                procedure.Parameters.AddWithValue( "pIdPublisher", idPublisher );
+                procedure.Parameters.AddWithValue( "pIdGenre", string.Join( ",", idGenre ) );
+                procedure.Parameters.AddWithValue( "pIdPlayerType", string.Join( ",", idPlayerType ) );
+                procedure.Parameters.AddWithValue( "pIdLanguage", string.Join( ",", idLanguageGame ) );
 
-        //        return Data.ExecuteProcedure( procedure );
-        //    }
-        //    catch ( Exception ex )
-        //    {
+                return Data.ExecuteProcedure( procedure );
+            }
+            catch ( Exception ex )
+            {
+                Log log = new Log();
+                log.Add( ex.Message );
+                return -1;
+            }
+        }
 
-        //        Log log = new Log();
-        //        log.Add( ex.Message );
-        //        return -1;
 
-        //    }
-        //}
+        public static int UpdateGame(long id = -1, string title = "", string subtitle = "", string description = "", string language = "", string cover = "", string releaseDate = "", sbyte totalScore = 0, sbyte isFav = 0, int idDev = -1, int idPlatform = -1, int idPublisher = -1, List<int> idGenre = null, List<int> idPlayerType = null, List<int> idLanguageGame = null)
+        {
+            try
+            {
+                MySqlCommand procedure = Data.CreateProcedure("UpdateGame");
 
-        //public static int UpdateGame(long id = -1, string headline = "", string summary = "", string body = "", string cover = "", int isPublished = -1, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<long> idGame = null)
-        //{
-        //    try
-        //    {
-        //        MySqlCommand procedure = Data.CreateProcedure("UpdateGame");
+                procedure.Parameters.AddWithValue( "pId", id );
+                procedure.Parameters.AddWithValue( "pTitle", title );
+                procedure.Parameters.AddWithValue( "pSubtitle", subtitle );
+                procedure.Parameters.AddWithValue( "pDescription", description );
+                procedure.Parameters.AddWithValue( "pLanguage", language );
+                procedure.Parameters.AddWithValue( "pCover", cover );
+                procedure.Parameters.AddWithValue( "pReleaseDate", releaseDate );
+                procedure.Parameters.AddWithValue( "pTotalScore", totalScore );
+                procedure.Parameters.AddWithValue( "pIsFav", isFav );
+                procedure.Parameters.AddWithValue( "pIdDev", idDev );
+                procedure.Parameters.AddWithValue( "pIdPlatform", idPlatform );
+                procedure.Parameters.AddWithValue( "pIdPublisher", idPublisher );
+                procedure.Parameters.AddWithValue( "pIdGenre", string.Join( ",", idGenre ) );
+                procedure.Parameters.AddWithValue( "pIdPlayerType", string.Join( ",", idPlayerType ) );
+                procedure.Parameters.AddWithValue( "pIdLanguage", string.Join( ",", idLanguageGame ) );
 
-        //        procedure.Parameters.AddWithValue( "pId", id );
-        //        procedure.Parameters.AddWithValue( "pHeadline", headline );
-        //        procedure.Parameters.AddWithValue( "pSummary", summary );
-        //        procedure.Parameters.AddWithValue( "pBody", body );
-        //        procedure.Parameters.AddWithValue( "pCover", cover );
-        //        procedure.Parameters.AddWithValue( "pIsPublished", isPublished );
-        //        procedure.Parameters.AddWithValue( "pCreatedDate", createdDate );
-        //        procedure.Parameters.AddWithValue( "pUpdatedDate", updatedDate );
-        //        procedure.Parameters.AddWithValue( "pIdAuthor", idAuthor );
-        //        procedure.Parameters.AddWithValue( "pLanguage", language );
-        //        procedure.Parameters.AddWithValue( "pIdGame", string.Join( ",", idGame ) );
+                return Data.ExecuteProcedure( procedure );
+            }
+            catch ( Exception ex )
+            {
+                Log log = new Log();
+                log.Add( ex.Message );
+                return -1;
+            }
+        }
 
-        //        return Data.ExecuteProcedure( procedure );
-        //    }
-        //    catch ( Exception ex )
-        //    {
 
-        //        Log log = new Log();
-        //        log.Add( ex.Message );
-        //        return -1;
+        public static int DeleteGame(long id = -1)
+        {
+            try
+            {
+                MySqlCommand procedure = Data.CreateProcedure("DeleteGame");
 
-        //    }
-        //}
+                procedure.Parameters.AddWithValue( "pId", id );
 
-        //public static int DeleteGame(int id = -1)
-        //{
-        //    try
-        //    {
-        //        MySqlCommand procedure = Data.CreateProcedure("DeleteGame");
+                return Data.ExecuteProcedure( procedure );
+            }
+            catch ( Exception ex )
+            {
 
-        //        procedure.Parameters.AddWithValue( "pId", id );
+                Log log = new Log();
+                log.Add( ex.Message );
+                return -1;
 
-        //        return Data.ExecuteProcedure( procedure );
-        //    }
-        //    catch ( Exception ex )
-        //    {
-
-        //        Log log = new Log();
-        //        log.Add( ex.Message );
-        //        return -1;
-
-        //    }
-        //}
+            }
+        }
     }
 }

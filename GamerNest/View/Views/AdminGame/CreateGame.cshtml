@@ -1,0 +1,151 @@
+﻿@model Support.GameModel
+
+@{
+    ViewData[ "Title" ] = "Admin - Create Game";
+}
+<main class="home-section">
+    <div class="text">
+        <h1>Game</h1>
+        <h2>@ViewData[ "TitleCreate" ]</h2>
+
+        <section class="Createform">
+            <form asp-controller="AdminGame" asp-action="Create" method="post" enctype="multipart/form-data">
+                <partial name="_Error" />
+
+                <div>
+                    <div>
+                        <label asp-for="title" class="required">Title:</label>
+                        <input required asp-for="title" placeholder="Title" />
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label asp-for="subtitle">Subtitle:</label>
+                        <input asp-for="subtitle" placeholder="Subtitle" />
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label asp-for="description" class="required">Description:</label>
+                        <textarea asp-for="description" id="mytextarea"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label asp-for="language" class="required">Language:</label>
+                        <select asp-for="language" required>
+                            <option value="ENG">English</option>
+                            <option value="ESP">Español</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label class="required" asp-for="cover">Cover:</label>
+                        <input required asp-for="cover" type="file" />
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label asp-for="releaseDate" class="required">Release Date:</label>
+                        <input required asp-for="releaseDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="totalScore">Total Score:</label>
+                        <input asp-for="totalScore" type="number" value="0" readonly />
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <input asp-for="isFav" type="text" value="false" readonly hidden/>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="idDev" class="required">Developer:</label>
+                        <select asp-for="idDev" class="select2SingleForm" required>
+                            @foreach ( var item in Model.devList )
+                            {
+                                <option value="@item.id">@item.name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="idPublisher" class="required">Publisher:</label>
+                        <select asp-for="idPublisher" class="select2SingleForm" required>
+                            @foreach ( var item in Model.publisherList )
+                            {
+                                <option value="@item.id">@item.name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="idPlatform" class="required">Platform:</label>
+                        <select asp-for="idPlatform" class="select2SingleForm" required>
+                            @foreach ( var item in Model.platformList )
+                            {
+                                <option value="@item.id">@item.name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                
+                
+                <div>
+                    <div>
+                        <label asp-for="idGenre" class="required">Genres:</label>
+                        <select asp-for="idGenre" class="select2SingleForm" required multiple="multiple">
+                            @foreach ( var item in Model.genreList )
+                            {
+                                <option value="@item.id">@item.name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="idPlayerType" class="required">Player Types:</label>
+                        <select asp-for="idPlayerType" class="select2SingleForm" required multiple="multiple">
+                            @foreach ( var item in Model.playerTypeList )
+                            {
+                                <option value="@item.id">@item.name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="idLanguageGame" class="required">Game Languages:</label>
+                        <select asp-for="idLanguageGame" class="select2SingleForm" required multiple="multiple">
+                            @foreach ( var item in Model.languageGameList )
+                            {
+                                <option value="@item.id">@item.name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <button type="submit" class="mainButton">@ViewData[ "ButtonCreate" ]</button>
+                    </div>
+                </div>
+
+            </form>
+        </section>
+
+
+    </div>
+</main>

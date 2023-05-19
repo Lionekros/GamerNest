@@ -108,23 +108,23 @@ namespace Domain
             }
         }
 
-        //public static void CreateGame(string headline = "", string summary = "", string body = "", string cover = "", bool isPublished = false, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<long> idGame = null)
-        //{
-        //    sbyte isPublished2 = Utility.BoolToSByte( isPublished );
+        public static void CreateGame(string title = "", string subtitle = "", string description = "", string language = "", string cover = "", string releaseDate = "", sbyte totalScore = 0, bool isFav = false, int idDev = -1, int idPlatform = -1, int idPublisher = -1, List<int> idGenre = null, List<int> idPlayerType = null, List<int> idLanguageGame = null)
+        {
+            sbyte isFav2 = Utility.BoolToSByte(isFav);
 
-        //    GameRepository.CreateGame( headline, summary, body, cover, isPublished2, createdDate, idAuthor, language, updatedDate, idGame );
-        //}
+            GameRepository.CreateGame( title, subtitle, description, language, cover, releaseDate, totalScore, isFav2, idDev, idPlatform, idPublisher, idGenre, idPlayerType, idLanguageGame);
+        }
 
-        //public static void UpdateGame(long id = -1, string headline = "", string summary = "", string body = "", string cover = "", bool isPublished = false, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<long> idGame = null)
-        //{
-        //    sbyte isPublished2 = Utility.BoolToSByte( isPublished );
+        public static void UpdateGame(long id = -1, string title = "", string subtitle = "", string description = "", string language = "", string cover = "", string releaseDate = "", sbyte totalScore = 0, bool isFav = false, int idDev = -1, int idPlatform = -1, int idPublisher = -1, List<int> idGenre = null, List<int> idPlayerType = null, List<int> idLanguageGame = null)
+        {
+            sbyte isFav2 = Utility.BoolToSByte(isFav);
 
-        //    GameRepository.UpdateGame( id, headline, summary, body, cover, isPublished2, createdDate, idAuthor, language, updatedDate, idGame );
-        //}
+            GameRepository.UpdateGame( id, title, subtitle, description, language, cover, releaseDate, totalScore, isFav2, idDev, idPlatform, idPublisher, idGenre, idPlayerType, idLanguageGame );
+        }
 
-        //public static void DeleteGame(int id = -1)
-        //{
-        //    GameRepository.DeleteGame( id );
-        //}
+        public static void DeleteGame(long id = -1)
+        {
+            GameRepository.DeleteGame( id );
+        }
     }
 }

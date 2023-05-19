@@ -86,7 +86,7 @@ namespace View.Controllers
         #endregion
 
         #region Game
-        public void GetAllGames(string language = "", string user = "", int idArticle = -1, int id = -1, string title = "", string subtitle = "", string orderBy = "")
+        public void GetAllGames(string language = "", string user = "", long idArticle = -1, int id = -1, string title = "", string subtitle = "", string orderBy = "")
         {
             lists.gameList = GameService.GetAllGames( language, user, idArticle, id, title, subtitle, orderBy );
         }

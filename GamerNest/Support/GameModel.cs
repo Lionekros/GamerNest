@@ -21,8 +21,8 @@ namespace Support
         [Required]
         public string language { get; set; }
         public string? releaseDate { get; set; }
-        public sbyte? totalScore { get; set; }
-        public sbyte? isFav { get; set; }
+        public sbyte totalScore { get; set; }
+        public bool isFav { get; set; }
         [Required]
         public int idDev { get; set; }
         public string? dev { get; set; }
@@ -34,13 +34,17 @@ namespace Support
         public int idPublisher { get; set; }
         public string? publisher { get; set; }
 
-        List<int> idGenre { get; set; }
-        List<int> idPlayerType { get; set; }
-        List<int> idLanguageGame { get; set; }
+        public List<int> idGenre { get; set; }
+        public List<int> idPlayerType { get; set; }
+        public List<int> idLanguageGame { get; set; }
 
-        List<GenreTypeLanguageModel> genreList { get; set; }
-        List<GenreTypeLanguageModel> playerTypeList { get; set; }
-        List<GenreTypeLanguageModel> LanguageGameList { get; set; }
+        public List<GenreTypeLanguageModel>? genreList { get; set; }
+        public List<GenreTypeLanguageModel>? playerTypeList { get; set; }
+        public List<GenreTypeLanguageModel>? languageGameList { get; set; }
+
+        public List<DevPublisherModel>? devList { get; set; }
+        public List<DevPublisherModel>? publisherList { get; set; }
+        public List<PlatformModel>? platformList { get; set; }
 
         public GameModel()
         {
@@ -56,7 +60,7 @@ namespace Support
             language = row.Field<string>( "language" );
             releaseDate = row.Field<string>( "releaseDate" );
             totalScore = row.Field<sbyte>( "totalScore" );
-            //isFav = row.Field<sbyte>( "isFav" );
+            isFav = Utility.sByteToBool( row.Field<sbyte>( "isFav" ));
             idDev = row.Field<int>( "idDev" );
             dev = row.Field<string?>( "dev" );
             idPlatform = row.Field<int>( "idPlatform" );
