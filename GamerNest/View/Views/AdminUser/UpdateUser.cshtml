@@ -17,35 +17,35 @@
 
                     <div>
                         <div>
-                            <label asp-for="id">ID:</label>
-                            <input asp-for="id" placeholder="id" readonly />
+                            <label asp-for="id">@ViewData["fId"]:</label>
+                            <input asp-for="id" placeholder="@ViewData["fId"]" readonly />
                         </div>
                     </div>
                     <div>
                         <div>
-                            <label asp-for="username">Username:</label>
-                            <input asp-for="username" placeholder="Username" />
-                        </div>
-                    </div>
-
-                    <div>
-                        <div>
-                            <label asp-for="password">Password:</label>
-                            <input asp-for="password" type="password" placeholder="Password" />
-                        </div>
-                        <div>
-                            <label asp-for="email">Email:</label>
-                            <input asp-for="email" placeholder="Email" />
+                            <label asp-for="username">@ViewData["fUsername"]</label>
+                            <input asp-for="username" placeholder="@ViewData["fUsername"]" />
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="avatar">Avatar:</label>
+                            <label asp-for="password">@ViewData["fPassword"]:</label>
+                            <input asp-for="password" type="password" placeholder="@ViewData["fPassword"]" />
+                        </div>
+                        <div>
+                            <label asp-for="email">@ViewData["fEmail"]:</label>
+                            <input asp-for="email" placeholder="@ViewData["fEmail"]" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label asp-for="avatar">@ViewData["fAvatar"]:</label>
                             <input asp-for="avatar" type="file" />
                         </div>
                         <div>
-                            <label asp-for="preferedLanguage">Preferred Language:</label>
+                            <label asp-for="preferedLanguage">@ViewData["fPrefLanguage"]:</label>
                             <select asp-for="preferedLanguage">
                                 <option value="ENG">English</option>
                                 <option value="ESP">Español</option>
@@ -55,7 +55,7 @@
 
                     <div>
                         <div>
-                            <label asp-for="birthday">Birthday:</label>
+                            <label asp-for="birthday">@ViewData["fBirthday"]:</label>
                             <input asp-for="birthday" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                         </div>
                     </div>

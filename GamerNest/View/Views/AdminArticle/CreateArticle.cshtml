@@ -14,32 +14,32 @@
 
                 <div>
                     <div>
-                        <label asp-for="author" class="required">Author:</label>
-                        <input required asp-for="author" placeholder="Author" readonly />
+                        <label asp-for="author" class="required">@ViewData[ "fAuthor" ]:</label>
+                        <input required asp-for="author" placeholder="@ViewData[ "fAuthor" ]" readonly />
                     </div>
                 </div>
 
                 <div>
                     <div>
-                        <label asp-for="headline" class="required">Headline:</label>
-                        <input required asp-for="headline" placeholder="Headline" />
+                        <label asp-for="headline" class="required">@ViewData[ "fHeadline" ]:</label>
+                        <input required asp-for="headline" placeholder="@ViewData[ "fHeadline" ]" />
                     </div>
                 </div>
                 <div>
                     <div>
-                        <label asp-for="summary">Summary:</label>
+                        <label asp-for="summary">@ViewData[ "fSummary" ]:</label>
                         <textarea asp-for="summary" id="mytextarea"></textarea>
                     </div>
                 </div>
                 <div>
                     <div>
-                        <label asp-for="body">Body:</label>
+                        <label asp-for="body">@ViewData[ "fBody" ]:</label>
                         <textarea asp-for="body" id="mytextarea"></textarea>
                     </div>
                 </div>
                 <div>
                     <div>
-                        <label asp-for="cover">Cover:</label>
+                        <label asp-for="cover">@ViewData[ "fCover" ]:</label>
                         <input asp-for="cover" type="file" />
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                 {
                     <div>
                         <div>
-                            <label asp-for="isPublished" class="required">Publish:</label>
+                            <label asp-for="isPublished" class="required">@ViewData[ "fPublished" ]:</label>
                             <select class="redSelect" onchange="selectColor(this)" asp-for="isPublished" required>
                                 <option class="redSelect" value="false">&#xf057;</option>
                                 <option class="greenSelect" value="true">&#xf058;</option>
@@ -59,7 +59,7 @@
                 {
                     <div>
                         <div>
-                            <label asp-for="isPublished" class="required">Publish:</label>
+                            <label asp-for="isPublished" class="required">@ViewData[ "fPublished" ]:</label>
                             <input asp-for="isPublished" value="false" readonly hidden />
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                 
                 <div>
                     <div>
-                        <label asp-for="language" class="required">Language:</label>
+                        <label asp-for="language" class="required">@ViewData[ "fLanguage" ]:</label>
                         <select asp-for="language" required>
                             <option value="ENG">English</option>
                             <option value="ESP">Español</option>
@@ -76,7 +76,7 @@
                 </div>
                 <div>
                     <div>
-                        <label asp-for="idGameList" class="required">Games:</label>
+                        <label asp-for="idGameList" class="required">@ViewData[ "fGamesList" ]:</label>
                         <select asp-for="idGameList" class="select2SingleForm" required multiple="multiple">
                             @foreach ( var item in Model.gameList )
                             {

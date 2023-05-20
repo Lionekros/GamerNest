@@ -1,6 +1,6 @@
 ﻿@model Support.ModelList
 @{
-    ViewData["Title"] = "Admin - Users";
+    ViewData[ "Title" ] = "Admin - Users";
 }
 
 <main class="home-section">
@@ -68,16 +68,15 @@
                     <table>
                         <tr>
                             <th>@ViewData[ "Actions" ]</th>
-                            @foreach ( var prop in Model.userList.First().GetType().GetProperties() )
-                            {
-                                // Exclude "Password" column from table
-                                if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
-                                {
-                                    <th>@prop.Name</th>
-                                }
-                            }
-                            <th>Fav. Games</th>
-                            <th>Scored Games</th>
+                            <th>@ViewData[ "tId" ]</th>
+                            <th>@ViewData[ "tUsername" ]</th>
+                            <th>@ViewData[ "tEmail" ]</th>
+                            <th>@ViewData[ "tAvatar" ]</th>
+                            <th>@ViewData[ "tPrefLanguage" ]</th>
+                            <th>@ViewData[ "tBirthday" ]</th>
+                            <th>@ViewData[ "tCreationDate" ]</th>
+                            <th>@ViewData[ "tFavGame" ]</th>
+                            <th>@ViewData[ "tScoredGame" ]</th>
                         </tr>
                         @foreach ( var item in Model.userList )
                         {
@@ -105,35 +104,22 @@
                                         </div>
                                     </div>
                                 </td>
-                                @foreach ( var prop in item.GetType().GetProperties() )
-                                {
-                                    // Exclude "Password" column from table
-                                    if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
+                                <td>@item.id</td>
+                                <td>@item.username</td>
+                                <td>@item.email</td>
+                                <td><img class="image-cell" src="@item.avatar" alt="avatar"></td>
+                                <td>
+                                    @if ( item.preferedLanguage == "ENG" )
                                     {
-                                        <td>
-                                            @if ( prop.Name.ToLower() == "avatar" )
-                                            {
-                                                <img class="image-cell" src="@prop.GetValue(item)" alt="Image">
-                                            }
-                                            else if ( prop.Name.ToLower() == "preferedlanguage" )
-                                            {
-                                                if ( prop.GetValue( item )?.ToString() == "ENG" )
-                                                {
-                                                    <span class="fi fi-gb fis"></span>
-                                                }
-                                                else if ( prop.GetValue( item )?.ToString() == "ESP" )
-                                                {
-                                                    <span class="fi fi-es fis"></span>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                @prop.GetValue(item);
-                                            }
-                                        </td>
+                                        <span class="fi fi-gb fis"></span>
                                     }
-
-                                }
+                                    else if ( item.preferedLanguage == "ESP" )
+                                    {
+                                        <span class="fi fi-es fis"></span>
+                                    }
+                                </td>
+                                <td>@item.birthday</td>
+                                <td>@item.creationDate</td>
                                 <td>
                                     <!-- Fav Games -->
                                     <a asp-controller="AdminGame" asp-action="Games" asp-route-user="@item.username">
@@ -193,6 +179,6 @@
                 </div>
             </section>
         }
-        
+
     </div>
 </main>

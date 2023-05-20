@@ -94,14 +94,22 @@
                     <table>
                         <tr>
                             <th>@ViewData[ "Actions" ]</th>
-                            @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
-                            {
-                                // Exclude "Password" column from table
-                                if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
-                                {
-                                    <th>@prop.Name</th>
-                                }
-                            }
+                            <th>@ViewData[ "tId" ]</th>
+                            <th>@ViewData[ "tName" ]</th>
+                            <th>@ViewData[ "tFirstName" ]</th>
+                            <th>@ViewData[ "tSecondName" ]</th>
+                            <th>@ViewData[ "tEmail" ]</th>
+                            <th>@ViewData[ "tPhone" ]</th>
+                            <th>@ViewData[ "tDescription" ]</th>
+                            <th>@ViewData[ "tAvatar" ]</th>
+                            <th>@ViewData[ "tPrefLanguage" ]</th>
+                            <th>@ViewData[ "tIsAdmin" ]</th>
+                            <th>@ViewData[ "tCanPublish" ]</th>
+                            <th>@ViewData[ "tIsActive" ]</th>
+                            <th>@ViewData[ "tBirthday" ]</th>
+                            <th>@ViewData[ "tStartDate" ]</th>
+                            <th>@ViewData[ "tFinishDate" ]</th>
+                            <th>@ViewData[ "tArticleList" ]</th>
                         </tr>
                         @foreach ( var item in Model.authorList )
                         {
@@ -129,54 +137,62 @@
                                         </div>
                                     </div>
                                 </td>
-                                @foreach ( var prop in item.GetType().GetProperties() )
-                                {
-                                    // Exclude "Password" column from table
-                                    if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
+                                <td>@item.id</td>
+                                <td>@item.name</td>
+                                <td>@item.firstLastName</td>
+                                <td>@item.secondLastName</td>
+                                <td>@item.email</td>
+                                <td>@item.phone</td>
+                                <td>@Html.Raw(item.description)</td>
+                                <td><img class="image-cell" src="@item.avatar" alt="avatar"></td>
+                                <td>
+                                    @if ( item.preferedLanguage == "ENG" )
                                     {
-                                        <td>
-                                            @if ( prop.PropertyType == typeof( bool ) )
-                                            {
-                                                @if ( (bool) prop.GetValue( item ) )
-                                                {
-                                                    <i class="far fa-circle-check checkmark-icon"></i>
-                                                }
-                                                else
-                                                {
-                                                    <i class="far fa-circle-xmark xmark-icon"></i>
-                                                }
-                                            }
-                                            else if ( prop.PropertyType == typeof( string ) && ((string) prop.GetValue( item ))?.StartsWith( "/img/" ) == true )
-                                            {
-                                                <img class="image-cell" src="@prop.GetValue(item)" alt="Image">
-                                            }
-                                            else if ( prop.Name.ToLower() == "description" )
-                                            {
-                                                @Html.Raw(prop.GetValue(item))
-                                                ;
-                                            }
-                                            else
-                                            {
-                                                var propValue = prop.GetValue(item)?.ToString();
-                                                if ( !string.IsNullOrEmpty( propValue ) )
-                                                {
-                                                    if ( propValue == "ENG" )
-                                                    {
-                                                        <span class="fi fi-gb fis"></span>
-                                                    }
-                                                    else if ( propValue == "ESP" )
-                                                    {
-                                                        <span class="fi fi-es fis"></span>
-                                                    }
-                                                    else
-                                                    {
-                                                        @propValue
-                                                    }
-                                                }
-                                            }
-                                        </td>
+                                        <span class="fi fi-gb fis"></span>
                                     }
-                                }
+                                    else if ( item.preferedLanguage == "ESP" )
+                                    {
+                                        <span class="fi fi-es fis"></span>
+                                    }
+                                </td>
+                                <td>
+                                    @if ( item.isAdmin)
+                                    {
+                                        <i class="far fa-circle-check checkmark-icon"></i>
+                                    }
+                                    else if ( !item.isAdmin )
+                                    {
+                                        <i class="far fa-circle-xmark xmark-icon"></i>
+                                    }
+                                </td>
+                                <td>
+                                    @if ( item.canPublish)
+                                    {
+                                        <i class="far fa-circle-check checkmark-icon"></i>
+                                    }
+                                    else if ( !item.canPublish )
+                                    {
+                                        <i class="far fa-circle-xmark xmark-icon"></i>
+                                    }
+                                </td>
+                                <td>
+                                    @if ( item.isActive )
+                                    {
+                                        <i class="far fa-circle-check checkmark-icon"></i>
+                                    }
+                                    else if ( !item.isActive )
+                                    {
+                                        <i class="far fa-circle-xmark xmark-icon"></i>
+                                    }
+                                </td>
+                                <td>@item.birthday</td>
+                                <td>@item.startDate</td>
+                                <td>@item.endDate</td>
+                                <td>
+                                    <a asp-controller="AdminArticle" asp-action="Articles" asp-route-author="@item.email">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                </td>
                             </tr>
                         }
                     </table>

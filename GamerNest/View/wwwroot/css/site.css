@@ -1,5 +1,9 @@
 ﻿@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+:root {
+  --primary-color: red;
+}
+
 /* Añadir siempre Normalize.css a los proyectos porque hace que se vea lo mas parecido posible en todos los navegadores!!!
 Acordarse de añadirlo en html también
 <link rel="preload" href="css/normailize.css" as="style">
@@ -312,6 +316,18 @@ template {
   display: none;
 }
 
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
+}
+
 .modal {
   display: none;
   justify-content: center;
@@ -471,6 +487,14 @@ template {
   }
 }
 
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
+}
+
 .pagination {
   display: flex;
   flex-direction: column;
@@ -524,6 +548,14 @@ template {
   background-color: #555555;
   pointer-events: none;
   cursor: not-allowed;
+}
+
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
 }
 
 .filter {
@@ -664,6 +696,10 @@ a {
 }
 .select2Single * {
   all: unset !important;
+}
+
+:root {
+  --primary-color: red;
 }
 
 * {
@@ -894,6 +930,14 @@ a {
     display: none;
   }
 }
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
+}
+
 .AdminHeader {
   display: flex;
   flex-direction: row;
@@ -1063,6 +1107,10 @@ a {
   }
 }
 
+:root {
+  --primary-color: red;
+}
+
 .adminTable {
   margin-top: 1rem;
   overflow-x: auto;
@@ -1124,6 +1172,14 @@ a {
   .adminTable td {
     padding: 5px;
   }
+}
+
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
 }
 
 .create {
@@ -1276,6 +1332,78 @@ a {
   width: 100%;
   height: 100%;
   resize: none;
+}
+
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
+}
+
+.articlePreview {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.articlePreview .Dates {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  flex-direction: column;
+}
+.articlePreview .Dates > div {
+  margin-left: auto;
+}
+.articlePreview .Article {
+  margin-bottom: 20px;
+}
+.articlePreview .Article h1 {
+  color: #FFB100;
+}
+.articlePreview .Article .summary {
+  color: #FCFCFC;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.articlePreview .Article .body {
+  text-align: justify;
+}
+.articlePreview .author {
+  display: flex;
+  align-items: center;
+  background-color: #555555;
+  border-radius: 1rem;
+  padding: 1rem;
+  justify-content: center;
+  max-width: 45rem;
+}
+.articlePreview .author .avatar img {
+  max-width: 100%;
+  margin-right: 10px;
+}
+.articlePreview .author .info .name {
+  text-align: center;
+  font-weight: bold;
+  color: #FFB100;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+.articlePreview .author .info .description {
+  text-align: center;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  font-size: 1rem;
+}
+@media (max-width: 768px) {
+  .articlePreview .author {
+    flex-direction: column;
+  }
+  .articlePreview .author .avatar {
+    margin-bottom: 10px;
+  }
 }
 
 .home-section {

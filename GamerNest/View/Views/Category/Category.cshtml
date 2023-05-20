@@ -60,14 +60,8 @@
                     <table>
                         <tr>
                             <th>@ViewData[ "Actions" ]</th>
-                            @foreach ( var prop in Model.categoryList.First().GetType().GetProperties() )
-                            {
-                                // Exclude "Password" column from table
-                                if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
-                                {
-                                    <th>@prop.Name</th>
-                                }
-                            }
+                            <th>@ViewData[ "tId" ]</th>
+                            <th>@ViewData[ "tName" ]</th>
                         </tr>
                         @foreach ( var item in Model.categoryList )
                         {
@@ -95,22 +89,12 @@
                                         </div>
                                     </div>
                                 </td>
-                                @foreach ( var prop in item.GetType().GetProperties() )
-                                {
-                                    // Exclude "Password" column from table
-                                    if ( prop.Name.ToLower() != "icon" )
-                                    {
-                                        <td>
-                                            @prop.GetValue(item)
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td>
-                                            @Html.Raw(prop.GetValue(item))
-                                        </td>
-                                    }
-                                }
+                                <td>
+                                    @item.id
+                                </td>
+                                <td>
+                                    @item.name
+                                </td>
                             </tr>
                         }
                     </table>

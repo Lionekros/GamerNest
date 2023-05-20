@@ -83,13 +83,20 @@
                 <table>
                     <tr>
                         <th>@ViewData[ "Actions" ]</th>
-                        @foreach ( var prop in Model.articleList.First().GetType().GetProperties() )
-                        {
-                            if ( @prop.Name != "idGameList" && @prop.Name != "gameList" )
-                            {
-                                <th>@prop.Name</th>
-                            }
-                        }
+                        <th>@ViewData[ "tPreview" ]</th>
+                        <th>@ViewData[ "tId" ]</th>
+                        <th>@ViewData[ "tHeadline" ]</th>
+                        <th>@ViewData[ "tSummary" ]</th>
+                        <th>@ViewData[ "tBody" ]</th>
+                        <th>@ViewData[ "tCover" ]</th>
+                        <th>@ViewData[ "tIsPublished" ]</th>
+                        <th>@ViewData[ "tCreatedDate" ]</th>
+                        <th>@ViewData[ "tUpdatedDate" ]</th>
+                        <th>@ViewData[ "tIdAuthor" ]</th>
+                        <th>@ViewData[ "tAuthor" ]</th>
+                        <th>@ViewData[ "tCanPublish" ]</th>
+                        <th>@ViewData[ "tLanguage" ]</th>
+                        <th>@ViewData[ "tGamesList" ]</th>
                     </tr>
                     @foreach ( var item in Model.articleList )
                     {
@@ -118,41 +125,55 @@
                                     </div>
                                 </div>
                             </td>
-                            @foreach ( var prop in item.GetType().GetProperties() )
-                            {
-                                if ( @prop.Name != "idGameList" && @prop.Name != "gameList" )
+                            <td>
+                                <a asp-controller="AdminArticle" asp-action="Preview" asp-route-id="@item.id">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </td>
+                            <td>@item.id</td>
+                            <td>@Html.Raw(item.headline)</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td><img class="image-cell" src="@item.cover" alt="cover"></td>
+                            <td>
+                                @if ( item.isPublished )
                                 {
-                                    <td>
-                                        @if ( !string.IsNullOrEmpty( prop.GetValue( item )?.ToString() ) )
-                                        {
-                                            if ( prop.GetValue( item )?.ToString() == "ENG" )
-                                            {
-                                                <span class="fi fi-gb fis"></span>
-                                            }
-                                            else if ( prop.GetValue( item )?.ToString() == "ESP" )
-                                            {
-                                                <span class="fi fi-es fis"></span>
-                                            }
-                                            else if ( prop.PropertyType == typeof( string ) && ((string) prop.GetValue( item ))?.StartsWith( "/img/" ) == true )
-                                            {
-                                                <img class="image-cell" src="@prop.GetValue(item)" alt="Image">
-                                            }
-                                            else if ( prop.GetValue( item )?.ToString() == "True" )
-                                            {
-                                                <i class="far fa-circle-check checkmark-icon"></i>
-                                            }
-                                            else if ( prop.GetValue( item )?.ToString() == "False" )
-                                            {
-                                                <i class="far fa-circle-xmark xmark-icon"></i>
-                                            }
-                                            else
-                                            {
-                                                @Html.Raw(@prop.GetValue( item )?.ToString())
-                                            }
-                                        }
-                                    </td>
+                                    <i class="far fa-circle-check checkmark-icon"></i>
                                 }
-                            }
+                                else if ( !item.isPublished )
+                                {
+                                    <i class="far fa-circle-xmark xmark-icon"></i>
+                                }
+                            </td>
+                            <td>@item.createdDate</td>
+                            <td>@item.updatedDate</td>
+                            <td>@item.idAuthor</td>
+                            <td>@item.author</td>
+                            <td>
+                                @if ( item.authorCanPublish == true )
+                                {
+                                    <i class="far fa-circle-check checkmark-icon"></i>
+                                }
+                                else if ( item.authorCanPublish == false )
+                                {
+                                    <i class="far fa-circle-xmark xmark-icon"></i>
+                                }
+                            </td>
+                            <td>
+                                @if ( item.language == "ENG" )
+                                {
+                                    <span class="fi fi-gb fis"></span>
+                                }
+                                else if ( item.language == "ESP" )
+                                {
+                                    <span class="fi fi-es fis"></span>
+                                }
+                            </td>
+                            <td>
+                                <a asp-controller="AdminGame" asp-action="Games" asp-route-idArticle="@item.id">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </td>
                         </tr>
                     }
                 </table>

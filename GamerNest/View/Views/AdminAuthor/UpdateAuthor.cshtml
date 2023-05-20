@@ -9,7 +9,7 @@
         <h1>Authors</h1>
         <h2>@ViewData[ "TitleUpdate" ]</h2>
 
-        @if (ViewData["AdminType"].ToString() == "Admin")
+        @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
         {
             <section class="Createform">
                 <form asp-controller="AdminAuthor" asp-action="Update" method="post" enctype="multipart/form-data">
@@ -17,42 +17,42 @@
 
                     <div>
                         <div>
-                            <label asp-for="id">ID:</label>
-                            <input asp-for="id" placeholder="id" readonly />
+                            <label asp-for="id">@ViewData[ "fId" ]:</label>
+                            <input asp-for="id" placeholder="@ViewData[ "fId" ]" readonly />
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="name">Name:</label>
-                            <input asp-for="name" placeholder="Name" />
+                            <label asp-for="name" class="required">@ViewData[ "fName" ]:</label>
+                            <input required asp-for="name" placeholder="@ViewData[ "fName" ]" />
                         </div>
                         <div>
-                            <label asp-for="firstLastName">First Last Name:</label>
-                            <input asp-for="firstLastName" placeholder="First Last Name" />
+                            <label asp-for="firstLastName" class="required">@ViewData[ "fFirstName" ]:</label>
+                            <input required asp-for="firstLastName" placeholder="@ViewData[ "fFirstName" ]" />
                         </div>
                         <div>
-                            <label asp-for="secondLastName">Second Last Name:</label>
-                            <input asp-for="secondLastName" placeholder="Second Last Name" />
+                            <label asp-for="secondLastName">@ViewData[ "fSecondName" ]:</label>
+                            <input asp-for="secondLastName" placeholder="@ViewData[ "fSecondName" ]" />
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="oldPassword">Password:</label>
-                            <input asp-for="oldPassword" type="password" placeholder="Password" />
+                            <label asp-for="oldPassword">@ViewData[ "fPassword" ]:</label>
+                            <input asp-for="oldPassword" type="password" placeholder="@ViewData[ "fPassword" ]" />
                         </div>
                         <div>
-                            <label asp-for="confirmPassword">Confirm New Password:</label>
-                            <input asp-for="confirmPassword" type="password" placeholder="Confirm Password" />
+                            <label asp-for="confirmPassword">@ViewData[ "NewPassword" ]:</label>
+                            <input asp-for="confirmPassword" type="password" placeholder="@ViewData[ "NewPassword" ]" />
                         </div>
                         <div>
-                            <label asp-for="email">Email:</label>
-                            <input asp-for="email" placeholder="Email" />
+                            <label asp-for="email" class="required">@ViewData[ "fEmail" ]:</label>
+                            <input required asp-for="email" placeholder="@ViewData[ "fEmail" ]" />
                         </div>
                         <div>
-                            <label asp-for="phone">Phone:</label>
-                            <input asp-for="phone" placeholder="Phone" />
+                            <label asp-for="phone" class="required">@ViewData[ "fPhone" ]:</label>
+                            <input required asp-for="phone" placeholder="@ViewData[ "fPhone" ]" />
                         </div>
                     </div>
 
@@ -65,11 +65,11 @@
 
                     <div>
                         <div>
-                            <label asp-for="avatar">Avatar:</label>
+                            <label asp-for="avatar">@ViewData[ "fAvatar" ]:</label>
                             <input asp-for="avatar" type="file" />
                         </div>
                         <div>
-                            <label asp-for="preferedLanguage">Preferred Language:</label>
+                            <label asp-for="preferedLanguage" class="required">@ViewData[ "fPrefLanguage" ]:</label>
                             <select asp-for="preferedLanguage" required>
                                 <option value="ENG">English</option>
                                 <option value="ESP">Español</option>
@@ -81,8 +81,8 @@
                         @if ( Model.isAdmin )
                         {
                             <div>
-                                <label asp-for="isAdmin">Is Admin:</label>
-                                <select class="greenSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
+                                <label asp-for="isAdmin" class="required">@ViewData[ "fIsAdmin" ]:</label>
+                                <select class="redSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
                                     <option class="redSelect" value="false">&#xf057;</option>
                                     <option class="greenSelect" value="true">&#xf058;</option>
                                 </select>
@@ -91,8 +91,8 @@
                         else
                         {
                             <div>
-                                <label asp-for="isAdmin">Is Admin:</label>
-                                <select class="redSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
+                                <label asp-for="isAdmin" class="required">@ViewData[ "fIsAdmin" ]:</label>
+                                <select class="greenSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
                                     <option class="redSelect" value="false">&#xf057;</option>
                                     <option class="greenSelect" value="true">&#xf058;</option>
                                 </select>
@@ -102,8 +102,8 @@
                         @if ( Model.canPublish )
                         {
                             <div>
-                                <label asp-for="canPublish">Can Publish:</label>
-                                <select class="greenSelect" onchange="selectColor(this)" asp-for="canPublish" required>
+                                <label asp-for="canPublish" class="required">@ViewData[ "fCanPublish" ]:</label>
+                                <select class="redSelect" onchange="selectColor(this)" asp-for="canPublish" required>
                                     <option class="redSelect" value="false">&#xf057;</option>
                                     <option class="greenSelect" value="true">&#xf058;</option>
                                 </select>
@@ -113,8 +113,8 @@
                         {
 
                             <div>
-                                <label asp-for="canPublish">Can Publish:</label>
-                                <select class="redSelect" onchange="selectColor(this)" asp-for="canPublish" required>
+                                <label asp-for="canPublish" class="required">@ViewData[ "fCanPublish" ]:</label>
+                                <select class="greenSelect" onchange="selectColor(this)" asp-for="canPublish" required>
                                     <option class="redSelect" value="false">&#xf057;</option>
                                     <option class="greenSelect" value="true">&#xf058;</option>
                                 </select>
@@ -124,7 +124,7 @@
                         @if ( !Model.isActive )
                         {
                             <div>
-                                <label asp-for="isActive">Is Active:</label>
+                                <label asp-for="isActive" class="required">@ViewData[ "fIsActive" ]:</label>
                                 <select class="redSelect" onchange="selectColor(this)" asp-for="isActive" required>
                                     <option class="greenSelect" value="true">&#xf058;</option>
                                     <option class="redSelect" value="false">&#xf057;</option>
@@ -134,7 +134,7 @@
                         else
                         {
                             <div>
-                                <label asp-for="isActive">Is Active:</label>
+                                <label asp-for="isActive" class="required">@ViewData[ "fIsActive" ]:</label>
                                 <select class="greenSelect" onchange="selectColor(this)" asp-for="isActive" required>
                                     <option class="greenSelect" value="true">&#xf058;</option>
                                     <option class="redSelect" value="false">&#xf057;</option>
@@ -142,20 +142,20 @@
                             </div>
 
                         }
-                        
+
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="birthday">Birthday:</label>
-                            <input asp-for="birthday" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                            <label asp-for="birthday" class="required">@ViewData[ "fBirthday" ]:</label>
+                            <input required asp-for="birthday" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                         </div>
                         <div>
-                            <label asp-for="startDate">Start Date:</label>
-                            <input asp-for="startDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                            <label asp-for="startDate" class="required">@ViewData[ "fStartDate" ]:</label>
+                            <input required asp-for="startDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                         </div>
                         <div>
-                            <label asp-for="endDate">End Date:</label>
+                            <label asp-for="endDate">@ViewData[ "fFinishDate" ]:</label>
                             <input asp-for="endDate" type="date" />
                         </div>
                     </div>
@@ -214,7 +214,7 @@
                     </div>
 
                     <div hidden>
-                        
+
                         <div>
                             <label asp-for="email">Email:</label>
                             <input asp-for="email" placeholder="Email" />
@@ -227,18 +227,19 @@
 
                     <div>
                         <div>
-                            <label asp-for="description">@ViewData[ "Description" ]:</label>
-                            <textarea asp-for="description" id="mytextarea" value="aaaaaaaaaaa"></textarea>
+                            <label asp-for="description">@ViewData[ "fDescription" ]:</label>
+                            <textarea asp-for="description" id="mytextarea"></textarea>
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="avatar">Avatar:</label>
+                            <label asp-for="avatar">@ViewData[ "fAvatar" ]:</label>
                             <input asp-for="avatar" type="file" />
                         </div>
                         <div>
                             <label asp-for="preferedLanguage">@ViewData[ "PreferedLanguage" ]:</label>
+                            <label asp-for="preferedLanguage" class="required">@ViewData[ "fPrefLanguage" ]:</label>
                             <select asp-for="preferedLanguage" required>
                                 <option value="ENG">English</option>
                                 <option value="ESP">Español</option>

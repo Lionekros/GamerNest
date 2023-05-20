@@ -92,7 +92,7 @@ namespace DBAccess
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = "SELECT article.id, article.headline, article.summary, article.body, article.cover, article.isPublished, article.createdDate, article.updatedDate, article.idAuthor, author.email as 'author', article.language"
+                    cmd.CommandText = "SELECT article.id, article.headline, article.summary, article.body, article.cover, article.isPublished, article.createdDate, article.updatedDate, article.idAuthor, author.email as 'author', author.canPublish as 'authorCanPublish', article.language"
                                         + " FROM article, author"
                                         + " WHERE article.idAuthor = author.id AND article.id = " + id;
                     return Data.ExecuteCommand( cmd );

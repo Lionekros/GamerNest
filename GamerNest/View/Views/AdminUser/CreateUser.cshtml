@@ -15,29 +15,29 @@
 
                 <div>
                     <div>
-                        <label asp-for="username" class="required">Username:</label>
-                        <input required asp-for="username" placeholder="Username" />
+                        <label asp-for="username" class="required">@ViewData["fUsername"]</label>
+                        <input required asp-for="username" placeholder="@ViewData["fUsername"]" />
                     </div>
                 </div>
 
                 <div>
                     <div>
-                        <label asp-for="password" class="required">Password:</label>
-                        <input required asp-for="password" type="password" placeholder="Password" />
+                        <label asp-for="password" class="required">@ViewData["fPassword"]:</label>
+                        <input required asp-for="password" type="password" placeholder="@ViewData["fPassword"]" />
                     </div>
                     <div>
-                        <label asp-for="email" class="required">Email:</label>
-                        <input required asp-for="email" placeholder="Email" />
+                        <label asp-for="email" class="required">@ViewData["fEmail"]:</label>
+                        <input required asp-for="email" placeholder="@ViewData["fEmail"]" />
                     </div>
                 </div>
 
                 <div>
                     <div>
-                        <label asp-for="avatar">Avatar:</label>
+                        <label asp-for="avatar">@ViewData["fAvatar"]:</label>
                         <input asp-for="avatar" type="file" />
                     </div>
                     <div>
-                        <label asp-for="preferedLanguage" class="required">Preferred Language:</label>
+                        <label asp-for="preferedLanguage" class="required">@ViewData["fPrefLanguage"]:</label>
                         <select asp-for="preferedLanguage" required>
                             <option value="ENG">English</option>
                             <option value="ESP">Español</option>
@@ -47,7 +47,7 @@
 
                 <div>
                     <div>
-                        <label asp-for="birthday" class="required">Birthday:</label>
+                        <label asp-for="birthday" class="required">@ViewData["fBirthday"]:</label>
                         <input required asp-for="birthday" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                     </div>
                 </div>

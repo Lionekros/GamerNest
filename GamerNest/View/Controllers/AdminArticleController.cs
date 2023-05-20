@@ -51,6 +51,23 @@ namespace View.Controllers
             }
         }
 
+        public ActionResult Preview(int id)
+        {
+            if ( HttpContext.Session.GetString( "AdminType" ) == null )
+            {
+                return RedirectToAction( "LogInForm", "Admin" );
+            }
+
+            SetDefaultViewDatas();
+
+            GetArticle( id );
+            GetAuthor( lists.articleList[ 0 ].author );
+
+            WebText( "ArticlePreview" );
+
+            return View( "ArticlePreview", lists );
+        }
+
         public ActionResult CreateForm()
         {
             try

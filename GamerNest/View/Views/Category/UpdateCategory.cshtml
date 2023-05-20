@@ -18,15 +18,15 @@
 
                     <div>
                         <div>
-                            <label asp-for="id">ID:</label>
-                            <input asp-for="id" placeholder="id" readonly />
+                            <label asp-for="id">@ViewData[ "tId" ]</label>
+                            <input asp-for="id" placeholder="@ViewData[ "tId" ]" readonly />
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="name">Name:</label>
-                            <input asp-for="name" placeholder="Name" />
+                            <label asp-for="name">@ViewData[ "tName" ]</label>
+                            <input asp-for="name" placeholder="@ViewData[ "tName" ]" />
                         </div>
                     </div>
                     <div>

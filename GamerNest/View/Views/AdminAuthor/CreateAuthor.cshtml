@@ -15,48 +15,48 @@
 
                 <div>
                     <div>
-                        <label asp-for="name" class="required">Name:</label>
-                        <input required asp-for="name" placeholder="Name" />
+                        <label asp-for="name" class="required">@ViewData[ "fName" ]:</label>
+                        <input required asp-for="name" placeholder="@ViewData[ "fName" ]" />
                     </div>
                     <div>
-                        <label asp-for="firstLastName" class="required">First Last Name:</label>
-                        <input required asp-for="firstLastName" placeholder="First Last Name" />
+                        <label asp-for="firstLastName" class="required">@ViewData[ "fFirstName" ]:</label>
+                        <input required asp-for="firstLastName" placeholder="@ViewData[ "fFirstName" ]" />
                     </div>
                     <div>
-                        <label asp-for="secondLastName">Second Last Name:</label>
-                        <input asp-for="secondLastName" placeholder="Second Last Name" />
-                    </div>
-                </div>
-
-                <div>
-                    <div>
-                        <label asp-for="password" class="required">Password:</label>
-                        <input required asp-for="password" type="password" placeholder="Password" />
-                    </div>
-                    <div>
-                        <label asp-for="email" class="required">Email:</label>
-                        <input required asp-for="email" placeholder="Email" />
-                    </div>
-                    <div>
-                        <label asp-for="phone" class="required">Phone:</label>
-                        <input required asp-for="phone" placeholder="Phone" />
+                        <label asp-for="secondLastName">@ViewData[ "fSecondName" ]:</label>
+                        <input asp-for="secondLastName" placeholder="@ViewData[ "fSecondName" ]" />
                     </div>
                 </div>
 
                 <div>
                     <div>
-                        <label asp-for="description">Description:</label>
+                        <label asp-for="password" class="required">@ViewData[ "fPassword" ]:</label>
+                        <input required asp-for="password" type="password" placeholder="@ViewData[ "fPassword" ]" />
+                    </div>
+                    <div>
+                        <label asp-for="email" class="required">@ViewData[ "fEmail" ]:</label>
+                        <input required asp-for="email" placeholder="@ViewData[ "fEmail" ]" />
+                    </div>
+                    <div>
+                        <label asp-for="phone" class="required">@ViewData[ "fPhone" ]:</label>
+                        <input required asp-for="phone" placeholder="@ViewData[ "fPhone" ]" />
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label asp-for="description">@ViewData[ "fDescription" ]:</label>
                         <textarea asp-for="description" id="mytextarea"></textarea>
                     </div>
                 </div>
 
                 <div>
                     <div>
-                        <label asp-for="avatar">Avatar:</label>
+                        <label asp-for="avatar">@ViewData[ "fAvatar" ]:</label>
                         <input asp-for="avatar" type="file" />
                     </div>
                     <div>
-                        <label asp-for="preferedLanguage" class="required">Preferred Language:</label>
+                        <label asp-for="preferedLanguage" class="required">@ViewData[ "fPrefLanguage" ]:</label>
                         <select asp-for="preferedLanguage" required>
                             <option value="ENG">English</option>
                             <option value="ESP">Español</option>
@@ -66,21 +66,21 @@
 
                 <div>
                     <div>
-                        <label asp-for="isAdmin" class="required" >Is Admin:</label>
+                        <label asp-for="isAdmin" class="required">@ViewData[ "fIsAdmin" ]:</label>
                         <select class="redSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
                             <option class="redSelect" value="false">&#xf057;</option>
                             <option class="greenSelect" value="true">&#xf058;</option>
                         </select>
                     </div>
                     <div>
-                        <label asp-for="canPublish" class="required">Can Publish:</label>
+                        <label asp-for="canPublish" class="required">@ViewData[ "fCanPublish" ]:</label>
                         <select class="redSelect" onchange="selectColor(this)" asp-for="canPublish" required>
                             <option class="redSelect" value="false">&#xf057;</option>
                             <option class="greenSelect" value="true">&#xf058;</option>
                         </select>
                     </div>
                     <div>
-                        <label asp-for="isActive" class="required">Is Active:</label>
+                        <label asp-for="isActive" class="required">@ViewData[ "fIsActive" ]:</label>
                         <select class="greenSelect" onchange="selectColor(this)" asp-for="isActive" required>
                             <option class="greenSelect" value="true">&#xf058;</option>
                             <option class="redSelect" value="false">&#xf057;</option>
@@ -90,15 +90,15 @@
 
                 <div>
                     <div>
-                        <label asp-for="birthday" class="required">Birthday:</label>
+                        <label asp-for="birthday" class="required">@ViewData[ "fBirthday" ]:</label>
                         <input required asp-for="birthday" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                     </div>
                     <div>
-                        <label asp-for="startDate" class="required">Start Date:</label>
+                        <label asp-for="startDate" class="required">@ViewData[ "fStartDate" ]:</label>
                         <input required asp-for="startDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                     </div>
                     <div>
-                        <label asp-for="endDate">End Date:</label>
+                        <label asp-for="endDate">@ViewData[ "fFinishDate" ]:</label>
                         <input asp-for="endDate" type="date" />
                     </div>
                 </div>

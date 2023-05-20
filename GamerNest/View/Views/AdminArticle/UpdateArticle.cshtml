@@ -10,109 +10,106 @@
         <h1>Article</h1>
         <h2>@ViewData[ "TitleUpdate" ]</h2>
 
-        @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
-        {
-            <section class="Createform">
-                <form asp-controller="AdminArticle" asp-action="Update" method="post" enctype="multipart/form-data">
-                    <partial name="_Error" />
+        <section class="Createform">
+            <form asp-controller="AdminArticle" asp-action="Update" method="post" enctype="multipart/form-data">
+                <partial name="_Error" />
 
+                <div>
                     <div>
-                        <div>
-                            <label asp-for="id">ID:</label>
-                            <input asp-for="id" placeholder="id" readonly />
-                        </div>
+                        <label asp-for="id">@ViewData[ "fId" ]:</label>
+                        <input asp-for="id" placeholder="@ViewData[ "fId" ]" readonly />
                     </div>
+                </div>
 
+                <div>
                     <div>
-                        <div>
-                            <label asp-for="author" >Author:</label>
-                            <input asp-for="author" placeholder="Author" readonly />
-                        </div>
+                        <label asp-for="author">@ViewData[ "fAuthor" ]:</label>
+                        <input asp-for="author" placeholder="@ViewData[ "fAuthor" ]" readonly />
                     </div>
+                </div>
 
+                <div>
                     <div>
-                        <div>
-                            <label asp-for="headline" >Headline:</label>
-                            <input asp-for="headline" placeholder="Headline" />
-                        </div>
+                        <label asp-for="headline">@ViewData[ "fHeadline" ]:</label>
+                        <input asp-for="headline" placeholder="@ViewData[ "fHeadline" ]" />
                     </div>
+                </div>
+                <div>
                     <div>
-                        <div>
-                            <label asp-for="summary">Summary:</label>
-                            <textarea asp-for="summary" id="mytextarea"></textarea>
-                        </div>
+                        <label asp-for="summary">@ViewData[ "fSummary" ]:</label>
+                        <textarea asp-for="summary" id="mytextarea"></textarea>
                     </div>
+                </div>
+                <div>
                     <div>
-                        <div>
-                            <label asp-for="body">Body:</label>
-                            <textarea asp-for="body" id="mytextarea"></textarea>
-                        </div>
+                        <label asp-for="body">@ViewData[ "fBody" ]:</label>
+                        <textarea asp-for="body" id="mytextarea"></textarea>
                     </div>
+                </div>
+                <div>
                     <div>
-                        <div>
-                            <label asp-for="cover">Cover:</label>
-                            <input asp-for="cover" type="file" />
-                        </div>
+                        <label asp-for="cover">@ViewData[ "fCover" ]:</label>
+                        <input asp-for="cover" type="file" />
                     </div>
-                    @if ( ViewData[ "AdminCanPublish" ].ToString() == "True" )
-                    {
-                        <div>
-                            <div>
-                                <label asp-for="isPublished">Publish:</label>
-                                <select class="redSelect" onchange="selectColor(this)" asp-for="isPublished" required>
-                                    <option class="redSelect" value="false">&#xf057;</option>
-                                    <option class="greenSelect" value="true">&#xf058;</option>
-                                </select>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div>
-                            <div>
-                                <label asp-for="isPublished">Publish:</label>
-                                <input asp-for="isPublished" readonly />
-                            </div>
-                        </div>
-                    }
-
+                </div>
+                @if ( ViewData[ "AdminCanPublish" ].ToString() == "True" )
+                {
                     <div>
                         <div>
-                            <label asp-for="createdDate">Created Date:</label>
-                            <input asp-for="createdDate" readonly />
-                        </div>
-                    </div>
-
-                    <div>
-                        <div>
-                            <label asp-for="language">Language:</label>
-                            <select asp-for="language" required>
-                                <option value="ENG">English</option>
-                                <option value="ESP">Español</option>
+                            <label asp-for="isPublished">@ViewData[ "fIsPublished" ]:</label>
+                            <select class="redSelect" onchange="selectColor(this)" asp-for="isPublished">
+                                <option class="redSelect" value="false">&#xf057;</option>
+                                <option class="greenSelect" value="true">&#xf058;</option>
                             </select>
                         </div>
                     </div>
+                }
+                else
+                {
                     <div>
                         <div>
-                            <label asp-for="idGameList">Games:</label>
-                            <select asp-for="idGameList" class="select2SingleForm" required multiple="multiple">
-                                @foreach ( var item in Model.gameList )
-                                {
-                                    <option value="@item.id">@item.title @item.subtitle @item.platform</option>
-                                }
-                            </select>
+                            <label asp-for="isPublished">@ViewData[ "fPublished" ]:</label>
+                            <input asp-for="isPublished" value="false" readonly hidden />
                         </div>
                     </div>
+                }
 
+                <div>
                     <div>
-                        <div>
-                            <button type="submit" class="mainButton">@ViewData[ "ButtonUpdate" ]</button>
-                        </div>
+                        <label asp-for="createdDate">Created Date:</label>
+                        <input asp-for="createdDate" readonly />
                     </div>
+                </div>
 
-                </form>
-            </section>
-        }
+                <div>
+                    <div>
+                        <label asp-for="language">@ViewData[ "fLanguage" ]:</label>
+                        <select asp-for="language">
+                            <option value="ENG">English</option>
+                            <option value="ESP">Español</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label asp-for="idGameList">@ViewData[ "fGamesList" ]:</label>
+                        <select asp-for="idGameList" class="select2SingleForm" multiple="multiple">
+                            @foreach ( var item in Model.gameList )
+                            {
+                                <option value="@item.id">@item.title @item.subtitle @item.platform</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <button type="submit" class="mainButton">@ViewData[ "ButtonUpdate" ]</button>
+                    </div>
+                </div>
+
+            </form>
+        </section>
 
     </div>
 </main>
