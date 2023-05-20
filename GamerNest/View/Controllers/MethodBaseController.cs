@@ -7,7 +7,7 @@ namespace View.Controllers
 {
     public class MethodBaseController :GetBaseController
     {
-        public void SetDefaultViewDatas()
+        public void SetDefaultAdminViewDatas()
         {
             ViewData[ "AdminEmail" ] = HttpContext.Session.GetString( "AdminEmail" );
             ViewData[ "AdminCanPublish" ] = HttpContext.Session.GetString( "AdminCanPublish" );
@@ -26,6 +26,24 @@ namespace View.Controllers
             HttpContext.Session.SetString( "AdminType", FetchUserType( lists.authorList[ 0 ].isAdmin ) );
 
             HttpContext.Session.SetString( "PageLanguage", lists.authorList[ 0 ].preferedLanguage );
+        }
+
+        public void SetDefaultUserViewDatas()
+        {
+            ViewData[ "UserID" ] = HttpContext.Session.GetString( "UserID" );
+            ViewData[ "UserUsername" ] = HttpContext.Session.GetString( "UserUsername" );
+            ViewData[ "UserEmail" ] = HttpContext.Session.GetString( "UserEmail" ) ?? "no";
+            ViewData[ "UserAvatar" ] = HttpContext.Session.GetString( "UserAvatar" );
+            ViewData[ "PageLanguage" ] = HttpContext.Session.GetString( "PageLanguage" ?? "ENG" );
+        }
+
+        public void SetUserSessions()
+        {
+            HttpContext.Session.SetString( "UserID", lists.userList[ 0 ].id.ToString() );
+            HttpContext.Session.SetString( "UserUsername", lists.userList[ 0 ].username );
+            HttpContext.Session.SetString( "UserEmail", lists.userList[ 0 ].email );
+            HttpContext.Session.SetString( "UserAvatar", lists.userList[ 0 ].avatar ?? string.Empty );
+            HttpContext.Session.SetString( "PageLanguage", lists.userList[ 0 ].preferedLanguage ?? "ENG");
         }
 
         public ActionResult ChangeLanguage(string lang, string cont, string act)

@@ -16,7 +16,7 @@ namespace View.Controllers
         {
             try
             {
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
@@ -47,7 +47,7 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 WebText( "AdminDevForm" );
                 return View( "CreateDev" );
             }
@@ -71,7 +71,7 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 GetDevUpdate( id );
                 UpdateDevPublisherModel model = lists.updateDevList[0];
                 WebText( "AdminDevForm" );
@@ -105,7 +105,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminDevForm" );
@@ -140,7 +140,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminDevForm" );
                 return View( "UpdateDev", model );

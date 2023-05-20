@@ -12,11 +12,11 @@ namespace Domain
 {
     public class ArticleService
     {
-        public static List<ArticleModel> GetAllArticles(string language = "", string author = "", int idGame = -1, int id = -1, string headline = "", sbyte isPublished = -1, string orderBy = "")
+        public static List<ArticleModel> GetAllArticles(string language = "", string author = "", int idGame = -1, int id = -1, string headline = "", sbyte isPublished = -1, string orderBy = "", bool isFav = false, int user = -1)
         {
             try
             {
-                DataTable dt = ArticleRepository.GetAllArticles(language, author, idGame, id, headline, isPublished, orderBy);
+                DataTable dt = ArticleRepository.GetAllArticles(language, author, idGame, id, headline, isPublished, orderBy, isFav, user);
                 List<ArticleModel> ArticleList = new List<ArticleModel>();
 
                 foreach ( DataRow row in dt.Rows )

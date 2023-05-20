@@ -16,7 +16,7 @@ namespace View.Controllers
         {
             try
             {
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
@@ -47,7 +47,7 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 WebText( "AdminPlayerTypeForm" );
                 return View( "CreatePlayerType" );
             }
@@ -71,7 +71,7 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 GetPlayerTypeUpdate( id );
                 UpdateGenreTypeLanguageModel model = lists.updatePlayerTypeList[0];
                 WebText( "AdminPlayerTypeForm" );
@@ -105,7 +105,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminPlayerTypeForm" );
@@ -140,7 +140,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminPlayerTypeForm" );
                 return View( "UpdatePlayerType", model );

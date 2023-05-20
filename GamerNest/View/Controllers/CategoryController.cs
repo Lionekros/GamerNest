@@ -18,7 +18,7 @@ namespace View.Controllers
         {
             try
             {
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
@@ -53,7 +53,7 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 WebText( "AdminCategoryForm" );
                 return View( "CreateCategory" );
             }
@@ -77,7 +77,7 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 GetCategoryUpdate( id );
                 UpdateCategoryModel category = lists.updateCategoryList[0];
                 WebText( "AdminCategoryForm" );
@@ -111,7 +111,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminCategoryForm" );
@@ -146,7 +146,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminCategoryForm" );
                 return View( "UpdateCategory", category );

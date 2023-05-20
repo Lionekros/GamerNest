@@ -11,7 +11,7 @@ namespace DBAccess
 {
     public class ArticleRepository
     {
-        public static DataTable GetAllArticles(string language = "", string author = "", int idGame = -1, int id = -1, string headline = "", sbyte isPublished = -1, string orderBy = "")
+        public static DataTable GetAllArticles(string language = "", string author = "", int idGame = -1, int id = -1, string headline = "", sbyte isPublished = -1, string orderBy = "", bool isFav = false, int user = -1)
         {
             try
             {
@@ -28,6 +28,16 @@ namespace DBAccess
                         queryBuilder.Append( " AND article.id = game_article.idArticle" );
                         queryBuilder.Append( " AND game_article.idGame = game.id" );
                         queryBuilder.Append( " AND game.id = " + idGame );
+                    }
+                    if ( isFav )
+                    {
+                        queryBuilder.Append( ", user, user_fav_game, game, game_article" );
+                        queryBuilder.Append( " WHERE article.idAuthor = author.id" );
+                        queryBuilder.Append( " AND user.id = user_fav_game.idUser" );
+                        queryBuilder.Append( " AND user_fav_game.idGame = game.id" );
+                        queryBuilder.Append( " AND game.id = game_article.idGame" );
+                        queryBuilder.Append( " AND game_article.idArticle = article.id" );
+                        queryBuilder.Append( " AND user_fav_game.idUser = " + user);
                     }
                     else
                     {

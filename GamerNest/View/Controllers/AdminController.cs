@@ -15,7 +15,7 @@ namespace View.Controllers
         {
             try
             {
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
@@ -112,7 +112,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "Login" );
                 return View( "Login", login );

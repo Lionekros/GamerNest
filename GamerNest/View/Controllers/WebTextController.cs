@@ -17,7 +17,7 @@ namespace View.Controllers
         {
             try
             {
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
@@ -53,7 +53,7 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 WebTextModel model = new WebTextModel();
                 model.categoryList = CategoryService.GetAllCategories();
                 WebText( "AdminTextForm" );
@@ -79,7 +79,7 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 GetTextUpdate( id );
                 UpdateWebTextModel model = lists.updateWebTextList[0];
                 model.categoryList = CategoryService.GetAllCategories();
@@ -116,7 +116,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminTextForm" );
@@ -154,7 +154,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminTextForm" );
                 model.categoryList = lists.categoryList = CategoryService.GetAllCategories();

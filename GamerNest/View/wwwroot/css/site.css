@@ -609,6 +609,14 @@ template {
   font-family: "FontAwesome", "sans-serif";
   color: #3c763d;
 }
+.filter form div .heart {
+  font-family: "FontAwesome", "sans-serif";
+  color: #a94442;
+}
+.filter form div .broken {
+  font-family: "FontAwesome", "sans-serif";
+  color: #3c763d;
+}
 .filter form div .filtButton {
   margin-left: 1rem;
   display: block;
@@ -1449,6 +1457,199 @@ a {
 }
 .linkActive i {
   color: #FFB100;
+}
+
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
+}
+
+.normalMenu {
+  display: flex;
+  flex-direction: column;
+  max-width: 95%;
+  margin: 1rem auto;
+  padding: 0 20px;
+}
+.normalMenu .firstRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.normalMenu .firstRow .logo-details {
+  display: flex;
+  align-items: center;
+}
+.normalMenu .firstRow .logo-details img {
+  max-width: 5rem;
+  margin-right: 0.5rem; /* Add margin to separate the logo name */
+}
+.normalMenu .firstRow .logo-details .logo_name {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #FFB100;
+  text-transform: uppercase;
+}
+.normalMenu .userSession {
+  /* Styles for the user session container */
+}
+.normalMenu .userSession a {
+  text-decoration: none;
+  color: #FFB100;
+  font-size: 1.5rem;
+}
+.normalMenu .secondRow {
+  display: flex;
+  flex-direction: row;
+}
+.normalMenu .secondRow .navButtons {
+  flex-direction: row;
+}
+.normalMenu .secondRow .navButtons .News {
+  /* Styles for the news button */
+}
+.normalMenu .secondRow .navButtons .News a {
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #1C1C1C;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .normalMenu .secondRow .navButtons .News a {
+    display: block;
+    width: 100%;
+  }
+}
+.normalMenu .secondRow .navButtons .News a:hover {
+  background-color: #0f0f0f;
+  color: #efefef;
+}
+.normalMenu .secondRow .navButtons .Games {
+  /* Styles for the games button */
+}
+.normalMenu .secondRow .navButtons .Games a {
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #1C1C1C;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .normalMenu .secondRow .navButtons .Games a {
+    display: block;
+    width: 100%;
+  }
+}
+.normalMenu .secondRow .navButtons .Games a:hover {
+  background-color: #0f0f0f;
+  color: #efefef;
+}
+.normalMenu .secondRow .searchGame {
+  /* Styles for the search game container */
+}
+.normalMenu .secondRow .searchGame form {
+  /* Styles for the form */
+}
+.normalMenu .secondRow .searchGame form .input-group {
+  /* Styles for the input group */
+}
+.normalMenu .secondRow .searchGame form .input-group .input-icon {
+  /* Styles for the input icon */
+}
+.normalMenu .secondRow .searchGame form .input-group input[type=text] {
+  /* Styles for the text input */
+}
+
+:root {
+  --primary-color: red;
+}
+
+.NormalCenter {
+  display: flex;
+  justify-content: center;
+}
+
+.news {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.news a {
+  display: flex;
+  align-items: center;
+  background-color: #555555;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  justify-content: center;
+  text-decoration: none;
+  max-width: 80%;
+  color: #FCFCFC;
+  margin-top: 2rem;
+}
+.news a:hover {
+  background-color: lighter(#555555);
+}
+.news a .card {
+  display: flex;
+}
+.news a .card .img img {
+  max-width: 12rem;
+  margin-right: 10px;
+}
+.news a .card .headline {
+  color: #FFB100;
+  text-align: center;
+}
+.news a .card .summary {
+  text-align: justify;
+  font-size: 1.3rem;
+}
+.news a .card .date {
+  text-align: end;
+  font-size: 1rem;
+}
+
+.home-section {
+  font-size: 1.5rem;
+}
+.home-section .text h1 {
+  text-transform: uppercase;
+  text-align: center;
+  color: #FFB100;
+}
+.home-section .text h2 {
+  color: #FFB100;
+  text-transform: uppercase;
+  text-align: center;
+}
+.home-section .text h3 {
+  padding: 1rem 0rem;
+  text-align: center;
+  background-color: #555555;
+  -webkit-border-radius: 2.5rem;
+  -moz-border-radius: 2.5rem;
+  border-radius: 2.5rem;
 }
 
 html {

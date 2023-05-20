@@ -1,0 +1,35 @@
+@import '_normalMenu.scss', '_articleIndex.scss';
+
+.home-section
+{
+    font-size: 1.5rem;
+
+    .text
+    {
+        
+
+        h1
+        {
+            text-transform: uppercase;
+            text-align: center;
+            color: $primary;
+        }
+
+        h2
+        {
+            color: $primary;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        h3
+        {
+            padding: 1rem 0rem;
+            text-align: center;
+            background-color: $terciary;
+            -webkit-border-radius: 2.5rem;
+            -moz-border-radius: 2.5rem;
+            border-radius: 2.5rem;
+        }
+    }
+}

@@ -35,6 +35,8 @@
 
             @include select($light);
 
+            @include selectHeart();
+
             .filtButton
             {
                 margin-left: 1rem;

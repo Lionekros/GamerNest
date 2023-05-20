@@ -1,16 +1,16 @@
 ﻿@model Support.ModelList
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData[ "Title" ] = "All Articles";
 }
 
 <!-- Render a partial view called "_MyPartial.cshtml" in the Views/Partials folder -->
 
 <main class="home-section">
     <div class="text">
-        <h1>News</h1>
+        <h1>All Articles</h1>
         <div class="NormalCenter">
             <section class="filter">
-                <form asp-controller="Article" asp-action="Index" method="post">
+                <form asp-controller="Article" asp-action="AllArticles" method="post">
                     <div>
                         <select id="orderBy" name="orderBy">
                             <option value="createdDate">Order By</option>
@@ -18,7 +18,7 @@
                             <option value="createdDate">Created Date</option>
                         </select>
                     </div>
-                    @if (ViewData["UserEmail"].ToString() != "no")
+                    @if ( ViewData[ "UserEmail" ].ToString() != "no" )
                     {
                         <div>
                             <div class="input-group">
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                     }
-                    
+
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -44,7 +44,7 @@
             </section>
         </div>
         <section class="news">
-            @foreach(var item in Model.articleList)
+            @foreach ( var item in Model.articleList )
             {
                 <a asp-controller="Article" asp-action="SeeArticle" asp-route-id="@item.id">
                     <div class="card">
@@ -63,17 +63,17 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </a>
             }
-            
+
         </section>
         <section class="pagination">
             <div>
                 @if ( Model.CurrentPage > 1 )
                 {
                     <!-- Previous Page -->
-                    <a asp-controller="Article" asp-action="Index"
+                    <a asp-controller="Article" asp-action="AllArticles"
                    asp-route-page="@(Model.CurrentPage - 1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-language="@ViewBag.FormData.language"
@@ -92,7 +92,7 @@
                 @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
                 {
                     <!-- Next Page -->
-                    <a asp-controller="Article" asp-action="Index"
+                    <a asp-controller="Article" asp-action="AllArticles"
                    asp-route-page="@(Model.CurrentPage + 1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-language="@ViewBag.FormData.language"

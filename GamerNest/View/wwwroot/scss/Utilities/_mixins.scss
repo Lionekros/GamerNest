@@ -107,3 +107,18 @@
         color: $green;
     }
 }
+
+@mixin selectHeart($normalColor: $dark)
+{
+    .heart
+    {
+        font-family: 'FontAwesome', 'sans-serif';
+        color: $red;
+    }
+
+    .broken
+    {
+        font-family: 'FontAwesome', 'sans-serif';
+        color: $green;
+    }
+}

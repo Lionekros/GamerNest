@@ -18,7 +18,7 @@ namespace View.Controllers
         {
             try
             {
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
@@ -58,7 +58,7 @@ namespace View.Controllers
                 return RedirectToAction( "LogInForm", "Admin" );
             }
 
-            SetDefaultViewDatas();
+            SetDefaultAdminViewDatas();
 
             GetArticle( id );
             GetAuthor( lists.articleList[ 0 ].author );
@@ -77,7 +77,7 @@ namespace View.Controllers
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
                 
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 WebText( "AdminArticleForm" );
                 ArticleModel model = new ArticleModel();
                 model.gameList = GameService.GetAllGames();
@@ -104,7 +104,7 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 GetArticleUpdate( id );
                 UpdateArticleModel model = lists.updateArticleList[0];
                 model.gameList = GameService.GetAllGames();
@@ -160,7 +160,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminArticleForm" );
@@ -204,7 +204,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 ViewBag.ErrorMessages = errorMessageList;
                 model.gameList = GameService.GetAllGames();
                 model.author = HttpContext.Session.GetString( "AdminEmail" );

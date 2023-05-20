@@ -1,0 +1,64 @@
+﻿@import "../Utilities/variables";
+.NormalCenter
+{
+    display: flex;
+    justify-content: center;
+}
+.news
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    a
+    {
+        display: flex;
+        align-items: center;
+        background-color: $terciary;
+        border-radius: 1.5rem;
+        padding: 1rem;
+        justify-content: center;
+        text-decoration: none;
+        max-width: 80%;
+        color: $light;
+        margin-top: 2rem;
+
+        &:hover
+        {
+            background-color: lighter($terciary);
+        }
+
+        .card
+        {
+            display: flex;
+
+            .img
+            {
+                img
+                {
+                    max-width: 12rem;
+                    margin-right: 10px;
+                }
+            }
+
+            .headline
+            {
+                color: $primary;
+                text-align: center;
+            }
+
+            .summary
+            {
+                text-align: justify;
+                font-size: 1.3rem;
+            }
+
+            .date
+            {
+                text-align: end;
+                font-size: 1rem;
+            }
+        }
+    }
+}

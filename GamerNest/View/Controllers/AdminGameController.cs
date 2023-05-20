@@ -16,7 +16,7 @@ namespace View.Controllers
         {
             try
             {
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
@@ -62,7 +62,7 @@ namespace View.Controllers
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
 
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 WebText( "AdminGameForm" );
                 GameModel model = new GameModel();
                 model.genreList = GenreService.GetAllGenres();
@@ -95,7 +95,7 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 GetGameUpdate( id );
                 UpdateGameModel model = lists.updateGameList[0];
                 model.genreList = GenreService.GetAllGenres();
@@ -166,7 +166,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
 
                 ViewBag.ErrorMessages = errorMessageList;
 
@@ -212,7 +212,7 @@ namespace View.Controllers
                 {
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
-                SetDefaultViewDatas();
+                SetDefaultAdminViewDatas();
                 ViewBag.ErrorMessages = errorMessageList;
 
                 model.genreList = GenreService.GetAllGenres();

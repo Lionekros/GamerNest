@@ -29,6 +29,9 @@
 	  <Content Remove="wwwroot\scss\Admin\_LogIn.scss" />
 	  <Content Remove="wwwroot\scss\Admin\_preview.scss" />
 	  <Content Remove="wwwroot\scss\Admin\_table.scss" />
+	  <Content Remove="wwwroot\scss\Normal\_articleIndex.scss" />
+	  <Content Remove="wwwroot\scss\Normal\_base.scss" />
+	  <Content Remove="wwwroot\scss\Normal\_normalMenu.scss" />
 	  <Content Remove="wwwroot\scss\utilities\_mixins.scss" />
 	  <Content Remove="wwwroot\scss\Utilities\_pagination.scss" />
 	</ItemGroup>
@@ -40,6 +43,9 @@
 	  <SassFile Remove="wwwroot\scss\Admin\_LogIn.scss" />
 	  <SassFile Remove="wwwroot\scss\Admin\_preview.scss" />
 	  <SassFile Remove="wwwroot\scss\Admin\_table.scss" />
+	  <SassFile Remove="wwwroot\scss\Normal\_articleIndex.scss" />
+	  <SassFile Remove="wwwroot\scss\Normal\_base.scss" />
+	  <SassFile Remove="wwwroot\scss\Normal\_normalMenu.scss" />
 	  <SassFile Remove="wwwroot\scss\Utilities\_filters.scss" />
 	  <SassFile Remove="wwwroot\scss\utilities\_mixins.scss" />
 	  <SassFile Remove="wwwroot\scss\Utilities\_modal.scss" />
@@ -54,6 +60,9 @@
 	  <None Include="wwwroot\scss\admin\_lateralMenu.scss" />
 	  <None Include="wwwroot\scss\Admin\_preview.scss" />
 	  <None Include="wwwroot\scss\Admin\_table.scss" />
+	  <None Include="wwwroot\scss\Normal\_articleIndex.scss" />
+	  <None Include="wwwroot\scss\Normal\_base.scss" />
+	  <None Include="wwwroot\scss\Normal\_normalMenu.scss" />
 	  <None Include="wwwroot\scss\utilities\_mixins.scss" />
 	  <None Include="wwwroot\scss\Utilities\_pagination.scss" />
 	</ItemGroup>

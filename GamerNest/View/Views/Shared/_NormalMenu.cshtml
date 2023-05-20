@@ -1,0 +1,59 @@
+﻿<nav class="normalMenu">
+    <div class="firstRow">
+        <div class="logo-details">
+            <img class="" src="~/img/Banner/Logo.png" alt="Banner">
+            <div class="logo_name">Gamer Nest</div>
+        </div>
+        @if (ViewData["UserEmail"].ToString() == "no")
+        {
+            <div class="flags">
+                <a asp-controller="MethodBase" asp-action="ChangeLanguage" asp-route-lang="ENG" asp-route-cont="Article" asp-route-act="Index">
+                    <span class="fi fi-gb fis"></span>
+                </a>
+
+                <a asp-controller="MethodBase" asp-action="ChangeLanguage" asp-route-lang="ESP" asp-route-cont="Article" asp-route-act="Index">
+                    <span class="fi fi-es fis"></span>
+                </a>
+            </div>
+        }
+        
+        <div class="userSession">
+            @if ( ViewData[ "UserEmail" ].ToString() == "no" )
+            {
+                    <a asp-controller="User" asp-action="LogIn">
+                        Log In
+                    </a>
+            }
+            else
+            {
+                    <a asp-controller="User" asp-action="UserPanel">
+                        <img class="" src="@ViewData["UserAvatar"]" alt="Avatar">
+                    </a>
+            }
+        </div>
+    </div>
+    <div class="secondRow">
+        <div class="navButtons">
+            <div class="News">
+                <a asp-controller="Article" asp-action="AllArticles">
+                    News
+                </a>
+            </div>
+            <div class="Games">
+                <a asp-controller="Games" asp-action="AllGames">
+                    Games
+                </a>
+            </div>
+        </div>
+        <div class="searchGame">
+            <form asp-controller="Game" asp-action="AllGames" method="post">
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="title" name="title"  placeholder="Game Title">
+                    </div>
+                </div>
+                </form>
+        </div>
+    </div>
+</nav>

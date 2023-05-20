@@ -9,9 +9,9 @@ namespace View.Controllers
         public ModelList lists = new ModelList();
 
         #region Article
-        public void GetAllArticles(string language = "", string author = "", int idGame = -1, int id = -1, string headline = "", sbyte isPublished = -1, string orderBy = "")
+        public void GetAllArticles(string language = "", string author = "", int idGame = -1, int id = -1, string headline = "", sbyte isPublished = -1, string orderBy = "", bool isFav = false, int user = -1)
         {
-            lists.articleList = ArticleService.GetAllArticles( language, author, idGame, id, headline, isPublished, orderBy );
+            lists.articleList = ArticleService.GetAllArticles( language, author, idGame, id, headline, isPublished, orderBy, isFav, user );
         }
 
         public void GetArticle(int id = -1)

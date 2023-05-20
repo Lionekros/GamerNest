@@ -1,0 +1,99 @@
+@import '../Utilities/_variables.scss', '../Utilities/_mixins.scss';
+
+.normalMenu
+{
+    display: flex;
+    flex-direction: column;
+    max-width: 95%;
+    margin: 1rem auto;
+    padding: 0 20px;
+
+    .firstRow
+    {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo-details
+        {
+            display: flex;
+            align-items: center;
+
+            img
+            {
+                max-width: 5rem;
+                margin-right: 0.5rem; /* Add margin to separate the logo name */
+            }
+
+            .logo_name
+            {
+                font-size: 2rem;
+                font-weight: 600;
+                color: $primary;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .userSession
+    {
+        /* Styles for the user session container */
+        a
+        {
+            text-decoration: none;
+            color: $primary;
+            font-size: 1.5rem;
+        }
+    }
+
+    .secondRow
+    {
+        display: flex;
+        flex-direction: row;
+
+        .navButtons
+        {
+            flex-direction: row;
+
+            .News
+            {
+                /* Styles for the news button */
+                a
+                {
+                    @include button($secondary, $light, 100%);
+                }
+            }
+
+            .Games
+            {
+                /* Styles for the games button */
+                a
+                {
+                    @include button($secondary, $light, 100%);
+                }
+            }
+        }
+
+        .searchGame
+        {
+            /* Styles for the search game container */
+            form
+            {
+                /* Styles for the form */
+                .input-group
+                {
+                    /* Styles for the input group */
+                    .input-icon
+                    {
+                        /* Styles for the input icon */
+                    }
+
+                    input[type="text"]
+                    {
+                        /* Styles for the text input */
+                    }
+                }
+            }
+        }
+    }
+}
