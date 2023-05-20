@@ -18,19 +18,22 @@
 
                     <div>
                         <div>
-                            <label asp-for="id">ID:</label>
-                            <input asp-for="id" placeholder="id" readonly />
+                            <label asp-for="id">@ViewData[ "fId" ]:</label>
+                            <input asp-for="id" placeholder="@ViewData[ "fId" ]" readonly />
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="name">Name:</label>
-                            <input asp-for="name" placeholder="Name" />
+                            <label asp-for="name">@ViewData[ "fName" ]:</label>
+                            <input asp-for="name" placeholder="@ViewData[ "fName" ]" />
                         </div>
+                    </div>
+
+                    <div>
                         <div>
-                            <label asp-for="icon">Icon:</label>
-                            <input required asp-for="icon" placeholder="flag icon" />
+                            <label asp-for="icon">@ViewData[ "fIcon" ]:</label>
+                            <input required asp-for="icon" placeholder="@ViewData[ "fIcon" ]" />
                         </div>
                     </div>
                     <div>

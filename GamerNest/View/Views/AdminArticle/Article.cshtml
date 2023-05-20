@@ -16,24 +16,25 @@
                 {
                     <div>
                         <select id="orderBy" name="orderBy">
-                            <option value="">@ViewData[ "fOrderBy" ]</option>
-                            @foreach ( var prop in Model.articleList.First().GetType().GetProperties() )
-                            {
-                                <option value="@prop.Name">@prop.Name</option>
-                            }
+                            <option value="id">@ViewData[ "fOrderBy" ]</option>
+                            <option value="id">@ViewData[ "tId" ]</option>
+                            <option value="headline">@ViewData[ "tHeadline" ]</option>
+                            <option value="idAuthor">@ViewData[ "tIdAuthor" ]</option>
+                            <option value="author">@ViewData[ "tAuthor" ]</option>
+                            <option value="createdDate">@ViewData[ "tCreatedDate" ]</option>
                         </select>
                     </div>
                 }
                 <div>
                     <div class="input-group">
                         <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="@ViewData[ "fSearchId" ]">
+                        <input type="number" id="id" name="id"  placeholder="@ViewData[ "fSearchId" ]">
                     </div>
                 </div>
                 <div>
                     <div class="input-group">
                         <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" id="headline" name="headline" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchHeadline" ]">
+                        <input type="text" id="headline" name="headline"  placeholder="@ViewData[ "fSearchHeadline" ]">
                     </div>
                 </div>
                 @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
@@ -41,7 +42,7 @@
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="author" name="author" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchAuthor" ]">
+                            <input type="text" id="author" name="author"  placeholder="@ViewData[ "fSearchAuthor" ]">
                         </div>
                     </div>
                 }

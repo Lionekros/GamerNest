@@ -16,30 +16,35 @@
                 {
                     <div>
                         <select id="orderBy" name="orderBy">
-                            <option value="">@ViewData[ "fOrderBy" ]</option>
-                            @foreach ( var prop in Model.gameList.First().GetType().GetProperties() )
-                            {
-                                <option value="@prop.Name">@prop.Name</option>
-                            }
+                            <option value="id">@ViewData[ "fOrderBy" ]</option>
+                            <option value="id">@ViewData[ "tId" ]</option>
+                            <option value="title">@ViewData[ "tTitle" ]</option>
+                            <option value="totalScore">@ViewData[ "tTotalScore" ]</option>
+                            <option value="idDev">@ViewData[ "tIdDev" ]</option>
+                            <option value="dev">@ViewData[ "tDev" ]</option>
+                            <option value="idPlatform">@ViewData[ "tIdPlatform" ]</option>
+                            <option value="platform">@ViewData[ "tPlatform" ]</option>
+                            <option value="idPublisher">@ViewData[ "tIdPublisher" ]</option>
+                            <option value="publisher">@ViewData[ "tPublisher" ]</option>
                         </select>
                     </div>
                 }
                 <div>
                     <div class="input-group">
                         <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="@ViewData[ "fSearchId" ]">
+                        <input type="number" id="id" name="id"  placeholder="@ViewData[ "fSearchId" ]">
                     </div>
                 </div>
                 <div>
                     <div class="input-group">
                         <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" id="title" name="title" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchTitle" ]">
+                        <input type="text" id="title" name="title"  placeholder="@ViewData[ "fSearchTitle" ]">
                     </div>
                 </div>
                 <div>
                     <div class="input-group">
                         <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" id="subtitle" name="subtitle" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchSubtitle" ]">
+                        <input type="text" id="subtitle" name="subtitle"  placeholder="@ViewData[ "fSearchSubtitle" ]">
                     </div>
                 </div>
 
@@ -50,82 +55,128 @@
 
             </form>
         </section>
-
-        <section class="create">
+        @if (ViewData["AdminType"].ToString() == "Admin")
+        {
+            <section class="create">
             <a asp-action="CreateForm" asp-controller="AdminGame">
                 <i class="fa-solid fa-plus"></i>
                 <span>@ViewData[ "ButtonNew" ]</span>
             </a>
         </section>
+        }
+        
 
         <section class="adminTable">
             @if ( Model.gameList?.Count > 0 )
             {
                 <table>
                     <tr>
-                        <th>@ViewData[ "Actions" ]</th>
-                        @foreach ( var prop in Model.gameList.First().GetType().GetProperties() )
+                        @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
                         {
-                            if ( @prop.Name != "idGameList" && @prop.Name != "gameList" )
-                            {
-                                <th>@prop.Name</th>
-                            }
+                            <th>@ViewData[ "Actions" ]</th>
                         }
+                        <th>@ViewData[ "tId" ]</th>
+                        <th>@ViewData[ "tTitle" ]</th>
+                        <th>@ViewData[ "tSubtitle" ]</th>
+                        <th>@ViewData[ "tDescription" ]</th>
+                        <th>@ViewData[ "tCover" ]</th>
+                        <th>@ViewData[ "tLanguage" ]</th>
+                        <th>@ViewData[ "tReleaseDate" ]</th>
+                        <th>@ViewData[ "tTotalScore" ]</th>
+                        @if ( ViewBag.score )
+                        {
+                            <th>@ViewData[ "tScore" ]</th>
+                        }
+                        <th>@ViewData[ "tIdDev" ]</th>
+                        <th>@ViewData[ "tDev" ]</th>
+                        <th>@ViewData[ "tIdPlatform" ]</th>
+                        <th>@ViewData[ "tPlatform" ]</th>
+                        <th>@ViewData[ "tIcon" ]</th>
+                        <th>@ViewData[ "tIdPublisher" ]</th>
+                        <th>@ViewData[ "tPublisher" ]</th>
+                        <th>@ViewData[ "tGenresList" ]</th>
+                        <th>@ViewData[ "tPlayerTypesList" ]</th>
+                        <th>@ViewData[ "tGameLanguagesList" ]</th>
+                        <th>@ViewData[ "tArticlesList" ]</th>
                     </tr>
                     @foreach ( var item in Model.gameList )
                     {
                         <tr>
-                            <td>
-                                <!-- Delete Game -->
-                                <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'AdminGame')">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </a>
+                            @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
+                            {
+                                <td>
+                                    <!-- Delete Game -->
+                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'AdminGame')">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
 
-                                <!-- Edit Game -->
-                                <a asp-controller="AdminGame" asp-action="UpdateForm" asp-route-id="@item.id">
-                                    <i class="fa-solid fa-pen"></i>
-                                </a>
+                                    <!-- Edit Game -->
+                                    <a asp-controller="AdminGame" asp-action="UpdateForm" asp-route-id="@item.id">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
 
-                                <!-- Modal -->
-                                <div id="confirmationModal_@item.id" class="modal">
-                                    <div class="modal-content">
-                                        <h2>@ViewData[ "ModalTitle" ]</h2>
-                                        <p>@ViewData[ "ModalText" ]: @item.id?</p>
-                                        <div class="modal-actions">
-                                            <button id="confirmBtn_@item.id" asp-controller="AdminGame" asp-action="Delete" asp-route-id="@item.id">@ViewData[ "ModalButtonDelete" ]</button>
+                                    <!-- Modal -->
+                                    <div id="confirmationModal_@item.id" class="modal">
+                                        <div class="modal-content">
+                                            <h2>@ViewData[ "ModalTitle" ]</h2>
+                                            <p>@ViewData[ "ModalText" ]: @item.id?</p>
+                                            <div class="modal-actions">
+                                                <button id="confirmBtn_@item.id" asp-controller="AdminGame" asp-action="Delete" asp-route-id="@item.id">@ViewData[ "ModalButtonDelete" ]</button>
 
-                                            <button id="cancelBtn_@item.id">@ViewData[ "ModalButtonCancelar" ]</button>
+                                                <button id="cancelBtn_@item.id">@ViewData[ "ModalButtonCancelar" ]</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-                            @foreach ( var prop in item.GetType().GetProperties() )
-                            {
-                                if ( @prop.Name != "idGameList" && @prop.Name != "gameList" )
-                                {
-                                    <td>
-                                        @if ( !string.IsNullOrEmpty( prop.GetValue( item )?.ToString() ) )
-                                        {
-                                            if ( prop.GetValue( item )?.ToString() == "ENG" )
-                                            {
-                                                <span class="fi fi-gb fis"></span>
-                                            }
-                                            else if ( prop.GetValue( item )?.ToString() == "ESP" )
-                                            {
-                                                <span class="fi fi-es fis"></span>
-                                            }
-                                            else if ( prop.PropertyType == typeof( string ) && ((string) prop.GetValue( item ))?.StartsWith( "/img/" ) == true )
-                                            {
-                                                <img class="image-cell" src="@prop.GetValue(item)" alt="Image">
-                                            }
-                                            else
-                                            {
-                                                @Html.Raw(@prop.GetValue( item )?.ToString())
-                                            }
-                                        }
-                                    </td>
-                                }
+                                </td>
                             }
+                            <td>@item.id</td>
+                            <td>@item.title</td>
+                            <td>@item.subtitle</td>
+                            <td>@Html.Raw(item.description)</td>
+                            <td><img class="image-cell" src="@item.cover" alt="cover"></td>
+                            <td>
+                                @if ( item.language == "ENG" )
+                                {
+                                    <span class="fi fi-gb fis"></span>
+                                }
+                                else if ( item.language == "ESP" )
+                                {
+                                    <span class="fi fi-es fis"></span>
+                                }
+                            </td>
+                            <td>@item.releaseDate</td>
+                            <td>@item.totalScore</td>
+                            @if ( ViewBag.score )
+                            {
+                                <td>@item.score</td>
+                            }
+                            <td>@item.idDev</td>
+                            <td>@item.dev</td>
+                            <td>@item.idPlatform</td>
+                            <td>@item.platform</td>
+                            <td>@Html.Raw(item.platformIcon)</td>
+                            <td>@item.idPublisher</td>
+                            <td>@item.publisher</td>
+                            <td>
+                                <a asp-controller="AdminGenre" asp-action="Genres" asp-route-idGame="@item.id">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="AdminPlayerType" asp-action="PlayerTypes" asp-route-idGame="@item.id">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="AdminLanguage" asp-action="Languages" asp-route-idGame="@item.id">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="AdminArticle" asp-action="Articles" asp-route-idGame="@item.id">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </td>
                         </tr>
                     }
                 </table>
@@ -145,11 +196,12 @@
                    asp-route-page="@(Model.CurrentPage - 1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-language="@ViewBag.FormData.language"
-                   asp-route-idAuthor="@ViewBag.FormData.user"
-                   asp-route-idGame="@ViewBag.FormData.idArticle"
+                   asp-route-user="@ViewBag.FormData.user"
+                   asp-route-idArticle="@ViewBag.FormData.idArticle"
+                   asp-route-scored="@ViewBag.FormData.scored"
                    asp-route-id="@ViewBag.FormData.id"
-                   asp-route-headline="@ViewBag.FormData.title"
-                   asp-route-isPublished="@ViewBag.FormData.subtitle"
+                   asp-route-title="@ViewBag.FormData.title"
+                   asp-route-subtitle="@ViewBag.FormData.subtitle"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
                         @ViewData[ "ButtonPrevious" ]
                     </a>
@@ -162,11 +214,12 @@
                    asp-route-page="@(Model.CurrentPage + 1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-language="@ViewBag.FormData.language"
-                   asp-route-idAuthor="@ViewBag.FormData.user"
-                   asp-route-idGame="@ViewBag.FormData.idArticle"
+                   asp-route-user="@ViewBag.FormData.user"
+                   asp-route-idArticle="@ViewBag.FormData.idArticle"
+                   asp-route-scored="@ViewBag.FormData.scored"
                    asp-route-id="@ViewBag.FormData.id"
-                   asp-route-headline="@ViewBag.FormData.title"
-                   asp-route-isPublished="@ViewBag.FormData.subtitle"
+                   asp-route-title="@ViewBag.FormData.title"
+                   asp-route-subtitle="@ViewBag.FormData.subtitle"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
                         @ViewData[ "ButtonNext" ]
                     </a>

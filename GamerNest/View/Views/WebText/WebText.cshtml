@@ -19,37 +19,30 @@
                         <div>
                             <select id="orderBy" name="orderBy">
                                 <option value="wt.id">@ViewData[ "fOrderBy" ]</option>
-                                @foreach ( var prop in Model.webTextList.First().GetType().GetProperties() )
-                                {
-                                    @if ( prop.Name == "category")
-                                    {
-                                        <option value="cat.@prop.Name">@prop.Name</option>
-                                    }
-                                    else if ( prop.Name != "idCategory" )
-                                    {
-                                        <option value="wt.@prop.Name">@prop.Name</option>
-                                    }
-                                    
-                                }
+                                <option value="wt.id">@ViewData[ "tId" ]</option>
+                                <option value="wt.title">@ViewData[ "tTitle" ]</option>
+                                <option value="wt.text">@ViewData[ "tText" ]</option>
+                                <option value="wt.idCategory">@ViewData[ "tIdCategory" ]</option>
+                                <option value="cat.id">@ViewData[ "tCategory" ]</option>
                             </select>
                         </div>
                     }
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="id" name="id" pattern="[0-9]+" placeholder="@ViewData[ "fSearchId" ]">
+                            <input type="text" id="id" name="id"  placeholder="@ViewData[ "fSearchId" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="title" name="title" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchTitle" ]">
+                            <input type="text" id="title" name="title"  placeholder="@ViewData[ "fSearchTitle" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="text" name="text" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchText" ]">
+                            <input type="text" id="text" name="text"  placeholder="@ViewData[ "fSearchText" ]">
                         </div>
                     </div>
                     <div>
@@ -94,14 +87,12 @@
                     <table>
                         <tr>
                             <th>@ViewData[ "Actions" ]</th>
-                            @foreach ( var prop in Model.webTextList.First().GetType().GetProperties() )
-                            {
-                                // Exclude "Password" column from table
-                                if ( prop.Name.ToLower() != "idcategory" && prop.Name.ToLower() != "categorylist" )
-                                {
-                                    <th>@prop.Name</th>
-                                }
-                            }
+                            <th>@ViewData[ "tId" ]</th>
+                            <th>@ViewData[ "tTitle" ]</th>
+                            <th>@ViewData[ "tText" ]</th>
+                            <th>@ViewData[ "tIdCategory" ]</th>
+                            <th>@ViewData[ "tCategory" ]</th>
+                            <th>@ViewData[ "tLanguage" ]</th>
                         </tr>
                         @foreach ( var item in Model.webTextList )
                         {
@@ -129,31 +120,21 @@
                                         </div>
                                     </div>
                                 </td>
-                                @foreach ( var prop in item.GetType().GetProperties() )
-                                {
-
-                                    @if ( prop.Name.ToLower() != "idcategory" && prop.Name.ToLower() != "categorylist" )
-                                        {
-                                        <td>
-                                            @if ( !string.IsNullOrEmpty( prop.GetValue( item )?.ToString() ) )
-                                            {
-                                                if ( prop.GetValue( item )?.ToString() == "ENG" )
-                                                {
-                                                    <span class="fi fi-gb fis"></span>
-                                                }
-                                                else if ( prop.GetValue( item )?.ToString() == "ESP" )
-                                                {
-                                                    <span class="fi fi-es fis"></span>
-                                                }
-                                                else
-                                                {
-                                                    @prop.GetValue( item )?.ToString()
-                                                }
-                                            }
-                                        </td>
-                                        }
-                                    
-                                }
+                                <td>@item.id</td>
+                                <td>@item.title</td>
+                                <td>@item.text</td>
+                                <td>@item.idCategory</td>
+                                <td>@item.category</td>
+                                <td>
+                                    @if ( item.language == "ENG" )
+                                    {
+                                        <span class="fi fi-gb fis"></span>
+                                    }
+                                    else if ( item.language == "ESP" )
+                                    {
+                                        <span class="fi fi-es fis"></span>
+                                    }
+                                </td>
                             </tr>
                         }
                     </table>

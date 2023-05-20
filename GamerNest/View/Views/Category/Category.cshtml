@@ -18,24 +18,22 @@
                     {
                         <div>
                             <select id="orderBy" name="orderBy">
-                                <option value="">@ViewData[ "fOrderBy" ]</option>
-                                @foreach ( var prop in Model.categoryList.First().GetType().GetProperties() )
-                                {
-                                    <option value="@prop.Name">@prop.Name</option>
-                                }
+                                <option value="id">@ViewData[ "fOrderBy" ]</option>
+                                <option value="id">@ViewData[ "tId" ]</option>
+                                <option value="name">@ViewData[ "tName" ]</option>
                             </select>
                         </div>
                     }
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="@ViewData[ "fSearchId" ]">
+                            <input type="number" id="id" name="id"  placeholder="@ViewData[ "fSearchId" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="name" name="name" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchName" ]">
+                            <input type="text" id="name" name="name"  placeholder="@ViewData[ "fSearchName" ]">
                         </div>
                     </div>
 

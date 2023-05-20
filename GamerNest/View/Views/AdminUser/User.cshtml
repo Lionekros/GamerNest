@@ -18,33 +18,29 @@
                     {
                         <div>
                             <select id="orderBy" name="orderBy">
-                                <option value="">@ViewData[ "fOrderBy" ]</option>
-                                @foreach ( var prop in Model.userList.First().GetType().GetProperties() )
-                                {
-                                    if ( prop.Name.ToLower() != "password" )
-                                    {
-                                        <option value="@prop.Name">@prop.Name</option>
-                                    }
-                                }
+                                <option value="id">@ViewData[ "fOrderBy" ]</option>
+                                <option value="id">@ViewData[ "tId" ]</option>
+                                <option value="username">@ViewData[ "tUsername" ]</option>
+                                <option value="email">@ViewData[ "tEmail" ]</option>
                             </select>
                         </div>
                     }
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="@ViewData[ "fSearchId" ]">
+                            <input type="number" id="id" name="id"  placeholder="@ViewData[ "fSearchId" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="username" name="username" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchUsername" ]">
+                            <input type="text" id="username" name="username"  placeholder="@ViewData[ "fSearchUsername" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="email" name="email" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchEmail" ]">
+                            <input type="text" id="email" name="email"  placeholder="@ViewData[ "fSearchEmail" ]">
                         </div>
                     </div>
                     <div>
@@ -128,7 +124,7 @@
                                 </td>
                                 <td>
                                     <!-- Scored Games -->
-                                    <a asp-controller="AdminUser" asp-action="ScoreGames" asp-route-userId="@item.id">
+                                    <a asp-controller="AdminGame" asp-action="Games" asp-route-user="@item.username" asp-route-scored="true">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                 </td>

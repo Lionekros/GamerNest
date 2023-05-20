@@ -18,45 +18,43 @@
                     {
                         <div>
                             <select id="orderBy" name="orderBy">
-                                <option value="">@ViewData[ "fOrderBy" ]</option>
-                                @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
-                                {
-                                    if ( prop.Name.ToLower() != "password" )
-                                    {
-                                        <option value="@prop.Name">@prop.Name</option>
-                                    }
-                                }
+                                <option value="id">@ViewData[ "fOrderBy" ]</option>
+                                <option value="id">@ViewData[ "tId" ]</option>
+                                <option value="name">@ViewData[ "tName" ]</option>
+                                <option value="firstName">@ViewData[ "tFirstName" ]</option>
+                                <option value="seconName">@ViewData[ "tSecondName" ]</option>
+                                <option value="email">@ViewData[ "tEmail" ]</option>
                             </select>
                         </div>
                     }
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="@ViewData[ "fSearchId" ]">
+                            <input type="number" id="id" name="id"  placeholder="@ViewData[ "fSearchId" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="name" name="name" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchName" ]">
+                            <input type="text" id="name" name="name"  placeholder="@ViewData[ "fSearchName" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="firstLastName" name="firstLastName" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchLastName" ]">
+                            <input type="text" id="firstLastName" name="firstLastName"  placeholder="@ViewData[ "fSearchLastName" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="secondLastName" name="secondLastName" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchSecondLastName" ]">
+                            <input type="text" id="secondLastName" name="secondLastName"  placeholder="@ViewData[ "fSearchSecondLastName" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="email" id="email" name="email" placeholder="@ViewData[ "fSearchEmail" ]">
+                            <input type="text" id="email" name="email" placeholder="@ViewData[ "fSearchEmail" ]">
                         </div>
                     </div>
                     <div>
@@ -115,27 +113,11 @@
                         {
                             <tr>
                                 <td>
-                                    <!-- Delete Author -->
-                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal(@item.id, 'AdminAuthor')">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </a>
 
                                     <!-- Edit Author -->
                                     <a asp-controller="AdminAuthor" asp-action="UpdateForm" asp-route-email="@item.email">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
-
-                                    <!-- Modal -->
-                                    <div id="confirmationModal_@item.id" class="modal">
-                                        <div class="modal-content">
-                                            <h2>@ViewData[ "ModalTitle" ]</h2>
-                                            <p>@ViewData[ "ModalText" ]: @item.id?</p>
-                                            <div class="modal-actions">
-                                                <button id="confirmBtn_@item.id" asp-controller="AdminAuthor" asp-action="Delete" asp-route-id="@item.id">@ViewData[ "ModalButtonDelete" ]</button>
-                                                <button id="cancelBtn_@item.id">@ViewData[ "ModalButtonCancelar" ]</button>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </td>
                                 <td>@item.id</td>
                                 <td>@item.name</td>

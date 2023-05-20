@@ -11,7 +11,7 @@ namespace View.Controllers
             (
                   int page = 1
                 , int pageSize = 5,
-                string language = "", string user = "", long idArticle = -1, int id = -1, string title = "", string subtitle = "", string orderBy = ""
+                string language = "", string user = "", long idArticle = -1, bool scored = false, int id = -1, string title = "", string subtitle = "", string orderBy = ""
             )
         {
             try
@@ -24,8 +24,17 @@ namespace View.Controllers
                 }
                 else
                 {
-                    GetAllGames( language, user, idArticle, id, title, subtitle, orderBy );
-                    FiltersViewBag( language, user, idArticle, id, title, subtitle, orderBy );
+                    if (scored)
+                    {
+                        GetGameScore(language, user, id, title, subtitle, orderBy );
+                    }
+                    else
+                    {
+                        GetAllGames( language, user, idArticle, id, title, subtitle, orderBy );
+                    }
+                    FiltersViewBag( language, user, idArticle, scored, id, title, subtitle, orderBy );
+
+                    ViewBag.score = scored;
                 }
 
                 Pagination( page, pageSize );
@@ -48,7 +57,7 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "AdminType" ) == null )
+                if ( HttpContext.Session.GetString( "AdminType" ) == null || HttpContext.Session.GetString( "AdminType" ) == "Author" )
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
@@ -82,7 +91,7 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "AdminType" ) == "" )
+                if ( HttpContext.Session.GetString( "AdminType" ) == null || HttpContext.Session.GetString( "AdminType" ) == "Author" )
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
@@ -268,7 +277,7 @@ namespace View.Controllers
 
         public void FiltersViewBag
             (
-                  string language = "", string user = "", long idArticle = -1, int id = -1, string title = "", string subtitle = "", string orderBy = ""
+                  string language = "", string user = "", long idArticle = -1, bool scored = false, int id = -1, string title = "", string subtitle = "", string orderBy = ""
             )
         {
             ViewBag.FormData = new
@@ -276,6 +285,7 @@ namespace View.Controllers
                 language = language,
                 user = user,
                 idArticle = idArticle,
+                scored = scored,
                 id = id,
                 title = title,
                 subtitle = subtitle,

@@ -14,11 +14,11 @@
 
                 <div>
                     <div>
-                        <label asp-for="name" class="required">Name:</label>
-                        <input required asp-for="name" placeholder="Name" />
+                        <label asp-for="name" class="required">@ViewData[ "fName" ]:</label>
+                        <input required asp-for="name" placeholder="@ViewData[ "fName" ]" />
                     </div>
                     <div>
-                        <label asp-for="language" class="required">Language:</label>
+                        <label asp-for="language" class="required">@ViewData[ "fLanguage" ]:</label>
                         <select asp-for="language" required>
                             <option value="ENG">English</option>
                             <option value="ESP">Español</option>

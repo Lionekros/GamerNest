@@ -96,9 +96,9 @@ namespace View.Controllers
             lists.gameList = GameService.GetGame( id );
         }
 
-        public void GetGameScore(int idArticle = -1, string user = "", string orderBy = "")
+        public void GetGameScore(string language = "", string user = "", long id = -1, string title = "", string subtitle = "", string orderBy = "")
         {
-            lists.gameScoreList = GameService.GetGameScore( idArticle, user, orderBy );
+            lists.gameList = GameService.GetGameScore( language, user, id, title, subtitle, orderBy  );
         }
 
         public void GetGameUpdate(int id = -1)

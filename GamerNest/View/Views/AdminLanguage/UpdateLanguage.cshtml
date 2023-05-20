@@ -18,18 +18,21 @@
 
                     <div>
                         <div>
-                            <label asp-for="id">ID:</label>
-                            <input asp-for="id" placeholder="id" readonly />
+                            <label asp-for="id">@ViewData[ "fId" ]:</label>
+                            <input asp-for="id" placeholder="@ViewData[ "fId" ]" readonly />
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="name">Name:</label>
-                            <input asp-for="name" placeholder="Name" />
+                            <label asp-for="name">@ViewData[ "fName" ]:</label>
+                            <input asp-for="name" placeholder="@ViewData[ "fName" ]" />
                         </div>
+                    </div>
+
+                    <div>
                         <div>
-                            <label asp-for="language">Language:</label>
+                            <label asp-for="language">@ViewData[ "fLanguage" ]:</label>
                             <select asp-for="language">
                                 <option value="ENG">English</option>
                                 <option value="ESP">Español</option>

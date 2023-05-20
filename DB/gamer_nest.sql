@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 20, 2023 at 02:46 AM
+-- Generation Time: May 20, 2023 at 01:02 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -1841,8 +1841,8 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (839, 'tPublisher', 'Editor', 8, 'ESP'),
 (840, 'tGenresList', 'Genres', 8, 'ENG'),
 (841, 'tGenresList', 'Géneros', 8, 'ESP'),
-(842, 'tPalyerTypesList', 'Player Types', 8, 'ENG'),
-(843, 'tPalyerTypesList', 'Tipos de Jugadores', 8, 'ESP'),
+(842, 'tPlayerTypesList', 'Player Types', 8, 'ENG'),
+(843, 'tPlayerTypesList', 'Tipos de Jugadores', 8, 'ESP'),
 (844, 'tGameLanguagesList', 'Game Languages', 8, 'ENG'),
 (845, 'tGameLanguagesList', 'Idiomas del Juego', 8, 'ESP'),
 (846, 'tArticlesList', 'Articles', 8, 'ENG'),
@@ -1881,8 +1881,8 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (879, 'fPublisher', 'Editor', 36, 'ESP'),
 (880, 'fGenresList', 'Genres', 36, 'ENG'),
 (881, 'fGenresList', 'Géneros', 36, 'ESP'),
-(882, 'fPalyerTypesList', 'Player Types', 36, 'ENG'),
-(883, 'fPalyerTypesList', 'Tipos de Jugadores', 36, 'ESP'),
+(882, 'fPlayerTypesList', 'Player Types', 36, 'ENG'),
+(883, 'fPlayerTypesList', 'Tipos de Jugadores', 36, 'ESP'),
 (884, 'fGameLanguagesList', 'Game Languages', 36, 'ENG'),
 (885, 'fGameLanguagesList', 'Idiomas del Juego', 36, 'ESP'),
 (886, 'fArticlesList', 'Articles', 36, 'ENG'),
@@ -1989,7 +1989,11 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (987, 'Created', 'Created', 37, 'ENG'),
 (988, 'Created', 'Creado', 37, 'ESP'),
 (989, 'Updated', 'Updated', 37, 'ENG'),
-(990, 'Updated', 'Actualizado', 37, 'ESP');
+(990, 'Updated', 'Actualizado', 37, 'ESP'),
+(991, 'tScore', 'Score', 8, 'ENG'),
+(992, 'tScore', 'Puntuación', 8, 'ESP'),
+(993, 'tIdCategory', 'ID Category', 25, 'ENG'),
+(994, 'tIdCategory', 'ID de la Categoría', 25, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -2214,7 +2218,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `web_text`
 --
 ALTER TABLE `web_text`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=991;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=995;
 
 --
 -- Constraints for dumped tables

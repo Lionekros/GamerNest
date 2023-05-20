@@ -18,33 +18,33 @@
 
                     <div>
                         <div>
-                            <label asp-for="id">ID:</label>
-                            <input asp-for="id" placeholder="id" readonly/>
+                            <label asp-for="id">@ViewData[ "fId" ]:</label>
+                            <input asp-for="id" placeholder="@ViewData[ "fId" ]" readonly />
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="title">Title:</label>
-                            <input asp-for="title" placeholder="Title" />
+                            <label asp-for="title">@ViewData[ "fTitle" ]:</label>
+                            <input asp-for="title" placeholder="@ViewData[ "fTitle" ]" />
                         </div>
                     </div>
                     <div>
                         <div>
-                            <label asp-for="subtitle">Subtitle:</label>
-                            <input asp-for="subtitle" placeholder="Subtitle" />
+                            <label asp-for="subtitle">@ViewData[ "fSubtitle" ]:</label>
+                            <input asp-for="subtitle" placeholder="@ViewData[ "fSubtitle" ]" />
                         </div>
                     </div>
                     <div>
                         <div>
-                            <label asp-for="description">Description:</label>
+                            <label asp-for="description">@ViewData[ "fDescription" ]:</label>
                             <textarea asp-for="description" id="mytextarea"></textarea>
                         </div>
                     </div>
                     <div>
                         <div>
-                            <label asp-for="language">Language:</label>
-                            <select asp-for="language">
+                            <label asp-for="language">@ViewData[ "fLanguage" ]:</label>
+                            <select asp-for="language" required>
                                 <option value="ENG">English</option>
                                 <option value="ESP">Español</option>
                             </select>
@@ -52,21 +52,21 @@
                     </div>
                     <div>
                         <div>
-                            <label asp-for="cover">Cover:</label>
+                            <label asp-for="cover">@ViewData[ "fCover" ]:</label>
                             <input asp-for="cover" type="file" />
                         </div>
                     </div>
                     <div>
                         <div>
-                            <label asp-for="releaseDate">Release Date:</label>
+                            <label asp-for="releaseDate">@ViewData[ "fReleaseDate" ]:</label>
                             <input asp-for="releaseDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="totalScore">Total Score:</label>
-                            <input asp-for="totalScore" type="number" readonly />
+                            <label asp-for="totalScore">@ViewData[ "fTotalScore" ]:</label>
+                            <input asp-for="totalScore" type="number" value="0" readonly />
                         </div>
                     </div>
                     <div>
@@ -77,8 +77,8 @@
 
                     <div>
                         <div>
-                            <label asp-for="idDev">Developer:</label>
-                            <select asp-for="idDev" class="select2SingleForm">
+                            <label asp-for="idDev">@ViewData[ "fDev" ]:</label>
+                            <select asp-for="idDev" class="select2SingleForm" required>
                                 @foreach ( var item in Model.devList )
                                 {
                                     <option value="@item.id">@item.name</option>
@@ -89,8 +89,8 @@
 
                     <div>
                         <div>
-                            <label asp-for="idPublisher">Publisher:</label>
-                            <select asp-for="idPublisher" class="select2SingleForm">
+                            <label asp-for="idPublisher">@ViewData[ "fPublisher" ]:</label>
+                            <select asp-for="idPublisher" class="select2SingleForm" required>
                                 @foreach ( var item in Model.publisherList )
                                 {
                                     <option value="@item.id">@item.name</option>
@@ -101,8 +101,8 @@
 
                     <div>
                         <div>
-                            <label asp-for="idPlatform">Platform:</label>
-                            <select asp-for="idPlatform" class="select2SingleForm">
+                            <label asp-for="idPlatform">@ViewData[ "fPlatform" ]:</label>
+                            <select asp-for="idPlatform" class="select2SingleForm" required>
                                 @foreach ( var item in Model.platformList )
                                 {
                                     <option value="@item.id">@item.name</option>
@@ -114,7 +114,7 @@
 
                     <div>
                         <div>
-                            <label asp-for="idGenre">Genres:</label>
+                            <label asp-for="idGenre">@ViewData[ "fGenresList" ]:</label>
                             <select asp-for="idGenre" class="select2SingleForm" multiple="multiple">
                                 @foreach ( var item in Model.genreList )
                                 {
@@ -126,7 +126,7 @@
 
                     <div>
                         <div>
-                            <label asp-for="idPlayerType">Player Types:</label>
+                            <label asp-for="idPlayerType">@ViewData[ "fPlayerTypesList" ]:</label>
                             <select asp-for="idPlayerType" class="select2SingleForm" multiple="multiple">
                                 @foreach ( var item in Model.playerTypeList )
                                 {
@@ -138,7 +138,7 @@
 
                     <div>
                         <div>
-                            <label asp-for="idLanguageGame">Game Languages:</label>
+                            <label asp-for="idLanguageGame">@ViewData[ "fGameLanguagesList" ]:</label>
                             <select asp-for="idLanguageGame" class="select2SingleForm" multiple="multiple">
                                 @foreach ( var item in Model.languageGameList )
                                 {

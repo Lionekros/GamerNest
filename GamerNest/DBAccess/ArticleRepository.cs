@@ -48,7 +48,7 @@ namespace DBAccess
 
                     if ( !string.IsNullOrEmpty( author ) )
                     {
-                        conditions.Add( "author.email = '" + author + "'" );
+                        conditions.Add( "LOWER(author.email) LIKE '%" + author.ToLower() + "%'" );
                     }
 
                     if ( isPublished >= 0 )

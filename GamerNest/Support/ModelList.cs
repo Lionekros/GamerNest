@@ -13,7 +13,6 @@
         public List<DevPublisherModel> devList { get; set; }
         public List<DevPublisherModel> publisherList { get; set; }
         public List<GameModel> gameList { get; set; }
-        public List<GameScoreModel> gameScoreList { get; set; }
         public List<GenreTypeLanguageModel> genreList { get; set; }
         public List<GenreTypeLanguageModel> languageList { get; set; }
         public List<GenreTypeLanguageModel> playerTypeList { get; set; }

@@ -67,7 +67,7 @@ namespace DBAccess
 
                     if ( !string.IsNullOrEmpty( language ) )
                     {
-                        conditions.Add( "LOWER(article.language) LIKE '%" + language.ToLower() + "%'" );
+                        conditions.Add( "LOWER(game.language) LIKE '%" + language.ToLower() + "%'" );
                     }
 
                     if ( conditions?.Count > 0 )
@@ -120,26 +120,55 @@ namespace DBAccess
             }
         }
 
-        public static DataTable GetGameScore(int idArticle = -1, string user = "", string orderBy = "")
+        public static DataTable GetGameScore(string language = "", string user = "", long id = -1, string title = "", string subtitle = "", string orderBy = "")
         {
             try
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
                     StringBuilder queryBuilder = new StringBuilder();
-                    queryBuilder.Append( "game.id, game.title, game.subtitle, game.cover, game.totalScore, game.idPlatform, platform.name as 'platform', platform.icon as 'platformIcon', user_score_game.score as 'score', user.username as 'username'" );
-                    queryBuilder.Append( " game, platform, user_score_game, user" );
-                    queryBuilder.Append( " WHERE game.idPlatform = platform.id" );
-                    queryBuilder.Append( " AND game.id = user_score_game.idGame" );
-                    queryBuilder.Append( " AND user_score_game.idUser = user.id" );
+                    queryBuilder.Append( "SELECT game.id, game.title, game.subtitle, game.description, game.language, game.cover, game.releaseDate, game.totalScore, game.isFav, game.idDev, dev.name as 'dev', game.idPlatform, platform.name as 'platform', platform.icon as 'platformIcon', game.idPublisher, publisher.name as 'publisher', user_score_game.score as 'score'" );
+                    queryBuilder.Append( " FROM game, dev, publisher, platform, user_score_game, user" );
 
-                    if ( idArticle > 0 )
+                    if ( id > 0 )
                     {
-                        queryBuilder.Append( " AND user_score_game.idGame = " + idArticle );
+                        queryBuilder.Append( " WHERE game.idDev = dev.id" );
+                        queryBuilder.Append( " AND game.idPlatform = platform.id" );
+                        queryBuilder.Append( " AND game.idPublisher = publisher.id" );
+                        queryBuilder.Append( " AND game.id = user_score_game.idGame" );
+                        queryBuilder.Append( " AND user_score_game.idUser = user.id" );
+                        queryBuilder.Append( " AND user_score_game.idGame = " + id );
                     }
-                    else if ( !string.IsNullOrEmpty( user ) )
+                    else
                     {
-                        queryBuilder.Append( " AND user.username = " + user );
+                        queryBuilder.Append( " WHERE game.idDev = dev.id" );
+                        queryBuilder.Append( " AND game.idPlatform = platform.id" );
+                        queryBuilder.Append( " AND game.idPublisher = publisher.id" );
+                        queryBuilder.Append( " AND game.id = user_score_game.idGame" );
+                        queryBuilder.Append( " AND user_score_game.idUser = user.id" );
+                        queryBuilder.Append( " AND user.username = '" + user + "'" );
+                    }
+
+                    List<string> conditions = new List<string>();
+
+                    if ( !string.IsNullOrEmpty( title ) )
+                    {
+                        conditions.Add( "LOWER(game.title) LIKE '%" + title.ToLower() + "%'" );
+                    }
+                    if ( !string.IsNullOrEmpty( subtitle ) )
+                    {
+                        conditions.Add( "LOWER(game.subtitle) LIKE '%" + subtitle.ToLower() + "%'" );
+                    }
+
+                    if ( !string.IsNullOrEmpty( language ) )
+                    {
+                        conditions.Add( "LOWER(game.language) LIKE '%" + language.ToLower() + "%'" );
+                    }
+
+                    if ( conditions?.Count > 0 )
+                    {
+                        queryBuilder.Append( " AND " );
+                        queryBuilder.Append( string.Join( " AND ", conditions ) );
                     }
 
                     if ( !string.IsNullOrEmpty( orderBy ) )

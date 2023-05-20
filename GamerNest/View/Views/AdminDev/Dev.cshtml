@@ -9,65 +9,69 @@
 
         <h3>@ViewData[ "Description" ]</h3>
 
+        <section class="filter">
+            <h4>@ViewData[ "FilterTitle" ]:</h4>
+            <form asp-controller="AdminDev" asp-action="Devs" method="post">
+                @if ( Model.devList?.Count > 0 )
+                {
+                    <div>
+                        <select id="orderBy" name="orderBy">
+                            <option value="id">@ViewData[ "fOrderBy" ]</option>
+                            <option value="id">@ViewData[ "tId" ]</option>
+                            <option value="name">@ViewData[ "tName" ]</option>
+                        </select>
+                    </div>
+                }
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="number" id="id" name="id"  placeholder="@ViewData[ "fSearchId" ]">
+                    </div>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="name" name="name"  placeholder="@ViewData[ "fSearchName" ]">
+                    </div>
+                </div>
+
+                <div>
+                    <input class="filtButton" type="submit" value="@ViewData[ "ButtonFilter" ]">
+                </div>
+
+
+            </form>
+        </section>
+
         @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
         {
-            <section class="filter">
-                <h4>@ViewData[ "FilterTitle" ]:</h4>
-                <form asp-controller="AdminDev" asp-action="Devs" method="post">
-                    @if ( Model.devList?.Count > 0 )
-                    {
-                        <div>
-                            <select id="orderBy" name="orderBy">
-                                <option value="">@ViewData[ "fOrderBy" ]</option>
-                                @foreach ( var prop in Model.devList.First().GetType().GetProperties() )
-                                {
-                                    <option value="@prop.Name">@prop.Name</option>
-                                }
-                            </select>
-                        </div>
-                    }
-                    <div>
-                        <div class="input-group">
-                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="@ViewData[ "fSearchId" ]">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-group">
-                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="name" name="name" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchName" ]">
-                        </div>
-                    </div>
-
-                    <div>
-                        <input class="filtButton" type="submit" value="@ViewData[ "ButtonFilter" ]">
-                    </div>
-
-
-                </form>
-            </section>
-
             <section class="create">
                 <a asp-action="CreateForm" asp-controller="AdminDev">
                     <i class="fa-solid fa-plus"></i>
                     <span>@ViewData[ "ButtonNew" ]</span>
                 </a>
             </section>
+        }
 
-            <section class="adminTable">
-                @if ( Model.devList?.Count > 0 )
-                {
-                    <table>
-                        <tr>
-                            <th>@ViewData[ "Actions" ]</th>
-                            @foreach ( var prop in Model.devList.First().GetType().GetProperties() )
-                            {
-                                <th>@prop.Name</th>
-                            }
-                        </tr>
-                        @foreach ( var item in Model.devList )
+
+        <section class="adminTable">
+            @if ( Model.devList?.Count > 0 )
+            {
+                <table>
+                    <tr>
+                        @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
                         {
-                            <tr>
+                            <th>@ViewData[ "Actions" ]</th>
+                        }
+                        <th>@ViewData[ "tId" ]</th>
+                        <th>@ViewData[ "tName" ]</th>
+
+                    </tr>
+                    @foreach ( var item in Model.devList )
+                    {
+                        <tr>
+                            @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
+                            {
                                 <td>
                                     <!-- Delete Dev -->
                                     <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'AdminDev')">
@@ -92,57 +96,53 @@
                                         </div>
                                     </div>
                                 </td>
-                                @foreach ( var prop in item.GetType().GetProperties() )
-                                {
-                                    <td>
-                                        @prop.GetValue( item )?.ToString()
-                                    </td>
-                                }
-                            </tr>
-                        }
-                    </table>
-                }
-                else
-                {
-                    <h4>@ViewData[ "NoData" ]</h4>
-                }
-            </section>
+                            }
+                            <td>@item.id</td>
+                            <td>@item.name</td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <h4>@ViewData[ "NoData" ]</h4>
+            }
+        </section>
 
-            <section class="pagination">
-                <div>
-                    @if ( Model.CurrentPage > 1 )
-                    {
-                        <!-- Previous Page -->
-                        <a asp-controller="AdminDev" asp-action="Devs"
+        <section class="pagination">
+            <div>
+                @if ( Model.CurrentPage > 1 )
+                {
+                    <!-- Previous Page -->
+                    <a asp-controller="AdminDev" asp-action="Devs"
                    asp-route-page="@(Model.CurrentPage - 1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-id="@ViewBag.FormData.id"
                    asp-route-name="@ViewBag.FormData.name"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
-                            @ViewData[ "ButtonPrevious" ]
-                        </a>
-                    }
+                        @ViewData[ "ButtonPrevious" ]
+                    </a>
+                }
 
-                    @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
-                    {
-                        <!-- Next Page -->
-                        <a asp-controller="AdminDev" asp-action="Devs"
+                @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
+                {
+                    <!-- Next Page -->
+                    <a asp-controller="AdminDev" asp-action="Devs"
                    asp-route-page="@(Model.CurrentPage + 1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-id="@ViewBag.FormData.id"
                    asp-route-name="@ViewBag.FormData.name"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
-                            @ViewData[ "ButtonNext" ]
-                        </a>
-                    }
-                </div>
-                <div>
-                    <p>
-                        @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.devList?.Count @ViewData[ "OutOf" ] @Model.TotalItems)
-                    </p>
-                </div>
-            </section>
-        }
+                        @ViewData[ "ButtonNext" ]
+                    </a>
+                }
+            </div>
+            <div>
+                <p>
+                    @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.devList?.Count @ViewData[ "OutOf" ] @Model.TotalItems)
+                </p>
+            </div>
+        </section>
 
     </div>
 </main>

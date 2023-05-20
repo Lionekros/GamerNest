@@ -18,24 +18,22 @@
                     {
                         <div>
                             <select id="orderBy" name="orderBy">
-                                <option value="">@ViewData[ "fOrderBy" ]</option>
-                                @foreach ( var prop in Model.webLanguageList.First().GetType().GetProperties() )
-                                {
-                                    <option value="@prop.Name">@prop.Name</option>
-                                }
+                                <option value="id">@ViewData[ "fOrderBy" ]</option>
+                                <option value="id">@ViewData[ "tId" ]</option>
+                                <option value="name">@ViewData[ "tName" ]</option>
                             </select>
                         </div>
                     }
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="id" name="id" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchId" ]">
+                            <input type="text" id="id" name="id"  placeholder="@ViewData[ "fSearchId" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="name" name="name" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchName" ]">
+                            <input type="text" id="name" name="name"  placeholder="@ViewData[ "fSearchName" ]">
                         </div>
                     </div>
 
@@ -60,14 +58,9 @@
                     <table>
                         <tr>
                             <th>@ViewData[ "Actions" ]</th>
-                            @foreach ( var prop in Model.webLanguageList.First().GetType().GetProperties() )
-                            {
-                                // Exclude "Password" column from table
-                                if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
-                                {
-                                    <th>@prop.Name</th>
-                                }
-                            }
+                            <th>@ViewData[ "tId" ]</th>
+                            <th>@ViewData[ "tName" ]</th>
+                            <th>@ViewData[ "tIcon" ]</th>
                         </tr>
                         @foreach ( var item in Model.webLanguageList )
                         {
@@ -79,22 +72,11 @@
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
                                 </td>
-                                @foreach ( var prop in item.GetType().GetProperties() )
-                                {
-                                    // Exclude "Password" column from table
-                                    if ( prop.Name.ToLower() != "icon" )
-                                    {
-                                        <td>
-                                            @prop.GetValue(item)
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td>
-                                            @Html.Raw(prop.GetValue(item))
-                                        </td>
-                                    }
-                                }
+                                <td>@item.id</td>
+                                <td>@item.name</td>
+                                <td>
+                                    @Html.Raw(item.icon)
+                                </td>
                             </tr>
                         }
                     </table>

@@ -41,6 +41,56 @@
                     <i class="fa-solid fa-right-from-bracket" id="log_out"></i>
                 </a>
             </li>
+            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Games") ? "linkActive" : "")">
+                <a asp-controller="AdminGame" asp-action="Games">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span class="links_name">Games</span>
+                </a>
+                <span class="tooltip">Games</span>
+            </li>
+            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Devs") ? "linkActive" : "")">
+                <a asp-controller="AdminDev" asp-action="Devs">
+                    <i class="fa-solid fa-code"></i>
+                    <span class="links_name">Devs</span>
+                </a>
+                <span class="tooltip">Devs</span>
+            </li>
+            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Publishers") ? "linkActive" : "")">
+                <a asp-controller="AdminPublisher" asp-action="Publishers">
+                    <i class="fa-solid fa-upload"></i>
+                    <span class="links_name">Publishers</span>
+                </a>
+                <span class="tooltip">Publishers</span>
+            </li>
+            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Platforms") ? "linkActive" : "")">
+                <a asp-controller="AdminPlatform" asp-action="Platforms">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span class="links_name">Platforms</span>
+                </a>
+                <span class="tooltip">Platforms</span>
+            </li>
+            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Genres") ? "linkActive" : "")">
+                <a asp-controller="AdminGenre" asp-action="Genres">
+                    <i class="fa-solid fa-dragon"></i>
+                    <span class="links_name">Genres</span>
+                </a>
+                <span class="tooltip">Genres</span>
+            </li>
+            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "Languages") ? "linkActive" : "")">
+                <a asp-controller="AdminLanguage" asp-action="Languages">
+                    <i class="fa-solid fa-volume-high"></i>
+                    <span class="links_name">Languages</span>
+                </a>
+                <span class="tooltip">Languages</span>
+            </li>
+            <li class="@((ViewContext.RouteData.Values["action"].ToString() == "PlayerTypes") ? "linkActive" : "")">
+                <a asp-controller="AdminPlayerType" asp-action="PlayerTypes">
+                    <i class="fa-solid fa-chess"></i>
+                    <span class="links_name">Player Types</span>
+                </a>
+                <span class="tooltip">Player Types</span>
+            </li>
+
         </ul>
     </nav>
 }

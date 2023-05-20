@@ -14,16 +14,16 @@
 
                 <div>
                     <div>
-                        <label asp-for="name">ID:</label>
-                        <input asp-for="id" placeholder="id" required />
+                        <label asp-for="name">@ViewData[ "fId" ]:</label>
+                        <input asp-for="id" placeholder="@ViewData[ "fId" ]" required />
                     </div>
                     <div>
-                        <label asp-for="name" class="required">Name:</label>
-                        <input required asp-for="name" placeholder="Name" />
+                        <label asp-for="name" class="required">@ViewData[ "fName" ]:</label>
+                        <input required asp-for="name" placeholder="@ViewData[ "fName" ]" />
                     </div>
                     <div>
-                        <label asp-for="icon" class="required">Icon:</label>
-                        <input required asp-for="icon" placeholder="flag icon" />
+                        <label asp-for="icon" class="required">@ViewData[ "fIcon" ]:</label>
+                        <input required asp-for="icon" placeholder="@ViewData[ "fIcon" ]" />
                     </div>
                 </div>
 

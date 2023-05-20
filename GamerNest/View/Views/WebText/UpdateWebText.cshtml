@@ -17,22 +17,22 @@
 
                     <div>
                         <div>
-                            <label asp-for="id">ID:</label>
-                            <input asp-for="id" placeholder="id" readonly />
+                            <label asp-for="id">@ViewData[ "fId" ]:</label>
+                            <input asp-for="id" placeholder="@ViewData[ "fId" ]" readonly />
                         </div>
                     </div>
 
                     <div>
                         <div>
-                            <label asp-for="title" class="required">Title:</label>
-                            <input required asp-for="title" placeholder="Title" />
+                            <label asp-for="title" class="required">@ViewData[ "fTitle" ]:</label>
+                            <input required asp-for="title" placeholder="@ViewData[ "fTitle" ]" />
                         </div>
                         <div>
-                            <label asp-for="text" class="required">Text:</label>
-                            <input required asp-for="text" placeholder="Text" />
+                            <label asp-for="text" class="required">@ViewData[ "fText" ]:</label>
+                            <input required asp-for="text" placeholder="@ViewData[ "fText" ]" />
                         </div>
                         <div>
-                            <label asp-for="idCategory" class="required">Category:</label>
+                            <label asp-for="idCategory" class="required">@ViewData[ "fCategory" ]:</label>
                             <select asp-for="idCategory" class="select2SingleForm" required>
                                 @foreach ( var item in Model.categoryList )
                                 {
@@ -41,7 +41,7 @@
                             </select>
                         </div>
                         <div>
-                            <label asp-for="language" class="required">Language:</label>
+                            <label asp-for="language" class="required">@ViewData[ "fLanguage" ]:</label>
                             <select asp-for="language" required>
                                 <option value="ENG">English</option>
                                 <option value="ESP">Español</option>

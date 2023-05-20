@@ -9,82 +9,87 @@
 
         <h3>@ViewData[ "Description" ]</h3>
 
-        @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
-        {
-            <section class="filter">
-                <h4>@ViewData[ "FilterTitle" ]:</h4>
-                <form asp-controller="AdminLanguage" asp-action="Languages" method="post">
-                    @if ( Model.languageList?.Count > 0 )
-                    {
-                        <div>
-                            <select id="orderBy" name="orderBy">
-                                <option value="">@ViewData[ "fOrderBy" ]</option>
-                                @foreach ( var prop in Model.languageList.First().GetType().GetProperties() )
-                                {
-                                    <option value="@prop.Name">@prop.Name</option>
-                                }
-                            </select>
-                        </div>
-                    }
-                    <div>
-                        <div class="input-group">
-                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="number" id="id" name="id" pattern="[0-9]+" placeholder="@ViewData[ "fSearchId" ]">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-group">
-                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="name" name="name" pattern="[\p{L} '-.]+" placeholder="@ViewData[ "fSearchName" ]">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-group">
-                            <select name="language" id="language">
-                                <option value="">@ViewData[ "fSearchLanguage" ]</option>
-                                <option value="ENG">ENG</option>
-                                <option value="ESP">ESP</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <input class="filtButton" type="submit" value="@ViewData[ "ButtonFilter" ]">
-                    </div>
-
-
-                </form>
-            </section>
-
-            <section class="create">
-                <a asp-action="CreateForm" asp-controller="AdminLanguage">
-                    <i class="fa-solid fa-plus"></i>
-                    <span>@ViewData[ "ButtonNew" ]</span>
-                </a>
-            </section>
-
-            <section class="adminTable">
+        <section class="filter">
+            <h4>@ViewData[ "FilterTitle" ]:</h4>
+            <form asp-controller="AdminLanguage" asp-action="Languages" method="post">
                 @if ( Model.languageList?.Count > 0 )
                 {
-                    <table>
-                        <tr>
-                            <th>@ViewData[ "Actions" ]</th>
-                            @foreach ( var prop in Model.languageList.First().GetType().GetProperties() )
-                            {
-                                <th>@prop.Name</th>
-                            }
-                        </tr>
-                        @foreach ( var item in Model.languageList )
+                    <div>
+                        <select id="orderBy" name="orderBy">
+                            <option value="id">@ViewData[ "fOrderBy" ]</option>
+                            <option value="id">@ViewData[ "tId" ]</option>
+                            <option value="name">@ViewData[ "tName" ]</option>
+                        </select>
+                    </div>
+                }
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="number" id="id" name="id"  placeholder="@ViewData[ "fSearchId" ]">
+                    </div>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="name" name="name"  placeholder="@ViewData[ "fSearchName" ]">
+                    </div>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <select name="language" id="language">
+                            <option value="">@ViewData[ "fSearchLanguage" ]</option>
+                            <option value="ENG">ENG</option>
+                            <option value="ESP">ESP</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <input class="filtButton" type="submit" value="@ViewData[ "ButtonFilter" ]">
+                </div>
+
+
+            </form>
+        </section>
+
+        @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
+        {
+<section class="create">
+            <a asp-action="CreateForm" asp-controller="AdminLanguage">
+                <i class="fa-solid fa-plus"></i>
+                <span>@ViewData[ "ButtonNew" ]</span>
+            </a>
+        </section>
+        }
+        
+
+        <section class="adminTable">
+            @if ( Model.languageList?.Count > 0 )
+            {
+                <table>
+                    <tr>
+                        @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
                         {
-                            <tr>
+                            <th>@ViewData[ "Actions" ]</th>
+                        }
+                        <th>@ViewData[ "tId" ]</th>
+                        <th>@ViewData[ "tName" ]</th>
+                        <th>@ViewData[ "tLanguage" ]</th>
+
+                    </tr>
+                    @foreach ( var item in Model.languageList )
+                    {
+                        <tr>
+                            @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
+                            {
                                 <td>
-                                    <!-- Delete Language -->
-                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'AdminLanguage')">
+                                    <!-- Delete Dev -->
+                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'AdminDev')">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
 
-                                    <!-- Edit Language -->
-                                    <a asp-controller="AdminLanguage" asp-action="UpdateForm" asp-route-id="@item.id">
+                                    <!-- Edit Dev -->
+                                    <a asp-controller="AdminDev" asp-action="UpdateForm" asp-route-id="@item.id">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
 
@@ -94,49 +99,42 @@
                                             <h2>@ViewData[ "ModalTitle" ]</h2>
                                             <p>@ViewData[ "ModalText" ]: @item.id?</p>
                                             <div class="modal-actions">
-                                                <button id="confirmBtn_@item.id" asp-controller="AdminLanguage" asp-action="Delete" asp-route-id="@item.id">@ViewData[ "ModalButtonDelete" ]</button>
+                                                <button id="confirmBtn_@item.id" asp-controller="AdminDev" asp-action="Delete" asp-route-id="@item.id">@ViewData[ "ModalButtonDelete" ]</button>
 
                                                 <button id="cancelBtn_@item.id">@ViewData[ "ModalButtonCancelar" ]</button>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                @foreach ( var prop in item.GetType().GetProperties() )
+                            }
+                            <td>@item.id</td>
+                            <td>@item.name</td>
+                            <td>
+                                @if ( item.language == "ENG" )
                                 {
-                                    <td>
-                                        @if ( !string.IsNullOrEmpty( prop.GetValue( item )?.ToString() ) )
-                                        {
-                                            if ( prop.GetValue( item )?.ToString() == "ENG" )
-                                            {
-                                                <span class="fi fi-gb fis"></span>
-                                            }
-                                            else if ( prop.GetValue( item )?.ToString() == "ESP" )
-                                            {
-                                                <span class="fi fi-es fis"></span>
-                                            }
-                                            else
-                                            {
-                                                @prop.GetValue( item )?.ToString()
-                                            }
-                                        }
-                                    </td>
+                                    <span class="fi fi-gb fis"></span>
                                 }
-                            </tr>
-                        }
-                    </table>
-                }
-                else
-                {
-                    <h4>@ViewData[ "NoData" ]</h4>
-                }
-            </section>
+                                else if ( item.language == "ESP" )
+                                {
+                                    <span class="fi fi-es fis"></span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <h4>@ViewData[ "NoData" ]</h4>
+            }
+        </section>
 
-            <section class="pagination">
-                <div>
-                    @if ( Model.CurrentPage > 1 )
-                    {
-                        <!-- Previous Page -->
-                        <a asp-controller="AdminLanguage" asp-action="Languages"
+        <section class="pagination">
+            <div>
+                @if ( Model.CurrentPage > 1 )
+                {
+                    <!-- Previous Page -->
+                    <a asp-controller="AdminLanguage" asp-action="Languages"
                    asp-route-page="@(Model.CurrentPage - 1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-language="@ViewBag.FormData.language"
@@ -144,14 +142,14 @@
                    asp-route-id="@ViewBag.FormData.id"
                    asp-route-name="@ViewBag.FormData.name"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
-                            @ViewData[ "ButtonPrevious" ]
-                        </a>
-                    }
+                        @ViewData[ "ButtonPrevious" ]
+                    </a>
+                }
 
-                    @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
-                    {
-                        <!-- Next Page -->
-                        <a asp-controller="AdminLanguage" asp-action="Languages"
+                @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
+                {
+                    <!-- Next Page -->
+                    <a asp-controller="AdminLanguage" asp-action="Languages"
                    asp-route-page="@(Model.CurrentPage + 1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-language="@ViewBag.FormData.language"
@@ -159,17 +157,16 @@
                    asp-route-id="@ViewBag.FormData.id"
                    asp-route-name="@ViewBag.FormData.name"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
-                            @ViewData[ "ButtonNext" ]
-                        </a>
-                    }
-                </div>
-                <div>
-                    <p>
-                        @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.languageList?.Count @ViewData[ "OutOf" ] @Model.TotalItems)
-                    </p>
-                </div>
-            </section>
-        }
+                        @ViewData[ "ButtonNext" ]
+                    </a>
+                }
+            </div>
+            <div>
+                <p>
+                    @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.languageList?.Count @ViewData[ "OutOf" ] @Model.TotalItems)
+                </p>
+            </div>
+        </section>
 
     </div>
 </main>

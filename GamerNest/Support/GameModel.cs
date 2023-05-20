@@ -46,6 +46,8 @@ namespace Support
         public List<DevPublisherModel>? publisherList { get; set; }
         public List<PlatformModel>? platformList { get; set; }
 
+        public sbyte? score { get; set; }
+
         public GameModel()
         {
         }
@@ -68,6 +70,15 @@ namespace Support
             platformIcon = row.Field<string?>( "platformIcon" );
             idPublisher = row.Field<int>( "idPublisher" );
             publisher = row.Field<string?>( "publisher" );
+
+            if ( row.Table.Columns.Contains( "score" ) )
+            {
+                score = row.Field<sbyte>( "score" );
+            }
+            else
+            {
+                score = -1;
+            }
         }
     }
 }

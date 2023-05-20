@@ -60,23 +60,23 @@ namespace Domain
             }
         }
 
-        public static List<GameScoreModel> GetGameScore(int idArticle = -1, string user = "", string orderBy = "")
+        public static List<GameModel> GetGameScore(string language = "", string user = "", long id = -1, string title = "", string subtitle = "", string orderBy = "")
         {
             try
             {
-                DataTable dt = GameRepository.GetGameScore(idArticle, user, orderBy);
-                List<GameScoreModel> GameList = new List<GameScoreModel>();
+                DataTable dt = GameRepository.GetGameScore( language, user, id, title, subtitle, orderBy  );
+                List<GameModel> GameList = new List<GameModel>();
 
                 foreach ( DataRow row in dt.Rows )
                 {
-                    GameList.Add( new GameScoreModel( row ) );
+                    GameList.Add( new GameModel( row ) );
                 }
 
                 return GameList;
             }
             catch ( Exception ex )
             {
-                List<GameScoreModel> GameList = new List<GameScoreModel>();
+                List<GameModel> GameList = new List<GameModel>();
                 Log log = new Log();
                 log.Add( ex.Message );
                 return GameList;

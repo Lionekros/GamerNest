@@ -22,10 +22,6 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "LogInForm", "Admin" );
                 }
-                else if ( HttpContext.Session.GetString( "AdminType" ) != "Admin" )
-                {
-                    return RedirectToAction( "Index", "Admin" );
-                }
                 GetAllDevs(id, name, orderBy );
                 Pagination( page, pageSize );
                 FiltersViewBag( id, name, orderBy );
