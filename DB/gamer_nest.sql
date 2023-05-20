@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 20, 2023 at 01:02 PM
+-- Generation Time: May 20, 2023 at 04:21 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -518,8 +518,8 @@ CREATE TABLE `article` (
   `body` mediumtext CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `cover` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `isPublished` tinyint NOT NULL,
-  `createdDate` varchar(19) COLLATE utf8mb3_bin NOT NULL,
-  `updatedDate` varchar(19) COLLATE utf8mb3_bin DEFAULT NULL,
+  `createdDate` varchar(19) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `updatedDate` varchar(19) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `idAuthor` int NOT NULL,
   `language` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
@@ -529,14 +529,15 @@ CREATE TABLE `article` (
 --
 
 INSERT INTO `article` (`id`, `headline`, `summary`, `body`, `cover`, `isPublished`, `createdDate`, `updatedDate`, `idAuthor`, `language`) VALUES
-(9, 'Headline1', 'Summary1', 'Body1', '/img/Cover/Article/Default.png', 0, '2023-05-12 13:04:10', NULL, 10, 'ESP'),
-(10, 'Headline2', 'Summary2', 'Body2', '/img/Cover/Article/Default.png', 1, '2023-05-12 13:04:10', NULL, 12, 'ENG'),
-(11, 'Headline3', 'Summary3', 'Body3', '/img/Cover/Article/Default.png', 0, '2023-05-12 13:04:10', NULL, 12, 'ESP'),
-(12, 'Headline4', 'Summary4', 'Body4', '/img/Cover/Article/Default.png', 0, '2023-05-12 13:04:10', NULL, 13, 'ESP'),
-(13, 'Headline5', 'Summary5', 'Body5', '/img/Cover/Article/Default.png', 1, '2023-05-12 13:04:10', NULL, 15, 'ENG'),
-(14, 'Headline6', 'Summary6', 'Body6', '/img/Cover/Article/Default.png', 1, '2023-05-12 13:04:10', NULL, 16, 'ESP'),
-(31, 'AAAAAA', '<p>asdasd</p>', '<p>asdasd</p>', '/img/Cover/Article/cover_31.webp', 0, '2023-05-14 22:31:48', NULL, 10, 'ENG'),
-(32, 'Vampire Survivors, bienvenido a tu nueva adicción', '<div>\r\n<div>Una de las primeras sorpresas de este 2022 es el triunfo en ventas de este modesto juego de acci&oacute;n que, con muy poco, consigue que nos cueste despegar los dedos del pad.</div>\r\n</div>', '<div>\r\n<div>Que el videojuego avance t&eacute;cnicamente no est&aacute; nunca de m&aacute;s: mejores gr&aacute;ficos, presentaciones m&aacute;s espectaculares, tecnolog&iacute;a de vanguardia&hellip; es todo parte del encanto de ser testigo del avance de un medio como &eacute;ste, en el que confluyen tantos factores art&iacute;sticos, tecnol&oacute;gicos y creativos. Pero siempre conviene recordar y tener en cuenta que una buena mec&aacute;nica de juego, por simple que sea, puede ser lo &uacute;nico que necesita un t&iacute;tulo para triunfar. Tal es el caso de Vampire Survivors, una de las tempranas sensaciones de Steam en este 2022, que ya acumula decenas de miles de usuarios y una valoraci&oacute;n &ldquo;Extremadamente Positiva&rdquo; despu&eacute;s de acumular m&aacute;s de 2000 an&aacute;lisis positivos frente a una veintena negativos.</div>\r\n<br>\r\n<div>Viendo las pantallas y el tr&aacute;iler la verdad es que el juego no levanta grandes expectativas. Un sprite pobremente animado de lo que parece un cazavampiros sacado de un Castlevania se va moviendo por un cutre mapeado bidimensional mientras decenas de enemigos salen a nuestro encuentro sin otra forma de ataque que acercarse a nuestra posici&oacute;n. Ni siquiera tenemos que atacar, ya que es autom&aacute;tico, s&oacute;lo controlamos el movimiento. Es un planteamiento que ya hemos visto en numerosas ocasiones, especialmente popular en flash dada la relativa simplicidad y facilidad de manejo. El reto es simplemente sobrevivir lo m&aacute;ximo posible antes del inevitable final, aunque en el caso de Vampire Survivors lo adereza con un componente roguelite que le viene como anillo al dedo.</div>\r\n<br>\r\n<h2>&lt;h2&gt;Planteamiento simple, diversi&oacute;n sin miramientos&lt;/h2&gt;</h2>\r\n<div>Como mandan los c&aacute;nones, hay un componente de progresi&oacute;n transitorio y otro permanente. Nuestro personaje ganar&aacute; niveles durante la partida recogiendo gemas que dejan los enemigos al morir y a cada nivel se nos dar&aacute; a elegir entre diferentes mejoras y habilidades para potenciar nuestra capacidad ofensiva y defensiva. No tenemos el control de cu&aacute;ndo o d&oacute;nde atacar, as&iacute; que nuestra prioridad es conseguir una combinaci&oacute;n que nos ayude a aguantar m&aacute;s tiempo, entre numerosas opciones aleatorias que ir&aacute;n apareciendo: bolas de fuego aleatorias, cuchillos que vuelan en l&iacute;nea recta, hachas voladoras que dibujan arcos ascendentes, cruces que act&uacute;an como boomerangs, barreras de ajo que da&ntilde;an al enemigo que se acerca, biblias que giran a nuestro alrededor (s&iacute;, la influencia de Castlevania est&aacute; poco disimulada). Tambi&eacute;n hay habilidades que aumentan las prestaciones b&aacute;sicas del personaje: m&aacute;s rapidez, m&aacute;s resistencia, m&aacute;s frecuencia de ataque, m&aacute;s n&uacute;mero de proyectiles&hellip; Hay que sumar el hecho de que cada uno de los personajes seleccionables tiene ciertas habilidades innatas que se manifiestan seg&uacute;n sube niveles, por lo que es responsabilidad del jugador elegir qu&eacute; priorizar para alcanzar un resultado &oacute;ptimo.</div>\r\n<br>\r\n<h2>&lt;h2&gt;Vampire Survivor PC&lt;/h2&gt;</h2>\r\n<div>En algunas ocasiones acabaremos con combinaciones con poca sinergia que har&aacute;n imposible sobrevivir a las oleadas de creciente n&uacute;mero y dificultad, con enemigos cada vez m&aacute;s numerosos, resistentes y r&aacute;pidos. Otras veces acertaremos a encontrar una combinaci&oacute;n ganadora que har&aacute; que nuestros enemigos caigan por miles y podamos resistir la media hora m&aacute;xima que podemos aguantar antes de que la muerte misma venga a llevarnos -en ese punto toda la pantalla est&aacute; rebosante de enemigos y el mapa no se ve, s&oacute;lo nosotros en el centro rodeado de enemigos que intentan desesperadamente llegar a nuestra posici&oacute;n mientras nuestro contador de muertes crece por centenares a cada segundo, muy satisfactorio y cat&aacute;rtico-. Factores como los bonus para subir nivel o la distancia a la que podremos atraer las preciadas gemas ser&aacute;n tambi&eacute;n importantes para que podamos progresar lo bastante r&aacute;pido como para afrontar los nuevos desaf&iacute;os. El hecho de que sean las gemas y no simplemente matar lo que nos hace subir de nivel nos obliga a estar en movimiento y no limitarnos a esperar en un sitio a que vengan por nosotros, lo que le da un acertado toque de dinamismo.</div>\r\n<br>\r\n<div>La parte de progresi&oacute;n permanente est&aacute; dividida en dos factores: si conseguimos ciertos objetivos en la anterior partida, como progresar un arma a cierto nivel, podremos desbloquear nuevos complementos e incluso nuevos personajes que usar, cada uno con una particularidad. Tambi&eacute;n acumularemos oro con el que conseguir bonificaciones permanentes que nos valdr&aacute;n para cada partida y nos permitir&aacute;n tener m&aacute;s posibilidades de llegar antes y mejor al punto al que queremos llegar. El componente de &ldquo;una partida m&aacute;s&rdquo; es poderoso, ya que siempre hay combinaciones que nos apetece probar y las partidas son r&aacute;pidas, no m&aacute;s de la media hora que hay ahora mismo de l&iacute;mite, por lo que resulta muy tentador echarse otra y ver c&oacute;mo lo hacemos en esta ocasi&oacute;n.</div>\r\n<br>\r\n<h2>Bueno, (no muy) bonito y barato</h2>\r\n<div>Vampire Survivors parte de una versi&oacute;n gratuita v&iacute;a web que podemos jugar para probarlo, siendo m&aacute;s limitada que la versi&oacute;n de pago en Early Access en Steam, que vale unos 2,39&euro; ahora mismo. Por ese precio encontramos un juego con m&aacute;s opciones que el gratuito, dos tipos de mapeado y m&aacute;s armas, adem&aacute;s de la promesa del desarrollador de ir mejor&aacute;ndolo y a&ntilde;adiendo contenido. La verdad es que por el precio, las horas de entretenimiento que ofrece hasta desbloquear todo lo que tiene actualmente es una ganga que nos puede entretener horas sin darnos cuenta. No parece que el desarrollador, poncle, tenga un plan detallado de progresi&oacute;n ahora mismo (o que esperase el &eacute;xito que ha encontrado, ya puestos) , pero se est&aacute; centrando actualmente en atajar bugs, mejorar calidad de vida y ajustes para hacer la experiencia m&aacute;s satisfactoria. En definitiva, uno de esos juegos que se puede recomendar sin tapujos aunque est&eacute; en Early Access y que s&oacute;lo puede mejorar de aqu&iacute; en adelante.</div>\r\n</div>', '/img/Cover/Article/cover_32.jpg', 1, '2023-05-20 04:35:49', '2023-05-20 04:39:09', 10, 'ENG');
+(33, 'Nuevo DLC: \"Cacería en el Bosque Oscuro\"', '<div>\r\n<div>CD Projekt RED announces the release of an exciting new DLC for The Witcher 3: Wild Hunt. In \"Hunt in the Dark Forest,\" Geralt of Rivia will face nightmare creatures while searching for answers in a cursed, sinister forest.</div>\r\n</div>', '<div>\r\n<div>CD Projekt RED anuncia el lanzamiento de un emocionante nuevo DLC para The Witcher 3: Wild Hunt. En \"Cacer&iacute;a en el Bosque Oscuro\", Geralt de Rivia se enfrentar&aacute; a criaturas de pesadilla mientras busca respuestas en un tenebroso bosque maldito.</div>\r\n</div>', '/img/Cover/Article/cover_33.jpeg', 1, '2023-05-20 04:35:49', '2023-05-20 18:11:15', 10, 'ESP'),
+(34, 'Nuevas actualizaciones y contenido para GTA Online', '<div>\r\n<div>Rockstar Games ha anunciado una serie de emocionantes actualizaciones y nuevo contenido para GTA Online. Prep&aacute;rate para m&aacute;s misiones, veh&iacute;culos y desaf&iacute;os en la siempre cambiante ciudad de Los Santos.</div>\r\n</div>', '<div>\r\n<div>Rockstar Games ha anunciado una serie de emocionantes actualizaciones y nuevo contenido para GTA Online. Prep&aacute;rate para m&aacute;s misiones, veh&iacute;culos y desaf&iacute;os en la siempre cambiante ciudad de Los Santos.</div>\r\n</div>', '/img/Cover/Article/cover_34.jpg', 1, '2023-05-20 04:40:12', '2023-05-20 18:12:30', 10, 'ESP'),
+(35, 'Secretos ocultos y misterios en The Legend of Zelda: Breath of the Wild', '<div>\r\n<div>Descubre los secretos ocultos y misterios que esperan ser descubiertos en The Legend of Zelda: Breath of the Wild. Explora el vasto reino de Hyrule y desentra&ntilde;a los enigmas de esta aclamada aventura de mundo abierto.</div>\r\n</div>', '<div>\r\n<div>Descubre los secretos ocultos y misterios que esperan ser descubiertos en The Legend of Zelda: Breath of the Wild. Explora el vasto reino de Hyrule y desentra&ntilde;a los enigmas de esta aclamada aventura de mundo abierto.</div>\r\n</div>', '/img/Cover/Article/cover_35.jpg', 1, '2023-05-20 04:44:21', '2023-05-20 18:14:37', 10, 'ESP'),
+(36, 'Nuevos desafíos y eventos en Red Dead Online', '<div>\r\n<div>Participa en emocionantes desaf&iacute;os y eventos en Red Dead Online. Descubre la vida en el Salvaje Oeste y forma tu propio camino como forajido o aventurero en esta experiencia multijugador en l&iacute;nea.</div>\r\n</div>', '<div>\r\n<div>Participa en emocionantes desaf&iacute;os y eventos en Red Dead Online. Descubre la vida en el Salvaje Oeste y forma tu propio camino como forajido o aventurero en esta experiencia multijugador en l&iacute;nea.</div>\r\n</div>', '/img/Cover/Article/cover_36.jpg', 1, '2023-05-20 04:48:02', '2023-05-20 18:16:14', 12, 'ESP'),
+(37, 'New DLC: \"Hunt in the Dark Forest\"', '<div>\r\n<div>CD Projekt RED announces the release of an exciting new DLC for The Witcher 3: Wild Hunt. In \"Hunt in the Dark Forest,\" Geralt of Rivia will face nightmare creatures while searching for answers in a cursed, sinister forest.</div>\r\n</div>', '<div>\r\n<div>CD Projekt RED announces the release of an exciting new DLC for The Witcher 3: Wild Hunt. In \"Hunt in the Dark Forest,\" Geralt of Rivia will face nightmare creatures while searching for answers in a cursed, sinister forest.</div>\r\n</div>', '/img/Cover/Article/cover_37.jpeg', 1, '2023-05-20 04:35:49', '2023-05-20 18:11:34', 10, 'ENG'),
+(39, 'New DLC: \"Hunt in the Dark Forest\"', '<div>\r\n<div>CD Projekt RED announces the release of an exciting new DLC for The Witcher 3: Wild Hunt. In \"Hunt in the Dark Forest,\" Geralt of Rivia will face nightmare creatures while searching for answers in a cursed, sinister forest.</div>\r\n</div>', '<div>\r\n<div>CD Projekt RED announces the release of an exciting new DLC for The Witcher 3: Wild Hunt. In \"Hunt in the Dark Forest,\" Geralt of Rivia will face nightmare creatures while searching for answers in a cursed, sinister forest.</div>\r\n</div>', '/img/Cover/Article/cover_39.jpeg', 1, '2023-05-20 04:35:49', '2023-05-20 18:17:02', 10, 'ENG'),
+(40, 'New updates and content for GTA Online', '<div>\r\n<div>Rockstar Games has announced a series of exciting updates and new content for GTA Online. Get ready for more missions, vehicles, and challenges in the ever-changing city of Los Santos.</div>\r\n</div>', '<div>\r\n<div>Rockstar Games has announced a series of exciting updates and new content for GTA Online. Get ready for more missions, vehicles, and challenges in the ever-changing city of Los Santos.</div>\r\n</div>', '/img/Cover/Article/cover_40.jpg', 1, '2023-05-20 04:40:12', '2023-05-20 18:13:00', 10, 'ENG'),
+(41, 'Hidden Secrets and Mysteries in The Legend of Zelda: Breath of the Wild', '<div>\r\n<div>Discover the hidden secrets and mysteries waiting to be uncovered in The Legend of Zelda: Breath of the Wild. Explore the vast kingdom of Hyrule and unravel the enigmas of this acclaimed open-world adventure.</div>\r\n</div>', '<div>\r\n<div>Discover the hidden secrets and mysteries waiting to be uncovered in The Legend of Zelda: Breath of the Wild. Explore the vast kingdom of Hyrule and unravel the enigmas of this acclaimed open-world adventure.</div>\r\n</div>', '/img/Cover/Article/cover_41.jpg', 1, '2023-05-20 04:44:21', '2023-05-20 18:15:04', 10, 'ENG'),
+(42, 'New Challenges and Events in Red Dead Online', '<div>\r\n<div>Participate in exciting challenges and events in Red Dead Online. Discover life in the Wild West and forge your own path as an outlaw or adventurer in this online multiplayer experience.</div>\r\n</div>', '<div>\r\n<div>Participate in exciting challenges and events in Red Dead Online. Discover life in the Wild West and forge your own path as an outlaw or adventurer in this online multiplayer experience.</div>\r\n</div>', '/img/Cover/Article/cover_42.jpg', 1, '2023-05-20 04:48:02', '2023-05-20 18:16:32', 12, 'ENG');
 
 -- --------------------------------------------------------
 
@@ -568,12 +569,11 @@ CREATE TABLE `author` (
 --
 
 INSERT INTO `author` (`id`, `name`, `firstLastName`, `secondLastName`, `password`, `email`, `phone`, `description`, `avatar`, `preferedLanguage`, `isAdmin`, `canPublish`, `isActive`, `birthday`, `startDate`, `endDate`) VALUES
-(10, 'Cristina', 'Carbonell', 'Matamoros', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'cristicarmat2@gmail.com', '965878965', '<p>AAAAAAAAA AAAAA A A A AAAAAAA AAAAAAAAA A AAAA A AAAAA A AA A A A A AA A A</p>', '/img/Avatar/Author/avatar_10.jpeg', 'ENG', 1, 1, 1, '2023-04-21', '2023-04-21', NULL),
-(12, 'Lidia', 'Echuaca', NULL, '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'lidia@gmail.com', '587698569', '<p>si leeis esto es un mensaje de ayuda cristiana me tiene secuestrada soy una esclava auxilio &aacute;NGEL</p>', '/img/Avatar/Author/avatar_12.jpg', 'ESP', 0, 1, 1, '2023-05-14', '2023-05-14', NULL),
-(13, 'Edu', 'Carbonell', 'Matamoros', '$2a$11$kfB1lJy5FsriRzPP659oqOPJv2UnZcPt0bes1Fe.b53YuRZ9XN5su', 'edu@gmail.com', '546896523', '<p>Pechuga</p>', '/img/Avatar/Author/avatar_0.jpeg', 'ESP', 0, 1, 1, '2008-10-11', '2023-04-21', NULL),
-(14, 'Ángel', 'Sánchez', 'Pastor', '$2a$11$tbjLxSXUXautTqagVujdm.C2uT0rcPFiK7npcQG3Hd0sZmMluRAWG', 'asp@gmail.com', '123456789', '<p>Me gustan las calculadoras y el Horizon. Tengo el record de hu&iacute;das de DAW.</p>', '/img/Avatar/Author/avatar_0.png', 'ESP', 1, 1, 1, '2023-04-22', '2023-04-22', NULL),
-(15, 'Adrián', 'Pérez', NULL, '$2a$11$Vhafab1MeBJiNnAKe.n/iuYq4zNVjyRa559Gv0rhxhpmC39ILv7Ge', 'adrianperez@gmail.com', '456137788', '<p>&iquest;Spiderman o Espaiderman?</p>', '/img/Avatar/Author/avatar_15.jpeg', 'ESP', 0, 0, 0, '2023-04-22', '2023-04-22', NULL),
-(16, 'Raquel', 'Pomares', 'Bleda', '123456', 'raquel@gmail.com', '41257968', '<p>Cristina, &iquest;que haces metiendome en esta p&aacute;gina de <strong>mierdaaa?</strong></p>', '/img/Avatar/Author/avatar_16.jpg', 'ENG', 0, 0, 1, '2023-04-23', '2023-04-23', NULL);
+(10, 'Cristina', 'Carbonell', 'Matamoros', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'cristicarmat2@gmail.com', '965878965', '<p>Hey there! I\'m <strong>Cristina</strong>, your go-to gal for video game news! I\'m all about staying in the loop and sharing the juiciest updates with my fellow gamers. From hot releases to esports showdowns, I\'ve got you covered with my fun and informal style. Let\'s level up together and dive into the exciting world of gaming! Ready to game on? Let\'s go!</p>', '/img/Avatar/Author/avatar_10.jpg', 'ENG', 1, 1, 1, '2023-05-20', '2023-05-20', NULL),
+(12, 'Lidia', 'Echuaca', NULL, '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'lidia@gmail.com', '587698569', '<p>&iexcl;Saludos, gamers! Soy <strong>Lidia</strong>, la autora divina de noticias de videojuegos. Viajar&eacute; por mundos virtuales, desentra&ntilde;ando secretos &eacute;picos y desvelando los tesoros ocultos de la industria. Con mi pluma en llamas, llevar&eacute; la magia y la emoci&oacute;n directo a sus pantallas. &iexcl;&Uacute;nanse a mi b&uacute;squeda de aventuras y descubran la grandeza de los videojuegos! &iexcl;Prep&aacute;rense para un viaje &eacute;pico!</p>', '/img/Avatar/Author/avatar_12.jpg', 'ESP', 0, 1, 1, '2023-05-20', '2023-05-20', NULL),
+(13, 'Edu', 'Carbonell', 'Matamoros', '$2a$11$kfB1lJy5FsriRzPP659oqOPJv2UnZcPt0bes1Fe.b53YuRZ9XN5su', 'edu@gmail.com', '546896523', '<p>&iexcl;Hola a todos! Soy <strong>Edu</strong>, el autor gamer con una pizca de diversi&oacute;n en cada noticia de videojuegos. Mi misi&oacute;n es hacerlos sonre&iacute;r mientras les cuento las &uacute;ltimas novedades y los secretos m&aacute;s alucinantes del mundo gaming. &iexcl;Vamos a sumergirnos juntos en esta aventura llena de risas y emociones! &iquest;Listos para disfrutar al m&aacute;ximo? &iexcl;Nos vemos en el siguiente nivel, gamers!</p>', '/img/Avatar/Author/avatar_13.jpg', 'ESP', 0, 1, 1, '2023-05-20', '2023-05-20', NULL),
+(14, 'Ángel', 'Sánchez', 'Pastor', '$2a$11$tbjLxSXUXautTqagVujdm.C2uT0rcPFiK7npcQG3Hd0sZmMluRAWG', 'asp@gmail.com', '123456789', '<p>&iexcl;Hola! Soy <strong>&Aacute;ngel</strong>, un apasionado autor de noticias de videojuegos. Mi objetivo es llevarte de la mano a trav&eacute;s de este fascinante mundo, compartiendo an&aacute;lisis y detalles emocionantes. &Uacute;nete a m&iacute; en este viaje lleno de aventuras, donde exploraremos juntos lo mejor de los videojuegos. &iexcl;Prep&aacute;rate para sumergirte en un oc&eacute;ano de diversi&oacute;n y descubrimiento!</p>', '/img/Avatar/Author/avatar_14.jpg', 'ESP', 1, 1, 1, '2023-05-20', '2023-05-20', NULL),
+(15, 'Adrián', 'Pérez', NULL, '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'adrianperez@gmail.com', '456137788', '<p>&iexcl;Ey, qu&eacute; tal! Soy <strong>Adri&aacute;n</strong>, el autor gamer un tanto despistado pero lleno de entusiasmo. Me pierdo en los niveles y me enredo con los controles, pero siempre encuentro la forma m&aacute;s loca de contar las noticias de videojuegos. Prep&aacute;rense para risas, bloopers y un toque de torpeza en cada art&iacute;culo. &iexcl;Juguemos y divirt&aacute;monos juntos en este mundo pixelado! &iexcl;Game on, amigos!</p>', '/img/Avatar/Author/avatar_15.jpg', 'ESP', 0, 0, 1, '2023-05-20', '2023-05-20', NULL);
 
 -- --------------------------------------------------------
 
@@ -647,7 +647,10 @@ INSERT INTO `dev` (`id`, `name`) VALUES
 (7, 'Naughty Dog'),
 (8, 'Capcom'),
 (9, 'Bethesda Game Studios'),
-(10, 'Nintendo');
+(10, 'Nintendo'),
+(21, 'Triumph Studios'),
+(22, 'WitchCraft'),
+(24, 'Nintendo');
 
 -- --------------------------------------------------------
 
@@ -675,11 +678,15 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`id`, `title`, `subtitle`, `description`, `language`, `cover`, `releaseDate`, `totalScore`, `isFav`, `idDev`, `idPlatform`, `idPublisher`) VALUES
-(1, 'Gameaa 1', 'Subtitle 1', '<p>Description 1</p>', 'ENG', '', '2023-05-19', 0, 0, 1, 2, 1),
-(2, 'Game 2', 'Subtitle 2', 'Description 2', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 2, 1, 1),
-(3, 'Game 3', 'Subtitle 3', 'Description 3', 'ENG', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 3, 2, 1),
-(4, 'Game 4', 'Subtitle 4', 'Description 4', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 1, 3, 1),
-(6, 'Game 6', 'Subtitle 6', 'Description 6', 'ESP', '/img/Cover/Game/Default.png', '2023-05-12', 0, 0, 3, 2, 1);
+(22, 'Overlord 2', NULL, '<p>Segunda entrega de este original juego de estrategia, en la que encarnaremos a un nuevo protagonista que se enfrenta a una suerte de imperio romano que tiene las intenciones de arrasar con toda la magia del mundo.</p>', 'ESP', '/img/Cover/Game/cover_22.jpg', '2023-05-20', 0, 0, 21, 6, 3),
+(23, 'The Witcher 3', 'Wild Hunt', '<p>Emb&aacute;rcate en una &eacute;pica cacer&iacute;a de monstruos en el vasto mundo abierto de The Witcher 3. Explora tierras peligrosas, toma decisiones dif&iacute;ciles y enfr&eacute;ntate a bestias sobrenaturales en esta aventura de rol aclamada por la cr&iacute;tica.</p>', 'ESP', '/img/Cover/Game/cover_23.jpg', '2015-05-19', 0, 0, 6, 6, 4),
+(24, 'Grand Theft Auto V', NULL, '<p>&Uacute;nete a los bajos fondos de Los Santos y vive una vida de crimen en el mundo abierto de Grand Theft Auto V. Roba coches, planea atracos y enfr&eacute;ntate a peligrosos enemigos en esta aventura de acci&oacute;n y delincuencia.</p>', 'ESP', '/img/Cover/Game/cover_24.jpg', '2015-04-14', 0, 0, 1, 6, 1),
+(25, 'The Legend of Zelda', 'Breath of the Wild', '<p>Emb&aacute;rcate en una aventura legendaria en el vasto reino de Hyrule en The Legend of Zelda: Breath of the Wild. Explora un mundo abierto lleno de misterios, resuelve acertijos y enfr&eacute;ntate a criaturas ancestrales en esta aclamada entrega de la saga.</p>', 'ESP', '/img/Cover/Game/cover_25.jpg', '2017-03-03', 0, 0, 10, 3, 5),
+(26, 'Red Dead Redemption 2', NULL, '<p>Sum&eacute;rgete en el salvaje oeste en la &eacute;pica historia de Red Dead Redemption 2. Explora vastas tierras fronterizas, caza animales salvajes y enfr&eacute;ntate a forajidos en esta aventura de mundo abierto desarrollada por Rockstar Games.</p>', 'ESP', '/img/Cover/Game/cover_26.jpg', '2019-11-05', 0, 0, 1, 6, 1),
+(27, 'The Witcher 3', 'Wild Hunt', '<p>Embark on an epic monster hunt in the vast open world of The Witcher 3. Explore dangerous lands, make difficult choices, and face supernatural beasts in this critically acclaimed role-playing adventure.</p>', 'ENG', '/img/Cover/Game/cover_27.jpg', '2015-05-19', 0, 0, 6, 6, 4),
+(28, 'Grand Theft Auto V', NULL, '<p>Join the criminal underworld of Los Santos and live a life of crime in the open world of Grand Theft Auto V. Steal cars, plan heists, and confront dangerous enemies in this action-packed adventure.</p>', 'ENG', '/img/Cover/Game/cover_28.jpg', '2015-04-14', 0, 0, 1, 6, 1),
+(29, 'The Legend of Zelda', 'Breath of the Wild', '<p>Embark on a legendary adventure in the vast kingdom of Hyrule in The Legend of Zelda: Breath of the Wild. Explore an open world full of mysteries, solve puzzles, and face ancient creatures in this critically acclaimed installment of the saga.</p>', 'ENG', '', '2017-03-03', 0, 0, 10, 3, 5),
+(30, 'Red Dead Redemption 2', NULL, '<p>Immerse yourself in the wild west in the epic story of Red Dead Redemption 2. Explore vast frontier lands, hunt wild animals, and confront outlaws in this open-world adventure developed by Rockstar Games.</p>', 'ENG', '/img/Cover/Game/cover_30.jpg', '2019-11-05', 0, 0, 1, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -697,8 +704,15 @@ CREATE TABLE `game_article` (
 --
 
 INSERT INTO `game_article` (`idGame`, `idArticle`) VALUES
-(3, 31),
-(3, 32);
+(23, 33),
+(24, 34),
+(25, 35),
+(26, 36),
+(27, 37),
+(27, 39),
+(28, 40),
+(29, 41),
+(30, 42);
 
 -- --------------------------------------------------------
 
@@ -716,13 +730,26 @@ CREATE TABLE `game_genre` (
 --
 
 INSERT INTO `game_genre` (`idGame`, `idGenre`) VALUES
-(1, 1),
-(2, 2),
-(1, 3),
-(2, 4),
-(4, 4),
-(4, 6),
-(4, 8);
+(27, 1),
+(28, 1),
+(29, 1),
+(30, 1),
+(23, 2),
+(24, 2),
+(25, 2),
+(26, 2),
+(28, 3),
+(29, 3),
+(30, 3),
+(22, 4),
+(24, 4),
+(25, 4),
+(26, 4),
+(27, 5),
+(23, 6),
+(22, 10),
+(28, 19),
+(24, 20);
 
 -- --------------------------------------------------------
 
@@ -740,14 +767,25 @@ CREATE TABLE `game_language` (
 --
 
 INSERT INTO `game_language` (`idGame`, `idLanguage`) VALUES
-(2, 1),
-(4, 1),
-(1, 4),
-(3, 4),
-(4, 4),
-(4, 5),
-(1, 6),
-(4, 6);
+(22, 1),
+(23, 1),
+(24, 1),
+(25, 1),
+(26, 1),
+(27, 4),
+(28, 4),
+(29, 4),
+(30, 4),
+(22, 5),
+(23, 5),
+(24, 5),
+(26, 5),
+(27, 6),
+(28, 6),
+(30, 6),
+(30, 8),
+(22, 9),
+(26, 9);
 
 -- --------------------------------------------------------
 
@@ -765,12 +803,21 @@ CREATE TABLE `game_player_type` (
 --
 
 INSERT INTO `game_player_type` (`idGame`, `idPlayerType`) VALUES
-(1, 1),
-(4, 1),
-(2, 2),
-(4, 2),
-(3, 3),
-(4, 3);
+(27, 1),
+(28, 1),
+(29, 1),
+(30, 1),
+(28, 2),
+(28, 3),
+(30, 3),
+(22, 4),
+(23, 4),
+(24, 4),
+(25, 4),
+(26, 4),
+(24, 5),
+(26, 5),
+(24, 6);
 
 -- --------------------------------------------------------
 
@@ -794,7 +841,7 @@ INSERT INTO `genre` (`id`, `name`, `language`) VALUES
 (3, 'Adventure', 'ENG'),
 (4, 'Aventura', 'ESP'),
 (5, 'Role-playing', 'ENG'),
-(6, 'Role-playing', 'ESP'),
+(6, 'Rol', 'ESP'),
 (7, 'Simulation', 'ENG'),
 (8, 'Simulación', 'ESP'),
 (9, 'Strategy', 'ENG'),
@@ -830,7 +877,9 @@ INSERT INTO `language` (`id`, `name`, `language`) VALUES
 (1, 'Español', 'ESP'),
 (4, 'Spanish', 'ENG'),
 (5, 'Inglés', 'ESP'),
-(6, 'English', 'ENG');
+(6, 'English', 'ENG'),
+(8, 'Italian', 'ENG'),
+(9, 'Italiano', 'ESP');
 
 -- --------------------------------------------------------
 
@@ -903,7 +952,10 @@ CREATE TABLE `publisher` (
 --
 
 INSERT INTO `publisher` (`id`, `name`) VALUES
-(1, 'Rockstar Games');
+(1, 'Rockstar Games'),
+(3, 'Codemasters'),
+(4, 'Bandai Namco'),
+(5, 'Nintendo');
 
 -- --------------------------------------------------------
 
@@ -927,13 +979,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `avatar`, `preferedLanguage`, `birthday`, `creationDate`) VALUES
-(2, 'user2', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user2@email.com', '/img/Avatar/User/Default.png', 'ESP', '1992-03-04', '2021-08-22'),
-(3, 'user3', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user3@email.com', '/img/Avatar/User/Default.png', 'ENG', '1993-04-05', '2022-01-05'),
-(4, 'user4', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user4@email.com', '/img/Avatar/User/Default.png', 'ESP', '1994-05-06', '2022-03-17'),
-(5, 'user5', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user5@email.com', '/img/Avatar/User/Default.png', 'ENG', '1995-06-07', '2021-11-29'),
-(6, 'user6', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user6@email.com', '/img/Avatar/User/Default.png', 'ESP', '1996-07-08', '2022-04-23'),
-(7, 'user77', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user7@email.com', '/img/Avatar/User/Default.png', 'ENG', '2023-05-14', ''),
-(8, 'user8', '$2a$12$MZ8Yv12l3gj/C.6i0B.S6OZErlbW1AondFJtxHAkaAf.VNW1RZbN6', 'user8@email.com', '/img/Avatar/User/Default.png', 'ESP', '1998-09-10', '2023-01-11');
+(13, 'Cris', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'cristicarmat2@gmail.com', '/img/Avatar/User/avatar_0.jpg', 'ENG', '1997-02-11', '20/05/2023');
 
 -- --------------------------------------------------------
 
@@ -946,16 +992,6 @@ CREATE TABLE `user_fav_game` (
   `idGame` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
---
--- Dumping data for table `user_fav_game`
---
-
-INSERT INTO `user_fav_game` (`idUser`, `idGame`) VALUES
-(2, 1),
-(2, 2),
-(3, 3),
-(5, 3);
-
 -- --------------------------------------------------------
 
 --
@@ -967,13 +1003,6 @@ CREATE TABLE `user_score_game` (
   `idGame` bigint NOT NULL,
   `score` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
-
---
--- Dumping data for table `user_score_game`
---
-
-INSERT INTO `user_score_game` (`idUser`, `idGame`, `score`) VALUES
-(2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -2152,7 +2181,7 @@ ALTER TABLE `web_text`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `author`
@@ -2170,13 +2199,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `dev`
 --
 ALTER TABLE `dev`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `genre`
@@ -2188,7 +2217,7 @@ ALTER TABLE `genre`
 -- AUTO_INCREMENT for table `language`
 --
 ALTER TABLE `language`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `platform`
@@ -2206,13 +2235,13 @@ ALTER TABLE `player_type`
 -- AUTO_INCREMENT for table `publisher`
 --
 ALTER TABLE `publisher`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `web_text`

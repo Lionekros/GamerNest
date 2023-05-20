@@ -80,7 +80,7 @@
                         <select asp-for="idGameList" class="select2SingleForm" required multiple="multiple">
                             @foreach ( var item in Model.gameList )
                             {
-                                <option value="@item.id">@item.title @item.subtitle @item.platform</option>
+                                <option value="@item.id">@item.title @item.subtitle @item.platform @item.language</option>
                             }
                         </select>
                     </div>

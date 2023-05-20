@@ -11,7 +11,7 @@ namespace Support
     {
         public long id { get; set; }
         public string title { get; set; }
-        public string subtitle { get; set; }
+        public string? subtitle { get; set; }
         public string description { get; set; }
         public string? cover { get; set; }
         public string language { get; set; }

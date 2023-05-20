@@ -1381,7 +1381,7 @@ a {
   max-width: 45rem;
 }
 .articlePreview .author .avatar img {
-  max-width: 100%;
+  max-width: 10rem;
   margin-right: 10px;
 }
 .articlePreview .author .info .name {

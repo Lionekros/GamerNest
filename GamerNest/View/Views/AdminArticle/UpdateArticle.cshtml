@@ -54,15 +54,30 @@
                 </div>
                 @if ( ViewData[ "AdminCanPublish" ].ToString() == "True" )
                 {
-                    <div>
+                    if (Model.isPublished)
+                    {
                         <div>
-                            <label asp-for="isPublished">@ViewData[ "fIsPublished" ]:</label>
-                            <select class="redSelect" onchange="selectColor(this)" asp-for="isPublished">
-                                <option class="redSelect" value="false">&#xf057;</option>
-                                <option class="greenSelect" value="true">&#xf058;</option>
-                            </select>
+                            <div>
+                                <label asp-for="isPublished">@ViewData[ "fPublished" ]:</label>
+                                <select class="greenSelect" onchange="selectColor(this)" asp-for="isPublished">
+                                    <option class="redSelect" value="false">&#xf057;</option>
+                                    <option class="greenSelect" value="true">&#xf058;</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <div>
+                                <label asp-for="isPublished">@ViewData[ "fPublished" ]:</label>
+                                <select class="redSelect" onchange="selectColor(this)" asp-for="isPublished">
+                                    <option class="redSelect" value="false">&#xf057;</option>
+                                    <option class="greenSelect" value="true">&#xf058;</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
                 }
                 else
                 {
@@ -76,7 +91,7 @@
 
                 <div>
                     <div>
-                        <label asp-for="createdDate">Created Date:</label>
+                        <label asp-for="createdDate">@ViewData[ "fCreatedDate" ]:</label>
                         <input asp-for="createdDate" readonly />
                     </div>
                 </div>
@@ -96,7 +111,7 @@
                         <select asp-for="idGameList" class="select2SingleForm" multiple="multiple">
                             @foreach ( var item in Model.gameList )
                             {
-                                <option value="@item.id">@item.title @item.subtitle @item.platform</option>
+                                <option value="@item.id">@item.title @item.subtitle @item.platform @item.language</option>
                             }
                         </select>
                     </div>

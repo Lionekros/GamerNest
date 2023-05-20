@@ -59,7 +59,7 @@
                     <div>
                         <div>
                             <label asp-for="releaseDate">@ViewData[ "fReleaseDate" ]:</label>
-                            <input asp-for="releaseDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                            <input asp-for="releaseDate" type="date" />
                         </div>
                     </div>
 
@@ -114,11 +114,11 @@
 
                     <div>
                         <div>
-                            <label asp-for="idGenre">@ViewData[ "fGenresList" ]:</label>
-                            <select asp-for="idGenre" class="select2SingleForm" multiple="multiple">
+                            <label asp-for="idGenre" class="required">@ViewData[ "fGenresList" ]:</label>
+                            <select asp-for="idGenre" class="select2SingleForm" required multiple="multiple">
                                 @foreach ( var item in Model.genreList )
                                 {
-                                    <option value="@item.id">@item.name</option>
+                                    <option value="@item.id">@item.name @item.language</option>
                                 }
                             </select>
                         </div>
@@ -126,11 +126,11 @@
 
                     <div>
                         <div>
-                            <label asp-for="idPlayerType">@ViewData[ "fPlayerTypesList" ]:</label>
-                            <select asp-for="idPlayerType" class="select2SingleForm" multiple="multiple">
+                            <label asp-for="idPlayerType" class="required">@ViewData[ "fPlayerTypesList" ]:</label>
+                            <select asp-for="idPlayerType" class="select2SingleForm" required multiple="multiple">
                                 @foreach ( var item in Model.playerTypeList )
                                 {
-                                    <option value="@item.id">@item.name</option>
+                                    <option value="@item.id">@item.name @item.language</option>
                                 }
                             </select>
                         </div>
@@ -138,11 +138,11 @@
 
                     <div>
                         <div>
-                            <label asp-for="idLanguageGame">@ViewData[ "fGameLanguagesList" ]:</label>
-                            <select asp-for="idLanguageGame" class="select2SingleForm" multiple="multiple">
+                            <label asp-for="idLanguageGame" class="required">@ViewData[ "fGameLanguagesList" ]:</label>
+                            <select asp-for="idLanguageGame" class="select2SingleForm" required multiple="multiple">
                                 @foreach ( var item in Model.languageGameList )
                                 {
-                                    <option value="@item.id">@item.name</option>
+                                    <option value="@item.id">@item.name @item.language</option>
                                 }
                             </select>
                         </div>

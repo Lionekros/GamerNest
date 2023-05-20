@@ -83,13 +83,13 @@
                             @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
                             {
                                 <td>
-                                    <!-- Delete Dev -->
-                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'AdminDev')">
+                                    <!-- Delete Language -->
+                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'AdminLanguage')">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
 
-                                    <!-- Edit Dev -->
-                                    <a asp-controller="AdminDev" asp-action="UpdateForm" asp-route-id="@item.id">
+                                    <!-- Edit Language -->
+                                    <a asp-controller="AdminLanguage" asp-action="UpdateForm" asp-route-id="@item.id">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
 
@@ -99,7 +99,7 @@
                                             <h2>@ViewData[ "ModalTitle" ]</h2>
                                             <p>@ViewData[ "ModalText" ]: @item.id?</p>
                                             <div class="modal-actions">
-                                                <button id="confirmBtn_@item.id" asp-controller="AdminDev" asp-action="Delete" asp-route-id="@item.id">@ViewData[ "ModalButtonDelete" ]</button>
+                                                <button id="confirmBtn_@item.id" asp-controller="AdminLanguage" asp-action="Delete" asp-route-id="@item.id">@ViewData[ "ModalButtonDelete" ]</button>
 
                                                 <button id="cancelBtn_@item.id">@ViewData[ "ModalButtonCancelar" ]</button>
                                             </div>

@@ -82,7 +82,7 @@
                         {
                             <div>
                                 <label asp-for="isAdmin" class="required">@ViewData[ "fIsAdmin" ]:</label>
-                                <select class="redSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
+                                <select class="greenSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
                                     <option class="redSelect" value="false">&#xf057;</option>
                                     <option class="greenSelect" value="true">&#xf058;</option>
                                 </select>
@@ -92,7 +92,7 @@
                         {
                             <div>
                                 <label asp-for="isAdmin" class="required">@ViewData[ "fIsAdmin" ]:</label>
-                                <select class="greenSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
+                                <select class="redSelect" onchange="selectColor(this)" asp-for="isAdmin" required>
                                     <option class="redSelect" value="false">&#xf057;</option>
                                     <option class="greenSelect" value="true">&#xf058;</option>
                                 </select>
@@ -103,7 +103,7 @@
                         {
                             <div>
                                 <label asp-for="canPublish" class="required">@ViewData[ "fCanPublish" ]:</label>
-                                <select class="redSelect" onchange="selectColor(this)" asp-for="canPublish" required>
+                                <select class="greenSelect" onchange="selectColor(this)" asp-for="canPublish" required>
                                     <option class="redSelect" value="false">&#xf057;</option>
                                     <option class="greenSelect" value="true">&#xf058;</option>
                                 </select>
@@ -111,14 +111,14 @@
                         }
                         else
                         {
-
                             <div>
                                 <label asp-for="canPublish" class="required">@ViewData[ "fCanPublish" ]:</label>
-                                <select class="greenSelect" onchange="selectColor(this)" asp-for="canPublish" required>
+                                <select class="redSelect" onchange="selectColor(this)" asp-for="canPublish" required>
                                     <option class="redSelect" value="false">&#xf057;</option>
                                     <option class="greenSelect" value="true">&#xf058;</option>
                                 </select>
                             </div>
+                            
                         }
 
                         @if ( !Model.isActive )

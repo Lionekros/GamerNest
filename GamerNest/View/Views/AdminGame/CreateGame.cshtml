@@ -107,7 +107,7 @@
                         <select asp-for="idGenre" class="select2SingleForm" required multiple="multiple">
                             @foreach ( var item in Model.genreList )
                             {
-                                <option value="@item.id">@item.name</option>
+                                <option value="@item.id">@item.name @item.language</option>
                             }
                         </select>
                     </div>
@@ -119,7 +119,7 @@
                         <select asp-for="idPlayerType" class="select2SingleForm" required multiple="multiple">
                             @foreach ( var item in Model.playerTypeList )
                             {
-                                <option value="@item.id">@item.name</option>
+                                <option value="@item.id">@item.name @item.language</option>
                             }
                         </select>
                     </div>
@@ -131,7 +131,7 @@
                         <select asp-for="idLanguageGame" class="select2SingleForm" required multiple="multiple">
                             @foreach ( var item in Model.languageGameList )
                             {
-                                <option value="@item.id">@item.name</option>
+                                <option value="@item.id">@item.name @item.language</option>
                             }
                         </select>
                     </div>
