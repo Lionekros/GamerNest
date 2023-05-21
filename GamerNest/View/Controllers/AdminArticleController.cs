@@ -22,9 +22,9 @@ namespace View.Controllers
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Article" );
                 }
-                else if ( HttpContext.Session.GetString( "AdminType" ) != "Admin" )
+                else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
                 {
                     GetAllArticles( language, HttpContext.Session.GetString( "AdminEmail" ), idGame, id, headline, isPublished, orderBy );
                     FiltersViewBag( language, HttpContext.Session.GetString( "AdminEmail" ), idGame, id, headline, isPublished, orderBy );
@@ -55,7 +55,7 @@ namespace View.Controllers
         {
             if ( HttpContext.Session.GetString( "AdminType" ) == null )
             {
-                return RedirectToAction( "LogInForm", "Admin" );
+                return RedirectToAction( "Index", "Article" );
             }
 
             SetDefaultAdminViewDatas();
@@ -74,7 +74,7 @@ namespace View.Controllers
             {
                 if ( HttpContext.Session.GetString( "AdminType" ) == null)
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Article" );
                 }
                 
                 SetDefaultAdminViewDatas();
@@ -100,9 +100,9 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "AdminType" ) == "" )
+                if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Article" );
                 }
                 SetDefaultAdminViewDatas();
                 GetArticleUpdate( id );

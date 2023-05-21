@@ -19,7 +19,7 @@ namespace View.Controllers
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Article" );
                 }
 
                 WebText("Admin");
@@ -126,32 +126,5 @@ namespace View.Controllers
                 return RedirectToAction( "Index", "Article" );
             }
         }
-
-        public bool CheckIfEmailAndPasswordIsCorrect(string email, string password)
-        {
-            GetAuthor( email );
-
-            if ( lists.authorList?.Count > 0 )
-            {
-                if ( Utility.VerifyPassword( password, lists.authorList[ 0 ].password ) )
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        public bool CheckIfAuthorExist(string email)
-        {
-            GetAuthor( email );
-
-            if ( lists.authorList?.Count > 0 )
-            {
-                return true;
-            }
-                
-            return false;
-        }
-
     }
 }

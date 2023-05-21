@@ -21,9 +21,9 @@ namespace View.Controllers
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Article" );
                 }
-                else if ( HttpContext.Session.GetString( "AdminType" ) != "Admin" )
+                else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
                 {
                     return RedirectToAction( "Index", "Admin" );
                 }
@@ -51,7 +51,7 @@ namespace View.Controllers
             {
                 if ( HttpContext.Session.GetString( "AdminType" ) == null || HttpContext.Session.GetString( "AdminType" ) == "Author" )
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Article" );
                 }
                 SetDefaultAdminViewDatas();
                 WebTextModel model = new WebTextModel();
@@ -75,9 +75,9 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "AdminType" ) != "Admin" )
+                if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Admin" );
                 }
                 SetDefaultAdminViewDatas();
                 GetTextUpdate( id );

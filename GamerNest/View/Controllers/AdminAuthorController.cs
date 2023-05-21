@@ -30,7 +30,7 @@ namespace View.Controllers
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Article" );
                 }
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == "Admin" )
@@ -65,9 +65,13 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "AdminType" ) == null || HttpContext.Session.GetString( "AdminType" ) == "Author" )
+                if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Article" );
+                }
+                else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
+                {
+                    return RedirectToAction( "Index", "Admin" );
                 }
                 SetDefaultAdminViewDatas();
                 WebText("AdminAuthorForm");
@@ -91,7 +95,7 @@ namespace View.Controllers
             {
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Article" );
                 }
                 SetDefaultAdminViewDatas();
                 GetAuthorUpdate( email );

@@ -20,7 +20,7 @@ namespace View.Controllers
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Article" );
                 }
                 else
                 {
@@ -57,9 +57,13 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "AdminType" ) == null || HttpContext.Session.GetString( "AdminType" ) == "Author" )
+                if ( HttpContext.Session.GetString( "AdminType" ) == null)
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Article" );
+                }
+                else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
+                {
+                    return RedirectToAction( "Index", "Admin" );
                 }
 
                 SetDefaultAdminViewDatas();
@@ -91,9 +95,13 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "AdminType" ) == null || HttpContext.Session.GetString( "AdminType" ) == "Author" )
+                if ( HttpContext.Session.GetString( "AdminType" ) == null)
                 {
-                    return RedirectToAction( "LogInForm", "Admin" );
+                    return RedirectToAction( "Index", "Article" );
+                }
+                else if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
+                {
+                    return RedirectToAction( "Index", "Admin" );
                 }
                 SetDefaultAdminViewDatas();
                 GetGameUpdate( id );

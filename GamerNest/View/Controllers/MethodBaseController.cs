@@ -24,8 +24,17 @@ namespace View.Controllers
             HttpContext.Session.SetString( "AdminFullName", lists.authorList[ 0 ].name + " " + lists.authorList[ 0 ].firstLastName + " " + lists.authorList[ 0 ].secondLastName );
             HttpContext.Session.SetString( "AdminAvatar", lists.authorList[ 0 ].avatar ?? string.Empty );
             HttpContext.Session.SetString( "AdminType", FetchUserType( lists.authorList[ 0 ].isAdmin ) );
-
             HttpContext.Session.SetString( "PageLanguage", lists.authorList[ 0 ].preferedLanguage );
+        }
+
+        public void DeleteAdminSession()
+        {
+            HttpContext.Session.SetString( "AdminEmail", "" );
+            HttpContext.Session.SetString( "AdminCanPublish", "" );
+            HttpContext.Session.SetString( "AdminFullName", "" );
+            HttpContext.Session.SetString( "AdminAvatar", "" );
+            HttpContext.Session.SetString( "AdminType", "" );
+            HttpContext.Session.SetString( "PageLanguage", "" );
         }
 
         public void SetDefaultUserViewDatas()
@@ -34,7 +43,6 @@ namespace View.Controllers
             ViewData[ "UserUsername" ] = HttpContext.Session.GetString( "UserUsername" );
             ViewData[ "UserEmail" ] = HttpContext.Session.GetString( "UserEmail" ) ?? "no";
             ViewData[ "UserAvatar" ] = HttpContext.Session.GetString( "UserAvatar" );
-            ViewData[ "PageLanguage" ] = HttpContext.Session.GetString( "PageLanguage" ?? "ENG" );
         }
 
         public void SetUserSessions()
@@ -46,10 +54,26 @@ namespace View.Controllers
             HttpContext.Session.SetString( "PageLanguage", lists.userList[ 0 ].preferedLanguage ?? "ENG");
         }
 
+        public void DeleteUserSessions()
+        {
+            HttpContext.Session.SetString( "UserID", "" );
+            HttpContext.Session.SetString( "UserUsername", "" );
+            HttpContext.Session.SetString( "UserEmail", "no" );
+            HttpContext.Session.SetString( "UserAvatar", "" );
+        }
+
         public ActionResult ChangeLanguage(string lang, string cont, string act)
         {
             HttpContext.Session.SetString( "PageLanguage", lang );
             return RedirectToAction( act, cont );
+        }
+
+        public void SetDefaultPageLanguage()
+        {
+            if ( HttpContext.Session.GetString( "PageLanguage" ) == null )
+            {
+                HttpContext.Session.SetString( "PageLanguage", "ENG" );
+            }
         }
 
         public void WebText(string cat)
@@ -113,6 +137,32 @@ namespace View.Controllers
             }
 
             return "";
+        }
+
+        public bool CheckIfEmailAndPasswordIsCorrect(string email, string password)
+        {
+            GetAuthor( email );
+
+            if ( lists.authorList?.Count > 0 )
+            {
+                if ( Utility.VerifyPassword( password, lists.authorList[ 0 ].password ) )
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        public bool CheckIfAuthorExist(string email)
+        {
+            GetAuthor( email );
+
+            if ( lists.authorList?.Count > 0 )
+            {
+                return true;
+            }
+
+            return false;
         }
 
     }

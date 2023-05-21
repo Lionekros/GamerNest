@@ -16,11 +16,9 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "PageLanguage") == null )
-                {
-                    HttpContext.Session.SetString( "PageLanguage", "ENG" );
-                }
-                
+                DeleteAdminSession();
+                SetDefaultPageLanguage();
+
                 SetDefaultUserViewDatas();
                 language = HttpContext.Session.GetString( "PageLanguage");
                 if ( isFav )
