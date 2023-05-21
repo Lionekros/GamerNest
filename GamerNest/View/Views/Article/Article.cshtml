@@ -1,0 +1,55 @@
+﻿@model Support.ModelList
+@{
+    ViewData[ "Title" ] = "Admin - Article Preview";
+}
+
+<main class="home-section">
+    <div class="text">
+        <div class="articlePreview">
+            @foreach ( var item in Model.articleList )
+            {
+                <section class="Dates">
+                    <div>
+                        @ViewData["Created"]: @item.createdDate
+                    </div>
+                    @if ( item.updatedDate != "" && item.updatedDate != null )
+                    {
+                        <div>
+                            @ViewData["Updated"]: @item.updatedDate
+                        </div>
+                    }
+                </section>
+                <section class="Article">
+                    <div class="headline">
+                        <h1>@Html.Raw(item.headline)</h1>
+                    </div>
+
+                    <div class="summary">
+                        <h3>@Html.Raw(item.summary)</h3>
+                    </div>
+
+                    <div class="body">
+                        @Html.Raw(item.body)
+                    </div>
+                </section>
+            }
+            @foreach ( var item in Model.authorList )
+            {
+                <section class="author">
+                    <div class="avatar">
+                        <img src="@item.avatar" alt="Avatar author">
+                    </div>
+                    <div class="info">
+                        <div class="name">
+                            @item.name @item.firstLastName @item.secondLastName
+                        </div>
+                        <div class="description">
+                            @Html.Raw(item.description)
+                        </div>
+                    </div>
+                </section>
+
+            }
+        </div>
+    </div>
+</main>

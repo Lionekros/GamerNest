@@ -7,6 +7,13 @@ namespace View.Controllers
 {
     public class MethodBaseController :GetBaseController
     {
+        public void UserDefault()
+        {
+            DeleteAdminSession();
+            SetDefaultPageLanguage();
+
+            SetDefaultUserViewDatas();
+        }
         public void SetDefaultAdminViewDatas()
         {
             ViewData[ "AdminEmail" ] = HttpContext.Session.GetString( "AdminEmail" );
@@ -70,7 +77,7 @@ namespace View.Controllers
 
         public void SetDefaultPageLanguage()
         {
-            if ( HttpContext.Session.GetString( "PageLanguage" ) == null )
+            if ( string.IsNullOrEmpty( HttpContext.Session.GetString( "PageLanguage" )))
             {
                 HttpContext.Session.SetString( "PageLanguage", "ENG" );
             }

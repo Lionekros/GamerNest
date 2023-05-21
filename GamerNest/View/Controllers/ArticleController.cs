@@ -16,10 +16,7 @@ namespace View.Controllers
         {
             try
             {
-                DeleteAdminSession();
-                SetDefaultPageLanguage();
-
-                SetDefaultUserViewDatas();
+                UserDefault();
                 language = HttpContext.Session.GetString( "PageLanguage");
                 if ( isFav )
                 {
@@ -55,23 +52,10 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "PageLanguage" ) == null )
-                {
-                    HttpContext.Session.SetString( "PageLanguage", "ENG" );
-                }
+                UserDefault();
 
-                SetDefaultUserViewDatas();
-                language = HttpContext.Session.GetString( "PageLanguage" );
-                if ( isFav )
-                {
-                    GetAllArticles( language, author, idGame, id, headline, isPublished, orderBy, isFav, int.Parse( HttpContext.Session.GetString( "UserID" ) ) );
-                    FiltersViewBag( language, author, idGame, id, headline, isPublished, orderBy, isFav, int.Parse( HttpContext.Session.GetString( "UserID" ) ) );
-                }
-                else
-                {
-                    GetAllArticles( language, author, idGame, id, headline, isPublished, orderBy );
-                    FiltersViewBag( language, author, idGame, id, headline, isPublished, orderBy );
-                }
+                GetAllArticles( language, author, idGame, id, headline, isPublished, orderBy );
+                FiltersViewBag( language, author, idGame, id, headline, isPublished, orderBy );
 
                 Pagination( page, pageSize );
 
@@ -88,6 +72,20 @@ namespace View.Controllers
                 return RedirectToAction( "Index", "Admin" );
             }
         }
+
+        public ActionResult SeeArticle(int id)
+        {
+            UserDefault();
+
+            GetArticle( id );
+            GetAuthor( lists.articleList[0].author );
+
+            WebText( "UserArticle" );
+
+            return View("Article",lists);
+        }
+
+        
 
         public void Pagination(int page, int pageSize)
         {
