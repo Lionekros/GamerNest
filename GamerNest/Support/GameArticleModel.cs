@@ -9,13 +9,13 @@ namespace Support
 {
     public class GameArticleModel
     {
-        public long idGame { get; set; }
-        public long idArticle { get; set; }
+        public int idGame { get; set; }
+        public int idArticle { get; set; }
 
         public GameArticleModel(DataRow row)
         {
-            idGame = row.Field<long>( "ididGame" );
-            idArticle = row.Field<long>( "idArticle" );
+            idGame = row.Field<int>( "ididGame" );
+            idArticle = row.Field<int>( "idArticle" );
         }
     }
 }

@@ -41,6 +41,7 @@ namespace View.Controllers
         {
             try
             {
+                DeleteUserSessions();
                 WebText( "Login" );
                 return View( "Login" );
             }

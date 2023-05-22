@@ -9,12 +9,11 @@ namespace Support
 {
     public class UserFavGameModel
     {
-        public long idUser { get; set; }
-        public List<UserFavGameModel> gameFavList { get; set; }
+        public int idUser { get; set; }
+        public int idGame { get; set; }
 
         public UserFavGameModel(DataRow row) 
         { 
-            gameFavList = new List<UserFavGameModel>();
         }
     }
 }

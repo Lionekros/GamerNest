@@ -10,7 +10,7 @@ namespace Support
 {
     public class ArticleModel
     {
-        public long id { get; set; }
+        public int id { get; set; }
 
         [Required( ErrorMessage = "Required" )]
         public string headline { get; set; }
@@ -34,7 +34,7 @@ namespace Support
 
 
         public List<GameModel>? gameList { get; set; }
-        public List<long>? idGameList { get; set; }
+        public List<int>? idGameList { get; set; }
 
         public ArticleModel()
         {
@@ -42,7 +42,7 @@ namespace Support
 
         public ArticleModel(DataRow row)
         {
-            id = row.Field<long>( "id" );
+            id = row.Field<int>( "id" );
             headline = row.Field<string>( "headline" );
             summary = row.Field<string>( "summary" );
             body = row.Field<string>( "body" );

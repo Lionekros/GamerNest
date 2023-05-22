@@ -111,7 +111,7 @@ namespace View.Controllers
 
                 List<GameModel> tempList = GameService.GetAllGames("","",model.id);
 
-                model.idGameList = new List<long>();
+                model.idGameList = new List<int>();
 
                 foreach (var item in tempList)
                 {

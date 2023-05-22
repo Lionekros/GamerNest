@@ -5,13 +5,14 @@ using Support;
 
 namespace View.Controllers
 {
+
     public class AdminGameController :MethodBaseController
     {
         public ActionResult Games
             (
                   int page = 1
                 , int pageSize = 5,
-                string language = "", string user = "", long idArticle = -1, bool scored = false, int id = -1, string title = "", string subtitle = "", string orderBy = ""
+                string language = "", string user = "", int idArticle = -1, bool scored = false, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = ""
             )
         {
             try
@@ -26,16 +27,18 @@ namespace View.Controllers
                 {
                     if (scored)
                     {
-                        GetGameScore(language, user, id, title, subtitle, orderBy );
+                        GetGameScore(language, user, id, title, subtitle, idPlatform, orderBy );
                     }
                     else
                     {
-                        GetAllGames( language, user, idArticle, id, title, subtitle, orderBy );
+                        GetAllGames( language, user, idArticle, id, title, subtitle, idPlatform, orderBy );
                     }
-                    FiltersViewBag( language, user, idArticle, scored, id, title, subtitle, orderBy );
+                    FiltersViewBag( language, user, idArticle, scored, id, title, subtitle, idPlatform, orderBy );
 
                     ViewBag.score = scored;
                 }
+
+                GetAllPlatforms(-1, "", "", "name");
 
                 Pagination( page, pageSize );
 
@@ -163,7 +166,7 @@ namespace View.Controllers
                 if ( ModelState.IsValid )
                 {
                     CreateGameProcedure( model );
-                    GetAllGames( "", "", -1, -1, "", "", "id" );
+                    GetAllGames( "", "", -1, -1, "", "", -1, "id" );
                     int lastIndex = lists.gameList.Count - 1;
                     model.id = lists.gameList[ lastIndex ].id;
                     model.cover = UploadImage( cover, model.id, "Cover", "Game", "cover" );
@@ -255,15 +258,15 @@ namespace View.Controllers
         {
             if ( lists.gameList != null )
             {
-                int totalGames = lists.gameList.Count;
+                int totalGenres = lists.gameList.Count;
 
-                int skippedGames = (page - 1) * pageSize;
+                int skippedGenres = (page - 1) * pageSize;
 
-                lists.gameList = lists.gameList.Skip( skippedGames ).Take( pageSize ).ToList();
+                lists.gameList = lists.gameList.Skip( skippedGenres ).Take( pageSize ).ToList();
 
                 lists.PageSize = pageSize;
                 lists.CurrentPage = page;
-                lists.TotalItems = totalGames;
+                lists.TotalItems = totalGenres;
             }
         }
 
@@ -285,7 +288,7 @@ namespace View.Controllers
 
         public void FiltersViewBag
             (
-                  string language = "", string user = "", long idArticle = -1, bool scored = false, int id = -1, string title = "", string subtitle = "", string orderBy = ""
+                  string language = "", string user = "", int idArticle = -1, bool scored = false, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = ""
             )
         {
             ViewBag.FormData = new
@@ -297,6 +300,7 @@ namespace View.Controllers
                 id = id,
                 title = title,
                 subtitle = subtitle,
+                idPlatform = idPlatform,
                 orderBy = orderBy
             };
         }

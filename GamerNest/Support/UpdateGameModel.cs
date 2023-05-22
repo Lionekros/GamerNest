@@ -9,7 +9,7 @@ namespace Support
 {
     public class UpdateGameModel
     {
-        public long id { get; set; }
+        public int id { get; set; }
         public string title { get; set; }
         public string? subtitle { get; set; }
         public string description { get; set; }
@@ -44,7 +44,7 @@ namespace Support
 
         public UpdateGameModel(DataRow row)
         {
-            id = row.Field<long>( "id" );
+            id = row.Field<int>( "id" );
             title = row.Field<string>( "title" );
             subtitle = row.Field<string>( "subtitle" );
             description = row.Field<string>( "description" );

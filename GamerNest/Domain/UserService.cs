@@ -14,7 +14,7 @@ namespace Domain
     {
         public static List<UserModel> GetAllUsers
             (
-                  long id = -1, string username = "", string email = "", string orderBy = ""
+                  int id = -1, string username = "", string email = "", string orderBy = ""
             )
         {
             try
@@ -39,7 +39,7 @@ namespace Domain
             }
         }
 
-        public static List<UserModel> GetUser(long id)
+        public static List<UserModel> GetUser(int id)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Domain
             }
         }
 
-        public static List<UpdateUserModel> GetUserUpdate(long id)
+        public static List<UpdateUserModel> GetUserUpdate(int id)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace Domain
 
         public static void UpdateUser
             (
-                    long id = -1
+                    int id = -1
                     , string username = "",
                     bool changedPassword = false,
                     string password = "",
@@ -125,7 +125,7 @@ namespace Domain
             UserRepository.UpdateUser( id, username, password, email, avatar, preferedLanguage, birthday, creationDate );
         }
 
-        public static void DeleteUser(long id = -1)
+        public static void DeleteUser(int id = -1)
         {
             UserRepository.DeleteUser( id );
         }

@@ -86,9 +86,9 @@ namespace View.Controllers
         #endregion
 
         #region Game
-        public void GetAllGames(string language = "", string user = "", long idArticle = -1, int id = -1, string title = "", string subtitle = "", string orderBy = "")
+        public void GetAllGames(string language = "", string user = "", int idArticle = -1, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = "")
         {
-            lists.gameList = GameService.GetAllGames( language, user, idArticle, id, title, subtitle, orderBy );
+            lists.gameList = GameService.GetAllGames( language, user, idArticle, id, title, subtitle, idPlatform, orderBy );
         }
 
         public void GetGame(int id = -1)
@@ -96,9 +96,9 @@ namespace View.Controllers
             lists.gameList = GameService.GetGame( id );
         }
 
-        public void GetGameScore(string language = "", string user = "", long id = -1, string title = "", string subtitle = "", string orderBy = "")
+        public void GetGameScore(string language = "", string user = "", int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = "")
         {
-            lists.gameList = GameService.GetGameScore( language, user, id, title, subtitle, orderBy  );
+            lists.gameList = GameService.GetGameScore( language, user, id, title, subtitle, idPlatform, orderBy  );
         }
 
         public void GetGameUpdate(int id = -1)
@@ -215,17 +215,17 @@ namespace View.Controllers
         #endregion
 
         #region User
-        public void GetAllUsers(long id = -1, string username = "", string email = "", string orderBy = "")
+        public void GetAllUsers(int id = -1, string username = "", string email = "", string orderBy = "")
         {
             lists.userList = UserService.GetAllUsers( id, username, email, orderBy );
         }
 
-        public void GetUser(long id)
+        public void GetUser(int id)
         {
             lists.userList = UserService.GetUser( id );
         }
 
-        public void GetUserUpdate(long id)
+        public void GetUserUpdate(int id)
         {
             lists.updateUserList = UserService.GetUserUpdate( id );
         }

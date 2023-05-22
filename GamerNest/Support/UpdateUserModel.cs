@@ -9,7 +9,7 @@ namespace Support
 {
     public class UpdateUserModel
     {
-        public long id { get; set; }
+        public int id { get; set; }
         public string username { get; set; }
         public string? password { get; set; }
         public string email { get; set; }
@@ -23,7 +23,7 @@ namespace Support
 
         public UpdateUserModel(DataRow row)
         {
-            id = row.Field<long>( "id" );
+            id = row.Field<int>( "id" );
             username = row.Field<string>( "username" );
             password = row.Field<string>( "password" );
             email = row.Field<string>( "email" );

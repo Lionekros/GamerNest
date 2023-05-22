@@ -12,7 +12,7 @@ namespace Domain
 {
     public class GameArticleService
     {
-        public static List<GameArticleModel> GetAllGameArticles(long idGame, string orderBy = "" )
+        public static List<GameArticleModel> GetAllGameArticles(int idGame, string orderBy = "" )
         {
             try
             {

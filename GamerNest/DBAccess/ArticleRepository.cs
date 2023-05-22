@@ -117,7 +117,7 @@ namespace DBAccess
             }
         }
 
-        public static int CreateArticle(string headline = "", string summary = "", string body = "", string cover = "", int isPublished = -1, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<long> idGame = null)
+        public static int CreateArticle(string headline = "", string summary = "", string body = "", string cover = "", int isPublished = -1, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<int> idGame = null)
         {
             try
             {
@@ -146,7 +146,7 @@ namespace DBAccess
             }
         }
 
-        public static int UpdateArticle(long id = -1, string headline = "", string summary = "", string body = "", string cover = "", int isPublished = -1, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<long> idGame = null)
+        public static int UpdateArticle(int id = -1, string headline = "", string summary = "", string body = "", string cover = "", int isPublished = -1, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<int> idGame = null)
         {
             try
             {

@@ -12,7 +12,7 @@ namespace View.Controllers
             (
                   int page = 1
                 , int pageSize = 10,
-                  long id = -1, string username = "", string email = "", string orderBy = ""
+                  int id = -1, string username = "", string email = "", string orderBy = ""
             )
         {
             try
@@ -68,7 +68,7 @@ namespace View.Controllers
 
         }
 
-        public ActionResult UpdateForm(long id)
+        public ActionResult UpdateForm(int id)
         {
             try
             {
@@ -167,7 +167,7 @@ namespace View.Controllers
             }
         }
 
-        public ActionResult Delete(long id)
+        public ActionResult Delete(int id)
         {
             DeleteUserProcedure( id );
             return RedirectToAction( "Users" );
@@ -200,14 +200,14 @@ namespace View.Controllers
             UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.birthday, model.creationDate );
         }
 
-        public void DeleteUserProcedure(long id)
+        public void DeleteUserProcedure(int id)
         {
             UserService.DeleteUser( id );
         }
 
         public void FiltersViewBag
             (
-                 long id = -1, string username = "", string email = "", string orderBy = ""
+                 int id = -1, string username = "", string email = "", string orderBy = ""
             )
         {
             ViewBag.FormData = new

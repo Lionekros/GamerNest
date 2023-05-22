@@ -1,0 +1,142 @@
+﻿@model Support.ModelList
+@{
+    ViewData[ "Title" ] = "All Games";
+}
+
+<partial name="_NormalMenu" />
+
+<main class="home-section">
+    <div class="text">
+        <h1>All Games</h1>
+        <div class="NormalCenter">
+            <section class="filter">
+                <form asp-controller="Game" asp-action="AllGames" method="post">
+                    <div>
+                        <select id="orderBy" name="orderBy">
+                            <option value="title">@ViewData[ "fOrderBy" ]</option>
+                            <option value="title">@ViewData[ "tTitle" ]</option>
+                            <option value="totalScore">@ViewData[ "tTotalScore" ]</option>
+                            <option value="platform">@ViewData[ "tPlatform" ]</option>
+                        </select>
+                    </div>
+                    @if ( ViewData[ "UserEmail" ].ToString() != "no" )
+                    {
+                        <div>
+                            <div class="input-group">
+                                <select name="isFav" id="isFav">
+                                    <option value="false">No Show Fav</option>
+                                    <option value="true">Show Fav</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+
+                    <div>
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" id="title" name="title" placeholder="Search Games">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-group">
+                            <select name="idPlatform" id="idPlatform" class="select2Single">
+                                <option>@ViewData[ "fSearchPlatform" ]</option>
+                                @foreach ( var item in Model.platformList )
+                                {
+                                    <option value="@item.id">@item.name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <input class="filtButton" type="submit" value="Filter">
+                    </div>
+                </form>
+            </section>
+        </div>
+        <section class="news">
+            @foreach ( var item in Model.gameList )
+            {
+                <a asp-controller="Game" asp-action="SeeGame" asp-route-id="@item.id">
+                    <div class="cardGame">
+                        <div class="img">
+                            <img src="@item.cover" alt="Cover">
+                        </div>
+                        <div class="info">
+                            <div class="icons">
+                                <div class="platform">
+
+                                </div>
+                                @if (ViewData["UserEmail"].ToString() != "no")
+                                {
+                                    <div class="favButton">
+                                        
+                                    </div>
+                                }
+                            </div>
+                            <div class="title">
+                                @Html.Raw(item.title)
+                            </div>
+                            @if ( !string.IsNullOrEmpty(item.subtitle) )
+                            {
+                                <div class="subtitle">
+                                    @item.subtitle
+                                </div>
+                            }
+                            
+                        </div>
+                    </div>
+
+                </a>
+            }
+
+        </section>
+        <section class="pagination">
+            <div>
+                @if ( Model.CurrentPage > 1 )
+                {
+                    <!-- Previous Page -->
+                    <a asp-controller="Game" asp-action="AllGames"
+                   asp-route-page="@(Model.CurrentPage - 1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-language="@ViewBag.FormData.language"
+                   asp-route-user="@ViewBag.FormData.user"
+                   asp-route-idArticle="@ViewBag.FormData.idArticle"
+                   asp-route-scored="@ViewBag.FormData.scored"
+                   asp-route-id="@ViewBag.FormData.id"
+                   asp-route-title="@ViewBag.FormData.title"
+                   asp-route-subtitle="@ViewBag.FormData.subtitle"
+                   asp-route-subtitle="@ViewBag.FormData.idPlatform"
+                   asp-route-orderBy="@ViewBag.FormData.orderBy">
+                        Previous
+                    </a>
+                }
+
+                @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
+                {
+                    <!-- Next Page -->
+                    <a asp-controller="Game" asp-action="AllGames"
+                   asp-route-page="@(Model.CurrentPage - 1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-language="@ViewBag.FormData.language"
+                   asp-route-user="@ViewBag.FormData.user"
+                   asp-route-idArticle="@ViewBag.FormData.idArticle"
+                   asp-route-scored="@ViewBag.FormData.scored"
+                   asp-route-id="@ViewBag.FormData.id"
+                   asp-route-title="@ViewBag.FormData.title"
+                   asp-route-subtitle="@ViewBag.FormData.subtitle"
+                   asp-route-subtitle="@ViewBag.FormData.idPlatform"
+                   asp-route-orderBy="@ViewBag.FormData.orderBy">
+                        Next
+                    </a>
+                }
+            </div>
+            <div>
+                <p>
+                    @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.articleList?.Count @ViewData[ "OutOf" ] @Model.TotalItems)
+                </p>
+            </div>
+        </section>
+    </div>
+</main>

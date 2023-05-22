@@ -10,7 +10,7 @@ namespace Support
 {
     public class UserModel
     {
-        public long id { get; set; }
+        public int id { get; set; }
         [Required( ErrorMessage = "Required" )]
         public string username { get; set; }
         [Required( ErrorMessage = "Required" )]
@@ -29,7 +29,7 @@ namespace Support
 
         public UserModel(DataRow row)
         {
-            id = row.Field<long>( "id" );
+            id = row.Field<int>( "id" );
             username = row.Field<string>( "username" );
             password = row.Field<string>( "password" );
             email = row.Field<string>( "email" );

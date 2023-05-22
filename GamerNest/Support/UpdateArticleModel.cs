@@ -9,7 +9,7 @@ namespace Support
 {
     public class UpdateArticleModel
     {
-        public long id { get; set; }
+        public int id { get; set; }
         public string headline { get; set; }
         public string summary { get; set; }
         public string body { get; set; }
@@ -23,7 +23,7 @@ namespace Support
         public string? author { get; set; }
 
         public List<GameModel>? gameList { get; set; }
-        public List<long>? idGameList { get; set; }
+        public List<int>? idGameList { get; set; }
 
         public UpdateArticleModel()
         {
@@ -31,7 +31,7 @@ namespace Support
 
         public UpdateArticleModel(DataRow row)
         {
-            id = row.Field<long>( "id" );
+            id = row.Field<int>( "id" );
             headline = row.Field<string>( "headline" );
             summary = row.Field<string>( "summary" );
             body = row.Field<string>( "body" );

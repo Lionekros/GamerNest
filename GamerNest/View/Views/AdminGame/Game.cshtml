@@ -47,6 +47,17 @@
                         <input type="text" id="subtitle" name="subtitle"  placeholder="@ViewData[ "fSearchSubtitle" ]">
                     </div>
                 </div>
+                <div>
+                    <div class="input-group">
+                        <select name="idPlatform" id="idPlatform" class="select2Single">
+                            <option>@ViewData[ "fSearchPlatform" ]</option>
+                            @foreach ( var item in Model.platformList )
+                            {
+                                <option value="@item.id">@item.name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
 
                 <div>
                     <input class="filtButton" type="submit" value="@ViewData[ "ButtonFilter" ]">
@@ -202,6 +213,7 @@
                    asp-route-id="@ViewBag.FormData.id"
                    asp-route-title="@ViewBag.FormData.title"
                    asp-route-subtitle="@ViewBag.FormData.subtitle"
+                   asp-route-subtitle="@ViewBag.FormData.idPlatform"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
                         @ViewData[ "ButtonPrevious" ]
                     </a>
@@ -220,6 +232,7 @@
                    asp-route-id="@ViewBag.FormData.id"
                    asp-route-title="@ViewBag.FormData.title"
                    asp-route-subtitle="@ViewBag.FormData.subtitle"
+                   asp-route-subtitle="@ViewBag.FormData.idPlatform"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
                         @ViewData[ "ButtonNext" ]
                     </a>

@@ -11,7 +11,7 @@ namespace DBAccess
 {
     public class GameArticleRepository
     {
-        public static DataTable GetAllGameArticles(long idGame, string orderBy = "" )
+        public static DataTable GetAllGameArticles(int idGame, string orderBy = "" )
         {
             try
             {

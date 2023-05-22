@@ -16,6 +16,7 @@ namespace View.Controllers
         }
         public void SetDefaultAdminViewDatas()
         {
+            DeleteUserSessions();
             ViewData[ "AdminEmail" ] = HttpContext.Session.GetString( "AdminEmail" );
             ViewData[ "AdminCanPublish" ] = HttpContext.Session.GetString( "AdminCanPublish" );
             ViewData[ "AdminFullName" ] = HttpContext.Session.GetString( "AdminFullName" );
@@ -120,7 +121,7 @@ namespace View.Controllers
             return false;
         }
 
-        public string UploadImage(IFormFile avatar, long id, string path1, string path2 = "", string name = "")
+        public string UploadImage(IFormFile avatar, int id, string path1, string path2 = "", string name = "")
         {
             if ( avatar != null && avatar.Length > 0 )
             {

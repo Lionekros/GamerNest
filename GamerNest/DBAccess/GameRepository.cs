@@ -11,7 +11,7 @@ namespace DBAccess
 {
     public class GameRepository
     {
-        public static DataTable GetAllGames(string language = "", string user = "", long idArticle = -1, int id = -1, string title = "", string subtitle = "", string orderBy = "")
+        public static DataTable GetAllGames(string language = "", string user = "", int idArticle = -1, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = "")
         {
             try
             {
@@ -63,6 +63,11 @@ namespace DBAccess
                     if ( !string.IsNullOrEmpty( subtitle ) )
                     {
                         conditions.Add( "LOWER(game.subtitle) LIKE '%" + subtitle.ToLower() + "%'" );
+                    }
+
+                    if (idPlatform > 0)
+                    {
+                        conditions.Add( "game.idPlatform = " + idPlatform );
                     }
 
                     if ( !string.IsNullOrEmpty( language ) )
@@ -120,7 +125,30 @@ namespace DBAccess
             }
         }
 
-        public static DataTable GetGameScore(string language = "", string user = "", long id = -1, string title = "", string subtitle = "", string orderBy = "")
+        public static DataTable CheckIfFav(int idUser = -1, int idGame = -1)
+        {
+            try
+            {
+                using ( MySqlCommand cmd = Data.CreateCommand() )
+                {
+                    cmd.CommandText = "SELECT idUser, idGame"
+                                        + " FROM user_fav_game"
+                                        + " WHERE idUser = " + idUser
+                                        + " AND idGame = " + idGame;
+
+                    return Data.ExecuteCommand( cmd );
+                }
+            }
+            catch ( MySqlException ex )
+            {
+                DataTable dt = new DataTable();
+                Log log = new Log();
+                log.Add( ex.Message );
+                return dt;
+            }
+        }
+
+        public static DataTable GetGameScore(string language = "", string user = "", int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = "")
         {
             try
             {
@@ -165,6 +193,11 @@ namespace DBAccess
                         conditions.Add( "LOWER(game.language) LIKE '%" + language.ToLower() + "%'" );
                     }
 
+                    if ( idPlatform > 0 )
+                    {
+                        conditions.Add( "game.idPlatform = " + idPlatform );
+                    }
+
                     if ( conditions?.Count > 0 )
                     {
                         queryBuilder.Append( " AND " );
@@ -190,7 +223,7 @@ namespace DBAccess
             }
         }
 
-        public static int CreateGame(string title = "", string subtitle = "", string description = "", string language = "", string cover = "/img/Cover/Game/Default.png", string releaseDate = "", sbyte totalScore = 0, sbyte isFav = 0, int idDev = -1, int idPlatform = -1, int idPublisher = -1, List<int> idGenre = null, List<int> idPlayerType = null, List<int> idLanguageGame = null)
+        public static long CreateGame(string title = "", string subtitle = "", string description = "", string language = "", string cover = "/img/Cover/Game/Default.png", string releaseDate = "", sbyte totalScore = 0, sbyte isFav = 0, int idDev = -1, int idPlatform = -1, int idPublisher = -1, List<int> idGenre = null, List<int> idPlayerType = null, List<int> idLanguageGame = null)
         {
             try
             {
@@ -222,7 +255,7 @@ namespace DBAccess
         }
 
 
-        public static int UpdateGame(long id = -1, string title = "", string subtitle = "", string description = "", string language = "", string cover = "", string releaseDate = "", sbyte totalScore = 0, sbyte isFav = 0, int idDev = -1, int idPlatform = -1, int idPublisher = -1, List<int> idGenre = null, List<int> idPlayerType = null, List<int> idLanguageGame = null)
+        public static long UpdateGame(int id = -1, string title = "", string subtitle = "", string description = "", string language = "", string cover = "", string releaseDate = "", sbyte totalScore = 0, sbyte isFav = 0, int idDev = -1, int idPlatform = -1, int idPublisher = -1, List<int> idGenre = null, List<int> idPlayerType = null, List<int> idLanguageGame = null)
         {
             try
             {
@@ -255,7 +288,7 @@ namespace DBAccess
         }
 
 
-        public static int DeleteGame(long id = -1)
+        public static long DeleteGame(int id = -1)
         {
             try
             {

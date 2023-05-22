@@ -10,7 +10,7 @@ namespace Support
 {
     public class GameModel
     {
-        public long id { get; set; }
+        public int id { get; set; }
         [Required]
         public string title { get; set; }
         public string? subtitle { get; set; }
@@ -54,7 +54,7 @@ namespace Support
 
         public GameModel(DataRow row)
         {
-            id = row.Field<long>( "id" );
+            id = row.Field<int>( "id" );
             title = row.Field<string>( "title" );
             subtitle = row.Field<string>( "subtitle" );
             description = row.Field<string>( "description" );

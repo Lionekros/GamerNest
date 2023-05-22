@@ -84,14 +84,14 @@ namespace Domain
             }
         }
 
-        public static void CreateArticle(string headline = "", string summary = "", string body = "", string cover = "", bool isPublished = false, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<long> idGame = null)
+        public static void CreateArticle(string headline = "", string summary = "", string body = "", string cover = "", bool isPublished = false, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<int> idGame = null)
         {
             sbyte isPublished2 = Utility.BoolToSByte( isPublished );
 
             ArticleRepository.CreateArticle( headline, summary, body, cover, isPublished2, createdDate, idAuthor, language, updatedDate, idGame);
         }
 
-        public static void UpdateArticle(long id = -1, string headline = "", string summary = "", string body = "", string cover = "", bool isPublished = false, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<long> idGame = null)
+        public static void UpdateArticle(int id = -1, string headline = "", string summary = "", string body = "", string cover = "", bool isPublished = false, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<int> idGame = null)
         {
             sbyte isPublished2 = Utility.BoolToSByte( isPublished );
 

@@ -9,14 +9,14 @@ namespace Support
 {
     public class UserScoreGameModel
     {
-        public long idUser { get; set; }
-        public long idGame { get; set; }
+        public int idUser { get; set; }
+        public int idGame { get; set; }
         public sbyte score { get; set; }
 
         public UserScoreGameModel(DataRow row) 
         {
-            idUser = row.Field<long>( "idUser" );
-            idGame = row.Field<long>( "idGame" );
+            idUser = row.Field<int>( "idUser" );
+            idGame = row.Field<int>( "idGame" );
             score = row.Field<sbyte>( "score" );
         }
     }

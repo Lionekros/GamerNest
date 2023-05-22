@@ -16,6 +16,7 @@ namespace View.Controllers
         {
             try
             {
+                DeleteUserSessions();
                 SetDefaultAdminViewDatas();
 
                 if ( HttpContext.Session.GetString( "AdminType" ) == null )

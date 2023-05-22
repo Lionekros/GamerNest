@@ -12,7 +12,7 @@ namespace DBAccess
 {
     public class UserRepository
     {
-        public static DataTable GetAllUsers(long id = -1, string username = "", string email = "", string orderBy = "")
+        public static DataTable GetAllUsers(int id = -1, string username = "", string email = "", string orderBy = "")
         {
             try
             {
@@ -61,7 +61,7 @@ namespace DBAccess
             }
         }
 
-        public static DataTable GetUser(long id)
+        public static DataTable GetUser(int id)
         {
             try
             {
@@ -123,7 +123,7 @@ namespace DBAccess
 
         public static int UpdateUser
                 (
-                      long id = -1
+                      int id = -1
                     , string username = "",
                     string password = "",
                     string email = "",
@@ -158,7 +158,7 @@ namespace DBAccess
             }
         }
 
-        public static int DeleteUser(long id = -1)
+        public static int DeleteUser(int id = -1)
         {
             try
             {
