@@ -1,6 +1,5 @@
 ﻿using LogError;
 using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
 using System.Data;
 using System.Text;
 

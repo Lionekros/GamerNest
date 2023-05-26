@@ -1,9 +1,7 @@
 ﻿using Domain;
+using LogError;
 using Microsoft.AspNetCore.Mvc;
 using Support;
-using LogError;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using System.Text.RegularExpressions;
 
 namespace View.Controllers
@@ -12,16 +10,16 @@ namespace View.Controllers
     {
         public ActionResult Authors
             (
-                  int       page            = 1
-                , int       pageSize        = 5
-                , int       id              = -1
-                , string    name            = ""
-                , string    firstLastName   = ""
-                , string    secondLastName  = ""
-                , string    email           = ""
-                , sbyte     isAdmin         = -1
-                , sbyte     isActive        = -1
-                , string    orderBy         = ""
+                  int page = 1
+                , int pageSize = 5
+                , int id = -1
+                , string name = ""
+                , string firstLastName = ""
+                , string secondLastName = ""
+                , string email = ""
+                , sbyte isAdmin = -1
+                , sbyte isActive = -1
+                , string orderBy = ""
             )
         {
             try
@@ -74,7 +72,7 @@ namespace View.Controllers
                     return RedirectToAction( "Index", "Admin" );
                 }
                 SetDefaultAdminViewDatas();
-                WebText("AdminAuthorForm");
+                WebText( "AdminAuthorForm" );
                 return View( "CreateAuthor" );
             }
             catch ( Exception ex )
@@ -154,14 +152,14 @@ namespace View.Controllers
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
                 SetDefaultAdminViewDatas();
-                
+
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminAuthorForm" );
                 return View( "CreateAuthor", author );
             }
             catch ( Exception ex )
             {
-                
+
                 Log log = new Log();
                 log.Add( ex.Message );
                 WebText( "Messages" );
@@ -170,7 +168,7 @@ namespace View.Controllers
             }
         }
 
-        public ActionResult Update(UpdateAuthorModel author, IFormFile avatar) 
+        public ActionResult Update(UpdateAuthorModel author, IFormFile avatar)
         {
 
             try
@@ -203,11 +201,11 @@ namespace View.Controllers
                         errorMessageList.Add( ViewData[ "PhoneExist" ].ToString() );
                     }
 
-                    if (avatar != null)
+                    if ( avatar != null )
                     {
                         author.avatar = UploadImage( avatar, author.id, "Avatar", "Author", "avatar" );
                     }
-                    
+
 
                     if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
                     {
@@ -247,13 +245,13 @@ namespace View.Controllers
                                 {
                                     SetAdminSessions();
                                 }
-                                
+
                                 return RedirectToAction( "Authors" );
                             }
                         }
                         else
                         {
-                            if ( !emailExist && !phoneExist)
+                            if ( !emailExist && !phoneExist )
                             {
                                 UpdateAuthorProcedure( author, changedPassword );
                                 GetAuthor( author.email );
@@ -301,7 +299,7 @@ namespace View.Controllers
                                 return RedirectToAction( "Authors" );
                             }
                         }
-                        
+
                     }
                 }
                 else
@@ -378,8 +376,8 @@ namespace View.Controllers
 
         public void CreateAuthorProcedure(AuthorModel author)
         {
-            AuthorService.CreateAuthor(author.name, author.firstLastName, author.secondLastName, author.password, author.email, author.phone, author.description, author.avatar, author.preferedLanguage, author.isAdmin, author
-                .canPublish, author.isActive, author.birthday, author.startDate, author.endDate);
+            AuthorService.CreateAuthor( author.name, author.firstLastName, author.secondLastName, author.password, author.email, author.phone, author.description, author.avatar, author.preferedLanguage, author.isAdmin, author
+                .canPublish, author.isActive, author.birthday, author.startDate, author.endDate );
         }
 
         public void UpdateAuthorProcedure(UpdateAuthorModel author, bool changedPassword = false)
@@ -389,7 +387,7 @@ namespace View.Controllers
                 .canPublish, author.isActive, author.birthday, author.startDate, author.endDate );
         }
 
-        public void DeleteAuthorProcedure(int id) 
+        public void DeleteAuthorProcedure(int id)
         {
             AuthorService.DeleteAuthor( id );
         }

@@ -1,17 +1,13 @@
 ﻿using LogError;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DBAccess
 {
     public class WebTextRepository
     {
-        public static DataTable GetAllTexts(int id = -1, string title = "", int idCategory = -1, string language = "", string orderBy = "wt.id" )
+        public static DataTable GetAllTexts(int id = -1, string title = "", int idCategory = -1, string language = "", string orderBy = "wt.id")
         {
             try
             {
@@ -57,7 +53,7 @@ namespace DBAccess
             }
         }
 
-        public static DataTable GetAllTextsByCategory(string category, string language = "ENG", string orderBy = "" )
+        public static DataTable GetAllTextsByCategory(string category, string language = "ENG", string orderBy = "")
         {
             try
             {

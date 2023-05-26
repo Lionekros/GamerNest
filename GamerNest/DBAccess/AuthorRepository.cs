@@ -1,11 +1,7 @@
 ﻿using LogError;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DBAccess
 {
@@ -13,14 +9,14 @@ namespace DBAccess
     {
         public static DataTable GetAllAuthors
             (
-                  int       id              = -1
-                , string    name            = ""
-                , string    firstLastName   = ""
-                , string    secondLastName  = ""
-                , string    email           = ""
-                , sbyte     isAdmin         = -1
-                , sbyte     isActive        = -1
-                , string    orderBy         = ""
+                  int id = -1
+                , string name = ""
+                , string firstLastName = ""
+                , string secondLastName = ""
+                , string email = ""
+                , sbyte isAdmin = -1
+                , sbyte isActive = -1
+                , string orderBy = ""
             )
         {
             try
@@ -94,7 +90,7 @@ namespace DBAccess
                 {
                     cmd.CommandText = cmd.CommandText = "SELECT id, name, firstLastName, secondLastName, password, email, phone, description, avatar, preferedLanguage, isAdmin, canPublish, isActive, birthday, startDate, endDate"
                         + " FROM author"
-                        + " WHERE email = '" + emailOrPhone  + "' OR phone = '" + emailOrPhone + "'";
+                        + " WHERE email = '" + emailOrPhone + "' OR phone = '" + emailOrPhone + "'";
                     return Data.ExecuteCommand( cmd );
                 }
 
@@ -111,21 +107,21 @@ namespace DBAccess
 
         public static int CreateAuthor
             (
-                  string    name                = ""
-                , string    firstLastName       = ""
-                , string    secondLastName      = ""
-                , string    password            = ""
-                , string    email               = ""
-                , string    phone               = ""
-                , string    description         = ""
-                , string    avatar              = "/img/Avatar/Author/Default.png"
-                , string    preferedLanguage    = ""
-                , sbyte     isAdmin             = -1
-                , sbyte     canPublish          = -1
-                , sbyte     isActive            = -1
-                , string    birthday            = ""
-                , string    startDate           = ""
-                , string    endDate             = ""
+                  string name = ""
+                , string firstLastName = ""
+                , string secondLastName = ""
+                , string password = ""
+                , string email = ""
+                , string phone = ""
+                , string description = ""
+                , string avatar = "/img/Avatar/Author/Default.png"
+                , string preferedLanguage = ""
+                , sbyte isAdmin = -1
+                , sbyte canPublish = -1
+                , sbyte isActive = -1
+                , string birthday = ""
+                , string startDate = ""
+                , string endDate = ""
             )
         {
             try
@@ -162,22 +158,22 @@ namespace DBAccess
 
         public static int UpdateAuthor
             (
-                  int       id                  = -1
-                , string    name                = ""
-                , string    firstLastName       = ""
-                , string    secondLastName      = ""
-                , string    password            = ""
-                , string    email               = ""
-                , string    phone               = ""
-                , string    description         = ""
-                , string    avatar              = ""
-                , string    preferedLanguage    = ""
-                , sbyte     isAdmin             = -1
-                , sbyte     canPublish          = -1
-                , sbyte     isActive            = -1
-                , string    birthday            = ""
-                , string    startDate           = ""
-                , string    endDate             = ""
+                  int id = -1
+                , string name = ""
+                , string firstLastName = ""
+                , string secondLastName = ""
+                , string password = ""
+                , string email = ""
+                , string phone = ""
+                , string description = ""
+                , string avatar = ""
+                , string preferedLanguage = ""
+                , sbyte isAdmin = -1
+                , sbyte canPublish = -1
+                , sbyte isActive = -1
+                , string birthday = ""
+                , string startDate = ""
+                , string endDate = ""
             )
         {
             try

@@ -1,11 +1,7 @@
 ﻿using Domain;
 using LogError;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Mysqlx.Crud;
 using Support;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace View.Controllers
 {
@@ -32,11 +28,11 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "Index", "Admin" );
                 }
-                GetAllWebLanguages(id, name, orderBy);
+                GetAllWebLanguages( id, name, orderBy );
                 Pagination( page, pageSize );
                 FiltersViewBag( id, name, orderBy );
                 WebText( "AdminWebLanguage" );
-                return View("WebLanguage", lists);
+                return View( "WebLanguage", lists );
             }
             catch ( Exception ex )
             {
@@ -77,7 +73,7 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "AdminType" ) == "Author")
+                if ( HttpContext.Session.GetString( "AdminType" ) == "Author" )
                 {
                     return RedirectToAction( "Index", "Admin" );
                 }
@@ -190,7 +186,7 @@ namespace View.Controllers
 
         public void CreateWebLanguageProcedure(WebLanguageModel webLang)
         {
-            WebLanguageService.CreateWebLanguage(webLang.id, webLang.name, webLang.icon );
+            WebLanguageService.CreateWebLanguage( webLang.id, webLang.name, webLang.icon );
         }
 
         public void UpdateWebLanguageProcedure(UpdateWebLanguageModel webLang)

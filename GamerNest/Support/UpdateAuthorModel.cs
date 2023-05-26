@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Support
 {
@@ -50,8 +45,8 @@ namespace Support
             avatar = row.Field<string>( "avatar" );
             preferedLanguage = row.Field<string>( "preferedLanguage" );
             isAdmin = Utility.sByteToBool( row.Field<sbyte>( "isAdmin" ) );
-            canPublish = Utility.sByteToBool( row.Field<sbyte>( "canPublish" ));
-            isActive = Utility.sByteToBool( row.Field<sbyte>( "isActive" ));
+            canPublish = Utility.sByteToBool( row.Field<sbyte>( "canPublish" ) );
+            isActive = Utility.sByteToBool( row.Field<sbyte>( "isActive" ) );
             birthday = row.Field<string>( "birthday" );
             startDate = row.Field<string>( "startDate" );
             endDate = row.Field<string>( "endDate" );

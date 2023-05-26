@@ -1,11 +1,7 @@
 ﻿using LogError;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DBAccess
 {
@@ -18,7 +14,7 @@ namespace DBAccess
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
                     StringBuilder queryBuilder = new StringBuilder();
-                    queryBuilder.Append( "SELECT game.id, game.title, game.subtitle, game.description, game.language, game.cover, game.releaseDate, game.totalScore, game.isFav, game.idDev, dev.name as 'dev', game.idPlatform, platform.name as 'platform', platform.icon as 'platformIcon', game.idPublisher, publisher.name as 'publisher'" );
+                    queryBuilder.Append( "SELECT game.id, game.title, game.subtitle, game.description, game.language, game.cover, game.releaseDate, game.totalScore, 0 as 'isFav', game.idDev, dev.name as 'dev', game.idPlatform, platform.name as 'platform', platform.icon as 'platformIcon', game.idPublisher, publisher.name as 'publisher'" );
                     queryBuilder.Append( " FROM game, dev, publisher, platform" );
 
                     if ( idArticle > 0 )
@@ -39,7 +35,7 @@ namespace DBAccess
                         queryBuilder.Append( " AND game.idPublisher = publisher.id" );
                         queryBuilder.Append( " AND game.id = user_fav_game.idGame" );
                         queryBuilder.Append( " AND user_fav_game.idUser = user.id" );
-                        queryBuilder.Append( " AND user.username = '" + user + "'");
+                        queryBuilder.Append( " AND user.username = '" + user + "'" );
                     }
                     else
                     {
@@ -65,7 +61,7 @@ namespace DBAccess
                         conditions.Add( "LOWER(game.subtitle) LIKE '%" + subtitle.ToLower() + "%'" );
                     }
 
-                    if (idPlatform > 0)
+                    if ( idPlatform > 0 )
                     {
                         conditions.Add( "game.idPlatform = " + idPlatform );
                     }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace Support
 {
@@ -13,7 +8,7 @@ namespace Support
         public int idGame { get; set; }
         public sbyte score { get; set; }
 
-        public UserScoreGameModel(DataRow row) 
+        public UserScoreGameModel(DataRow row)
         {
             idUser = row.Field<int>( "idUser" );
             idGame = row.Field<int>( "idGame" );

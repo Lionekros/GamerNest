@@ -1,12 +1,7 @@
 ﻿using DBAccess;
 using LogError;
 using Support;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -14,15 +9,15 @@ namespace Domain
     {
         public static List<AuthorModel> GetAllAuthors
             (
-                  int       id              = -1
-                , string    name            = ""
-                , string    firstLastName   = ""
-                , string    secondLastName  = ""
-                , string    email           = ""
-                , sbyte     isAdmin         = -1
-                , sbyte     isActive        = -1
-                , string    orderBy         = ""
-                
+                  int id = -1
+                , string name = ""
+                , string firstLastName = ""
+                , string secondLastName = ""
+                , string email = ""
+                , sbyte isAdmin = -1
+                , sbyte isActive = -1
+                , string orderBy = ""
+
             )
         {
             try
@@ -97,21 +92,21 @@ namespace Domain
 
         public static void CreateAuthor
             (
-                  string    name                = ""
-                , string    firstLastName       = ""
-                , string    secondLastName      = ""
-                , string    password            = ""
-                , string    email               = ""
-                , string    phone               = ""
-                , string    description         = ""
-                , string    avatar              = ""
-                , string    preferedLanguage    = ""
-                , bool      isAdmin             = false
-                , bool      canPublish          = false
-                , bool      isActive            = true
-                , string    birthday            = ""
-                , string    startDate           = ""
-                , string    endDate             = ""
+                  string name = ""
+                , string firstLastName = ""
+                , string secondLastName = ""
+                , string password = ""
+                , string email = ""
+                , string phone = ""
+                , string description = ""
+                , string avatar = ""
+                , string preferedLanguage = ""
+                , bool isAdmin = false
+                , bool canPublish = false
+                , bool isActive = true
+                , string birthday = ""
+                , string startDate = ""
+                , string endDate = ""
             )
         {
             sbyte isAdmin2 = Utility.BoolToSByte( isAdmin );
@@ -119,44 +114,44 @@ namespace Domain
             sbyte isActive2 = Utility.BoolToSByte( isActive );
 
             password = Utility.EncriptPassword( password );
-            
-            AuthorRepository.CreateAuthor(name, firstLastName, secondLastName, password, email, phone, description, avatar, preferedLanguage, isAdmin2, canPublish2, isActive2, birthday, startDate, endDate);
+
+            AuthorRepository.CreateAuthor( name, firstLastName, secondLastName, password, email, phone, description, avatar, preferedLanguage, isAdmin2, canPublish2, isActive2, birthday, startDate, endDate );
         }
 
         public static void UpdateAuthor
             (
-                  int       id                  = -1
-                , string    name                = ""
-                , string    firstLastName       = ""
-                , string    secondLastName      = ""
-                , string    password            = ""
-                , bool      changedPassword     = false
-                , string    email               = ""
-                , string    phone               = ""
-                , string    description         = ""
-                , string    avatar              = ""
-                , string    preferedLanguage    = ""
-                , bool      isAdmin             = false
-                , bool      canPublish          = false
-                , bool      isActive            = true
-                , string    birthday            = ""
-                , string    startDate           = ""
-                , string    endDate             = ""
+                  int id = -1
+                , string name = ""
+                , string firstLastName = ""
+                , string secondLastName = ""
+                , string password = ""
+                , bool changedPassword = false
+                , string email = ""
+                , string phone = ""
+                , string description = ""
+                , string avatar = ""
+                , string preferedLanguage = ""
+                , bool isAdmin = false
+                , bool canPublish = false
+                , bool isActive = true
+                , string birthday = ""
+                , string startDate = ""
+                , string endDate = ""
             )
         {
             sbyte isAdmin2 = Utility.BoolToSByte( isAdmin );
             sbyte canPublish2 = Utility.BoolToSByte( canPublish );
             sbyte isActive2 = Utility.BoolToSByte( isActive );
 
-            if (changedPassword)
+            if ( changedPassword )
             {
                 password = Utility.EncriptPassword( password );
             }
-            
+
             AuthorRepository.UpdateAuthor( id, name, firstLastName, secondLastName, password, email, phone, description, avatar, preferedLanguage, isAdmin2, canPublish2, isActive2, birthday, startDate, endDate );
         }
 
-        public static void DeleteAuthor( int id = -1)
+        public static void DeleteAuthor(int id = -1)
         {
             AuthorRepository.DeleteAuthor( id );
         }

@@ -1,6 +1,4 @@
-﻿using Domain;
-using LogError;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Support;
 
 namespace View.Controllers
@@ -22,7 +20,7 @@ namespace View.Controllers
             ViewData[ "AdminFullName" ] = HttpContext.Session.GetString( "AdminFullName" );
             ViewData[ "AdminType" ] = HttpContext.Session.GetString( "AdminType" );
             ViewData[ "AdminAvatar" ] = HttpContext.Session.GetString( "AdminAvatar" );
-            ViewData[ "PageLanguage"] = HttpContext.Session.GetString( "PageLanguage" );
+            ViewData[ "PageLanguage" ] = HttpContext.Session.GetString( "PageLanguage" );
         }
 
         public void SetAdminSessions()
@@ -59,7 +57,7 @@ namespace View.Controllers
             HttpContext.Session.SetString( "UserUsername", lists.userList[ 0 ].username );
             HttpContext.Session.SetString( "UserEmail", lists.userList[ 0 ].email );
             HttpContext.Session.SetString( "UserAvatar", lists.userList[ 0 ].avatar ?? string.Empty );
-            HttpContext.Session.SetString( "PageLanguage", lists.userList[ 0 ].preferedLanguage ?? "ENG");
+            HttpContext.Session.SetString( "PageLanguage", lists.userList[ 0 ].preferedLanguage ?? "ENG" );
         }
 
         public void DeleteUserSessions()
@@ -78,7 +76,7 @@ namespace View.Controllers
 
         public void SetDefaultPageLanguage()
         {
-            if ( string.IsNullOrEmpty( HttpContext.Session.GetString( "PageLanguage" )))
+            if ( string.IsNullOrEmpty( HttpContext.Session.GetString( "PageLanguage" ) ) )
             {
                 HttpContext.Session.SetString( "PageLanguage", "ENG" );
             }

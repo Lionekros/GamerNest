@@ -1,9 +1,5 @@
-﻿using Domain;
-using LogError;
+﻿using LogError;
 using Microsoft.AspNetCore.Mvc;
-using Support;
-using System.Diagnostics;
-using View.Models;
 
 namespace View.Controllers
 {
@@ -17,7 +13,7 @@ namespace View.Controllers
             try
             {
                 UserDefault();
-                language = HttpContext.Session.GetString( "PageLanguage");
+                language = HttpContext.Session.GetString( "PageLanguage" );
                 if ( isFav )
                 {
                     GetAllArticles( language, author, idGame, id, headline, isPublished, orderBy, isFav, int.Parse( HttpContext.Session.GetString( "UserID" ) ) );
@@ -30,7 +26,7 @@ namespace View.Controllers
                 }
 
                 Pagination( page, pageSize );
-                
+
                 WebText( "UserArticle" );
                 return View( "Index", lists );
             }
@@ -78,14 +74,14 @@ namespace View.Controllers
             UserDefault();
 
             GetArticle( id );
-            GetAuthor( lists.articleList[0].author );
+            GetAuthor( lists.articleList[ 0 ].author );
 
             WebText( "UserArticle" );
 
-            return View("Article",lists);
+            return View( "Article", lists );
         }
 
-        
+
 
         public void Pagination(int page, int pageSize)
         {

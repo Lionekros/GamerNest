@@ -1,12 +1,7 @@
 ﻿using DBAccess;
 using LogError;
 using Support;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -88,7 +83,7 @@ namespace Domain
         {
             sbyte isPublished2 = Utility.BoolToSByte( isPublished );
 
-            ArticleRepository.CreateArticle( headline, summary, body, cover, isPublished2, createdDate, idAuthor, language, updatedDate, idGame);
+            ArticleRepository.CreateArticle( headline, summary, body, cover, isPublished2, createdDate, idAuthor, language, updatedDate, idGame );
         }
 
         public static void UpdateArticle(int id = -1, string headline = "", string summary = "", string body = "", string cover = "", bool isPublished = false, string createdDate = "", int idAuthor = -1, string language = "", string updatedDate = "", List<int> idGame = null)

@@ -1,12 +1,7 @@
 ﻿using DBAccess;
 using LogError;
 using Support;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -112,7 +107,7 @@ namespace Domain
         {
             sbyte isFav2 = Utility.BoolToSByte(isFav);
 
-            GameRepository.CreateGame( title, subtitle, description, language, cover, releaseDate, totalScore, isFav2, idDev, idPlatform, idPublisher, idGenre, idPlayerType, idLanguageGame);
+            GameRepository.CreateGame( title, subtitle, description, language, cover, releaseDate, totalScore, isFav2, idDev, idPlatform, idPublisher, idGenre, idPlayerType, idLanguageGame );
         }
 
         public static void UpdateGame(int id = -1, string title = "", string subtitle = "", string description = "", string language = "", string cover = "", string releaseDate = "", sbyte totalScore = 0, bool isFav = false, int idDev = -1, int idPlatform = -1, int idPublisher = -1, List<int> idGenre = null, List<int> idPlayerType = null, List<int> idLanguageGame = null)

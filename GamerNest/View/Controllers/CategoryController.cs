@@ -186,7 +186,7 @@ namespace View.Controllers
 
         public void CreateCategoryProcedure(CategoryModel cat)
         {
-            CategoryService.CreateCategory(cat.name);
+            CategoryService.CreateCategory( cat.name );
         }
 
         public void UpdateCategoryProcedure(UpdateCategoryModel cat)

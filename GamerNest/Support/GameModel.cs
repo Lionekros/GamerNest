@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Support
 {
@@ -62,7 +57,7 @@ namespace Support
             language = row.Field<string>( "language" );
             releaseDate = row.Field<string>( "releaseDate" );
             totalScore = row.Field<sbyte>( "totalScore" );
-            isFav = Utility.sByteToBool( row.Field<sbyte>( "isFav" ));
+            isFav = Utility.longToBool( row.Field<long>( "isFav" ) );
             idDev = row.Field<int>( "idDev" );
             dev = row.Field<string?>( "dev" );
             idPlatform = row.Field<int>( "idPlatform" );

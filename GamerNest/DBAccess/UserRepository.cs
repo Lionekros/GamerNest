@@ -1,12 +1,7 @@
 ﻿using LogError;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DBAccess
 {
@@ -97,7 +92,7 @@ namespace DBAccess
         {
             try
             {
-                if (avatar == "")
+                if ( avatar == "" )
                 {
                     avatar = "/img/Avatar/User/Default.png";
                 }
@@ -178,11 +173,11 @@ namespace DBAccess
             }
         }
 
-//        SELECT game.id as 'game.id', game.cover as 'game.cover', game.title as 'game.title', game.subtitle as 'game.subtitle', platform.name as 'platform.name ', platform.icon as 'platform.icon'
-//FROM user, user_fav_game, game, platform
-//WHERE user.id = user_fav_game.idUser
-//AND user_fav_game.idGame = game.id
-//AND game.idPlatform = platform.id
-//and user_fav_game.idUser = 1
+        //        SELECT game.id as 'game.id', game.cover as 'game.cover', game.title as 'game.title', game.subtitle as 'game.subtitle', platform.name as 'platform.name ', platform.icon as 'platform.icon'
+        //FROM user, user_fav_game, game, platform
+        //WHERE user.id = user_fav_game.idUser
+        //AND user_fav_game.idGame = game.id
+        //AND game.idPlatform = platform.id
+        //and user_fav_game.idUser = 1
     }
 }

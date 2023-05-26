@@ -2,7 +2,6 @@
 using LogError;
 using Microsoft.AspNetCore.Mvc;
 using Support;
-using System.Xml.Linq;
 
 namespace View.Controllers
 {
@@ -27,10 +26,10 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "Index", "Admin" );
                 }
-                GetAllTexts( id, title, idCategory, language, orderBy);
+                GetAllTexts( id, title, idCategory, language, orderBy );
                 GetAllCategories();
                 Pagination( page, pageSize );
-                FiltersViewBag( id, title, idCategory, language, orderBy);
+                FiltersViewBag( id, title, idCategory, language, orderBy );
                 WebText( "AdminText" );
                 return View( "WebText", lists );
             }
@@ -120,7 +119,7 @@ namespace View.Controllers
 
                 ViewBag.ErrorMessages = errorMessageList;
                 WebText( "AdminTextForm" );
-                model.categoryList = lists.categoryList = CategoryService.GetAllCategories( );
+                model.categoryList = lists.categoryList = CategoryService.GetAllCategories();
                 return View( "CreateWebText", model );
             }
             catch ( Exception ex )
@@ -190,12 +189,12 @@ namespace View.Controllers
                 lists.PageSize = pageSize;
                 lists.CurrentPage = page;
                 lists.TotalItems = totalTexts;
-            } 
+            }
         }
 
         public void CreateTextProcedure(WebTextModel model)
         {
-            WebTextService.CreateText( model.title, model.text, model.idCategory, model.language);
+            WebTextService.CreateText( model.title, model.text, model.idCategory, model.language );
         }
 
         public void UpdateTextProcedure(UpdateWebTextModel model)

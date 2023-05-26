@@ -1,11 +1,7 @@
-﻿using Domain;
-using LogError;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using LogError;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Support;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
 
 namespace View.Controllers
 {
@@ -22,7 +18,7 @@ namespace View.Controllers
                     return RedirectToAction( "Index", "Article" );
                 }
 
-                WebText("Admin");
+                WebText( "Admin" );
 
                 return View();
 
@@ -47,7 +43,7 @@ namespace View.Controllers
             }
             catch ( Exception ex )
             {
-                
+
                 Log log = new Log();
                 log.Add( ex.Message );
                 WebText( "Login" );
@@ -102,7 +98,7 @@ namespace View.Controllers
 
                             return RedirectToAction( "Index", "Admin" );
                         }
-                        
+
                     }
                     else
                     {

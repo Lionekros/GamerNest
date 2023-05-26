@@ -1,11 +1,7 @@
 ﻿using LogError;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DBAccess
 {
@@ -37,7 +33,7 @@ namespace DBAccess
                         queryBuilder.Append( " AND user_fav_game.idGame = game.id" );
                         queryBuilder.Append( " AND game.id = game_article.idGame" );
                         queryBuilder.Append( " AND game_article.idArticle = article.id" );
-                        queryBuilder.Append( " AND user_fav_game.idUser = " + user);
+                        queryBuilder.Append( " AND user_fav_game.idUser = " + user );
                     }
                     else
                     {
@@ -132,7 +128,7 @@ namespace DBAccess
                 procedure.Parameters.AddWithValue( "pUpdatedDate", updatedDate );
                 procedure.Parameters.AddWithValue( "pIdAuthor", idAuthor );
                 procedure.Parameters.AddWithValue( "pLanguage", language );
-                procedure.Parameters.AddWithValue( "pIdGame", string.Join(",", idGame) );
+                procedure.Parameters.AddWithValue( "pIdGame", string.Join( ",", idGame ) );
 
                 return Data.ExecuteProcedure( procedure );
             }

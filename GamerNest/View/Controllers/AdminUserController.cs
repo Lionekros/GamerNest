@@ -2,7 +2,6 @@
 using LogError;
 using Microsoft.AspNetCore.Mvc;
 using Support;
-using System.Text.RegularExpressions;
 
 namespace View.Controllers
 {

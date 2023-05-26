@@ -1,18 +1,13 @@
 ﻿using DBAccess;
 using LogError;
 using Support;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
     public class GameArticleService
     {
-        public static List<GameArticleModel> GetAllGameArticles(int idGame, string orderBy = "" )
+        public static List<GameArticleModel> GetAllGameArticles(int idGame, string orderBy = "")
         {
             try
             {

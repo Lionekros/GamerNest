@@ -1,12 +1,7 @@
 ﻿using DBAccess;
 using LogError;
 using Support;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -98,7 +93,7 @@ namespace Domain
                     string creationDate = ""
             )
         {
-            creationDate = Utility.DateTimeToString(DateTime.Now.Date);
+            creationDate = Utility.DateTimeToString( DateTime.Now.Date );
             password = Utility.EncriptPassword( password );
 
             UserRepository.CreateUser( username, password, email, avatar, preferedLanguage, birthday, creationDate );

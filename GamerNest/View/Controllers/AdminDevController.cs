@@ -23,7 +23,7 @@ namespace View.Controllers
                 {
                     return RedirectToAction( "Index", "Article" );
                 }
-                GetAllDevs(id, name, orderBy );
+                GetAllDevs( id, name, orderBy );
                 Pagination( page, pageSize );
                 FiltersViewBag( id, name, orderBy );
                 WebText( "AdminDev" );
@@ -185,13 +185,13 @@ namespace View.Controllers
 
         public void CreateDevProcedure(DevPublisherModel model)
         {
-            DevService.CreateDev( model.name);
+            DevService.CreateDev( model.name );
         }
 
         public void UpdateDevProcedure(UpdateDevPublisherModel model)
         {
 
-            DevService.UpdateDev( model.id, model.name);
+            DevService.UpdateDev( model.id, model.name );
         }
 
         public void DeleteDevProcedure(int id)

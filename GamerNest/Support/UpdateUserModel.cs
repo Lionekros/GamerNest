@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace Support
 {
@@ -19,7 +14,7 @@ namespace Support
         public string? creationDate { get; set; }
 
         public UpdateUserModel()
-        {}
+        { }
 
         public UpdateUserModel(DataRow row)
         {

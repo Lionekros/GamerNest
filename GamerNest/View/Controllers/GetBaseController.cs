@@ -52,37 +52,37 @@ namespace View.Controllers
         #endregion
 
         #region Category
-            public void GetAllCategories(int id = -1, string name = "", string orderBy = "")
-            {
-                lists.categoryList = CategoryService.GetAllCategories( id, name, orderBy );
-            }
+        public void GetAllCategories(int id = -1, string name = "", string orderBy = "")
+        {
+            lists.categoryList = CategoryService.GetAllCategories( id, name, orderBy );
+        }
 
-            public void GetCategory(int id)
-            {
-                lists.categoryList = CategoryService.GetCategory( id );
-            }
+        public void GetCategory(int id)
+        {
+            lists.categoryList = CategoryService.GetCategory( id );
+        }
 
-            public void GetCategoryUpdate(int id)
-            {
-                lists.updateCategoryList = CategoryService.GetCategoryUpdate( id );
-            }
+        public void GetCategoryUpdate(int id)
+        {
+            lists.updateCategoryList = CategoryService.GetCategoryUpdate( id );
+        }
         #endregion
 
         #region Dev
         public void GetAllDevs(int id = -1, string name = "", string orderBy = "")
-            {
-                lists.devList = DevService.GetAllDevs( id, name, orderBy );
-            }
+        {
+            lists.devList = DevService.GetAllDevs( id, name, orderBy );
+        }
 
-            public void GetDev(int id)
-            {
-                lists.devList = DevService.GetDev( id );
-            }
+        public void GetDev(int id)
+        {
+            lists.devList = DevService.GetDev( id );
+        }
 
-            public void GetDevUpdate(int id)
-            {
-                lists.updateDevList = DevService.GetDevUpdate( id );
-            }
+        public void GetDevUpdate(int id)
+        {
+            lists.updateDevList = DevService.GetDevUpdate( id );
+        }
         #endregion
 
         #region Game
@@ -98,7 +98,7 @@ namespace View.Controllers
 
         public void GetGameScore(string language = "", string user = "", int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = "")
         {
-            lists.gameList = GameService.GetGameScore( language, user, id, title, subtitle, idPlatform, orderBy  );
+            lists.gameList = GameService.GetGameScore( language, user, id, title, subtitle, idPlatform, orderBy );
         }
 
         public void GetGameUpdate(int id = -1)
@@ -109,109 +109,109 @@ namespace View.Controllers
 
         #region Genre
         public void GetAllGenres(string language = "", int idGame = -1, int id = -1, string name = "", string orderBy = "")
-            {
-                lists.genreList = GenreService.GetAllGenres( language, idGame, id, name, orderBy );
-            }
+        {
+            lists.genreList = GenreService.GetAllGenres( language, idGame, id, name, orderBy );
+        }
 
-            public void GetGenre(int id)
-            {
-                lists.genreList = GenreService.GetGenre( id );
-            }
+        public void GetGenre(int id)
+        {
+            lists.genreList = GenreService.GetGenre( id );
+        }
 
-            public void GetGenreUpdate(int id)
-            {
-                lists.updateGenreList = GenreService.GetGenreUpdate( id );
-            }
+        public void GetGenreUpdate(int id)
+        {
+            lists.updateGenreList = GenreService.GetGenreUpdate( id );
+        }
         #endregion
 
         #region Language
         public void GetAllLanguages(string language = "", int idGame = -1, int id = -1, string name = "", string orderBy = "")
-            {
-                lists.languageList = LanguageService.GetAllLanguages( language, idGame, id, name, orderBy );
-            }
+        {
+            lists.languageList = LanguageService.GetAllLanguages( language, idGame, id, name, orderBy );
+        }
 
-            public void GetLanguage(int id)
-            {
-                lists.languageList = LanguageService.GetLanguage( id );
-            }
+        public void GetLanguage(int id)
+        {
+            lists.languageList = LanguageService.GetLanguage( id );
+        }
 
-            public void GetLanguageUpdate(int id)
-            {
-                lists.updateLanguageList = LanguageService.GetLanguageUpdate( id );
-            }
+        public void GetLanguageUpdate(int id)
+        {
+            lists.updateLanguageList = LanguageService.GetLanguageUpdate( id );
+        }
         #endregion
 
         #region Platform
         public void GetAllPlatforms(int id = -1, string name = "", string icon = "", string orderBy = "")
-            {
-                lists.platformList = PlatformService.GetAllPlatforms( id, name, icon, orderBy );
-            }
+        {
+            lists.platformList = PlatformService.GetAllPlatforms( id, name, icon, orderBy );
+        }
 
-            public void GetPlatform(int id)
-            {
-                lists.platformList = PlatformService.GetPlatform( id );
-            }
+        public void GetPlatform(int id)
+        {
+            lists.platformList = PlatformService.GetPlatform( id );
+        }
 
-            public void GetPlatformUpdate(int id)
-            {
-                lists.updatePlatformList = PlatformService.GetPlatformUpdate( id );
-            }
+        public void GetPlatformUpdate(int id)
+        {
+            lists.updatePlatformList = PlatformService.GetPlatformUpdate( id );
+        }
         #endregion
 
         #region Player Type
-        public void GetAllPlayerTypes(string language = "", int idGame = -1, int id = -1, string name = "", string orderBy = "" )
-            {
-                lists.playerTypeList = PlayerTypeService.GetAllPlayerTypes( language, idGame, id, name, orderBy );
-            }
+        public void GetAllPlayerTypes(string language = "", int idGame = -1, int id = -1, string name = "", string orderBy = "")
+        {
+            lists.playerTypeList = PlayerTypeService.GetAllPlayerTypes( language, idGame, id, name, orderBy );
+        }
 
-            public void GetPlayerType(int id)
-            {
-                lists.playerTypeList = PlayerTypeService.GetPlayerType( id );
-            }
+        public void GetPlayerType(int id)
+        {
+            lists.playerTypeList = PlayerTypeService.GetPlayerType( id );
+        }
 
-            public void GetPlayerTypeUpdate(int id)
-            {
-                lists.updatePlayerTypeList = PlayerTypeService.GetPlayerTypeUpdate( id );
-            }
+        public void GetPlayerTypeUpdate(int id)
+        {
+            lists.updatePlayerTypeList = PlayerTypeService.GetPlayerTypeUpdate( id );
+        }
         #endregion
 
         #region Publisher
         public void GetAllPublishers(int id = -1, string name = "", string orderBy = "")
-            {
-                lists.publisherList = PublisherService.GetAllPublishers( id, name, orderBy );
-            }
+        {
+            lists.publisherList = PublisherService.GetAllPublishers( id, name, orderBy );
+        }
 
-            public void GetPublisher(int id)
-            {
-                lists.publisherList = PublisherService.GetPublisher( id );
-            }
+        public void GetPublisher(int id)
+        {
+            lists.publisherList = PublisherService.GetPublisher( id );
+        }
 
-            public void GetPublisherUpdate(int id)
-            {
-                lists.updatePublisherList = PublisherService.GetPublisherUpdate( id );
-            }
+        public void GetPublisherUpdate(int id)
+        {
+            lists.updatePublisherList = PublisherService.GetPublisherUpdate( id );
+        }
         #endregion
 
         #region Web Text
         public void GetAllTexts(int id = -1, string title = "", int idCategory = -1, string language = "", string orderBy = "")
-            {
-                lists.webTextList = WebTextService.GetAllTexts( id, title, idCategory, language, orderBy );
-            }
+        {
+            lists.webTextList = WebTextService.GetAllTexts( id, title, idCategory, language, orderBy );
+        }
 
-            public void GetAllTextsByCategory(string cat, string lang = "ENG")
-            {
-                lists.textList = WebTextService.GetAllTextsByCategory( cat, lang );
-            }
+        public void GetAllTextsByCategory(string cat, string lang = "ENG")
+        {
+            lists.textList = WebTextService.GetAllTextsByCategory( cat, lang );
+        }
 
-            public void GetText(int id)
-            {
-                lists.webTextList = WebTextService.GetText( id );
-            }
+        public void GetText(int id)
+        {
+            lists.webTextList = WebTextService.GetText( id );
+        }
 
-            public void GetTextUpdate(int id)
-            {
-                lists.updateWebTextList = WebTextService.GetTextUpdate( id );
-            }
+        public void GetTextUpdate(int id)
+        {
+            lists.updateWebTextList = WebTextService.GetTextUpdate( id );
+        }
         #endregion
 
         #region User

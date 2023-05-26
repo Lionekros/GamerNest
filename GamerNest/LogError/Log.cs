@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Diagnostics;
 
 namespace LogError
 {
@@ -12,7 +10,7 @@ namespace LogError
 
         public void Add(string errorMessage)
         {
-            AdminLog(errorMessage);
+            AdminLog( errorMessage );
             UserLog( errorMessage );
         }
 
@@ -44,7 +42,7 @@ namespace LogError
 
         private void AdminLog(string errorMessage)
         {
-            CreateDirectory(adminPath);
+            CreateDirectory( adminPath );
             string name = CreateFilename();
             string chain = "";
 
@@ -63,7 +61,7 @@ namespace LogError
         }
         private void UserLog(string errorMessage)
         {
-            CreateDirectory(userPath);
+            CreateDirectory( userPath );
             string name = CreateFilename();
             string chain = "";
 

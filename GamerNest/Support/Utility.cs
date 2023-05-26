@@ -1,9 +1,4 @@
 ﻿using LogError;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Support
 {
@@ -14,16 +9,26 @@ namespace Support
             return num == 1 ? true : false;
         }
 
-        public static sbyte BoolToSByte(bool op) 
+        public static sbyte BoolToSByte(bool op)
         {
             return op ? (sbyte) 1 : (sbyte) 0;
+        }
+
+        public static bool longToBool(long num)
+        {
+            return num == 1 ? true : false;
+        }
+
+        public static long BoolToLong(bool op)
+        {
+            return op ? 1 : 0;
         }
 
         public static string EncriptPassword(this string password)
         {
             try
             {
-                return BCrypt.Net.BCrypt.HashPassword(password);
+                return BCrypt.Net.BCrypt.HashPassword( password );
             }
             catch ( Exception ex )
             {
@@ -51,12 +56,12 @@ namespace Support
 
         public static string DateTimeToString(DateTime dateTime)
         {
-            return dateTime.ToString("dd/MM/yyyy");
+            return dateTime.ToString( "dd/MM/yyyy" );
         }
 
         public static DateTime StringToDateTime(string dateString)
         {
-            return DateTime.ParseExact(dateString, "dd/MM/yyyy", null);
+            return DateTime.ParseExact( dateString, "dd/MM/yyyy", null );
         }
     }
 }

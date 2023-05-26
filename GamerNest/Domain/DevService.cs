@@ -82,12 +82,12 @@ namespace Domain
         public static void CreateDev(string name = "")
         {
 
-            DevRepository.CreateDev( name);
+            DevRepository.CreateDev( name );
         }
 
         public static void UpdateDev(int id = -1, string name = "")
         {
-            DevRepository.UpdateDev( id, name);
+            DevRepository.UpdateDev( id, name );
         }
 
         public static void DeleteDev(int id = -1)

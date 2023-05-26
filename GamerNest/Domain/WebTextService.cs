@@ -1,12 +1,7 @@
 ﻿using DBAccess;
 using LogError;
 using Support;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -36,7 +31,7 @@ namespace Domain
             }
         }
 
-        public static List<WebTextModel> GetAllTextsByCategory(string category, string language = "ENG", string orderBy = "" )
+        public static List<WebTextModel> GetAllTextsByCategory(string category, string language = "ENG", string orderBy = "")
         {
             try
             {
@@ -111,12 +106,12 @@ namespace Domain
         public static void CreateText(string title = "", string text = "", int idCategory = -1, string language = "")
         {
 
-            WebTextRepository.CreateText(title, text, idCategory, language);
+            WebTextRepository.CreateText( title, text, idCategory, language );
         }
 
         public static void UpdateText(int id = -1, string title = "", string text = "", int idCategory = -1, string language = "")
         {
-            WebTextRepository.UpdateText( id, title, text, idCategory, language);
+            WebTextRepository.UpdateText( id, title, text, idCategory, language );
         }
 
         public static void DeleteText(int id = -1)
