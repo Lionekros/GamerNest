@@ -139,10 +139,10 @@ namespace View.Controllers
                         errorMessageList.Add( ViewData[ "PhoneExist" ].ToString() );
                     }
 
-                    author.avatar = UploadImage( avatar, author.id, "Avatar", "Author", "avatar" );
-
                     if ( !emailExist && !phoneExist )
                     {
+                        author.avatar = UploadImage( avatar, author.id, "Avatar", "Author", "avatar" );
+
                         CreateAuthorProcedure( author );
                         return RedirectToAction( "Authors" );
                     }

@@ -12,6 +12,7 @@
         public List<CategoryModel> categoryList { get; set; }
         public List<DevPublisherModel> devList { get; set; }
         public List<DevPublisherModel> publisherList { get; set; }
+        public List<UserFavGameModel> favList { get; set; }
         public List<GameModel> gameList { get; set; }
         public List<GenreTypeLanguageModel> genreList { get; set; }
         public List<GenreTypeLanguageModel> languageList { get; set; }

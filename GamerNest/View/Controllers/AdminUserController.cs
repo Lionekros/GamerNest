@@ -104,8 +104,10 @@ namespace View.Controllers
 
                 if ( ModelState.IsValid )
                 {
-                    model.avatar = UploadImage( avatar, model.id, "Avatar", "User", "avatar" );
                     CreateUserProcedure( model );
+                    GetUser( -1, model.username );
+                    int userId = lists.userList[0].id;
+                    model.avatar = UploadImage( avatar, userId, "Avatar", "User", "avatar" );
                     return RedirectToAction( "Users" );
                 }
                 else

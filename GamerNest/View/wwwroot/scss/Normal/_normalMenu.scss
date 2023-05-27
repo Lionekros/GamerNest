@@ -21,7 +21,7 @@
 
             img
             {
-                max-width: 5rem;
+                max-width: 22rem;
                 margin-right: 0.5rem; /* Add margin to separate the logo name */
             }
 
@@ -35,14 +35,63 @@
         }
     }
 
+    .flags
+    {
+        font-size: 2rem;
+
+        .fi-es
+        {
+            margin-left: 1rem;
+        }
+    }
+
     .userSession
     {
-        /* Styles for the user session container */
-        a
+        display: flex;
+        align-items: center;
+
+        .join, .login, .closeSession
         {
             text-decoration: none;
-            color: $primary;
             font-size: 1.5rem;
+        }
+
+        .join
+        {
+            color: $primary;
+            margin-right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        &:hover
+        {
+            color: darken($primary, 10%);
+        }
+
+        .login, .closeSession
+        {
+            color: $light;
+        }
+
+
+        .closeSession
+        {
+            margin-right: 1.5rem;
+        }
+
+        &:hover
+        {
+            color: darken($light, 10%);
+        }
+
+        .avatar
+        {
+            img
+            {
+                max-width: 5rem;
+                border-radius: 2.5rem;
+            }
         }
     }
 
@@ -50,47 +99,161 @@
     {
         display: flex;
         flex-direction: row;
+        margin: 1.5rem;
+        border-bottom: 4px solid $light;
 
-        .navButtons
+        .borderr
         {
+            margin-bottom: 1rem;
+            display: flex;
             flex-direction: row;
 
-            .News
+            .navButtons
             {
-                /* Styles for the news button */
-                a
+                display: flex;
+                flex-direction: row;
+
+                .News
                 {
-                    @include button($secondary, $light, 100%);
+                    /* Styles for the news button */
+                    a
+                    {
+                        @include button($secondary, $light, 100%);
+                        padding: 1.5rem 3rem;
+                        border-radius: 1rem;
+                    }
+
+                    margin-right: 4rem;
+                }
+
+                .Games
+                {
+                    /* Styles for the games button */
+                    a
+                    {
+                        @include button($secondary, $light, 100%);
+                        margin-right: 2rem;
+                        padding: 1.5rem 3rem;
+                        border-radius: 1rem;
+                    }
+
+                    border-right: 4px solid $light;
+                    margin-right: 2rem;
                 }
             }
 
-            .Games
+            .searchGame
             {
-                /* Styles for the games button */
-                a
+                display: flex;
+                align-items: center;
+
+                form
                 {
-                    @include button($secondary, $light, 100%);
+                    .input-group
+                    {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+
+                        input
+                        {
+                            width: 100%;
+                            padding: 1.5rem 10rem;
+                            border-radius: 1rem;
+                            border: 2px solid $light;
+                            background-color: $secondary;
+                            color: $light;
+                        }
+
+                        .input-icon
+                        {
+                            position: absolute;
+                            left: 0.5rem;
+                            pointer-events: none;
+                            color: $primary;
+                        }
+
+                        input[type="text"]
+                        {
+                            padding-left: 2.5rem;
+                        }
+                    }
                 }
             }
         }
+    }
+}
 
-        .searchGame
+@media (max-width: 767px)
+{
+    .normalMenu
+    {
+        .firstRow
         {
-            /* Styles for the search game container */
-            form
+            // Display as column and centered
+            flex-direction: column;
+            align-items: center;
+
+            .logo-details
             {
-                /* Styles for the form */
-                .input-group
+                margin-top: 2rem; // Increase margin for logo-details
+            }
+
+            .flags
+            {
+                margin-top: 2rem; // Increase margin for flags
+            }
+
+            .userSession
+            {
+                margin-top: 2rem; // Increase margin for userSession
+            }
+        }
+
+        .secondRow
+        {
+            .borderr
+            {
+                flex-direction: column;
+
+                .navButtons
                 {
-                    /* Styles for the input group */
-                    .input-icon
+                    display: block;
+                    flex-direction: column;
+
+                    .News
                     {
-                        /* Styles for the input icon */
+                        /* Styles for the news button */
+                        a
+                        {
+                            /*padding: 1.5rem 3rem;*/
+                        }
                     }
 
-                    input[type="text"]
+                    .Games
                     {
-                        /* Styles for the text input */
+                        /* Styles for the games button */
+                        a
+                        {
+                            /*padding: 1.5rem 3rem;*/
+                        }
+
+                        border: none;
+                    }
+                }
+
+                .searchGame
+                {
+                    display: block;
+
+                    form
+                    {
+                        .input-group
+                        {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                        }
                     }
                 }
             }

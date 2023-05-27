@@ -1,0 +1,59 @@
+﻿@model Support.UserJoinModel
+@{
+    ViewData[ "Title" ] = "Join";
+}
+
+<partial name="_NormalMenu" />
+
+<main class="home-user">
+    <div class="text">
+        <section class="UserLogIn">
+            <h1>Join</h1>
+            <section>
+                <div class="form">
+                    <form asp-controller="User" asp-action="Join" method="post">
+                        <partial name="_Error" />
+
+                        <div>
+                            <label asp-for="username" class="required">Username:</label>
+                            <input asp-for="username" placeholder="Username" required />
+                        </div>
+                        <div>
+                            <label asp-for="email" class="required">Email:</label>
+                            <input asp-for="email" placeholder="Email" type="email" required />
+                        </div>
+                        <div>
+                            <label asp-for="password" class="required">Password:</label>
+                            <input asp-for="password" placeholder="Password" type="password" required />
+                        </div>
+                        <div>
+                            <label asp-for="confirmPassword" class="required">Repeat Password:</label>
+                            <input asp-for="confirmPassword" placeholder="Repeat Password" type="password" required />
+                        </div>
+                        <div>
+                            <label asp-for="preferedLanguage" class="required">Prefered Language:</label>
+                            <select asp-for="preferedLanguage" required>
+                                <option value="ENG">English</option>
+                                <option value="ESP">Español</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label asp-for="birthday">Birthday:</label>
+                            <input asp-for="birthday" type="date" />
+                        </div>
+
+                        <div hidden>
+                            <input asp-for="creationDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </div>
+
+                        <button type="submit" class="mainButton">Join</button>
+                    </form>
+                </div>
+            </section>
+            <a asp-controller="User" asp-action="LogInForm">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Log In</span>
+            </a>
+        </section>
+    </div>
+</main>

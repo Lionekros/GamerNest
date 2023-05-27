@@ -1,0 +1,87 @@
+﻿@import "../Utilities/variables";
+
+.games
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    a
+    {
+        display: flex;
+        align-items: center;
+        background-color: $terciary;
+        border-radius: 1.5rem;
+        padding: 1rem;
+        justify-content: center;
+        text-decoration: none;
+        max-width: 80%;
+        color: $light;
+        margin-top: 2rem;
+
+        &:hover
+        {
+            background-color: lighter($terciary);
+        }
+
+        .cardGame
+        {
+            .img
+            {
+                img
+                {
+                    max-width: 12rem;
+                    margin-right: 10px;
+                }
+            }
+
+            .info
+            {
+                display: flex;
+                flex-direction: column;
+
+                .icons
+                {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-around;
+
+                    .platform
+                    {
+                        color: $primary;
+                    }
+
+                    .favButton
+                    {
+                        .isFav
+                        {
+                            background-color: $secondary;
+                            color: $primary;
+                            border: 2px solid $light;
+                        }
+
+                        .isNotFav
+                        {
+                            background-color: $secondary;
+                            color: $light;
+                            border: 2px solid $light;
+                        }
+                    }
+                }
+
+                .title
+                {
+                    color: $primary;
+                    text-align: center;
+                }
+
+                .subtitle
+                {
+                    text-align: justify;
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    }
+}

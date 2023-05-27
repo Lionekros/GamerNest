@@ -9,6 +9,8 @@ namespace Support
 
         public UserFavGameModel(DataRow row)
         {
+            idUser = row.Field<int>( "idUser" );
+            idGame = row.Field<int>( "idGame" );
         }
     }
 }

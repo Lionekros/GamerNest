@@ -121,15 +121,16 @@ namespace DBAccess
             }
         }
 
-        public static DataTable CheckIfFav(int idUser = -1, int idGame = -1)
+        public static DataTable CheckIfFav(string user = "", int idGame = -1)
         {
             try
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
                     cmd.CommandText = "SELECT idUser, idGame"
-                                        + " FROM user_fav_game"
-                                        + " WHERE idUser = " + idUser
+                                        + " FROM user_fav_game, user"
+                                        + " WHERE user_fav_game.idUser = user.id"
+                                        + " AND user.username = '" + user + "'"
                                         + " AND idGame = " + idGame;
 
                     return Data.ExecuteCommand( cmd );

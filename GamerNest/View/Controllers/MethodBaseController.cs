@@ -40,7 +40,6 @@ namespace View.Controllers
             HttpContext.Session.SetString( "AdminFullName", "" );
             HttpContext.Session.SetString( "AdminAvatar", "" );
             HttpContext.Session.SetString( "AdminType", "" );
-            HttpContext.Session.SetString( "PageLanguage", "" );
         }
 
         public void SetDefaultUserViewDatas()
@@ -49,15 +48,16 @@ namespace View.Controllers
             ViewData[ "UserUsername" ] = HttpContext.Session.GetString( "UserUsername" );
             ViewData[ "UserEmail" ] = HttpContext.Session.GetString( "UserEmail" ) ?? "no";
             ViewData[ "UserAvatar" ] = HttpContext.Session.GetString( "UserAvatar" );
+            ViewData[ "PageLanguage" ] = HttpContext.Session.GetString( "PageLanguage" );
         }
 
         public void SetUserSessions()
         {
-            HttpContext.Session.SetString( "UserID", lists.userList[ 0 ].id.ToString() );
-            HttpContext.Session.SetString( "UserUsername", lists.userList[ 0 ].username );
-            HttpContext.Session.SetString( "UserEmail", lists.userList[ 0 ].email );
-            HttpContext.Session.SetString( "UserAvatar", lists.userList[ 0 ].avatar ?? string.Empty );
-            HttpContext.Session.SetString( "PageLanguage", lists.userList[ 0 ].preferedLanguage ?? "ENG" );
+            HttpContext.Session.SetString( "UserID", lists.userList[ 0 ]?.id.ToString() );
+            HttpContext.Session.SetString( "UserUsername", lists.userList[ 0 ]?.username );
+            HttpContext.Session.SetString( "UserEmail", lists.userList[ 0 ]?.email ?? "no" );
+            HttpContext.Session.SetString( "UserAvatar", lists.userList[ 0 ]?.avatar ?? string.Empty );
+            HttpContext.Session.SetString( "PageLanguage", lists.userList[ 0 ]?.preferedLanguage ?? "ENG" );
         }
 
         public void DeleteUserSessions()
@@ -145,7 +145,7 @@ namespace View.Controllers
             return "";
         }
 
-        public bool CheckIfEmailAndPasswordIsCorrect(string email, string password)
+        public bool CheckIfAdminLogIn(string email, string password)
         {
             GetAuthor( email );
 
@@ -170,6 +170,19 @@ namespace View.Controllers
 
             return false;
         }
+        public bool CheckIfUserLogIn(string username, string password)
+        {
+            GetUser(-1, username);
 
+            if ( lists.userList?.Count > 0 )
+            {
+                if ( Utility.VerifyPassword( password, lists.userList[ 0 ].password ) )
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

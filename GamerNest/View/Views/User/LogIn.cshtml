@@ -1,0 +1,36 @@
+﻿@model Support.UserLogInModel
+@{
+    ViewData[ "Title" ] = "LogIn";
+}
+
+<partial name="_NormalMenu" />
+
+<main class="home-user">
+    <div class="text">
+        <section class="UserLogIn">
+            <h1>Log In</h1>
+            <section>
+                <div class="form">
+                    <form asp-controller="User" asp-action="LogIn" method="post">
+                        <partial name="_Error" />
+
+                        <div>
+                            <label asp-for="username" class="required">Username:</label>
+                            <input asp-for="username" placeholder="Username" required />
+                        </div>
+                        <div>
+                            <label asp-for="password" class="required">Password:</label>
+                            <input asp-for="password" placeholder="Password" type="password" required />
+                        </div>
+
+                        <button type="submit" class="mainButton">Log In</button>
+                    </form>
+                </div>
+            </section>
+            <a asp-controller="User" asp-action="JoinForm">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Join</span>
+            </a>
+        </section>
+    </div>
+</main>

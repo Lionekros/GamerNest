@@ -82,7 +82,7 @@ namespace View.Controllers
 
                 if ( ModelState.IsValid )
                 {
-                    correctPassword = CheckIfEmailAndPasswordIsCorrect( login.email, login.password );
+                    correctPassword = CheckIfAdminLogIn( login.email, login.password );
                     if ( correctPassword )
                     {
                         GetAuthor( login.email );

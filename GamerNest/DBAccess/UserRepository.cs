@@ -56,15 +56,27 @@ namespace DBAccess
             }
         }
 
-        public static DataTable GetUser(int id)
+        public static DataTable GetUser(int id = -1, string username = "", string email = "")
         {
             try
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = cmd.CommandText = "SELECT id, username, password, email, avatar, preferedLanguage, birthday, creationDate"
-                        + " FROM user"
-                        + " WHERE id = " + id;
+                    cmd.CommandText = "SELECT id, username, password, email, avatar, preferedLanguage, birthday, creationDate"
+                        + " FROM user";
+                    if ( id > 0 )
+                    {
+                        cmd.CommandText += " WHERE id = " + id;
+                    }
+                    else if (!string.IsNullOrEmpty(username))
+                    {
+                        cmd.CommandText += " WHERE username = '" + username + "'";
+                    }
+                    else if ( !string.IsNullOrEmpty( email ) )
+                    {
+                        cmd.CommandText += " WHERE email = '" + email + "'";
+                    }
+
                     return Data.ExecuteCommand( cmd );
                 }
 

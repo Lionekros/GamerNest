@@ -11,24 +11,41 @@ namespace View.Controllers
             (
                   int page = 1
                 , int pageSize = 5,
-                string language = "", string user = "", int idArticle = -1, bool scored = false, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = "title"
+                string language = "", bool isFav = false, int idArticle = -1, bool scored = false, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = "title"
             )
         {
             try
             {
                 UserDefault();
+                string user = HttpContext.Session.GetString( "UserUsername" );
                 language = HttpContext.Session.GetString( "PageLanguage" );
+                if ( isFav )
+                {
+                    GetAllGames( language, user, idArticle, id, title, subtitle, idPlatform, orderBy );
+                }
+                else
+                {
+                    GetAllGames( language, "", idArticle, id, title, subtitle, idPlatform, orderBy );
+                }
+                
 
-                GetAllGames( language, user, idArticle, id, title, subtitle, idPlatform, orderBy );
                 FiltersViewBag( language, user, idArticle, scored, id, title, subtitle, idPlatform, orderBy );
 
 
                 GetAllPlatforms( -1, "", "", "name" );
 
+                if ( !string.IsNullOrEmpty( HttpContext.Session.GetString( "UserUsername" )) )
+                {
+                    foreach (var item in lists.gameList)
+                    {
+                        item.isFav = IsFav( user, item.id );
+                    }
+                }
+
                 Pagination( page, pageSize );
 
                 WebText( "UserAllGames" );
-                return View( "Game", lists );
+                return View( "AllGames", lists );
             }
             catch ( Exception ex )
             {
@@ -38,6 +55,19 @@ namespace View.Controllers
                 WebText( "AdminGame" );
                 ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
+            }
+        }
+
+        public bool IsFav(string user, int idGame)
+        {
+            CheckIfFav(user, idGame);
+            if (lists.favList.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

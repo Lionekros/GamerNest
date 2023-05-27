@@ -8,7 +8,6 @@
 
 	<ItemGroup>
 		<Folder Include="Views\Game\" />
-		<Folder Include="Views\User\" />
 		<Folder Include="wwwroot\img\Cover\Game\" />
 		<Folder Include="wwwroot\img\Cover\Article\" />
 		<Folder Include="wwwroot\scss\Article\" />
@@ -24,13 +23,16 @@
 	  <Content Remove="compilerconfig.json" />
 	  <Content Remove="wwwroot\scss\admin\_base.scss" />
 	  <Content Remove="wwwroot\scss\Admin\_create.scss" />
+	  <Content Remove="wwwroot\scss\Admin\_index.scss" />
 	  <Content Remove="wwwroot\scss\admin\_lateralMenu.scss" />
 	  <Content Remove="wwwroot\scss\Admin\_LogIn.scss" />
 	  <Content Remove="wwwroot\scss\Admin\_preview.scss" />
 	  <Content Remove="wwwroot\scss\Admin\_table.scss" />
+	  <Content Remove="wwwroot\scss\Normal\_allGames.scss" />
 	  <Content Remove="wwwroot\scss\Normal\_articleIndex.scss" />
 	  <Content Remove="wwwroot\scss\Normal\_base.scss" />
 	  <Content Remove="wwwroot\scss\Normal\_normalMenu.scss" />
+	  <Content Remove="wwwroot\scss\Normal\_userJoin.scss" />
 	  <Content Remove="wwwroot\scss\utilities\_mixins.scss" />
 	  <Content Remove="wwwroot\scss\Utilities\_pagination.scss" />
 	</ItemGroup>
@@ -38,13 +40,16 @@
 	<ItemGroup>
 	  <SassFile Remove="wwwroot\scss\admin\_base.scss" />
 	  <SassFile Remove="wwwroot\scss\Admin\_create.scss" />
+	  <SassFile Remove="wwwroot\scss\Admin\_index.scss" />
 	  <SassFile Remove="wwwroot\scss\admin\_lateralMenu.scss" />
 	  <SassFile Remove="wwwroot\scss\Admin\_LogIn.scss" />
 	  <SassFile Remove="wwwroot\scss\Admin\_preview.scss" />
 	  <SassFile Remove="wwwroot\scss\Admin\_table.scss" />
+	  <SassFile Remove="wwwroot\scss\Normal\_allGames.scss" />
 	  <SassFile Remove="wwwroot\scss\Normal\_articleIndex.scss" />
 	  <SassFile Remove="wwwroot\scss\Normal\_base.scss" />
 	  <SassFile Remove="wwwroot\scss\Normal\_normalMenu.scss" />
+	  <SassFile Remove="wwwroot\scss\Normal\_userJoin.scss" />
 	  <SassFile Remove="wwwroot\scss\Utilities\_filters.scss" />
 	  <SassFile Remove="wwwroot\scss\utilities\_mixins.scss" />
 	  <SassFile Remove="wwwroot\scss\Utilities\_modal.scss" />
@@ -55,13 +60,16 @@
 	  <None Include="compilerconfig.json" />
 	  <None Include="wwwroot\scss\admin\_base.scss" />
 	  <None Include="wwwroot\scss\Admin\_create.scss" />
+	  <None Include="wwwroot\scss\Admin\_index.scss" />
 	  <None Include="wwwroot\scss\Admin\_LogIn.scss" />
 	  <None Include="wwwroot\scss\admin\_lateralMenu.scss" />
 	  <None Include="wwwroot\scss\Admin\_preview.scss" />
 	  <None Include="wwwroot\scss\Admin\_table.scss" />
+	  <None Include="wwwroot\scss\Normal\_allGames.scss" />
 	  <None Include="wwwroot\scss\Normal\_articleIndex.scss" />
 	  <None Include="wwwroot\scss\Normal\_base.scss" />
 	  <None Include="wwwroot\scss\Normal\_normalMenu.scss" />
+	  <None Include="wwwroot\scss\Normal\_userJoin.scss" />
 	  <None Include="wwwroot\scss\utilities\_mixins.scss" />
 	  <None Include="wwwroot\scss\Utilities\_pagination.scss" />
 	</ItemGroup>

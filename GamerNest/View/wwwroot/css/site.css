@@ -1414,6 +1414,20 @@ a {
   }
 }
 
+:root {
+  --primary-color: red;
+}
+
+.AdminIndex {
+  margin-top: 18rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AdminIndex img {
+  max-width: 100%;
+}
+
 .home-section {
   position: relative;
   min-height: 100vh;
@@ -1484,7 +1498,7 @@ a {
   align-items: center;
 }
 .normalMenu .firstRow .logo-details img {
-  max-width: 5rem;
+  max-width: 22rem;
   margin-right: 0.5rem; /* Add margin to separate the logo name */
 }
 .normalMenu .firstRow .logo-details .logo_name {
@@ -1493,25 +1507,62 @@ a {
   color: #FFB100;
   text-transform: uppercase;
 }
-.normalMenu .userSession {
-  /* Styles for the user session container */
+.normalMenu .flags {
+  font-size: 2rem;
 }
-.normalMenu .userSession a {
+.normalMenu .flags .fi-es {
+  margin-left: 1rem;
+}
+.normalMenu .userSession {
+  display: flex;
+  align-items: center;
+}
+.normalMenu .userSession .join, .normalMenu .userSession .login, .normalMenu .userSession .closeSession {
   text-decoration: none;
-  color: #FFB100;
   font-size: 1.5rem;
+}
+.normalMenu .userSession .join {
+  color: #FFB100;
+  margin-right: 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.normalMenu .userSession:hover {
+  color: #cc8e00;
+}
+.normalMenu .userSession .login, .normalMenu .userSession .closeSession {
+  color: #FCFCFC;
+}
+.normalMenu .userSession .closeSession {
+  margin-right: 1.5rem;
+}
+.normalMenu .userSession:hover {
+  color: #e3e3e3;
+}
+.normalMenu .userSession .avatar img {
+  max-width: 5rem;
+  border-radius: 2.5rem;
 }
 .normalMenu .secondRow {
   display: flex;
   flex-direction: row;
+  margin: 1.5rem;
+  border-bottom: 4px solid #FCFCFC;
 }
-.normalMenu .secondRow .navButtons {
+.normalMenu .secondRow .borderr {
+  margin-bottom: 1rem;
+  display: flex;
   flex-direction: row;
 }
-.normalMenu .secondRow .navButtons .News {
+.normalMenu .secondRow .borderr .navButtons {
+  display: flex;
+  flex-direction: row;
+}
+.normalMenu .secondRow .borderr .navButtons .News {
   /* Styles for the news button */
+  margin-right: 4rem;
 }
-.normalMenu .secondRow .navButtons .News a {
+.normalMenu .secondRow .borderr .navButtons .News a {
   display: block;
   max-width: 100%;
   padding: 1rem;
@@ -1525,21 +1576,25 @@ a {
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
+  padding: 1.5rem 3rem;
+  border-radius: 1rem;
 }
 @media (max-width: 767px) {
-  .normalMenu .secondRow .navButtons .News a {
+  .normalMenu .secondRow .borderr .navButtons .News a {
     display: block;
     width: 100%;
   }
 }
-.normalMenu .secondRow .navButtons .News a:hover {
+.normalMenu .secondRow .borderr .navButtons .News a:hover {
   background-color: #0f0f0f;
   color: #efefef;
 }
-.normalMenu .secondRow .navButtons .Games {
+.normalMenu .secondRow .borderr .navButtons .Games {
   /* Styles for the games button */
+  border-right: 4px solid #FCFCFC;
+  margin-right: 2rem;
 }
-.normalMenu .secondRow .navButtons .Games a {
+.normalMenu .secondRow .borderr .navButtons .Games a {
   display: block;
   max-width: 100%;
   padding: 1rem;
@@ -1553,33 +1608,90 @@ a {
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
+  margin-right: 2rem;
+  padding: 1.5rem 3rem;
+  border-radius: 1rem;
 }
 @media (max-width: 767px) {
-  .normalMenu .secondRow .navButtons .Games a {
+  .normalMenu .secondRow .borderr .navButtons .Games a {
     display: block;
     width: 100%;
   }
 }
-.normalMenu .secondRow .navButtons .Games a:hover {
+.normalMenu .secondRow .borderr .navButtons .Games a:hover {
   background-color: #0f0f0f;
   color: #efefef;
 }
-.normalMenu .secondRow .searchGame {
-  /* Styles for the search game container */
+.normalMenu .secondRow .borderr .searchGame {
+  display: flex;
+  align-items: center;
 }
-.normalMenu .secondRow .searchGame form {
-  /* Styles for the form */
+.normalMenu .secondRow .borderr .searchGame form .input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
-.normalMenu .secondRow .searchGame form .input-group {
-  /* Styles for the input group */
+.normalMenu .secondRow .borderr .searchGame form .input-group input {
+  width: 100%;
+  padding: 1.5rem 10rem;
+  border-radius: 1rem;
+  border: 2px solid #FCFCFC;
+  background-color: #1C1C1C;
+  color: #FCFCFC;
 }
-.normalMenu .secondRow .searchGame form .input-group .input-icon {
-  /* Styles for the input icon */
+.normalMenu .secondRow .borderr .searchGame form .input-group .input-icon {
+  position: absolute;
+  left: 0.5rem;
+  pointer-events: none;
+  color: #FFB100;
 }
-.normalMenu .secondRow .searchGame form .input-group input[type=text] {
-  /* Styles for the text input */
+.normalMenu .secondRow .borderr .searchGame form .input-group input[type=text] {
+  padding-left: 2.5rem;
 }
 
+@media (max-width: 767px) {
+  .normalMenu .firstRow {
+    flex-direction: column;
+    align-items: center;
+  }
+  .normalMenu .firstRow .logo-details {
+    margin-top: 2rem;
+  }
+  .normalMenu .firstRow .flags {
+    margin-top: 2rem;
+  }
+  .normalMenu .firstRow .userSession {
+    margin-top: 2rem;
+  }
+  .normalMenu .secondRow .borderr {
+    flex-direction: column;
+  }
+  .normalMenu .secondRow .borderr .navButtons {
+    display: block;
+    flex-direction: column;
+  }
+  .normalMenu .secondRow .borderr .navButtons .News {
+    /* Styles for the news button */
+  }
+  .normalMenu .secondRow .borderr .navButtons .News a {
+    /*padding: 1.5rem 3rem;*/
+  }
+  .normalMenu .secondRow .borderr .navButtons .Games {
+    /* Styles for the games button */
+    border: none;
+  }
+  .normalMenu .secondRow .borderr .navButtons .Games a {
+    /*padding: 1.5rem 3rem;*/
+  }
+  .normalMenu .secondRow .borderr .searchGame {
+    display: block;
+  }
+  .normalMenu .secondRow .borderr .searchGame form .input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+}
 :root {
   --primary-color: red;
 }
@@ -1630,20 +1742,234 @@ a {
   font-size: 1rem;
 }
 
-.home-section {
+:root {
+  --primary-color: red;
+}
+
+.games {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.games a {
+  display: flex;
+  align-items: center;
+  background-color: #555555;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  justify-content: center;
+  text-decoration: none;
+  max-width: 80%;
+  color: #FCFCFC;
+  margin-top: 2rem;
+}
+.games a:hover {
+  background-color: lighter(#555555);
+}
+.games a .cardGame .img img {
+  max-width: 12rem;
+  margin-right: 10px;
+}
+.games a .cardGame .info {
+  display: flex;
+  flex-direction: column;
+}
+.games a .cardGame .info .icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.games a .cardGame .info .icons .platform {
+  color: #FFB100;
+}
+.games a .cardGame .info .icons .favButton .isFav {
+  background-color: #1C1C1C;
+  color: #FFB100;
+  border: 2px solid #FCFCFC;
+}
+.games a .cardGame .info .icons .favButton .isNotFav {
+  background-color: #1C1C1C;
+  color: #FCFCFC;
+  border: 2px solid #FCFCFC;
+}
+.games a .cardGame .info .title {
+  color: #FFB100;
+  text-align: center;
+}
+.games a .cardGame .info .subtitle {
+  text-align: justify;
+  font-size: 1.3rem;
+}
+
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
+}
+
+.UserLogIn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.UserLogIn h1 {
+  font-size: 5rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .UserLogIn h1 {
+    font-size: 3rem;
+  }
+}
+.UserLogIn section {
+  max-width: 50%;
+  width: 100%;
+  padding: 20px;
+  background-color: #1C1C1C;
+  border-radius: 10px;
+  margin: 2rem 0;
+}
+@media (max-width: 767px) {
+  .UserLogIn section {
+    max-width: 90%;
+  }
+}
+.UserLogIn section .form {
+  margin-top: 1rem;
+}
+.UserLogIn section .form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #FFB100;
+}
+.UserLogIn section .form input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 1rem;
+  border: 1px solid #292929;
+  margin-bottom: 2rem;
+  background-color: #FCFCFC;
+  color: #292929;
+}
+.UserLogIn section .form select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 1rem;
+  border: 1px solid #292929;
+  margin-bottom: 2rem;
+  background-color: #FCFCFC;
+  color: #292929;
+}
+.UserLogIn section .form .normalSelect {
+  font-family: Quantico, "sans-serif";
+  color: #292929;
+}
+.UserLogIn section .form .redSelect {
+  font-family: "FontAwesome", "sans-serif";
+  color: #a94442;
+}
+.UserLogIn section .form .greenSelect {
+  font-family: "FontAwesome", "sans-serif";
+  color: #3c763d;
+}
+.UserLogIn section .form .error {
+  color: #FFB100;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  background-color: #555555;
+  margin-bottom: 1rem;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  list-style: none;
+}
+.UserLogIn section .form .mainButton {
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #FFB100;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  z-index: 1;
+  overflow: hidden;
+  text-shadow: -1px -1px 0 #292929, 1px -1px 0 #292929, -1px 1px 0 #292929, 1px 1px 0 #292929;
+  margin-left: auto;
+}
+@media (max-width: 767px) {
+  .UserLogIn section .form .mainButton {
+    display: block;
+    width: 100%;
+  }
+}
+.UserLogIn section .form .mainButton:hover {
+  background-color: #e69f00;
+  color: #efefef;
+}
+.UserLogIn a {
+  text-decoration: none;
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #555555;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .UserLogIn a {
+    display: block;
+    width: 100%;
+  }
+}
+.UserLogIn a:hover {
+  background-color: #484848;
+  color: #efefef;
+}
+@media (max-width: 767px) {
+  .UserLogIn a {
+    margin-top: 2rem;
+    max-width: 70%;
+  }
+}
+
+.home-user {
   font-size: 1.5rem;
 }
-.home-section .text h1 {
+.home-user .text {
+  display: inline-block;
+  width: 100%;
+}
+.home-user .text h1 {
   text-transform: uppercase;
   text-align: center;
   color: #FFB100;
 }
-.home-section .text h2 {
+.home-user .text h2 {
   color: #FFB100;
   text-transform: uppercase;
   text-align: center;
 }
-.home-section .text h3 {
+.home-user .text h3 {
   padding: 1rem 0rem;
   text-align: center;
   background-color: #555555;

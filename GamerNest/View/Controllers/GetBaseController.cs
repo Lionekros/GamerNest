@@ -96,6 +96,11 @@ namespace View.Controllers
             lists.gameList = GameService.GetGame( id );
         }
 
+        public void CheckIfFav(string user = "", int idGame = -1)
+        {
+            lists.favList = GameService.CheckIfFav( user, idGame );
+        }
+
         public void GetGameScore(string language = "", string user = "", int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = "")
         {
             lists.gameList = GameService.GetGameScore( language, user, id, title, subtitle, idPlatform, orderBy );
@@ -220,9 +225,9 @@ namespace View.Controllers
             lists.userList = UserService.GetAllUsers( id, username, email, orderBy );
         }
 
-        public void GetUser(int id)
+        public void GetUser(int id = -1, string username = "", string email = "")
         {
-            lists.userList = UserService.GetUser( id );
+            lists.userList = UserService.GetUser( id, username, email );
         }
 
         public void GetUserUpdate(int id)

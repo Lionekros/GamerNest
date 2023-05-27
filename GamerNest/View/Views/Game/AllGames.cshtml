@@ -5,7 +5,7 @@
 
 <partial name="_NormalMenu" />
 
-<main class="home-section">
+<main class="home-user">
     <div class="text">
         <h1>All Games</h1>
         <div class="NormalCenter">
@@ -55,7 +55,7 @@
                 </form>
             </section>
         </div>
-        <section class="news">
+        <section class="games">
             @foreach ( var item in Model.gameList )
             {
                 <a asp-controller="Game" asp-action="SeeGame" asp-route-id="@item.id">
@@ -66,14 +66,30 @@
                         <div class="info">
                             <div class="icons">
                                 <div class="platform">
-
+                                    @Html.Raw(item.platformIcon);
                                 </div>
-                                @if (ViewData["UserEmail"].ToString() != "no")
+                                @*@if (ViewData["UserEmail"].ToString() != "no")
                                 {
                                     <div class="favButton">
-                                        
+                                        @if ( item.isFav )
+                                        {
+                                            <a class="isFav" asp-controller="Game" asp-action="GameIsNotFav" asp-route-idGame="@item.id">
+                                                <i class="fa-solid fa-heart"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="isNotFav" asp-controller="Game" asp-action="GameIsFav" asp-route-idGame="@item.id">
+                                                <i class="fa-solid fa-heart-crack"></i>
+                                            </a>
+                                        }
                                     </div>
-                                }
+                                }*@
+                                <div class="favButton">
+                                    <a class="isNotFav" asp-controller="Game" asp-action="GameIsFav" asp-route-idGame="@item.id">
+                                        <i class="fa-solid fa-heart-crack"></i>
+                                    </a>
+                                </div>
                             </div>
                             <div class="title">
                                 @Html.Raw(item.title)

@@ -55,6 +55,30 @@ namespace Domain
             }
         }
 
+        public static List<UserFavGameModel> CheckIfFav(string user = "", int idGame = -1)
+        {
+            try
+            {
+                DataTable dt = GameRepository.CheckIfFav(user, idGame);
+                List<UserFavGameModel> list = new List<UserFavGameModel>();
+
+                foreach ( DataRow row in dt.Rows )
+                {
+                    list.Add( new UserFavGameModel( row ) );
+                }
+
+                return list;
+            }
+            catch ( Exception ex )
+            {
+                List<UserFavGameModel> list = new List<UserFavGameModel>();
+                Log log = new Log();
+                log.Add( ex.Message );
+                return list;
+
+            }
+        }
+
         public static List<GameModel> GetGameScore(string language = "", string user = "", int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = "")
         {
             try

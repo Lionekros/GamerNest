@@ -34,11 +34,11 @@ namespace Domain
             }
         }
 
-        public static List<UserModel> GetUser(int id)
+        public static List<UserModel> GetUser(int id = -1, string username = "", string email = "")
         {
             try
             {
-                DataTable dt = UserRepository.GetUser(id);
+                DataTable dt = UserRepository.GetUser(id, username, email);
                 List<UserModel> list = new List<UserModel>();
 
                 foreach ( DataRow row in dt.Rows )
