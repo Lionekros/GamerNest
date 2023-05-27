@@ -16,7 +16,6 @@ namespace Support
         [Required( ErrorMessage = "Required" )]
         public string preferedLanguage { get; set; }
         [Required( ErrorMessage = "Required" )]
-        public string birthday { get; set; }
         public string? creationDate { get; set; }
 
         public UserModel()
@@ -30,7 +29,6 @@ namespace Support
             email = row.Field<string>( "email" );
             avatar = row.Field<string>( "avatar" );
             preferedLanguage = row.Field<string>( "preferedLanguage" );
-            birthday = row.Field<string>( "birthday" );
             creationDate = row.Field<string>( "creationDate" );
         }
     }

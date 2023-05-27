@@ -108,6 +108,13 @@ namespace View.Controllers
                     GetUser( -1, model.username );
                     int userId = lists.userList[0].id;
                     model.avatar = UploadImage( avatar, userId, "Avatar", "User", "avatar" );
+
+                    GetUserUpdate( userId );
+                    UpdateUserModel upModel = lists.updateUserList[0];
+
+                    upModel.avatar = model.avatar;
+
+                    UpdateUserProcedure(upModel, false);
                     return RedirectToAction( "Users" );
                 }
                 else
@@ -192,13 +199,13 @@ namespace View.Controllers
 
         public void CreateUserProcedure(UserModel model)
         {
-            UserService.CreateUser( model.username, model.password, model.email, model.avatar, model.preferedLanguage, model.birthday, model.creationDate );
+            UserService.CreateUser( model.username, model.password, model.email, model.avatar, model.preferedLanguage, model.creationDate );
         }
 
         public void UpdateUserProcedure(UpdateUserModel model, bool changedPassword = false)
         {
 
-            UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.birthday, model.creationDate );
+            UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.creationDate );
         }
 
         public void DeleteUserProcedure(int id)

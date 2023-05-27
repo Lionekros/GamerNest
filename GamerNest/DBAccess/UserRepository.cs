@@ -14,7 +14,7 @@ namespace DBAccess
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
                     StringBuilder queryBuilder = new StringBuilder();
-                    queryBuilder.Append( "SELECT id, username, password, email, avatar, preferedLanguage, birthday, creationDate" );
+                    queryBuilder.Append( "SELECT id, username, password, email, avatar, preferedLanguage, creationDate" );
                     queryBuilder.Append( " FROM user" );
 
                     List<string> conditions = new List<string>();
@@ -62,7 +62,7 @@ namespace DBAccess
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = "SELECT id, username, password, email, avatar, preferedLanguage, birthday, creationDate"
+                    cmd.CommandText = "SELECT id, username, password, email, avatar, preferedLanguage, creationDate"
                         + " FROM user";
                     if ( id > 0 )
                     {
@@ -98,7 +98,6 @@ namespace DBAccess
                 string email = "",
                 string avatar = "",
                 string preferedLanguage = "",
-                string birthday = "",
                 string creationDate = ""
             )
         {
@@ -115,7 +114,6 @@ namespace DBAccess
                 procedure.Parameters.AddWithValue( "pEmail", email );
                 procedure.Parameters.AddWithValue( "pAvatar", avatar );
                 procedure.Parameters.AddWithValue( "pPreferedLanguage", preferedLanguage );
-                procedure.Parameters.AddWithValue( "pBirthday", birthday );
                 procedure.Parameters.AddWithValue( "pCreationDate", creationDate );
 
                 return Data.ExecuteProcedure( procedure );
@@ -136,7 +134,6 @@ namespace DBAccess
                     string email = "",
                     string avatar = "",
                     string preferedLanguage = "",
-                    string birthday = "",
                     string creationDate = ""
                 )
         {
@@ -150,7 +147,6 @@ namespace DBAccess
                 procedure.Parameters.AddWithValue( "pEmail", email );
                 procedure.Parameters.AddWithValue( "pAvatar", avatar );
                 procedure.Parameters.AddWithValue( "pPreferedLanguage", preferedLanguage );
-                procedure.Parameters.AddWithValue( "pBirthday", birthday );
                 procedure.Parameters.AddWithValue( "pCreationDate", creationDate );
 
                 return Data.ExecuteProcedure( procedure );
@@ -184,12 +180,5 @@ namespace DBAccess
 
             }
         }
-
-        //        SELECT game.id as 'game.id', game.cover as 'game.cover', game.title as 'game.title', game.subtitle as 'game.subtitle', platform.name as 'platform.name ', platform.icon as 'platform.icon'
-        //FROM user, user_fav_game, game, platform
-        //WHERE user.id = user_fav_game.idUser
-        //AND user_fav_game.idGame = game.id
-        //AND game.idPlatform = platform.id
-        //and user_fav_game.idUser = 1
     }
 }

@@ -184,5 +184,19 @@ namespace View.Controllers
 
             return false;
         }
+        public bool CheckIfUserLogInID(int id, string password)
+        {
+            GetUser( id );
+
+            if ( lists.userList?.Count > 0 )
+            {
+                if ( Utility.VerifyPassword( password, lists.userList[ 0 ].password ) )
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

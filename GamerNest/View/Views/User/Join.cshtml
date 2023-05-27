@@ -41,10 +41,6 @@
                                 <option value="ESP">Español</option>
                             </select>
                         </div>
-                        <div>
-                            <label asp-for="birthday">Birthday:</label>
-                            <input asp-for="birthday" type="date" />
-                        </div>
 
                         <div hidden>
                             <input asp-for="creationDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
@@ -61,3 +57,5 @@
         </section>
     </div>
 </main>
+
+<partial name="_Footer" />

@@ -1952,6 +1952,42 @@ a {
   }
 }
 
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
+}
+
+.footer {
+  margin-top: 2rem;
+  border-top: 2px solid #FCFCFC;
+}
+.footer a {
+  margin: 1rem 0;
+  text-decoration: none;
+  color: #FCFCFC;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.footer a img {
+  max-width: 12rem;
+}
+.footer a p {
+  font-size: 1.2rem;
+}
+
 .home-user {
   font-size: 1.5rem;
 }

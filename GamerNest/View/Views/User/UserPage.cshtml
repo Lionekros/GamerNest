@@ -1,5 +1,88 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Support.UserPageModel
 @{
+    ViewData[ "Title" ] = "UserPage";
 }
+
+<partial name="_NormalMenu" />
+
+<main class="home-user">
+    <div class="text">
+        <h1>@ViewData["Welcome"]</h1>
+        <h2>@ViewData[ "UserUsername" ]</h2>
+
+        @if ( ViewBag.SuccessMessage != null )
+        {
+            <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+        }
+
+        <partial name="_Error" />
+
+        <section class="userpageConfig">
+            <section class="firstRow">
+                <div class="seeFav">
+                    <h3>See Fav</h3>
+                    <a asp-controller="Game" asp-action="AllGames" asp-route-isFav="true">
+                        See Fav Games
+                    </a>
+                </div>
+                <div class="changeAvatar">
+                    <h3>Change Avatar</h3>
+                    <form asp-controller="User" asp-action="ChangeAvatar" method="post" enctype="multipart/form-data">
+                        <div>
+                            <label asp-for="avatar">Avatar:</label>
+                            <input asp-for="avatar" type="file" />
+                        </div>
+                        <button type="submit" class="mainButton">Change</button>
+                     </form>
+                </div>
+            </section>
+            <hr />
+            <section class="secondRow">
+                <div class="changePreferedLanguage">
+                    <h3>Change Prefered Language</h3>
+                    <form asp-controller="User" asp-action="ChangePreferedLanguage" method="post">
+                        <div>
+                            <label asp-for="preferedLanguage">Prefered Language:</label>
+                            <select asp-for="preferedLanguage">
+                                <option value="ENG">English</option>
+                                <option value="ESP">Español</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="mainButton">Change</button>
+                    </form>
+                </div>
+                <div class="changePassword">
+                    <h3>Change Password</h3>
+                    <form asp-controller="User" asp-action="ChangePassword" method="post" enctype="multipart/form-data">
+                        <div>
+                            <label asp-for="oldPassword" class="required">Old Password:</label>
+                            <input asp-for="oldPassword" placeholder="old Password" type="password" />
+                        </div>
+                        <div>
+                            <label asp-for="newPassword" class="required">New Password:</label>
+                            <input asp-for="newPassword" placeholder="new Password" type="password" />
+                        </div>
+                        <div>
+                            <label asp-for="confirmPassword" class="required">Repeat New Password:</label>
+                            <input asp-for="confirmPassword" placeholder="Repeat Password" type="password" required />
+                        </div>
+                        <button type="submit" class="mainButton">Change</button>
+                    </form>
+                </div>
+            </section>
+            <hr />
+            <section class="thirdRow">
+                <div class="deleteUser">
+                    <h3>Delete User</h3>
+                    <a asp-controller="User" asp-action="DeleteUser">
+                        Delete User
+                    </a>
+                </div>
+            </section>
+            
+            
+        </section>
+    </div>
+</main>
+
+<partial name="_Footer" />

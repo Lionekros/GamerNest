@@ -19,6 +19,7 @@
         public List<GenreTypeLanguageModel> playerTypeList { get; set; }
         public List<PlatformModel> platformList { get; set; }
         public List<UserModel> userList { get; set; }
+        public List<UserPageModel> userPageList { get; set; }
         public List<WebLanguageModel> webLanguageList { get; set; }
         public List<WebTextModel> webTextList { get; set; }
         public List<WebTextModel> textList { get; set; }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 27, 2023 at 04:03 PM
+-- Generation Time: May 27, 2023 at 07:00 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -188,14 +188,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreatePublisher` (IN `pName` VARCHA
   VALUES (pName);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateUser` (IN `pUsername` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pBirthday` VARCHAR(10), IN `pCreationDate` VARCHAR(10))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateUser` (IN `pUsername` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pCreationDate` VARCHAR(10))   BEGIN
     INSERT INTO `user` (
         `username`,
         `password`,
         `email`,
         `avatar`,
         `preferedLanguage`,
-        `birthday`,
         `creationDate`
     ) VALUES (
         pUsername,
@@ -203,7 +202,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateUser` (IN `pUsername` VARCHAR
         pEmail,
         pAvatar,
         pPreferedLanguage,
-        pBirthday,
         pCreationDate
     );
 END$$
@@ -473,7 +471,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdatePublisher` (IN `pId` INT, IN 
   WHERE `id` = pId;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateUser` (IN `pId` INT, IN `pUsername` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pBirthday` VARCHAR(10), IN `pCreationDate` VARCHAR(10))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateUser` (IN `pId` INT, IN `pUsername` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pCreationDate` VARCHAR(10))   BEGIN
     UPDATE `user`
     SET
         `username` = pUsername,
@@ -481,7 +479,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateUser` (IN `pId` INT, IN `pUse
         `email` = pEmail,
         `avatar` = IFNULL(NULLIF(pAvatar, ''), `avatar`),
         `preferedLanguage` = pPreferedLanguage,
-        `birthday` = pBirthday,
         `creationDate` = pCreationDate
     WHERE
         `id` = pId;
@@ -969,7 +966,6 @@ CREATE TABLE `user` (
   `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `avatar` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT '/img/Avatar/User/Default.png',
   `preferedLanguage` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `birthday` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `creationDate` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
@@ -977,10 +973,10 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `avatar`, `preferedLanguage`, `birthday`, `creationDate`) VALUES
-(13, 'Cris', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'cristicarmat2@gmail.com', '/img/Avatar/User/avatar_13.jpg', 'ENG', '1997-02-11', ''),
-(14, 'Lidia', '$2a$11$AJpyrieovrhGAF3fn8OfqO1okY7IgITaA.XtBItUCRrhtN6rYUh/e', 'lidia@gmail.com', '/img/Avatar/User/avatar_0.jpg', 'ESP', '1996-09-11', '27/05/2023'),
-(23, 'Kuma', 'Kumalamasguapa1+', 'kuma@gmail.com', '/img/Avatar/User/avatar_23.jpg', 'ESP', '2019-08-28', '2023-05-27');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `avatar`, `preferedLanguage`, `creationDate`) VALUES
+(13, 'Cris', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'cristicarmat2@gmail.com', '/img/Avatar/User/avatar_13.jpg', 'ENG', ''),
+(14, 'Lidia', '$2a$11$AJpyrieovrhGAF3fn8OfqO1okY7IgITaA.XtBItUCRrhtN6rYUh/e', 'lidia@gmail.com', '/img/Avatar/User/avatar_0.jpg', 'ESP', '27/05/2023'),
+(25, 'Kuma', '$2a$11$MQH534UxB4ZTvV2b/EQzSuJzEP71jd.H0xMRCaH6DRPoXZzDdM0tK', 'kuma@gmail.com', '/img/Avatar/User/avatar_25.jpg', 'ESP', '2023-05-27');
 
 -- --------------------------------------------------------
 
@@ -2257,7 +2253,7 @@ ALTER TABLE `publisher`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `web_text`

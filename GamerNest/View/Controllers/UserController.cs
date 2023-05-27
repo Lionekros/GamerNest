@@ -24,7 +24,7 @@ namespace View.Controllers
                 ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Article" );
             }
-            
+
         }
 
         public ActionResult Join(UserJoinModel model, IFormFile avatar)
@@ -44,7 +44,7 @@ namespace View.Controllers
 
                 if ( ModelState.IsValid )
                 {
-                    usernameExist = CheckIfUserDataExist(-1, model.username);
+                    usernameExist = CheckIfUserDataExist( -1, model.username );
                     emailExist = CheckIfUserDataExist( -1, "", model.email );
 
                     if ( emailExist )
@@ -81,9 +81,9 @@ namespace View.Controllers
                         int userId = lists.userList[0].id;
                         model.avatar = UploadImage( avatar, userId, "Avatar", "User", "avatar" );
                         model.id = userId;
-                        UpdateUserJoinProcedure( model, false );
+                        UpdateUserJoinProcedure( model, true );
 
-                        GetUser(-1, model.username);
+                        GetUser( -1, model.username );
                         SetUserSessions();
 
                         return RedirectToAction( "Index", "Article" );
@@ -133,7 +133,7 @@ namespace View.Controllers
             {
                 HttpContext.Session.Clear();
                 WebText( "UserJoinForm" );
-                return RedirectToAction("Index", "Article");
+                return RedirectToAction( "Index", "Article" );
             }
             catch ( Exception ex )
             {
@@ -191,8 +191,15 @@ namespace View.Controllers
             try
             {
                 UserDefault();
+
+                GetUser( int.Parse( HttpContext.Session.GetString( "UserID" ) ) );
+
+                UserPageModel model = new UserPageModel();
+
+                model.preferedLanguage = lists.userList[ 0 ].preferedLanguage;
+
                 WebText( "UserJoinForm" );
-                return View( "Join" );
+                return View( "UserPage", model );
             }
             catch ( Exception ex )
             {
@@ -206,9 +213,9 @@ namespace View.Controllers
 
         public bool CheckIfUserDataExist(int id = -1, string username = "", string email = "")
         {
-            GetUser(id, username, email);
+            GetUser( id, username, email );
 
-            if (lists.userList.Count > 0)
+            if ( lists.userList.Count > 0 )
             {
                 return true;
             }
@@ -220,24 +227,161 @@ namespace View.Controllers
 
         public void CreateUserProcedure(UserJoinModel model)
         {
-            UserService.CreateUser( model.username, model.password, model.email, model.avatar, model.preferedLanguage, model.birthday, model.creationDate );
+            UserService.CreateUser( model.username, model.password, model.email, model.avatar, model.preferedLanguage, model.creationDate );
         }
 
         public void UpdateUserJoinProcedure(UserJoinModel model, bool changedPassword = false)
         {
 
-            UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.birthday, model.creationDate );
+            UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.creationDate );
         }
 
         public void UpdateUserProcedure(UpdateUserModel model, bool changedPassword = false)
         {
 
-            UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.birthday, model.creationDate );
+            UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.creationDate );
         }
 
-        public void DeleteUserProcedure(int id)
+        public ActionResult DeleteUser()
         {
-            UserService.DeleteUser( id );
+            try
+            {
+                UserService.DeleteUser( int.Parse( HttpContext.Session.GetString( "UserID" ) ) );
+
+                return RedirectToAction( "LogOut" );
+            }
+            catch ( Exception ex )
+            {
+                Log log = new Log();
+                log.Add( ex.Message );
+                WebText( "Messages" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
+                return RedirectToAction( "Index", "Article" );
+            }
+        }
+
+        public ActionResult ChangeAvatar(UserPageModel model, IFormFile avatar)
+        {
+            try
+            {
+                model.avatar = UploadImage( avatar, int.Parse( HttpContext.Session.GetString( "UserID" ) ), "Avatar", "User", "avatar" );
+                UpdateUserModel userModel = constructModel(model, true);
+                UpdateUserProcedure( userModel );
+
+                HttpContext.Session.SetString( "UserAvatar", model.avatar );
+
+                ViewBag.SuccessMessage = "Item created successfully!";
+                return RedirectToAction( "UserPage" );
+            }
+            catch ( Exception ex )
+            {
+                Log log = new Log();
+                log.Add( ex.Message );
+                WebText( "Messages" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
+                return RedirectToAction( "Index", "Article" );
+            }
+
+        }
+        public ActionResult ChangePreferedLanguage(UserPageModel model)
+        {
+            try
+            {
+                UpdateUserModel userModel = constructModel(model, false, true);
+                UpdateUserProcedure( userModel );
+
+                HttpContext.Session.SetString( "PageLanguage", model.preferedLanguage );
+
+                return RedirectToAction( "UserPage" );
+            }
+            catch ( Exception ex )
+            {
+                Log log = new Log();
+                log.Add( ex.Message );
+                WebText( "Messages" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
+                return RedirectToAction( "Index", "Article" );
+            }
+
+        }
+        public ActionResult ChangePassword(UserPageModel model)
+        {
+            try
+            {
+                WebText( "Messages" );
+                List<string> errorMessageList = new List<string>();
+                string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&+])[A-Za-z\d@$!%*?&+]{8,}$";
+
+                bool confirmPass = false;
+
+                if ( CheckIfUserLogInID( int.Parse( HttpContext.Session.GetString( "UserID" ) ), model.oldPassword ) )
+                {
+                    if ( !ConfirmPassword( model.newPassword, model.confirmPassword ) )
+                    {
+                        errorMessageList.Add( ViewData[ "MismatchPasswords" ].ToString() );
+                    }
+
+                    if ( !Regex.IsMatch( model.newPassword, passwordRegex ) )
+                    {
+                        errorMessageList.Add( ViewData[ "InvalidPassword" ].ToString() );
+                    }
+                    else
+                    {
+                        confirmPass = true;
+                    }
+                }
+                else
+                {
+                    errorMessageList.Add( ViewData[ "ErrorOldPassword" ].ToString() );
+                }
+
+                if ( confirmPass )
+                {
+                    UpdateUserModel userModel = constructModel(model, false, false, true);
+                    UpdateUserProcedure( userModel, true );
+
+                    return RedirectToAction( "UserPage" );
+                }
+                else
+                {
+                    UserDefault();
+                    ViewBag.ErrorMessages = errorMessageList;
+                    WebText( "UserJoinForm" );
+                    return View( "UserPage", model );
+                }
+            }
+            catch ( Exception ex )
+            {
+                Log log = new Log();
+                log.Add( ex.Message );
+                WebText( "Messages" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
+                return RedirectToAction( "Index", "Article" );
+            }
+
+        }
+
+        public UpdateUserModel constructModel(UserPageModel upModel, bool changeAvatar = false, bool changePreferedLanguage = false, bool changePassword = false)
+        {
+            GetUserUpdate( int.Parse( HttpContext.Session.GetString( "UserID" ) ) );
+            UpdateUserModel model;
+
+            model = lists.updateUserList[ 0 ];
+
+            if ( changeAvatar )
+            {
+                model.avatar = upModel.avatar;
+            }
+            if ( changePreferedLanguage )
+            {
+                model.preferedLanguage = upModel.preferedLanguage;
+            }
+            if ( changePassword )
+            {
+                model.password = upModel.newPassword;
+            }
+
+            return model;
         }
     }
 }
