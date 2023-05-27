@@ -1,85 +1,121 @@
 ﻿@import "../Utilities/variables";
 
-.games
+.AllGames
 {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    a
+    div
     {
         display: flex;
-        align-items: center;
-        background-color: $terciary;
-        border-radius: 1.5rem;
-        padding: 1rem;
-        justify-content: center;
-        text-decoration: none;
-        max-width: 80%;
-        color: $light;
-        margin-top: 2rem;
+        flex-direction: row;
 
-        &:hover
+        .aGame
         {
-            background-color: lighter($terciary);
-        }
+            background-color: $terciary;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            text-decoration: none;
+            color: $light;
+            margin-top: 2rem;
 
-        .cardGame
-        {
-            .img
+            &:hover
             {
-                img
-                {
-                    max-width: 12rem;
-                    margin-right: 10px;
-                }
+                background-color: lighter($terciary);
             }
 
-            .info
+            .cardGame
             {
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
+                height: auto;
+                width: 40rem;
 
-                .icons
+                .img
+                {
+                    img
+                    {
+                        max-width: 12rem;
+                        margin-right: 10px;
+                    }
+                }
+
+                .info
                 {
                     display: flex;
-                    flex-direction: row;
-                    justify-content: space-around;
+                    flex-direction: column;
+                    width: 100%;
 
-                    .platform
+                    .icons
                     {
-                        color: $primary;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        margin-left: 1rem;
+
+                        .platform
+                        {
+                            color: $primary;
+                        }
                     }
 
-                    .favButton
+                    .titAndSub
                     {
-                        .isFav
+                        display: flex;
+                        flex-direction: column;
+                        text-align: center;
+                        align-items: center;
+                        height: 100%;
+                        justify-content: center;
+
+                        .title
                         {
-                            background-color: $secondary;
                             color: $primary;
-                            border: 2px solid $light;
+                            text-align: center;
                         }
 
-                        .isNotFav
+                        .subtitle
                         {
-                            background-color: $secondary;
-                            color: $light;
-                            border: 2px solid $light;
+                            text-align: center;
+                            font-size: 1.3rem;
                         }
                     }
                 }
+            }
+        }
 
-                .title
+        .favButton
+        {
+            display: flex;
+            align-items: center;
+            margin-top: 2rem;
+
+            div
+            {
+                padding: 1rem;
+                background-color: $terciary;
+                border-top-right-radius: 1rem;
+                border-bottom-right-radius: 1rem;
+
+                .isFav, .isNotFav
+                {
+                    background-color: $secondary;
+                    padding: 1rem;
+                    border-radius: 1rem;
+                    border: 1px solid $light;
+                    font-size: 2.3rem;
+                }
+
+                .isFav
                 {
                     color: $primary;
-                    text-align: center;
                 }
 
-                .subtitle
+                .isNotFav
                 {
-                    text-align: justify;
-                    font-size: 1.3rem;
+                    color: $light;
                 }
             }
         }

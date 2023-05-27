@@ -562,6 +562,9 @@ template {
   margin-top: 2rem;
   font-size: 1rem;
 }
+.filter .select2-selection--single {
+  margin-bottom: 0 !important;
+}
 .filter h4 {
   display: block;
   margin-bottom: 1rem;
@@ -697,13 +700,6 @@ html {
 
 a {
   text-decoration: none;
-}
-
-.select2Single {
-  all: unset !important;
-}
-.select2Single * {
-  all: unset !important;
 }
 
 :root {
@@ -1746,60 +1742,90 @@ a {
   --primary-color: red;
 }
 
-.games {
+.AllGames {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.games a {
+.AllGames div {
   display: flex;
-  align-items: center;
+  flex-direction: row;
+}
+.AllGames div .aGame {
   background-color: #555555;
   border-radius: 1.5rem;
   padding: 1rem;
-  justify-content: center;
   text-decoration: none;
-  max-width: 80%;
   color: #FCFCFC;
   margin-top: 2rem;
 }
-.games a:hover {
+.AllGames div .aGame:hover {
   background-color: lighter(#555555);
 }
-.games a .cardGame .img img {
+.AllGames div .aGame .cardGame {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 40rem;
+}
+.AllGames div .aGame .cardGame .img img {
   max-width: 12rem;
   margin-right: 10px;
 }
-.games a .cardGame .info {
+.AllGames div .aGame .cardGame .info {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
-.games a .cardGame .info .icons {
+.AllGames div .aGame .cardGame .info .icons {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  align-items: center;
+  margin-left: 1rem;
 }
-.games a .cardGame .info .icons .platform {
+.AllGames div .aGame .cardGame .info .icons .platform {
   color: #FFB100;
 }
-.games a .cardGame .info .icons .favButton .isFav {
-  background-color: #1C1C1C;
-  color: #FFB100;
-  border: 2px solid #FCFCFC;
+.AllGames div .aGame .cardGame .info .titAndSub {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
 }
-.games a .cardGame .info .icons .favButton .isNotFav {
-  background-color: #1C1C1C;
-  color: #FCFCFC;
-  border: 2px solid #FCFCFC;
-}
-.games a .cardGame .info .title {
+.AllGames div .aGame .cardGame .info .titAndSub .title {
   color: #FFB100;
   text-align: center;
 }
-.games a .cardGame .info .subtitle {
-  text-align: justify;
+.AllGames div .aGame .cardGame .info .titAndSub .subtitle {
+  text-align: center;
   font-size: 1.3rem;
+}
+.AllGames div .favButton {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+.AllGames div .favButton div {
+  padding: 1rem;
+  background-color: #555555;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+.AllGames div .favButton div .isFav, .AllGames div .favButton div .isNotFav {
+  background-color: #1C1C1C;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #FCFCFC;
+  font-size: 2.3rem;
+}
+.AllGames div .favButton div .isFav {
+  color: #FFB100;
+}
+.AllGames div .favButton div .isNotFav {
+  color: #FCFCFC;
 }
 
 :root {

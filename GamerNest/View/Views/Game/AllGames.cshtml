@@ -39,7 +39,7 @@
                     </div>
                     <div>
                         <div class="input-group">
-                            <select name="idPlatform" id="idPlatform" class="select2Single">
+                            <select name="idPlatform" id="idPlatform" class="select2Single marginBotom">
                                 <option>@ViewData[ "fSearchPlatform" ]</option>
                                 @foreach ( var item in Model.platformList )
                                 {
@@ -55,59 +55,62 @@
                 </form>
             </section>
         </div>
-        <section class="games">
+
+        <section class="AllGames">
+            
             @foreach ( var item in Model.gameList )
             {
-                <a asp-controller="Game" asp-action="SeeGame" asp-route-id="@item.id">
-                    <div class="cardGame">
-                        <div class="img">
-                            <img src="@item.cover" alt="Cover">
-                        </div>
-                        <div class="info">
-                            <div class="icons">
-                                <div class="platform">
-                                    @Html.Raw(item.platformIcon);
-                                </div>
-                                @*@if (ViewData["UserEmail"].ToString() != "no")
-                                {
-                                    <div class="favButton">
-                                        @if ( item.isFav )
-                                        {
-                                            <a class="isFav" asp-controller="Game" asp-action="GameIsNotFav" asp-route-idGame="@item.id">
-                                                <i class="fa-solid fa-heart"></i>
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a class="isNotFav" asp-controller="Game" asp-action="GameIsFav" asp-route-idGame="@item.id">
-                                                <i class="fa-solid fa-heart-crack"></i>
-                                            </a>
-                                        }
+                <div>
+                    <a class="aGame" asp-controller="Game" asp-action="SeeGame" asp-route-id="@item.id">
+                        <div class="cardGame">
+                            <div class="img">
+                                <img src="@item.cover" alt="Cover" />
+                            </div>
+                            <div class="info">
+                                <div class="icons">
+                                    <div class="platform">
+                                        @Html.Raw(item.platformIcon)
                                     </div>
-                                }*@
-                                <div class="favButton">
+                                </div>
+                                <div class="titAndSub">
+                                    <div class="title">
+                                        @Html.Raw(item.title)
+                                    </div>
+                                    @if ( !string.IsNullOrEmpty( item.subtitle ) )
+                                    {
+                                        <div class="subtitle">
+                                            @item.subtitle
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    @if ( ViewData[ "UserEmail" ].ToString() != "no" )
+                    {
+                        <div class="favButton">
+                            <div>
+                                @if ( item.isFav )
+                                {
+                                    <a class="isFav" asp-controller="Game" asp-action="GameIsNotFav" asp-route-idGame="@item.id">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </a>
+                                }
+                                else
+                                {
                                     <a class="isNotFav" asp-controller="Game" asp-action="GameIsFav" asp-route-idGame="@item.id">
                                         <i class="fa-solid fa-heart-crack"></i>
                                     </a>
-                                </div>
+                                }
                             </div>
-                            <div class="title">
-                                @Html.Raw(item.title)
-                            </div>
-                            @if ( !string.IsNullOrEmpty(item.subtitle) )
-                            {
-                                <div class="subtitle">
-                                    @item.subtitle
-                                </div>
-                            }
                             
                         </div>
-                    </div>
-
-                </a>
+                    }
+                </div>
             }
 
         </section>
+
         <section class="pagination">
             <div>
                 @if ( Model.CurrentPage > 1 )
