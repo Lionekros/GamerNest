@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 20, 2023 at 04:21 PM
+-- Generation Time: May 27, 2023 at 04:03 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -218,7 +218,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateWebText` (IN `pTitle` VARCHAR
   VALUES (pTitle, pText, pIdCategory, pLanguage);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteArticle` (IN `pId` BIGINT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteArticle` (IN `pId` INT)   BEGIN
   DELETE FROM game_article WHERE idArticle = pId;
   DELETE FROM article WHERE id = pId;
 END$$
@@ -237,7 +237,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteDev` (IN `pId` INT)   BEGIN
   WHERE `id` = pId;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteGame` (IN `pId` BIGINT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteGame` (IN `pId` INT)   BEGIN
   DELETE FROM game_genre WHERE idGame = pId;
   DELETE FROM game_player_type WHERE idGame = pId;
   DELETE FROM game_language WHERE idGame = pId;
@@ -274,7 +274,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletePublisher` (IN `pId` INT)   B
   WHERE `id` = pId;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteUser` (IN `pId` BIGINT)   begin
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteUser` (IN `pId` INT)   begin
 	 DELETE FROM user_fav_game  WHERE idUser = pId;
 	DELETE FROM user_score_game  WHERE idUser = pId;
 DELETE FROM user WHERE id = pId;
@@ -290,7 +290,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteWebText` (IN `pId` INT)   BEG
   WHERE `id` = pId;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateArticle` (IN `pId` BIGINT, IN `pHeadline` VARCHAR(255), IN `pSummary` TEXT, IN `pBody` MEDIUMTEXT, IN `pCover` VARCHAR(255), IN `pIsPublished` TINYINT, IN `pCreatedDate` VARCHAR(19), IN `pUpdatedDate` VARCHAR(19), IN `pIdAuthor` INT, IN `pLanguage` CHAR(3), IN `pIdGame` TEXT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateArticle` (IN `pId` INT, IN `pHeadline` VARCHAR(255), IN `pSummary` TEXT, IN `pBody` MEDIUMTEXT, IN `pCover` VARCHAR(255), IN `pIsPublished` TINYINT, IN `pCreatedDate` VARCHAR(19), IN `pUpdatedDate` VARCHAR(19), IN `pIdAuthor` INT, IN `pLanguage` CHAR(3), IN `pIdGame` TEXT)   BEGIN
   
   -- Update the article in the article table
   UPDATE article
@@ -363,7 +363,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateDev` (IN `pId` INT, IN `pName
   WHERE `id` = pId;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateGame` (IN `pId` BIGINT, IN `pTitle` VARCHAR(255), IN `pSubtitle` VARCHAR(255), IN `pDescription` TEXT, IN `pLanguage` CHAR(3), IN `pCover` VARCHAR(255), IN `pReleaseDate` VARCHAR(10), IN `pTotalScore` TINYINT, IN `pIsFav` TINYINT, IN `pIdDev` INT, IN `pIdPlatform` INT, IN `pIdPublisher` INT, IN `pIdGenre` TEXT, IN `pIdPlayerType` TEXT, IN `pIdLanguage` TEXT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateGame` (IN `pId` INT, IN `pTitle` VARCHAR(255), IN `pSubtitle` VARCHAR(255), IN `pDescription` TEXT, IN `pLanguage` CHAR(3), IN `pCover` VARCHAR(255), IN `pReleaseDate` VARCHAR(10), IN `pTotalScore` TINYINT, IN `pIsFav` TINYINT, IN `pIdDev` INT, IN `pIdPlatform` INT, IN `pIdPublisher` INT, IN `pIdGenre` TEXT, IN `pIdPlayerType` TEXT, IN `pIdLanguage` TEXT)   BEGIN
   
   -- Update the article in the article table
   UPDATE `game`
@@ -512,7 +512,7 @@ DELIMITER ;
 --
 
 CREATE TABLE `article` (
-  `id` bigint NOT NULL,
+  `id` int NOT NULL,
   `headline` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `summary` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `body` mediumtext CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
@@ -534,7 +534,7 @@ INSERT INTO `article` (`id`, `headline`, `summary`, `body`, `cover`, `isPublishe
 (35, 'Secretos ocultos y misterios en The Legend of Zelda: Breath of the Wild', '<div>\r\n<div>Descubre los secretos ocultos y misterios que esperan ser descubiertos en The Legend of Zelda: Breath of the Wild. Explora el vasto reino de Hyrule y desentra&ntilde;a los enigmas de esta aclamada aventura de mundo abierto.</div>\r\n</div>', '<div>\r\n<div>Descubre los secretos ocultos y misterios que esperan ser descubiertos en The Legend of Zelda: Breath of the Wild. Explora el vasto reino de Hyrule y desentra&ntilde;a los enigmas de esta aclamada aventura de mundo abierto.</div>\r\n</div>', '/img/Cover/Article/cover_35.jpg', 1, '2023-05-20 04:44:21', '2023-05-20 18:14:37', 10, 'ESP'),
 (36, 'Nuevos desafíos y eventos en Red Dead Online', '<div>\r\n<div>Participa en emocionantes desaf&iacute;os y eventos en Red Dead Online. Descubre la vida en el Salvaje Oeste y forma tu propio camino como forajido o aventurero en esta experiencia multijugador en l&iacute;nea.</div>\r\n</div>', '<div>\r\n<div>Participa en emocionantes desaf&iacute;os y eventos en Red Dead Online. Descubre la vida en el Salvaje Oeste y forma tu propio camino como forajido o aventurero en esta experiencia multijugador en l&iacute;nea.</div>\r\n</div>', '/img/Cover/Article/cover_36.jpg', 1, '2023-05-20 04:48:02', '2023-05-20 18:16:14', 12, 'ESP'),
 (37, 'New DLC: \"Hunt in the Dark Forest\"', '<div>\r\n<div>CD Projekt RED announces the release of an exciting new DLC for The Witcher 3: Wild Hunt. In \"Hunt in the Dark Forest,\" Geralt of Rivia will face nightmare creatures while searching for answers in a cursed, sinister forest.</div>\r\n</div>', '<div>\r\n<div>CD Projekt RED announces the release of an exciting new DLC for The Witcher 3: Wild Hunt. In \"Hunt in the Dark Forest,\" Geralt of Rivia will face nightmare creatures while searching for answers in a cursed, sinister forest.</div>\r\n</div>', '/img/Cover/Article/cover_37.jpeg', 1, '2023-05-20 04:35:49', '2023-05-20 18:11:34', 10, 'ENG'),
-(39, 'New DLC: \"Hunt in the Dark Forest\"', '<div>\r\n<div>CD Projekt RED announces the release of an exciting new DLC for The Witcher 3: Wild Hunt. In \"Hunt in the Dark Forest,\" Geralt of Rivia will face nightmare creatures while searching for answers in a cursed, sinister forest.</div>\r\n</div>', '<div>\r\n<div>CD Projekt RED announces the release of an exciting new DLC for The Witcher 3: Wild Hunt. In \"Hunt in the Dark Forest,\" Geralt of Rivia will face nightmare creatures while searching for answers in a cursed, sinister forest.</div>\r\n</div>', '/img/Cover/Article/cover_39.jpeg', 1, '2023-05-20 04:35:49', '2023-05-20 18:17:02', 10, 'ENG'),
+(39, 'New DLC: \"Hunt in the Dark Forest\" 2', '<div>\r\n<div>CD Projekt RED announces the release of an exciting new DLC for The Witcher 3: Wild Hunt. In \"Hunt in the Dark Forest,\" Geralt of Rivia will face nightmare creatures while searching for answers in a cursed, sinister forest.</div>\r\n</div>', '<div>\r\n<div>CD Projekt RED announces the release of an exciting new DLC for The Witcher 3: Wild Hunt. In \"Hunt in the Dark Forest,\" Geralt of Rivia will face nightmare creatures while searching for answers in a cursed, sinister forest.</div>\r\n</div>', '/img/Cover/Article/cover_39.jpeg', 1, '2023-05-20 04:35:49', '2023-05-20 18:17:02', 10, 'ENG'),
 (40, 'New updates and content for GTA Online', '<div>\r\n<div>Rockstar Games has announced a series of exciting updates and new content for GTA Online. Get ready for more missions, vehicles, and challenges in the ever-changing city of Los Santos.</div>\r\n</div>', '<div>\r\n<div>Rockstar Games has announced a series of exciting updates and new content for GTA Online. Get ready for more missions, vehicles, and challenges in the ever-changing city of Los Santos.</div>\r\n</div>', '/img/Cover/Article/cover_40.jpg', 1, '2023-05-20 04:40:12', '2023-05-20 18:13:00', 10, 'ENG'),
 (41, 'Hidden Secrets and Mysteries in The Legend of Zelda: Breath of the Wild', '<div>\r\n<div>Discover the hidden secrets and mysteries waiting to be uncovered in The Legend of Zelda: Breath of the Wild. Explore the vast kingdom of Hyrule and unravel the enigmas of this acclaimed open-world adventure.</div>\r\n</div>', '<div>\r\n<div>Discover the hidden secrets and mysteries waiting to be uncovered in The Legend of Zelda: Breath of the Wild. Explore the vast kingdom of Hyrule and unravel the enigmas of this acclaimed open-world adventure.</div>\r\n</div>', '/img/Cover/Article/cover_41.jpg', 1, '2023-05-20 04:44:21', '2023-05-20 18:15:04', 10, 'ENG'),
 (42, 'New Challenges and Events in Red Dead Online', '<div>\r\n<div>Participate in exciting challenges and events in Red Dead Online. Discover life in the Wild West and forge your own path as an outlaw or adventurer in this online multiplayer experience.</div>\r\n</div>', '<div>\r\n<div>Participate in exciting challenges and events in Red Dead Online. Discover life in the Wild West and forge your own path as an outlaw or adventurer in this online multiplayer experience.</div>\r\n</div>', '/img/Cover/Article/cover_42.jpg', 1, '2023-05-20 04:48:02', '2023-05-20 18:16:32', 12, 'ENG');
@@ -659,7 +659,7 @@ INSERT INTO `dev` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `game` (
-  `id` bigint NOT NULL,
+  `id` int NOT NULL,
   `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `subtitle` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
@@ -667,7 +667,6 @@ CREATE TABLE `game` (
   `cover` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT '/img/Cover/Game/Default.png',
   `releaseDate` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `totalScore` tinyint NOT NULL DEFAULT '0',
-  `isFav` tinyint NOT NULL DEFAULT '0',
   `idDev` int NOT NULL,
   `idPlatform` int NOT NULL,
   `idPublisher` int NOT NULL
@@ -677,16 +676,16 @@ CREATE TABLE `game` (
 -- Dumping data for table `game`
 --
 
-INSERT INTO `game` (`id`, `title`, `subtitle`, `description`, `language`, `cover`, `releaseDate`, `totalScore`, `isFav`, `idDev`, `idPlatform`, `idPublisher`) VALUES
-(22, 'Overlord 2', NULL, '<p>Segunda entrega de este original juego de estrategia, en la que encarnaremos a un nuevo protagonista que se enfrenta a una suerte de imperio romano que tiene las intenciones de arrasar con toda la magia del mundo.</p>', 'ESP', '/img/Cover/Game/cover_22.jpg', '2023-05-20', 0, 0, 21, 6, 3),
-(23, 'The Witcher 3', 'Wild Hunt', '<p>Emb&aacute;rcate en una &eacute;pica cacer&iacute;a de monstruos en el vasto mundo abierto de The Witcher 3. Explora tierras peligrosas, toma decisiones dif&iacute;ciles y enfr&eacute;ntate a bestias sobrenaturales en esta aventura de rol aclamada por la cr&iacute;tica.</p>', 'ESP', '/img/Cover/Game/cover_23.jpg', '2015-05-19', 0, 0, 6, 6, 4),
-(24, 'Grand Theft Auto V', NULL, '<p>&Uacute;nete a los bajos fondos de Los Santos y vive una vida de crimen en el mundo abierto de Grand Theft Auto V. Roba coches, planea atracos y enfr&eacute;ntate a peligrosos enemigos en esta aventura de acci&oacute;n y delincuencia.</p>', 'ESP', '/img/Cover/Game/cover_24.jpg', '2015-04-14', 0, 0, 1, 6, 1),
-(25, 'The Legend of Zelda', 'Breath of the Wild', '<p>Emb&aacute;rcate en una aventura legendaria en el vasto reino de Hyrule en The Legend of Zelda: Breath of the Wild. Explora un mundo abierto lleno de misterios, resuelve acertijos y enfr&eacute;ntate a criaturas ancestrales en esta aclamada entrega de la saga.</p>', 'ESP', '/img/Cover/Game/cover_25.jpg', '2017-03-03', 0, 0, 10, 3, 5),
-(26, 'Red Dead Redemption 2', NULL, '<p>Sum&eacute;rgete en el salvaje oeste en la &eacute;pica historia de Red Dead Redemption 2. Explora vastas tierras fronterizas, caza animales salvajes y enfr&eacute;ntate a forajidos en esta aventura de mundo abierto desarrollada por Rockstar Games.</p>', 'ESP', '/img/Cover/Game/cover_26.jpg', '2019-11-05', 0, 0, 1, 6, 1),
-(27, 'The Witcher 3', 'Wild Hunt', '<p>Embark on an epic monster hunt in the vast open world of The Witcher 3. Explore dangerous lands, make difficult choices, and face supernatural beasts in this critically acclaimed role-playing adventure.</p>', 'ENG', '/img/Cover/Game/cover_27.jpg', '2015-05-19', 0, 0, 6, 6, 4),
-(28, 'Grand Theft Auto V', NULL, '<p>Join the criminal underworld of Los Santos and live a life of crime in the open world of Grand Theft Auto V. Steal cars, plan heists, and confront dangerous enemies in this action-packed adventure.</p>', 'ENG', '/img/Cover/Game/cover_28.jpg', '2015-04-14', 0, 0, 1, 6, 1),
-(29, 'The Legend of Zelda', 'Breath of the Wild', '<p>Embark on a legendary adventure in the vast kingdom of Hyrule in The Legend of Zelda: Breath of the Wild. Explore an open world full of mysteries, solve puzzles, and face ancient creatures in this critically acclaimed installment of the saga.</p>', 'ENG', '', '2017-03-03', 0, 0, 10, 3, 5),
-(30, 'Red Dead Redemption 2', NULL, '<p>Immerse yourself in the wild west in the epic story of Red Dead Redemption 2. Explore vast frontier lands, hunt wild animals, and confront outlaws in this open-world adventure developed by Rockstar Games.</p>', 'ENG', '/img/Cover/Game/cover_30.jpg', '2019-11-05', 0, 0, 1, 6, 1);
+INSERT INTO `game` (`id`, `title`, `subtitle`, `description`, `language`, `cover`, `releaseDate`, `totalScore`, `idDev`, `idPlatform`, `idPublisher`) VALUES
+(22, 'Overlord 2', NULL, '<p>Segunda entrega de este original juego de estrategia, en la que encarnaremos a un nuevo protagonista que se enfrenta a una suerte de imperio romano que tiene las intenciones de arrasar con toda la magia del mundo.</p>', 'ESP', '/img/Cover/Game/cover_22.jpg', '2023-05-20', 0, 21, 6, 3),
+(23, 'The Witcher 3', 'Wild Hunt', '<p>Emb&aacute;rcate en una &eacute;pica cacer&iacute;a de monstruos en el vasto mundo abierto de The Witcher 3. Explora tierras peligrosas, toma decisiones dif&iacute;ciles y enfr&eacute;ntate a bestias sobrenaturales en esta aventura de rol aclamada por la cr&iacute;tica.</p>', 'ESP', '/img/Cover/Game/cover_23.jpg', '2015-05-19', 0, 6, 6, 4),
+(24, 'Grand Theft Auto V', NULL, '<p>&Uacute;nete a los bajos fondos de Los Santos y vive una vida de crimen en el mundo abierto de Grand Theft Auto V. Roba coches, planea atracos y enfr&eacute;ntate a peligrosos enemigos en esta aventura de acci&oacute;n y delincuencia.</p>', 'ESP', '/img/Cover/Game/cover_24.jpg', '2015-04-14', 0, 1, 6, 1),
+(25, 'The Legend of Zelda', 'Breath of the Wild', '<p>Emb&aacute;rcate en una aventura legendaria en el vasto reino de Hyrule en The Legend of Zelda: Breath of the Wild. Explora un mundo abierto lleno de misterios, resuelve acertijos y enfr&eacute;ntate a criaturas ancestrales en esta aclamada entrega de la saga.</p>', 'ESP', '/img/Cover/Game/cover_25.jpg', '2017-03-03', 0, 10, 3, 5),
+(26, 'Red Dead Redemption 2', NULL, '<p>Sum&eacute;rgete en el salvaje oeste en la &eacute;pica historia de Red Dead Redemption 2. Explora vastas tierras fronterizas, caza animales salvajes y enfr&eacute;ntate a forajidos en esta aventura de mundo abierto desarrollada por Rockstar Games.</p>', 'ESP', '/img/Cover/Game/cover_26.jpg', '2019-11-05', 0, 1, 6, 1),
+(27, 'The Witcher 3', 'Wild Hunt', '<p>Embark on an epic monster hunt in the vast open world of The Witcher 3. Explore dangerous lands, make difficult choices, and face supernatural beasts in this critically acclaimed role-playing adventure.</p>', 'ENG', '/img/Cover/Game/cover_27.jpg', '2015-05-19', 0, 6, 6, 4),
+(28, 'Grand Theft Auto V', NULL, '<p>Join the criminal underworld of Los Santos and live a life of crime in the open world of Grand Theft Auto V. Steal cars, plan heists, and confront dangerous enemies in this action-packed adventure.</p>', 'ENG', '/img/Cover/Game/cover_28.jpg', '2015-04-14', 0, 1, 6, 1),
+(29, 'The Legend of Zelda', 'Breath of the Wild', '<p>Embark on a legendary adventure in the vast kingdom of Hyrule in The Legend of Zelda: Breath of the Wild. Explore an open world full of mysteries, solve puzzles, and face ancient creatures in this critically acclaimed installment of the saga.</p>', 'ENG', '/img/Cover/Game/cover_25.jpg', '2017-03-03', 0, 10, 3, 5),
+(30, 'Red Dead Redemption 2', NULL, '<p>Immerse yourself in the wild west in the epic story of Red Dead Redemption 2. Explore vast frontier lands, hunt wild animals, and confront outlaws in this open-world adventure developed by Rockstar Games.</p>', 'ENG', '/img/Cover/Game/cover_30.jpg', '2019-11-05', 0, 1, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -695,8 +694,8 @@ INSERT INTO `game` (`id`, `title`, `subtitle`, `description`, `language`, `cover
 --
 
 CREATE TABLE `game_article` (
-  `idGame` bigint NOT NULL,
-  `idArticle` bigint NOT NULL
+  `idGame` int NOT NULL,
+  `idArticle` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
@@ -721,7 +720,7 @@ INSERT INTO `game_article` (`idGame`, `idArticle`) VALUES
 --
 
 CREATE TABLE `game_genre` (
-  `idGame` bigint NOT NULL,
+  `idGame` int NOT NULL,
   `idGenre` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
@@ -758,7 +757,7 @@ INSERT INTO `game_genre` (`idGame`, `idGenre`) VALUES
 --
 
 CREATE TABLE `game_language` (
-  `idGame` bigint NOT NULL,
+  `idGame` int NOT NULL,
   `idLanguage` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
@@ -794,7 +793,7 @@ INSERT INTO `game_language` (`idGame`, `idLanguage`) VALUES
 --
 
 CREATE TABLE `game_player_type` (
-  `idGame` bigint NOT NULL,
+  `idGame` int NOT NULL,
   `idPlayerType` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
@@ -964,7 +963,7 @@ INSERT INTO `publisher` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `user` (
-  `id` bigint NOT NULL,
+  `id` int NOT NULL,
   `username` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
@@ -979,7 +978,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `avatar`, `preferedLanguage`, `birthday`, `creationDate`) VALUES
-(13, 'Cris', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'cristicarmat2@gmail.com', '/img/Avatar/User/avatar_0.jpg', 'ENG', '1997-02-11', '20/05/2023');
+(13, 'Cris', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'cristicarmat2@gmail.com', '/img/Avatar/User/avatar_13.jpg', 'ENG', '1997-02-11', ''),
+(14, 'Lidia', '$2a$11$AJpyrieovrhGAF3fn8OfqO1okY7IgITaA.XtBItUCRrhtN6rYUh/e', 'lidia@gmail.com', '/img/Avatar/User/avatar_0.jpg', 'ESP', '1996-09-11', '27/05/2023'),
+(23, 'Kuma', 'Kumalamasguapa1+', 'kuma@gmail.com', '/img/Avatar/User/avatar_23.jpg', 'ESP', '2019-08-28', '2023-05-27');
 
 -- --------------------------------------------------------
 
@@ -988,9 +989,18 @@ INSERT INTO `user` (`id`, `username`, `password`, `email`, `avatar`, `preferedLa
 --
 
 CREATE TABLE `user_fav_game` (
-  `idUser` bigint NOT NULL,
-  `idGame` bigint NOT NULL
+  `idUser` int NOT NULL,
+  `idGame` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+
+--
+-- Dumping data for table `user_fav_game`
+--
+
+INSERT INTO `user_fav_game` (`idUser`, `idGame`) VALUES
+(13, 27),
+(13, 28),
+(13, 29);
 
 -- --------------------------------------------------------
 
@@ -999,8 +1009,8 @@ CREATE TABLE `user_fav_game` (
 --
 
 CREATE TABLE `user_score_game` (
-  `idUser` bigint NOT NULL,
-  `idGame` bigint NOT NULL,
+  `idUser` int NOT NULL,
+  `idGame` int NOT NULL,
   `score` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
@@ -2022,7 +2032,13 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (991, 'tScore', 'Score', 8, 'ENG'),
 (992, 'tScore', 'Puntuación', 8, 'ESP'),
 (993, 'tIdCategory', 'ID Category', 25, 'ENG'),
-(994, 'tIdCategory', 'ID de la Categoría', 25, 'ESP');
+(994, 'tIdCategory', 'ID de la Categoría', 25, 'ESP'),
+(995, 'fSearchPlatform', 'Platform', 8, 'ENG'),
+(996, 'fSearchPlatform', 'Plataforma', 8, 'ESP'),
+(997, 'UsernameExist', 'Username already Exist', 17, 'ENG'),
+(998, 'UsernameExist', 'El usuario ya existe', 17, 'ESP'),
+(999, 'IncorrectUsernameOrPassword', 'Incorrect Username or Password', 17, 'ENG'),
+(1000, 'IncorrectUsernameOrPassword', 'Usuario o contraseña incorrectos', 17, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -2181,7 +2197,7 @@ ALTER TABLE `web_text`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `author`
@@ -2205,7 +2221,7 @@ ALTER TABLE `dev`
 -- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `genre`
@@ -2241,13 +2257,13 @@ ALTER TABLE `publisher`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `web_text`
 --
 ALTER TABLE `web_text`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=995;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
 
 --
 -- Constraints for dumped tables

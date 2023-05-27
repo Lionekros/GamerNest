@@ -152,7 +152,7 @@
                         </div>
                         <div>
                             <label asp-for="startDate" class="required">@ViewData[ "fStartDate" ]:</label>
-                            <input required asp-for="startDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                            <input required asp-for="startDate" type="date" readonly />
                         </div>
                         <div>
                             <label asp-for="endDate">@ViewData[ "fFinishDate" ]:</label>

@@ -11,7 +11,7 @@
             <h1>Join</h1>
             <section>
                 <div class="form">
-                    <form asp-controller="User" asp-action="Join" method="post">
+                    <form asp-controller="User" asp-action="Join" method="post" enctype="multipart/form-data">
                         <partial name="_Error" />
 
                         <div>
@@ -29,6 +29,10 @@
                         <div>
                             <label asp-for="confirmPassword" class="required">Repeat Password:</label>
                             <input asp-for="confirmPassword" placeholder="Repeat Password" type="password" required />
+                        </div>
+                        <div>
+                            <label asp-for="avatar">Avatar:</label>
+                            <input asp-for="avatar" type="file" />
                         </div>
                         <div>
                             <label asp-for="preferedLanguage" class="required">Prefered Language:</label>

@@ -76,9 +76,11 @@ namespace View.Controllers
                     if ( !emailExist && !usernameExist && confirmPass )
                     {
                         CreateUserProcedure( model );
+
                         GetUser( -1, model.username );
                         int userId = lists.userList[0].id;
                         model.avatar = UploadImage( avatar, userId, "Avatar", "User", "avatar" );
+                        model.id = userId;
                         UpdateUserJoinProcedure( model, false );
 
                         GetUser(-1, model.username);

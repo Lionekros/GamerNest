@@ -104,7 +104,7 @@ namespace DBAccess
         {
             try
             {
-                if ( avatar == "" )
+                if ( string.IsNullOrEmpty(avatar) )
                 {
                     avatar = "/img/Avatar/User/Default.png";
                 }
