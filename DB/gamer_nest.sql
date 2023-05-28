@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 28, 2023 at 02:22 PM
+-- Generation Time: May 28, 2023 at 05:22 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -958,7 +958,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `avatar`, `birthday`, `preferedLanguage`, `creationDate`) VALUES
 (13, 'Cris', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'cristicarmat2@gmail.com', '/img/Avatar/User/avatar_13.jpg', NULL, 'ENG', ''),
-(14, 'Lidia', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'lidia@gmail.com', '/img/Avatar/User/avatar_0.jpg', NULL, 'ESP', '27/05/2023'),
+(14, 'Lidia', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'lidia@gmail.com', '/img/Avatar/User/avatar_0.jpg', '2023-03-22', 'ESP', '27/05/2023'),
 (26, 'Kuma', '$2a$11$rWv3S81NXwIRbZCo01ebEO6TmuNPQSCX1De2HcT0UIEN8wxEgPwI2', 'kuma@gmail.com', '/img/Avatar/User/avatar_26.jpg', NULL, 'ESP', '2023-05-28');
 
 -- --------------------------------------------------------
@@ -978,7 +978,8 @@ CREATE TABLE `user_fav_game` (
 
 INSERT INTO `user_fav_game` (`idUser`, `idGame`) VALUES
 (13, 27),
-(13, 28),
+(13, 29),
+(13, 30),
 (26, 24),
 (26, 26);
 

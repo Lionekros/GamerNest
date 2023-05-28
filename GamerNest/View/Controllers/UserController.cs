@@ -198,6 +198,7 @@ namespace View.Controllers
                 UserPageModel model = new UserPageModel();
 
                 model.preferedLanguage = lists.userList[ 0 ].preferedLanguage;
+                model.birthday = lists.userList[ 0 ].birthday;
 
                 WebText( "NormalUser" );
                 return View( "UserPage", model );
@@ -309,7 +310,7 @@ namespace View.Controllers
         {
             try
             {
-                UpdateUserModel userModel = constructModel(model, false, true);
+                UpdateUserModel userModel = constructModel(model, false, false, true);
                 UpdateUserProcedure( userModel );
 
                 return RedirectToAction( "UserPage" );

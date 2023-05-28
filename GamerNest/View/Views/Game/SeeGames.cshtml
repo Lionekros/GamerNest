@@ -15,19 +15,24 @@
                 </div>
                 <div>
                     <div class="icons">
+                        <div class="seeNews">
+                            <a class="isNotFav" asp-controller="Article" asp-action="AllArticles" asp-route-idGame="@item.id" >
+                                @ViewData[ "SeeNews" ]
+                            </a>
+                        </div>
                         @if ( ViewData[ "UserEmail" ].ToString() != "no" )
                         {
                             <div class="favButton">
                                 <div>
                                     @if ( item.isFav )
                                     {
-                                        <a class="isFav" asp-controller="Game" asp-action="GameIsNotFav" asp-route-id="@item.id" asp-route-act="SeeGame" asp-route-con="Game">
+                                        <a class="isFav" asp-controller="Game" asp-action="GameIsNotFav" asp-route-idGame="@item.id" asp-route-isSingleGame="true">
                                             <i class="fa-solid fa-heart"></i>
                                         </a>
                                     }
                                     else
                                     {
-                                        <a class="isNotFav" asp-controller="Game" asp-action="GameIsFav" asp-route-id="@item.id" asp-route-act="SeeGame" asp-route-con="Game">
+                                        <a class="isNotFav" asp-controller="Game" asp-action="GameIsFav" asp-route-idGame="@item.id" asp-route-isSingleGame="true">
                                             <i class="fa-solid fa-heart-crack"></i>
                                         </a>
                                     }
@@ -35,72 +40,69 @@
 
                             </div>
                         }
-                        <div class="seeNews">
-                            <a class="isNotFav" asp-controller="Article" asp-action="AllArticles" asp-route-idGame="@item.id" >
-                                @ViewData[ "SeeNews" ]
-                            </a>
-                        </div>
                     </div>
                     <div class="info">
                         <div class="firstRow">
-                            <h1>@item.title. @item.subtitle</h1>
+                            <h1>@item.title</h1> <h2>@item.subtitle</h2>
                         </div>
                         <hr>
-                        <div class="secondRow">
-                            <div class="secondFirstRow">
-                                <strong>@ViewData[ "ReleaseDate" ]:</strong> @item.releaseDate
-                            </div>
-                            <div class="secondSecondRow">
-                                <strong>@ViewData[ "Platform" ]:</strong> @item.platform
-                            </div>
-                        </div>
-                        <div class="thirdRow">
-                            <div class="thirdFirstRow">
-                                <strong>@ViewData[ "Developer" ]:</strong> @item.dev
-                            </div>
-                            <div class="thirdSecondRow">
-                                <strong>@ViewData[ "Publisher" ]:</strong> @item.publisher
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="fourthRow">
-                            <div class="playerTypes">
-                                <strong>@ViewData[ "PlayerType" ]:</strong>
-                                @foreach ( var item2 in Model.playerTypeList )
-                                {
-                                    @item2.name
-                                }
-                            </div>
-                        </div>
-                        <div class="fifthRow">
-                            <div class="languages">
-                                <strong>@ViewData[ "Language" ]:</strong>
-                                @foreach ( var item2 in Model.languageList )
-                                {
-                                    @item2.name
-                                }
-                            </div>
-                        </div>
-                        <div class="sixthRow">
-                            <div class="genres">
-                                <strong>@ViewData[ "Genre" ]:</strong>
-                                @foreach ( var item2 in Model.genreList )
-                                {
-                                    @item2.name
-                                }
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="seventhRow">
-                            <div class="description">
-                                <div class="title">
-
+                        <div class="info2">
+                            <div class="div1">
+                                <div class="secondRow">
+                                    <div class="secondFirstRow">
+                                        <strong>@ViewData[ "ReleaseDate" ]:</strong> @item.releaseDate
+                                    </div>
+                                    <div class="secondSecondRow">
+                                        <strong>@ViewData[ "Platform" ]:</strong> @item.platform
+                                    </div>
                                 </div>
-                                <div class="desc">
-                                    @Html.Raw(item.description)
+                                <div class="thirdRow">
+                                    <div class="thirdFirstRow">
+                                        <strong>@ViewData[ "Developer" ]:</strong> @item.dev
+                                    </div>
+                                    <div class="thirdSecondRow">
+                                        <strong>@ViewData[ "Publisher" ]:</strong> @item.publisher
+                                    </div>
                                 </div>
                             </div>
+                            <div class ="div2">
+                                <div class="fourthRow">
+                                    <div class="playerTypes">
+                                        <strong>@ViewData[ "PlayerType" ]:</strong>
+                                        @foreach ( var item2 in Model.playerTypeList )
+                                        {
+                                            <span>@item2.name</span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="fifthRow">
+                                    <div class="languages">
+                                        <strong>@ViewData[ "Language" ]:</strong>
+                                        @foreach ( var item2 in Model.languageList )
+                                        {
+                                            <span>@item2.name</span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="sixthRow">
+                                    <div class="genres">
+                                        <strong>@ViewData[ "Genre" ]:</strong>
+                                        @foreach ( var item2 in Model.genreList )
+                                        {
+                                            <span>@item2.name</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="seventhRow">
+                                <div class="description">
+                                    <div class="desc">
+                                        @Html.Raw(item.description)
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        
                     </div>
                 </div>
                 

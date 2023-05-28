@@ -133,32 +133,40 @@ namespace View.Controllers
             }
         }
 
-        public ActionResult GameIsFav(int idGame, string act, string con, bool isSingleGame = false)
+        public ActionResult GameIsFav(int idGame, bool isSingleGame = false, bool isFav = false)
         {
             GameService.CreateFav( int.Parse( HttpContext.Session.GetString( "UserID" ) ), idGame );
 
             if ( isSingleGame )
             {
-                return RedirectToAction( act, con, idGame );
+                return RedirectToAction( "SeeGame", new { id = idGame } );
+            }
+            else if ( isFav )
+            {
+                return RedirectToAction( "FavGames" );
             }
             else
             {
-                return RedirectToAction( act );
+                return RedirectToAction( "AllGames" );
             }
 
         }
 
-        public ActionResult GameIsNotFav(int idGame, string act, string con, bool isSingleGame = false)
+        public ActionResult GameIsNotFav(int idGame, bool isSingleGame = false, bool isFav = false)
         {
             GameService.DeleteFav( int.Parse( HttpContext.Session.GetString( "UserID" ) ), idGame );
 
             if ( isSingleGame )
             {
-                return RedirectToAction( act, con, idGame );
+                return RedirectToAction( "SeeGame", new { id = idGame } );
+            }
+            else if (isFav)
+            {
+                return RedirectToAction( "FavGames" );
             }
             else
             {
-                return RedirectToAction( act );
+                return RedirectToAction("AllGames");
             }
         }
 

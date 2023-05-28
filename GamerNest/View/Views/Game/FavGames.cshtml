@@ -80,13 +80,13 @@
                             <div>
                                 @if ( item.isFav )
                                 {
-                                    <a class="isFav" asp-controller="Game" asp-action="GameIsNotFav" asp-route-idGame="@item.id" asp-route-act="FavGames" asp-route-con="Game">
+                                    <a class="isFav" asp-controller="Game" asp-action="GameIsNotFav" asp-route-idGame="@item.id" asp-route-isFav="true">
                                         <i class="fa-solid fa-heart"></i>
                                     </a>
                                 }
                                 else
                                 {
-                                    <a class="isNotFav" asp-controller="Game" asp-action="GameIsFav" asp-route-idGame="@item.id" asp-route-act="FavGames" asp-route-con="Game">
+                                    <a class="isNotFav" asp-controller="Game" asp-action="GameIsFav" asp-route-idGame="@item.id" asp-route-isFav="true">
                                         <i class="fa-solid fa-heart-crack"></i>
                                     </a>
                                 }
