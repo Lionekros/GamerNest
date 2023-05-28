@@ -21,13 +21,16 @@
             <section class="firstRow">
                 <div class="seeFav">
                     <h3>@ViewData[ "SeeFav" ]</h3>
-                    <a asp-controller="Game" asp-action="FavGames">
-                        @ViewData[ "SeeFav" ]
-                    </a>
+                    <div>
+                        <a asp-controller="Game" asp-action="FavGames">
+                            @ViewData[ "SeeFav" ]
+                        </a>
+                    </div>
+                    
                 </div>
                 <div class="changeAvatar">
                     <h3>@ViewData[ "ChangeAvatar" ]</h3>
-                    <form asp-controller="User" asp-action="ChangeAvatar" method="post" enctype="multipart/form-data">
+                    <form class="formUserPage" asp-controller="User" asp-action="ChangeAvatar" method="post" enctype="multipart/form class="formUserPage"-data">
                         <div>
                             <label asp-for="avatar">@ViewData[ "ChangeAvatar" ]:</label>
                             <input asp-for="avatar" type="file" />
@@ -36,11 +39,10 @@
                      </form>
                 </div>
             </section>
-            <hr />
             <section class="secondRow">
                 <div class="changePreferedLanguage">
                     <h3>@ViewData[ "ChangePreferedLanguage" ]</h3>
-                    <form asp-controller="User" asp-action="ChangePreferedLanguage" method="post">
+                    <form class="formUserPage" asp-controller="User" asp-action="ChangePreferedLanguage" method="post">
                         <div>
                             <label asp-for="preferedLanguage">@ViewData[ "ChangePreferedLanguage" ]:</label>
                             <select asp-for="preferedLanguage">
@@ -53,7 +55,7 @@
                 </div>
                 <div class="changeBirthday">
                     <h3>@ViewData[ "ChangeBirthday" ]</h3>
-                    <form asp-controller="User" asp-action="ChangeBirthday" method="post">
+                    <form class="formUserPage" asp-controller="User" asp-action="ChangeBirthday" method="post">
                         <div>
                             <label asp-for="birthday">@ViewData[ "ChangeBirthday" ]:</label>
                             <input asp-for="birthday" type="date" />
@@ -63,7 +65,7 @@
                 </div>
                 <div class="changePassword">
                     <h3>@ViewData[ "ChangePassword" ]</h3>
-                    <form asp-controller="User" asp-action="ChangePassword" method="post" enctype="multipart/form-data">
+                    <form class="formUserPage" asp-controller="User" asp-action="ChangePassword" method="post" enctype="multipart/form class="formUserPage"-data">
                         <div>
                             <label asp-for="oldPassword" class="required">@ViewData[ "OldPassword" ]:</label>
                             <input asp-for="oldPassword" placeholder="@ViewData[ "OldPassword" ]" type="password" />
@@ -80,13 +82,15 @@
                     </form>
                 </div>
             </section>
-            <hr />
             <section class="thirdRow">
                 <div class="deleteUser">
                     <h3>@ViewData[ "DeleteUser" ]</h3>
-                    <a asp-controller="User" asp-action="DeleteUser">
-                        @ViewData[ "DeleteUser" ]
-                    </a>
+                    <div>
+                        <a asp-controller="User" asp-action="DeleteUser">
+                            @ViewData[ "DeleteUser" ]
+                        </a>
+                    </div>
+                    
                 </div>
             </section>
             

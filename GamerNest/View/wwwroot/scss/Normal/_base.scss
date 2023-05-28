@@ -1,4 +1,4 @@
-@import '_normalMenu.scss', '_articleIndex.scss', '_allGames.scss', '_userJoin.scss', '_userpage.scss', '_footer.scss';
+@import '_normalMenu.scss', '_articleIndex.scss', '_allGames.scss', '_userJoin.scss', '_userpage.scss', '_footer.scss', '_gameFile.scss';
 
 .home-user
 {
@@ -25,12 +25,12 @@
 
         h3
         {
-            padding: 1rem 0rem;
+            padding: 2rem 2rem;
             text-align: center;
-            background-color: $terciary;
-            -webkit-border-radius: 2.5rem;
-            -moz-border-radius: 2.5rem;
-            border-radius: 2.5rem;
+            text-transform: uppercase;
+            margin-top: 2rem;
+            background-color: $secondary;
+
         }
     }
 }

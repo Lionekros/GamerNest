@@ -42,6 +42,11 @@
         .fi-es
         {
             margin-left: 1rem;
+
+            &:hover
+            {
+                background-color: darken($terciary, 10%)
+            }
         }
     }
 
@@ -62,16 +67,21 @@
             margin-right: 1.5rem;
             font-size: 2rem;
             font-weight: bold;
-        }
 
-        &:hover
-        {
-            color: darken($primary, 10%);
+            &:hover
+            {
+                color: darken($primary, 10%)
+            }
         }
 
         .login, .closeSession
         {
             color: $light;
+
+            &:hover
+            {
+                color: darken($light, 20%);
+            }
         }
 
 
@@ -80,10 +90,7 @@
             margin-right: 1.5rem;
         }
 
-        &:hover
-        {
-            color: darken($light, 10%);
-        }
+
 
         .avatar
         {

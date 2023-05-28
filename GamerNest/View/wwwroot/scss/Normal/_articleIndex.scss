@@ -26,7 +26,7 @@
 
         &:hover
         {
-            background-color: lighter($terciary);
+            background-color: darken($terciary, 10%)
         }
 
         .card
@@ -60,7 +60,5 @@
                 font-size: 1rem;
             }
         }
-
-        
     }
 }

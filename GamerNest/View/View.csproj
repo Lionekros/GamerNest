@@ -28,6 +28,7 @@
 	  <Content Remove="wwwroot\scss\Normal\_articleIndex.scss" />
 	  <Content Remove="wwwroot\scss\Normal\_base.scss" />
 	  <Content Remove="wwwroot\scss\Normal\_footer.scss" />
+	  <Content Remove="wwwroot\scss\Normal\_gameFile.scss" />
 	  <Content Remove="wwwroot\scss\Normal\_normalMenu.scss" />
 	  <Content Remove="wwwroot\scss\Normal\_userJoin.scss" />
 	  <Content Remove="wwwroot\scss\Normal\_userpage.scss" />
@@ -47,6 +48,7 @@
 	  <SassFile Remove="wwwroot\scss\Normal\_articleIndex.scss" />
 	  <SassFile Remove="wwwroot\scss\Normal\_base.scss" />
 	  <SassFile Remove="wwwroot\scss\Normal\_footer.scss" />
+	  <SassFile Remove="wwwroot\scss\Normal\_gameFile.scss" />
 	  <SassFile Remove="wwwroot\scss\Normal\_normalMenu.scss" />
 	  <SassFile Remove="wwwroot\scss\Normal\_userJoin.scss" />
 	  <SassFile Remove="wwwroot\scss\Normal\_userpage.scss" />
@@ -71,6 +73,7 @@
 	  <None Include="wwwroot\scss\Normal\_footer.scss" />
 	  <None Include="wwwroot\scss\Normal\_normalMenu.scss" />
 	  <None Include="wwwroot\scss\Normal\_userJoin.scss" />
+	  <None Include="wwwroot\scss\Normal\_gameFile.scss" />
 	  <None Include="wwwroot\scss\Normal\_userpage.scss" />
 	  <None Include="wwwroot\scss\utilities\_mixins.scss" />
 	  <None Include="wwwroot\scss\Utilities\_pagination.scss" />

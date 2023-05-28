@@ -1497,6 +1497,9 @@ a {
 .normalMenu .flags .fi-es {
   margin-left: 1rem;
 }
+.normalMenu .flags .fi-es:hover {
+  background-color: #3c3c3c;
+}
 .normalMenu .userSession {
   display: flex;
   align-items: center;
@@ -1511,17 +1514,17 @@ a {
   font-size: 2rem;
   font-weight: bold;
 }
-.normalMenu .userSession:hover {
+.normalMenu .userSession .join:hover {
   color: #cc8e00;
 }
 .normalMenu .userSession .login, .normalMenu .userSession .closeSession {
   color: #FCFCFC;
 }
+.normalMenu .userSession .login:hover, .normalMenu .userSession .closeSession:hover {
+  color: #c9c9c9;
+}
 .normalMenu .userSession .closeSession {
   margin-right: 1.5rem;
-}
-.normalMenu .userSession:hover {
-  color: #e3e3e3;
 }
 .normalMenu .userSession .avatar img {
   max-width: 5rem;
@@ -1692,7 +1695,7 @@ a {
   margin-top: 2rem;
 }
 .news a:hover {
-  background-color: lighter(#555555);
+  background-color: #3c3c3c;
 }
 .news a .card {
   display: flex;
@@ -1737,7 +1740,7 @@ a {
   margin-top: 2rem;
 }
 .AllGames div .aGame:hover {
-  background-color: lighter(#555555);
+  background-color: #3c3c3c;
 }
 .AllGames div .aGame .cardGame {
   display: flex;
@@ -1796,6 +1799,9 @@ a {
   border-radius: 1rem;
   border: 1px solid #FCFCFC;
   font-size: 2.3rem;
+}
+.AllGames div .favButton div .isFav:hover, .AllGames div .favButton div .isNotFav:hover {
+  background-color: #030303;
 }
 .AllGames div .favButton div .isFav {
   color: #FFB100;
@@ -1962,6 +1968,164 @@ a {
   --primary-color: red;
 }
 
+.userpageConfig {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userpageConfig .firstRow {
+  border-bottom: 2px solid #FCFCFC;
+}
+.userpageConfig .firstRow .seeFav div {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.userpageConfig .firstRow .seeFav div a {
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #FFB100;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .userpageConfig .firstRow .seeFav div a {
+    display: block;
+    width: 100%;
+  }
+}
+.userpageConfig .firstRow .seeFav div a:hover {
+  background-color: #e69f00;
+  color: #efefef;
+}
+.userpageConfig .secondRow {
+  border-bottom: 2px solid #FCFCFC;
+}
+.userpageConfig .thirdRow .deleteUser div {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.userpageConfig .thirdRow .deleteUser div a {
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #a94442;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .userpageConfig .thirdRow .deleteUser div a {
+    display: block;
+    width: 100%;
+  }
+}
+.userpageConfig .thirdRow .deleteUser div a:hover {
+  background-color: #973d3b;
+  color: #efefef;
+}
+
+.formUserPage {
+  margin-top: 1rem;
+}
+.formUserPage label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #FFB100;
+}
+.formUserPage input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 1rem;
+  border: 1px solid #292929;
+  margin-bottom: 2rem;
+  background-color: #FCFCFC;
+  color: #292929;
+}
+.formUserPage select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 1rem;
+  border: 1px solid #292929;
+  margin-bottom: 2rem;
+  background-color: #FCFCFC;
+  color: #292929;
+}
+.formUserPage .normalSelect {
+  font-family: Quantico, "sans-serif";
+  color: #292929;
+}
+.formUserPage .redSelect {
+  font-family: "FontAwesome", "sans-serif";
+  color: #a94442;
+}
+.formUserPage .greenSelect {
+  font-family: "FontAwesome", "sans-serif";
+  color: #3c763d;
+}
+.formUserPage .error {
+  color: #FFB100;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  background-color: #555555;
+  margin-bottom: 1rem;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  list-style: none;
+}
+.formUserPage .mainButton {
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #555555;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  z-index: 1;
+  overflow: hidden;
+  text-shadow: -1px -1px 0 #1C1C1C, 1px -1px 0 #1C1C1C, -1px 1px 0 #1C1C1C, 1px 1px 0 #1C1C1C;
+  margin-left: auto;
+  margin-bottom: 1rem;
+}
+@media (max-width: 767px) {
+  .formUserPage .mainButton {
+    display: block;
+    width: 100%;
+  }
+}
+.formUserPage .mainButton:hover {
+  background-color: #484848;
+  color: #efefef;
+}
+
 :root {
   --primary-color: red;
 }
@@ -1990,6 +2154,14 @@ a {
   font-size: 1.2rem;
 }
 
+:root {
+  --primary-color: red;
+}
+
+:root {
+  --primary-color: red;
+}
+
 .home-user {
   font-size: 1.5rem;
 }
@@ -2008,12 +2180,11 @@ a {
   text-align: center;
 }
 .home-user .text h3 {
-  padding: 1rem 0rem;
+  padding: 2rem 2rem;
   text-align: center;
-  background-color: #555555;
-  -webkit-border-radius: 2.5rem;
-  -moz-border-radius: 2.5rem;
-  border-radius: 2.5rem;
+  text-transform: uppercase;
+  margin-top: 2rem;
+  background-color: #1C1C1C;
 }
 
 html {

@@ -1,0 +1,111 @@
+﻿@import '../Utilities/_variables.scss', '../Utilities/_mixins.scss';
+
+.gameFile
+{
+    .img
+    {
+        img
+        {
+        }
+    }
+
+    .icons
+    {
+        .favButton
+        {
+            div
+            {
+                .isFav
+                {
+                }
+
+                .isNotFav
+                {
+                }
+            }
+        }
+
+        .seeNews
+        {
+        }
+    }
+
+    .info
+    {
+        .firstRow
+        {
+            h1
+            {
+            }
+        }
+
+        hr
+        {
+        }
+
+        .secondRow
+        {
+            .secondFirstRow
+            {
+            }
+
+            .secondSecondRow
+            {
+            }
+        }
+
+        .thirdRow
+        {
+            .thirdFirstRow
+            {
+            }
+
+            .thirdSecondRow
+            {
+            }
+        }
+
+        hr
+        {
+        }
+
+        .fourthRow
+        {
+            .playerTypes
+            {
+            }
+        }
+
+        .fifthRow
+        {
+            .languages
+            {
+            }
+        }
+
+        .sixthRow
+        {
+            .genres
+            {
+            }
+        }
+
+        hr
+        {
+        }
+
+        .seventhRow
+        {
+            .description
+            {
+                .title
+                {
+                }
+
+                .desc
+                {
+                }
+            }
+        }
+    }
+}
