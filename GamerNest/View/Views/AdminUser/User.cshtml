@@ -72,7 +72,6 @@
                             <th>@ViewData[ "tBirthday" ]</th>
                             <th>@ViewData[ "tCreationDate" ]</th>
                             <th>@ViewData[ "tFavGame" ]</th>
-                            <th>@ViewData[ "tScoredGame" ]</th>
                         </tr>
                         @foreach ( var item in Model.userList )
                         {
@@ -119,12 +118,6 @@
                                 <td>
                                     <!-- Fav Games -->
                                     <a asp-controller="AdminGame" asp-action="Games" asp-route-user="@item.username">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <!-- Scored Games -->
-                                    <a asp-controller="AdminGame" asp-action="Games" asp-route-user="@item.username" asp-route-scored="true">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                 </td>

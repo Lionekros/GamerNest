@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 27, 2023 at 07:00 PM
+-- Generation Time: May 28, 2023 at 02:07 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -26,32 +26,26 @@ DELIMITER $$
 -- Procedures
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateArticle` (IN `pHeadline` VARCHAR(255), IN `pSummary` TEXT, IN `pBody` MEDIUMTEXT, IN `pCover` VARCHAR(255), IN `pIsPublished` TINYINT, IN `pCreatedDate` VARCHAR(19), IN `pUpdatedDate` VARCHAR(19), IN `pIdAuthor` INT, IN `pLanguage` CHAR(3), IN `pIdGame` TEXT)   BEGIN
-  -- Drop the temporary table if it already exists
+
   DROP TEMPORARY TABLE IF EXISTS temp_game_ids;
   
-  -- Create a temporary table to store the list of game ids
   CREATE TEMPORARY TABLE temp_game_ids (
     id INT NOT NULL
   );
   
-  -- Insert the game ids into the temporary table
   SET @sql = CONCAT('INSERT INTO temp_game_ids (id) VALUES (', REPLACE(pIdGame, ',', '), ('), ')');
   PREPARE stmt FROM @sql;
   EXECUTE stmt;
   
-  -- Insert the article into the article table
   INSERT INTO article(headline, summary, body, cover, isPublished, createdDate, updatedDate, idAuthor, language)
   VALUES (pHeadline, pSummary, pBody, pCover, pIsPublished, pCreatedDate, pUpdatedDate, pIdAuthor, pLanguage);
   
-  -- Get the id of the newly inserted article
   SET @article_id = LAST_INSERT_ID();
   
-  -- Insert the game-article associations into the game_article table
   INSERT INTO game_article(idArticle, idGame)
   SELECT @article_id, id
   FROM temp_game_ids;
   
-  -- Drop the temporary table
   DROP TEMPORARY TABLE IF EXISTS temp_game_ids;
 END$$
 
@@ -101,13 +95,17 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateDev` (IN `pName` VARCHAR(45))
   VALUES (pName);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateGame` (IN `pTitle` VARCHAR(255), IN `pSubtitle` VARCHAR(255), IN `pDescription` TEXT, IN `pLanguage` CHAR(3), IN `pCover` VARCHAR(255), IN `pReleaseDate` VARCHAR(10), IN `pTotalScore` TINYINT, IN `pIsFav` TINYINT, IN `pIdDev` INT, IN `pIdPlatform` INT, IN `pIdPublisher` INT, IN `pIdGenre` TEXT, IN `pIdPlayerType` TEXT, IN `pIdLanguage` TEXT)   BEGIN
-  -- Drop the temporary tables if they already exist
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateFav` (IN `pIdUser` INT, IN `pIdGame` INT)   BEGIN
+  INSERT INTO user_fav_game (idUser, idGame)
+  VALUES (pIdUser, pIdGame);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateGame` (IN `pTitle` VARCHAR(255), IN `pSubtitle` VARCHAR(255), IN `pDescription` TEXT, IN `pLanguage` CHAR(3), IN `pCover` VARCHAR(255), IN `pReleaseDate` VARCHAR(10), IN `pIsFav` TINYINT, IN `pIdDev` INT, IN `pIdPlatform` INT, IN `pIdPublisher` INT, IN `pIdGenre` TEXT, IN `pIdPlayerType` TEXT, IN `pIdLanguage` TEXT)   begin
+	
   DROP TEMPORARY TABLE IF EXISTS temp_genre_ids;
   DROP TEMPORARY TABLE IF EXISTS temp_player_type_ids;
   DROP TEMPORARY TABLE IF EXISTS temp_language_ids;
   
-  -- Create temporary tables to store the list of genre, player type, and language ids
   CREATE TEMPORARY TABLE temp_genre_ids (
     id INT NOT NULL
   );
@@ -120,44 +118,35 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateGame` (IN `pTitle` VARCHAR(25
     id INT NOT NULL
   );
   
-  -- Insert the genre ids into the temporary table
   SET @genre_sql = CONCAT('INSERT INTO temp_genre_ids (id) VALUES (', REPLACE(pIdGenre, ',', '), ('), ')');
   PREPARE genre_stmt FROM @genre_sql;
   EXECUTE genre_stmt;
   
-  -- Insert the player type ids into the temporary table
   SET @player_type_sql = CONCAT('INSERT INTO temp_player_type_ids (id) VALUES (', REPLACE(pIdPlayerType, ',', '), ('), ')');
   PREPARE player_type_stmt FROM @player_type_sql;
   EXECUTE player_type_stmt;
   
-  -- Insert the language ids into the temporary table
   SET @language_sql = CONCAT('INSERT INTO temp_language_ids (id) VALUES (', REPLACE(pIdLanguage, ',', '), ('), ')');
   PREPARE language_stmt FROM @language_sql;
   EXECUTE language_stmt;
   
-  -- Insert the game into the game table
-  INSERT INTO game(title, subtitle, description, language, cover, releaseDate, totalScore, isFav, idDev, idPlatform, idPublisher)
-  VALUES (pTitle, pSubtitle, pDescription, pLanguage, pCover, pReleaseDate, pTotalScore, pIsFav, pIdDev, pIdPlatform, pIdPublisher);
+  INSERT INTO game(title, subtitle, description, language, cover, releaseDate, isFav, idDev, idPlatform, idPublisher)
+  VALUES (pTitle, pSubtitle, pDescription, pLanguage, pCover, pReleaseDate, pIsFav, pIdDev, pIdPlatform, pIdPublisher);
   
-  -- Get the id of the newly inserted game
   SET @game_id = LAST_INSERT_ID();
   
-  -- Insert the genre-game associations into the game_genre table
   INSERT INTO game_genre(idGame, idGenre)
   SELECT @game_id, id
   FROM temp_genre_ids;
   
-  -- Insert the player type-game associations into the game_player_type table
   INSERT INTO game_player_type(idGame, idPlayerType)
   SELECT @game_id, id
   FROM temp_player_type_ids;
   
-  -- Insert the language-game associations into the game_language table
   INSERT INTO game_language(idGame, idLanguage)
   SELECT @game_id, id
   FROM temp_language_ids;
   
-  -- Drop the temporary tables
   DROP TEMPORARY TABLE IF EXISTS temp_genre_ids;
   DROP TEMPORARY TABLE IF EXISTS temp_player_type_ids;
   DROP TEMPORARY TABLE IF EXISTS temp_language_ids;
@@ -188,13 +177,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreatePublisher` (IN `pName` VARCHA
   VALUES (pName);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateUser` (IN `pUsername` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pCreationDate` VARCHAR(10))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateUser` (IN `pUsername` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pBirthday` VARCHAR(10), IN `pCreationDate` VARCHAR(10))   BEGIN
     INSERT INTO `user` (
         `username`,
         `password`,
         `email`,
         `avatar`,
         `preferedLanguage`,
+        `birthday`,
         `creationDate`
     ) VALUES (
         pUsername,
@@ -202,6 +192,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateUser` (IN `pUsername` VARCHAR
         pEmail,
         pAvatar,
         pPreferedLanguage,
+        pBirthday,
         pCreationDate
     );
 END$$
@@ -233,6 +224,11 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteDev` (IN `pId` INT)   BEGIN
   DELETE FROM `dev`
   WHERE `id` = pId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteFav` (IN `pIdUser` INT, IN `pIdGame` INT)   BEGIN
+  DELETE FROM user_fav_game
+  WHERE idUser = pIdUser AND idGame = pIdGame;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteGame` (IN `pId` INT)   BEGIN
@@ -290,7 +286,6 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateArticle` (IN `pId` INT, IN `pHeadline` VARCHAR(255), IN `pSummary` TEXT, IN `pBody` MEDIUMTEXT, IN `pCover` VARCHAR(255), IN `pIsPublished` TINYINT, IN `pCreatedDate` VARCHAR(19), IN `pUpdatedDate` VARCHAR(19), IN `pIdAuthor` INT, IN `pLanguage` CHAR(3), IN `pIdGame` TEXT)   BEGIN
   
-  -- Update the article in the article table
   UPDATE article
   SET 
     headline = pHeadline,
@@ -304,28 +299,22 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateArticle` (IN `pId` INT, IN `p
      `cover` = IFNULL(NULLIF(pCover, ''), `cover`)
   WHERE id = pId;
   
-  -- Delete all game-article associations for the given article
   DELETE FROM game_article WHERE idArticle = pId;
   
-  -- Drop the temporary table if it already exists
   DROP TEMPORARY TABLE IF EXISTS temp_game_ids;
   
-  -- Create a temporary table to store the list of game ids
   CREATE TEMPORARY TABLE temp_game_ids (
     id INT NOT NULL
   );
   
-  -- Insert the game ids into the temporary table
   SET @sql = CONCAT('INSERT INTO temp_game_ids (id) VALUES (', REPLACE(pIdGame, ',', '), ('), ')');
   PREPARE stmt FROM @sql;
   EXECUTE stmt;
   
-  -- Insert the game-article associations into the game_article table
   INSERT INTO game_article(idArticle, idGame)
   SELECT pId, id
   FROM temp_game_ids;
   
-  -- Drop the temporary table
   DROP TEMPORARY TABLE IF EXISTS temp_game_ids;
 END$$
 
@@ -361,9 +350,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateDev` (IN `pId` INT, IN `pName
   WHERE `id` = pId;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateGame` (IN `pId` INT, IN `pTitle` VARCHAR(255), IN `pSubtitle` VARCHAR(255), IN `pDescription` TEXT, IN `pLanguage` CHAR(3), IN `pCover` VARCHAR(255), IN `pReleaseDate` VARCHAR(10), IN `pTotalScore` TINYINT, IN `pIsFav` TINYINT, IN `pIdDev` INT, IN `pIdPlatform` INT, IN `pIdPublisher` INT, IN `pIdGenre` TEXT, IN `pIdPlayerType` TEXT, IN `pIdLanguage` TEXT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateGame` (IN `pId` INT, IN `pTitle` VARCHAR(255), IN `pSubtitle` VARCHAR(255), IN `pDescription` TEXT, IN `pLanguage` CHAR(3), IN `pCover` VARCHAR(255), IN `pReleaseDate` VARCHAR(10), IN `pIsFav` TINYINT, IN `pIdDev` INT, IN `pIdPlatform` INT, IN `pIdPublisher` INT, IN `pIdGenre` TEXT, IN `pIdPlayerType` TEXT, IN `pIdLanguage` TEXT)   BEGIN
   
-  -- Update the article in the article table
   UPDATE `game`
 SET `title` = pTitle,
     `subtitle` = pSubtitle,
@@ -371,7 +359,6 @@ SET `title` = pTitle,
     `language` = pLanguage,
     `cover` = pCover,
     `releaseDate` = pReleaseDate,
-    `totalScore` = pTotalScore,
     `isFav` = pIsFav,
     `idDev` = pIdDev,
     `idPlatform` = pIdPlatform,
@@ -379,7 +366,6 @@ SET `title` = pTitle,
 WHERE `id` = pId;
 
   
-  -- Delete all game-article associations for the given article
   DELETE FROM game_genre WHERE idGame = pId;
   DELETE FROM game_player_type WHERE idGame = pId;
   DELETE FROM game_language WHERE idGame = pId;
@@ -388,7 +374,6 @@ DROP TEMPORARY TABLE IF EXISTS temp_genre_ids;
   DROP TEMPORARY TABLE IF EXISTS temp_player_type_ids;
   DROP TEMPORARY TABLE IF EXISTS temp_language_ids;
   
-  -- Create temporary tables to store the list of genre, player type, and language ids
   CREATE TEMPORARY TABLE temp_genre_ids (
     id INT NOT NULL
   );
@@ -402,17 +387,14 @@ DROP TEMPORARY TABLE IF EXISTS temp_genre_ids;
   );
   
   
-  -- Insert the genre ids into the temporary table
   SET @genre_sql = CONCAT('INSERT INTO temp_genre_ids (id) VALUES (', REPLACE(pIdGenre, ',', '), ('), ')');
   PREPARE genre_stmt FROM @genre_sql;
   EXECUTE genre_stmt;
-  
-  -- Insert the player type ids into the temporary table
+ 
   SET @player_type_sql = CONCAT('INSERT INTO temp_player_type_ids (id) VALUES (', REPLACE(pIdPlayerType, ',', '), ('), ')');
   PREPARE player_type_stmt FROM @player_type_sql;
   EXECUTE player_type_stmt;
   
-  -- Insert the language ids into the temporary table
   SET @language_sql = CONCAT('INSERT INTO temp_language_ids (id) VALUES (', REPLACE(pIdLanguage, ',', '), ('), ')');
   PREPARE language_stmt FROM @language_sql;
   EXECUTE language_stmt;
@@ -421,17 +403,14 @@ DROP TEMPORARY TABLE IF EXISTS temp_genre_ids;
   SELECT pId, id
   FROM temp_genre_ids;
   
-  -- Insert the player type-game associations into the game_player_type table
   INSERT INTO game_player_type(idGame, idPlayerType)
   SELECT pId, id
   FROM temp_player_type_ids;
   
-  -- Insert the language-game associations into the game_language table
   INSERT INTO game_language(idGame, idLanguage)
   SELECT pId, id
   FROM temp_language_ids;
   
-  -- Drop the temporary tables
   DROP TEMPORARY TABLE IF EXISTS temp_genre_ids;
   DROP TEMPORARY TABLE IF EXISTS temp_player_type_ids;
   DROP TEMPORARY TABLE IF EXISTS temp_language_ids;
@@ -471,7 +450,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdatePublisher` (IN `pId` INT, IN 
   WHERE `id` = pId;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateUser` (IN `pId` INT, IN `pUsername` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pCreationDate` VARCHAR(10))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateUser` (IN `pId` INT, IN `pUsername` VARCHAR(45), IN `pPassword` VARCHAR(255), IN `pEmail` VARCHAR(255), IN `pAvatar` VARCHAR(255), IN `pPreferedLanguage` CHAR(3), IN `pBirthday` VARCHAR(10), IN `pCreationDate` VARCHAR(10))   BEGIN
     UPDATE `user`
     SET
         `username` = pUsername,
@@ -479,6 +458,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateUser` (IN `pId` INT, IN `pUse
         `email` = pEmail,
         `avatar` = IFNULL(NULLIF(pAvatar, ''), `avatar`),
         `preferedLanguage` = pPreferedLanguage,
+        `birthday` = pBirthday,
         `creationDate` = pCreationDate
     WHERE
         `id` = pId;
@@ -663,7 +643,6 @@ CREATE TABLE `game` (
   `language` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `cover` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT '/img/Cover/Game/Default.png',
   `releaseDate` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
-  `totalScore` tinyint NOT NULL DEFAULT '0',
   `idDev` int NOT NULL,
   `idPlatform` int NOT NULL,
   `idPublisher` int NOT NULL
@@ -673,16 +652,16 @@ CREATE TABLE `game` (
 -- Dumping data for table `game`
 --
 
-INSERT INTO `game` (`id`, `title`, `subtitle`, `description`, `language`, `cover`, `releaseDate`, `totalScore`, `idDev`, `idPlatform`, `idPublisher`) VALUES
-(22, 'Overlord 2', NULL, '<p>Segunda entrega de este original juego de estrategia, en la que encarnaremos a un nuevo protagonista que se enfrenta a una suerte de imperio romano que tiene las intenciones de arrasar con toda la magia del mundo.</p>', 'ESP', '/img/Cover/Game/cover_22.jpg', '2023-05-20', 0, 21, 6, 3),
-(23, 'The Witcher 3', 'Wild Hunt', '<p>Emb&aacute;rcate en una &eacute;pica cacer&iacute;a de monstruos en el vasto mundo abierto de The Witcher 3. Explora tierras peligrosas, toma decisiones dif&iacute;ciles y enfr&eacute;ntate a bestias sobrenaturales en esta aventura de rol aclamada por la cr&iacute;tica.</p>', 'ESP', '/img/Cover/Game/cover_23.jpg', '2015-05-19', 0, 6, 6, 4),
-(24, 'Grand Theft Auto V', NULL, '<p>&Uacute;nete a los bajos fondos de Los Santos y vive una vida de crimen en el mundo abierto de Grand Theft Auto V. Roba coches, planea atracos y enfr&eacute;ntate a peligrosos enemigos en esta aventura de acci&oacute;n y delincuencia.</p>', 'ESP', '/img/Cover/Game/cover_24.jpg', '2015-04-14', 0, 1, 6, 1),
-(25, 'The Legend of Zelda', 'Breath of the Wild', '<p>Emb&aacute;rcate en una aventura legendaria en el vasto reino de Hyrule en The Legend of Zelda: Breath of the Wild. Explora un mundo abierto lleno de misterios, resuelve acertijos y enfr&eacute;ntate a criaturas ancestrales en esta aclamada entrega de la saga.</p>', 'ESP', '/img/Cover/Game/cover_25.jpg', '2017-03-03', 0, 10, 3, 5),
-(26, 'Red Dead Redemption 2', NULL, '<p>Sum&eacute;rgete en el salvaje oeste en la &eacute;pica historia de Red Dead Redemption 2. Explora vastas tierras fronterizas, caza animales salvajes y enfr&eacute;ntate a forajidos en esta aventura de mundo abierto desarrollada por Rockstar Games.</p>', 'ESP', '/img/Cover/Game/cover_26.jpg', '2019-11-05', 0, 1, 6, 1),
-(27, 'The Witcher 3', 'Wild Hunt', '<p>Embark on an epic monster hunt in the vast open world of The Witcher 3. Explore dangerous lands, make difficult choices, and face supernatural beasts in this critically acclaimed role-playing adventure.</p>', 'ENG', '/img/Cover/Game/cover_27.jpg', '2015-05-19', 0, 6, 6, 4),
-(28, 'Grand Theft Auto V', NULL, '<p>Join the criminal underworld of Los Santos and live a life of crime in the open world of Grand Theft Auto V. Steal cars, plan heists, and confront dangerous enemies in this action-packed adventure.</p>', 'ENG', '/img/Cover/Game/cover_28.jpg', '2015-04-14', 0, 1, 6, 1),
-(29, 'The Legend of Zelda', 'Breath of the Wild', '<p>Embark on a legendary adventure in the vast kingdom of Hyrule in The Legend of Zelda: Breath of the Wild. Explore an open world full of mysteries, solve puzzles, and face ancient creatures in this critically acclaimed installment of the saga.</p>', 'ENG', '/img/Cover/Game/cover_25.jpg', '2017-03-03', 0, 10, 3, 5),
-(30, 'Red Dead Redemption 2', NULL, '<p>Immerse yourself in the wild west in the epic story of Red Dead Redemption 2. Explore vast frontier lands, hunt wild animals, and confront outlaws in this open-world adventure developed by Rockstar Games.</p>', 'ENG', '/img/Cover/Game/cover_30.jpg', '2019-11-05', 0, 1, 6, 1);
+INSERT INTO `game` (`id`, `title`, `subtitle`, `description`, `language`, `cover`, `releaseDate`, `idDev`, `idPlatform`, `idPublisher`) VALUES
+(22, 'Overlord 2', NULL, '<p>Segunda entrega de este original juego de estrategia, en la que encarnaremos a un nuevo protagonista que se enfrenta a una suerte de imperio romano que tiene las intenciones de arrasar con toda la magia del mundo.</p>', 'ESP', '/img/Cover/Game/cover_22.jpg', '2023-05-20', 21, 6, 3),
+(23, 'The Witcher 3', 'Wild Hunt', '<p>Emb&aacute;rcate en una &eacute;pica cacer&iacute;a de monstruos en el vasto mundo abierto de The Witcher 3. Explora tierras peligrosas, toma decisiones dif&iacute;ciles y enfr&eacute;ntate a bestias sobrenaturales en esta aventura de rol aclamada por la cr&iacute;tica.</p>', 'ESP', '/img/Cover/Game/cover_23.jpg', '2015-05-19', 6, 6, 4),
+(24, 'Grand Theft Auto V', NULL, '<p>&Uacute;nete a los bajos fondos de Los Santos y vive una vida de crimen en el mundo abierto de Grand Theft Auto V. Roba coches, planea atracos y enfr&eacute;ntate a peligrosos enemigos en esta aventura de acci&oacute;n y delincuencia.</p>', 'ESP', '/img/Cover/Game/cover_24.jpg', '2015-04-14', 1, 6, 1),
+(25, 'The Legend of Zelda', 'Breath of the Wild', '<p>Emb&aacute;rcate en una aventura legendaria en el vasto reino de Hyrule en The Legend of Zelda: Breath of the Wild. Explora un mundo abierto lleno de misterios, resuelve acertijos y enfr&eacute;ntate a criaturas ancestrales en esta aclamada entrega de la saga.</p>', 'ESP', '/img/Cover/Game/cover_25.jpg', '2017-03-03', 10, 3, 5),
+(26, 'Red Dead Redemption 2', NULL, '<p>Sum&eacute;rgete en el salvaje oeste en la &eacute;pica historia de Red Dead Redemption 2. Explora vastas tierras fronterizas, caza animales salvajes y enfr&eacute;ntate a forajidos en esta aventura de mundo abierto desarrollada por Rockstar Games.</p>', 'ESP', '/img/Cover/Game/cover_26.jpg', '2019-11-05', 1, 6, 1),
+(27, 'The Witcher 3', 'Wild Hunt', '<p>Embark on an epic monster hunt in the vast open world of The Witcher 3. Explore dangerous lands, make difficult choices, and face supernatural beasts in this critically acclaimed role-playing adventure.</p>', 'ENG', '/img/Cover/Game/cover_27.jpg', '2015-05-19', 6, 6, 4),
+(28, 'Grand Theft Auto V', NULL, '<p>Join the criminal underworld of Los Santos and live a life of crime in the open world of Grand Theft Auto V. Steal cars, plan heists, and confront dangerous enemies in this action-packed adventure.</p>', 'ENG', '/img/Cover/Game/cover_28.jpg', '2015-04-14', 1, 6, 1),
+(29, 'The Legend of Zelda', 'Breath of the Wild', '<p>Embark on a legendary adventure in the vast kingdom of Hyrule in The Legend of Zelda: Breath of the Wild. Explore an open world full of mysteries, solve puzzles, and face ancient creatures in this critically acclaimed installment of the saga.</p>', 'ENG', '/img/Cover/Game/cover_25.jpg', '2017-03-03', 10, 3, 5),
+(30, 'Red Dead Redemption 2', NULL, '<p>Immerse yourself in the wild west in the epic story of Red Dead Redemption 2. Explore vast frontier lands, hunt wild animals, and confront outlaws in this open-world adventure developed by Rockstar Games.</p>', 'ENG', '/img/Cover/Game/cover_30.jpg', '2019-11-05', 1, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -965,6 +944,7 @@ CREATE TABLE `user` (
   `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `avatar` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT '/img/Avatar/User/Default.png',
+  `birthday` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `preferedLanguage` char(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `creationDate` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
@@ -973,10 +953,10 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `avatar`, `preferedLanguage`, `creationDate`) VALUES
-(13, 'Cris', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'cristicarmat2@gmail.com', '/img/Avatar/User/avatar_13.jpg', 'ENG', ''),
-(14, 'Lidia', '$2a$11$AJpyrieovrhGAF3fn8OfqO1okY7IgITaA.XtBItUCRrhtN6rYUh/e', 'lidia@gmail.com', '/img/Avatar/User/avatar_0.jpg', 'ESP', '27/05/2023'),
-(25, 'Kuma', '$2a$11$MQH534UxB4ZTvV2b/EQzSuJzEP71jd.H0xMRCaH6DRPoXZzDdM0tK', 'kuma@gmail.com', '/img/Avatar/User/avatar_25.jpg', 'ESP', '2023-05-27');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `avatar`, `birthday`, `preferedLanguage`, `creationDate`) VALUES
+(13, 'Cris', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'cristicarmat2@gmail.com', '/img/Avatar/User/avatar_13.jpg', NULL, 'ENG', ''),
+(14, 'Lidia', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'lidia@gmail.com', '/img/Avatar/User/avatar_0.jpg', NULL, 'ESP', '27/05/2023'),
+(26, 'Kuma', '$2a$11$rWv3S81NXwIRbZCo01ebEO6TmuNPQSCX1De2HcT0UIEN8wxEgPwI2', 'kuma@gmail.com', '/img/Avatar/User/avatar_26.jpg', NULL, 'ESP', '2023-05-28');
 
 -- --------------------------------------------------------
 
@@ -996,19 +976,8 @@ CREATE TABLE `user_fav_game` (
 INSERT INTO `user_fav_game` (`idUser`, `idGame`) VALUES
 (13, 27),
 (13, 28),
-(13, 29);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_score_game`
---
-
-CREATE TABLE `user_score_game` (
-  `idUser` int NOT NULL,
-  `idGame` int NOT NULL,
-  `score` tinyint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+(26, 24),
+(26, 26);
 
 -- --------------------------------------------------------
 
@@ -2162,14 +2131,6 @@ ALTER TABLE `user_fav_game`
   ADD KEY `fk_game_has_user_game1_idx` (`idGame`);
 
 --
--- Indexes for table `user_score_game`
---
-ALTER TABLE `user_score_game`
-  ADD PRIMARY KEY (`idUser`,`idGame`),
-  ADD KEY `fk_user_has_game_game1_idx` (`idGame`),
-  ADD KEY `fk_user_has_game_user1_idx` (`idUser`);
-
---
 -- Indexes for table `web_language`
 --
 ALTER TABLE `web_language`
@@ -2253,7 +2214,7 @@ ALTER TABLE `publisher`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `web_text`
@@ -2345,13 +2306,6 @@ ALTER TABLE `user`
 ALTER TABLE `user_fav_game`
   ADD CONSTRAINT `fk_game_has_user_game1` FOREIGN KEY (`idGame`) REFERENCES `game` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_game_has_user_user1` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `user_score_game`
---
-ALTER TABLE `user_score_game`
-  ADD CONSTRAINT `fk_user_has_game_game1` FOREIGN KEY (`idGame`) REFERENCES `game` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_user_has_game_user1` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `web_text`

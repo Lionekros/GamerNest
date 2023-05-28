@@ -13,7 +13,7 @@ namespace View.Controllers
             (
                   int page = 1
                 , int pageSize = 10,
-                string language = "", bool isFav = false, int idArticle = -1, bool scored = false, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = "title"
+                string language = "", bool isFav = false, int idArticle = -1, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = "title"
             )
         {
             try
@@ -31,7 +31,7 @@ namespace View.Controllers
                 }
                 
 
-                FiltersViewBag( language, user, idArticle, scored, id, title, subtitle, idPlatform, orderBy );
+                FiltersViewBag( language, user, idArticle, id, title, subtitle, idPlatform, orderBy );
 
 
                 GetAllPlatforms( -1, "", "", "name" );
@@ -76,7 +76,7 @@ namespace View.Controllers
                 GetAllGames( language, user, idArticle, id, title, subtitle, idPlatform, orderBy );
 
 
-                FiltersViewBag( language, user, idArticle, scored, id, title, subtitle, idPlatform, orderBy );
+                FiltersViewBag( language, user, idArticle, id, title, subtitle, idPlatform, orderBy );
 
 
                 GetAllPlatforms( -1, "", "", "name" );
@@ -183,7 +183,7 @@ namespace View.Controllers
 
         public void FiltersViewBag
             (
-                  string language = "", string user = "", int idArticle = -1, bool scored = false, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = ""
+                  string language = "", string user = "", int idArticle = -1, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = ""
             )
         {
             ViewBag.FormData = new
@@ -191,7 +191,6 @@ namespace View.Controllers
                 language = language,
                 user = user,
                 idArticle = idArticle,
-                scored = scored,
                 id = id,
                 title = title,
                 subtitle = subtitle,

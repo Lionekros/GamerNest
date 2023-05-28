@@ -12,7 +12,7 @@ namespace View.Controllers
             (
                   int page = 1
                 , int pageSize = 5,
-                string language = "", string user = "", int idArticle = -1, bool scored = false, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = ""
+                string language = "", string user = "", int idArticle = -1, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = ""
             )
         {
             try
@@ -25,17 +25,8 @@ namespace View.Controllers
                 }
                 else
                 {
-                    if (scored)
-                    {
-                        GetGameScore(language, user, id, title, subtitle, idPlatform, orderBy );
-                    }
-                    else
-                    {
-                        GetAllGames( language, user, idArticle, id, title, subtitle, idPlatform, orderBy );
-                    }
-                    FiltersViewBag( language, user, idArticle, scored, id, title, subtitle, idPlatform, orderBy );
-
-                    ViewBag.score = scored;
+                    GetAllGames( language, user, idArticle, id, title, subtitle, idPlatform, orderBy );
+                    FiltersViewBag( language, user, idArticle, id, title, subtitle, idPlatform, orderBy );
                 }
 
                 GetAllPlatforms(-1, "", "", "name");
@@ -170,7 +161,7 @@ namespace View.Controllers
                     int lastIndex = lists.gameList.Count - 1;
                     model.id = lists.gameList[ lastIndex ].id;
                     model.cover = UploadImage( cover, model.id, "Cover", "Game", "cover" );
-                    GameService.UpdateGame( model.id, model.title, model.subtitle, model.description, model.language, model.cover, model.releaseDate, model.totalScore, model.isFav, model.idDev, model.idPlatform, model.idPublisher, model.idGenre, model.idPlayerType, model.idLanguageGame );
+                    GameService.UpdateGame( model.id, model.title, model.subtitle, model.description, model.language, model.cover, model.releaseDate, model.isFav, model.idDev, model.idPlatform, model.idPublisher, model.idGenre, model.idPlayerType, model.idLanguageGame );
                     return RedirectToAction( "Games" );
                 }
                 else
@@ -272,13 +263,13 @@ namespace View.Controllers
 
         public void CreateGameProcedure(GameModel model)
         {
-            GameService.CreateGame( model.title, model.subtitle, model.description, model.language, model.cover, model.releaseDate, model.totalScore, model.isFav, model.idDev, model.idPlatform, model.idPublisher, model.idGenre, model.idPlayerType, model.idLanguageGame );
+            GameService.CreateGame( model.title, model.subtitle, model.description, model.language, model.cover, model.releaseDate, model.isFav, model.idDev, model.idPlatform, model.idPublisher, model.idGenre, model.idPlayerType, model.idLanguageGame );
         }
 
         public void UpdateGameProcedure(UpdateGameModel model)
         {
 
-            GameService.UpdateGame( model.id, model.title, model.subtitle, model.description, model.language, model.cover, model.releaseDate, model.totalScore, model.isFav, model.idDev, model.idPlatform, model.idPublisher, model.idGenre, model.idPlayerType, model.idLanguageGame );
+            GameService.UpdateGame( model.id, model.title, model.subtitle, model.description, model.language, model.cover, model.releaseDate, model.isFav, model.idDev, model.idPlatform, model.idPublisher, model.idGenre, model.idPlayerType, model.idLanguageGame );
         }
 
         public void DeleteGameProcedure(int id)
@@ -288,7 +279,7 @@ namespace View.Controllers
 
         public void FiltersViewBag
             (
-                  string language = "", string user = "", int idArticle = -1, bool scored = false, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = ""
+                  string language = "", string user = "", int idArticle = -1, int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = ""
             )
         {
             ViewBag.FormData = new
@@ -296,7 +287,6 @@ namespace View.Controllers
                 language = language,
                 user = user,
                 idArticle = idArticle,
-                scored = scored,
                 id = id,
                 title = title,
                 subtitle = subtitle,

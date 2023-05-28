@@ -11,7 +11,6 @@ namespace Support
         public string? cover { get; set; }
         public string language { get; set; }
         public string? releaseDate { get; set; }
-        public sbyte totalScore { get; set; }
         public bool isFav { get; set; }
         public int idDev { get; set; }
         public string? dev { get; set; }
@@ -46,7 +45,6 @@ namespace Support
             cover = row.Field<string?>( "cover" );
             language = row.Field<string>( "language" );
             releaseDate = row.Field<string>( "releaseDate" );
-            totalScore = row.Field<sbyte>( "totalScore" );
             isFav = Utility.longToBool( row.Field<long>( "isFav" ) );
             idDev = row.Field<int>( "idDev" );
             dev = row.Field<string?>( "dev" );

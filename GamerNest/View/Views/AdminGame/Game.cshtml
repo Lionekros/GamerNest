@@ -93,11 +93,6 @@
                         <th>@ViewData[ "tCover" ]</th>
                         <th>@ViewData[ "tLanguage" ]</th>
                         <th>@ViewData[ "tReleaseDate" ]</th>
-                        <th>@ViewData[ "tTotalScore" ]</th>
-                        @if ( ViewBag.score )
-                        {
-                            <th>@ViewData[ "tScore" ]</th>
-                        }
                         <th>@ViewData[ "tIdDev" ]</th>
                         <th>@ViewData[ "tDev" ]</th>
                         <th>@ViewData[ "tIdPlatform" ]</th>
@@ -156,11 +151,6 @@
                                 }
                             </td>
                             <td>@item.releaseDate</td>
-                            <td>@item.totalScore</td>
-                            @if ( ViewBag.score )
-                            {
-                                <td>@item.score</td>
-                            }
                             <td>@item.idDev</td>
                             <td>@item.dev</td>
                             <td>@item.idPlatform</td>
@@ -209,7 +199,6 @@
                    asp-route-language="@ViewBag.FormData.language"
                    asp-route-user="@ViewBag.FormData.user"
                    asp-route-idArticle="@ViewBag.FormData.idArticle"
-                   asp-route-scored="@ViewBag.FormData.scored"
                    asp-route-id="@ViewBag.FormData.id"
                    asp-route-title="@ViewBag.FormData.title"
                    asp-route-subtitle="@ViewBag.FormData.subtitle"
@@ -228,7 +217,6 @@
                    asp-route-language="@ViewBag.FormData.language"
                    asp-route-user="@ViewBag.FormData.user"
                    asp-route-idArticle="@ViewBag.FormData.idArticle"
-                   asp-route-scored="@ViewBag.FormData.scored"
                    asp-route-id="@ViewBag.FormData.id"
                    asp-route-title="@ViewBag.FormData.title"
                    asp-route-subtitle="@ViewBag.FormData.subtitle"

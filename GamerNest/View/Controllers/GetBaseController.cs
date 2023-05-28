@@ -101,11 +101,6 @@ namespace View.Controllers
             lists.favList = GameService.CheckIfFav( user, idGame );
         }
 
-        public void GetGameScore(string language = "", string user = "", int id = -1, string title = "", string subtitle = "", int idPlatform = -1, string orderBy = "")
-        {
-            lists.gameList = GameService.GetGameScore( language, user, id, title, subtitle, idPlatform, orderBy );
-        }
-
         public void GetGameUpdate(int id = -1)
         {
             lists.updateGameList = GameService.GetGameUpdate( id );
