@@ -173,6 +173,7 @@ namespace View.Controllers
                     errorMessageList.Add( ViewData[ "FillAllData" ].ToString() );
                 }
                 UserDefault();
+                ViewBag.ErrorMessages = errorMessageList;
                 WebText( "UserLogInForm" );
                 return View( "Login" );
             }
@@ -227,19 +228,19 @@ namespace View.Controllers
 
         public void CreateUserProcedure(UserJoinModel model)
         {
-            UserService.CreateUser( model.username, model.password, model.email, model.avatar, model.preferedLanguage, model.creationDate );
+            UserService.CreateUser( model.username, model.password, model.email, model.avatar, model.preferedLanguage, model.birthday, model.creationDate );
         }
 
         public void UpdateUserJoinProcedure(UserJoinModel model, bool changedPassword = false)
         {
 
-            UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.creationDate );
+            UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.birthday, model.creationDate );
         }
 
         public void UpdateUserProcedure(UpdateUserModel model, bool changedPassword = false)
         {
 
-            UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.creationDate );
+            UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.birthday, model.creationDate );
         }
 
         public ActionResult DeleteUser()
@@ -304,6 +305,25 @@ namespace View.Controllers
             }
 
         }
+        public ActionResult ChangeBirthday(UserPageModel model)
+        {
+            try
+            {
+                UpdateUserModel userModel = constructModel(model, false, true);
+                UpdateUserProcedure( userModel );
+
+                return RedirectToAction( "UserPage" );
+            }
+            catch ( Exception ex )
+            {
+                Log log = new Log();
+                log.Add( ex.Message );
+                WebText( "Messages" );
+                ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
+                return RedirectToAction( "Index", "Article" );
+            }
+
+        }
         public ActionResult ChangePassword(UserPageModel model)
         {
             try
@@ -337,7 +357,7 @@ namespace View.Controllers
 
                 if ( confirmPass )
                 {
-                    UpdateUserModel userModel = constructModel(model, false, false, true);
+                    UpdateUserModel userModel = constructModel(model, false, false, false, true);
                     UpdateUserProcedure( userModel, true );
 
                     return RedirectToAction( "UserPage" );
@@ -361,7 +381,7 @@ namespace View.Controllers
 
         }
 
-        public UpdateUserModel constructModel(UserPageModel upModel, bool changeAvatar = false, bool changePreferedLanguage = false, bool changePassword = false)
+        public UpdateUserModel constructModel(UserPageModel upModel, bool changeAvatar = false, bool changePreferedLanguage = false, bool changeBirthdat = false, bool changePassword = false)
         {
             GetUserUpdate( int.Parse( HttpContext.Session.GetString( "UserID" ) ) );
             UpdateUserModel model;
@@ -375,6 +395,10 @@ namespace View.Controllers
             if ( changePreferedLanguage )
             {
                 model.preferedLanguage = upModel.preferedLanguage;
+            }
+            if (changeBirthdat)
+            {
+                model.birthday = upModel.birthday;
             }
             if ( changePassword )
             {

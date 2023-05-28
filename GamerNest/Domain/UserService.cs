@@ -89,13 +89,14 @@ namespace Domain
                     string email = "",
                     string avatar = "",
                     string preferedLanguage = "",
+                                        string birthday = "",
                     string creationDate = ""
             )
         {
             creationDate = Utility.DateTimeToString( DateTime.Now.Date );
             password = Utility.EncriptPassword( password );
 
-            UserRepository.CreateUser( username, password, email, avatar, preferedLanguage, creationDate );
+            UserRepository.CreateUser( username, password, email, avatar, preferedLanguage, birthday, creationDate );
         }
 
         public static void UpdateUser
@@ -107,6 +108,7 @@ namespace Domain
                     string email = "",
                     string avatar = "",
                     string preferedLanguage = "",
+                                        string birthday = "",
                     string creationDate = ""
             )
         {
@@ -115,7 +117,7 @@ namespace Domain
                 password = Utility.EncriptPassword( password );
             }
 
-            UserRepository.UpdateUser( id, username, password, email, avatar, preferedLanguage, creationDate );
+            UserRepository.UpdateUser( id, username, password, email, avatar, preferedLanguage, birthday, creationDate );
         }
 
         public static void DeleteUser(int id = -1)

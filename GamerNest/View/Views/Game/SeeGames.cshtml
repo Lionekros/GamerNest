@@ -1,0 +1,97 @@
+﻿@model Support.ModelList
+@{
+    ViewData[ "Title" ] = "See Game";
+}
+
+<partial name="_NormalMenu" />
+
+<main class="home-user">
+    <div class="text">
+        <section class="gameFile">
+            @foreach ( var item in Model.gameList )
+            {
+                <div class="img">
+                    <img src="@item.cover" />
+                </div>
+                <div>
+                    <div class="icons">
+                        <div class="FavButton">
+
+                        </div>
+                        <div class="seeNews">
+
+                        </div>
+                        <div class="score">
+
+                        </div>
+                    </div>
+                    <div class="info">
+                        <div class="firstRow">
+                            <h1>@item.title. @item.subtitle</h1>
+                        </div>
+                        <hr>
+                        <div class="secondRow">
+                            <div class="secondFirstRow">
+                                <strong>Release Date:</strong> @item.releaseDate
+                            </div>
+                            <div class="secondSecondRow">
+                                <strong>Platform:</strong> @item.platform
+                            </div>
+                        </div>
+                        <div class="thirdRow">
+                            <div class="thirdFirstRow">
+                                <strong>Developer:</strong> @item.dev
+                            </div>
+                            <div class="thirdSecondRow">
+                                <strong>Publisher:</strong> @item.publisher
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="fourthRow">
+                            <div class="playerTypes">
+                                <strong>Player type:</strong>
+                                @foreach ( var item2 in Model.playerTypeList )
+                                {
+                                    @item2.name
+                                }
+                            </div>
+                        </div>
+                        <div class="fifthRow">
+                            <div class="languages">
+                                <strong>Languages:</strong>
+                                @foreach ( var item2 in Model.languageList )
+                                {
+                                    @item2.name
+                                }
+                            </div>
+                        </div>
+                        <div class="sixthRow">
+                            <div class="genres">
+                                <strong>Genres:</strong>
+                                @foreach ( var item2 in Model.genreList )
+                                {
+                                    @item2.name
+                                }
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="seventhRow">
+                            <div class="description">
+                                <div class="title">
+
+                                </div>
+                                <div class="desc">
+                                    @Html.Raw(item.description)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            }
+            
+        </section>
+    </div>
+</main>
+
+<partial name="_Footer" />

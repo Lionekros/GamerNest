@@ -7,10 +7,10 @@
 
 <main class="home-user">
     <div class="text">
-        <h1>All Games</h1>
+        <h1>Fav Games</h1>
         <div class="NormalCenter">
             <section class="filter">
-                <form asp-controller="Game" asp-action="AllGames" method="post">
+                <form asp-controller="Game" asp-action="FavGames" method="post">
                     <div>
                         <select id="orderBy" name="orderBy">
                             <option value="title">@ViewData[ "fOrderBy" ]</option>
@@ -19,17 +19,6 @@
                             <option value="platform">@ViewData[ "tPlatform" ]</option>
                         </select>
                     </div>
-                    @if ( ViewData[ "UserEmail" ].ToString() != "no" )
-                    {
-                        <div>
-                            <div class="input-group">
-                                <select name="isFav" id="isFav">
-                                    <option value="false">No Show Fav</option>
-                                    <option value="true">Show Fav</option>
-                                </select>
-                            </div>
-                        </div>
-                    }
 
                     <div>
                         <div class="input-group">
@@ -92,13 +81,13 @@
                             <div>
                                 @if ( item.isFav )
                                 {
-                                    <a class="isFav" asp-controller="Game" asp-action="GameIsNotFav" asp-route-idGame="@item.id" asp-route-act="AllGames" asp-route-con="Game">
+                                    <a class="isFav" asp-controller="Game" asp-action="GameIsNotFav" asp-route-idGame="@item.id" asp-route-act="FavGames" asp-route-con="Game">
                                         <i class="fa-solid fa-heart"></i>
                                     </a>
                                 }
                                 else
                                 {
-                                    <a class="isNotFav" asp-controller="Game" asp-action="GameIsFav" asp-route-idGame="@item.id" asp-route-act="AllGames" asp-route-con="Game">
+                                    <a class="isNotFav" asp-controller="Game" asp-action="GameIsFav" asp-route-idGame="@item.id" asp-route-act="FavGames" asp-route-con="Game">
                                         <i class="fa-solid fa-heart-crack"></i>
                                     </a>
                                 }
@@ -116,7 +105,7 @@
                 @if ( Model.CurrentPage > 1 )
                 {
                     <!-- Previous Page -->
-                    <a asp-controller="Game" asp-action="AllGames"
+                    <a asp-controller="Game" asp-action="FavGames"
                    asp-route-page="@(Model.CurrentPage - 1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-language="@ViewBag.FormData.language"
@@ -135,7 +124,7 @@
                 @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
                 {
                     <!-- Next Page -->
-                    <a asp-controller="Game" asp-action="AllGames"
+                    <a asp-controller="Game" asp-action="FavGames"
                    asp-route-page="@(Model.CurrentPage - 1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-language="@ViewBag.FormData.language"

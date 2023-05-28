@@ -14,7 +14,7 @@ namespace DBAccess
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
                     StringBuilder queryBuilder = new StringBuilder();
-                    queryBuilder.Append( "SELECT id, username, password, email, avatar, preferedLanguage, creationDate" );
+                    queryBuilder.Append( "SELECT id, username, password, email, avatar, preferedLanguage,  birthday, creationDate" );
                     queryBuilder.Append( " FROM user" );
 
                     List<string> conditions = new List<string>();
@@ -62,7 +62,7 @@ namespace DBAccess
             {
                 using ( MySqlCommand cmd = Data.CreateCommand() )
                 {
-                    cmd.CommandText = "SELECT id, username, password, email, avatar, preferedLanguage, creationDate"
+                    cmd.CommandText = "SELECT id, username, password, email, avatar, preferedLanguage,  birthday, creationDate"
                         + " FROM user";
                     if ( id > 0 )
                     {
@@ -98,6 +98,7 @@ namespace DBAccess
                 string email = "",
                 string avatar = "",
                 string preferedLanguage = "",
+                string birthday = "",
                 string creationDate = ""
             )
         {
@@ -114,6 +115,7 @@ namespace DBAccess
                 procedure.Parameters.AddWithValue( "pEmail", email );
                 procedure.Parameters.AddWithValue( "pAvatar", avatar );
                 procedure.Parameters.AddWithValue( "pPreferedLanguage", preferedLanguage );
+                procedure.Parameters.AddWithValue( "pBirthday", birthday );
                 procedure.Parameters.AddWithValue( "pCreationDate", creationDate );
 
                 return Data.ExecuteProcedure( procedure );
@@ -134,6 +136,7 @@ namespace DBAccess
                     string email = "",
                     string avatar = "",
                     string preferedLanguage = "",
+                    string birthday = "",
                     string creationDate = ""
                 )
         {
@@ -147,6 +150,7 @@ namespace DBAccess
                 procedure.Parameters.AddWithValue( "pEmail", email );
                 procedure.Parameters.AddWithValue( "pAvatar", avatar );
                 procedure.Parameters.AddWithValue( "pPreferedLanguage", preferedLanguage );
+                procedure.Parameters.AddWithValue( "pBirthday", birthday );
                 procedure.Parameters.AddWithValue( "pCreationDate", creationDate );
 
                 return Data.ExecuteProcedure( procedure );

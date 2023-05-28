@@ -7,7 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Views\Game\" />
 		<Folder Include="wwwroot\img\Cover\Game\" />
 		<Folder Include="wwwroot\img\Cover\Article\" />
 		<Folder Include="wwwroot\scss\Article\" />

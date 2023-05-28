@@ -199,13 +199,13 @@ namespace View.Controllers
 
         public void CreateUserProcedure(UserModel model)
         {
-            UserService.CreateUser( model.username, model.password, model.email, model.avatar, model.preferedLanguage, model.creationDate );
+            UserService.CreateUser( model.username, model.password, model.email, model.avatar, model.preferedLanguage, model.birthday, model.creationDate );
         }
 
         public void UpdateUserProcedure(UpdateUserModel model, bool changedPassword = false)
         {
 
-            UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.creationDate );
+            UserService.UpdateUser( model.id, model.username, changedPassword, model.password, model.email, model.avatar, model.preferedLanguage, model.birthday, model.creationDate );
         }
 
         public void DeleteUserProcedure(int id)

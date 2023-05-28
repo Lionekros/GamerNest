@@ -145,5 +145,15 @@ namespace Domain
         {
             GameRepository.DeleteGame( id );
         }
+
+        public static void CreateFav(int idUser, int idGame)
+        {
+            GameRepository.CreateFav( idUser, idGame );
+        }
+
+        public static void DeleteFav(int idUser, int idGame)
+        {
+            GameRepository.DeleteFav( idUser, idGame );
+        }
     }
 }

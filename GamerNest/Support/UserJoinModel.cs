@@ -20,6 +20,9 @@ namespace Support
         public string avatar { get; set; }
         [Required( ErrorMessage = "Required" )]
         public string preferedLanguage { get; set; }
+
+        public string? birthday { get; set; }
+
         [Required( ErrorMessage = "Required" )]
         public string? creationDate { get; set; }
 
@@ -36,6 +39,7 @@ namespace Support
             email = row.Field<string>( "email" );
             avatar = row.Field<string>( "avatar" );
             preferedLanguage = row.Field<string>( "preferedLanguage" );
+            birthday = row.Field<string>( "birthday" );
             creationDate = row.Field<string>( "creationDate" );
         }
     }

@@ -21,7 +21,7 @@
             <section class="firstRow">
                 <div class="seeFav">
                     <h3>See Fav</h3>
-                    <a asp-controller="Game" asp-action="AllGames" asp-route-isFav="true">
+                    <a asp-controller="Game" asp-action="FavGames">
                         See Fav Games
                     </a>
                 </div>
@@ -47,6 +47,16 @@
                                 <option value="ENG">English</option>
                                 <option value="ESP">Español</option>
                             </select>
+                        </div>
+                        <button type="submit" class="mainButton">Change</button>
+                    </form>
+                </div>
+                <div class="changeBirthday">
+                    <h3>Change Prefered Language</h3>
+                    <form asp-controller="User" asp-action="ChangeBirthday" method="post">
+                        <div>
+                            <label asp-for="birthday">Birthday:</label>
+                            <input asp-for="birthday" type="date" />
                         </div>
                         <button type="submit" class="mainButton">Change</button>
                     </form>

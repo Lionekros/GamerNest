@@ -10,6 +10,7 @@ namespace Support
         public string email { get; set; }
         public string? avatar { get; set; }
         public string preferedLanguage { get; set; }
+        public string? birthday { get; set; }
         public string? creationDate { get; set; }
 
         public UpdateUserModel()
@@ -22,6 +23,7 @@ namespace Support
             password = row.Field<string>( "password" );
             email = row.Field<string>( "email" );
             preferedLanguage = row.Field<string>( "preferedLanguage" );
+            birthday = row.Field<string>( "birthday" );
             avatar = row.Field<string>( "avatar" );
             creationDate = row.Field<string>( "creationDate" );
         }

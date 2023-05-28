@@ -304,5 +304,47 @@ namespace DBAccess
 
             }
         }
+
+        public static long CreateFav(int idUser, int idGame)
+        {
+            try
+            {
+                MySqlCommand procedure = Data.CreateProcedure("CreateFav");
+
+                procedure.Parameters.AddWithValue( "pIdUser", idUser );
+                procedure.Parameters.AddWithValue( "pIdGame", idGame );
+
+                return Data.ExecuteProcedure( procedure );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                return -1;
+
+            }
+        }
+
+        public static long DeleteFav(int idUser, int idGame)
+        {
+            try
+            {
+                MySqlCommand procedure = Data.CreateProcedure("DeleteFav");
+
+                procedure.Parameters.AddWithValue( "pIdUser", idUser );
+                procedure.Parameters.AddWithValue( "pIdGame", idGame );
+
+                return Data.ExecuteProcedure( procedure );
+            }
+            catch ( Exception ex )
+            {
+
+                Log log = new Log();
+                log.Add( ex.Message );
+                return -1;
+
+            }
+        }
     }
 }
