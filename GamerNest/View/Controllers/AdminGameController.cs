@@ -29,7 +29,7 @@ namespace View.Controllers
                     FiltersViewBag( language, user, idArticle, id, title, subtitle, idPlatform, orderBy );
                 }
 
-                GetAllPlatforms(-1, "", "", "name");
+                GetAllPlatforms( -1, "", "", "name" );
 
                 Pagination( page, pageSize );
 
@@ -51,7 +51,7 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "AdminType" ) == null)
+                if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
                     return RedirectToAction( "Index", "Article" );
                 }
@@ -89,7 +89,7 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "AdminType" ) == null)
+                if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
                     return RedirectToAction( "Index", "Article" );
                 }

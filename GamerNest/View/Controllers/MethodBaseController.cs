@@ -172,7 +172,7 @@ namespace View.Controllers
         }
         public bool CheckIfUserLogIn(string username, string password)
         {
-            GetUser(-1, username);
+            GetUser( -1, username );
 
             if ( lists.userList?.Count > 0 )
             {

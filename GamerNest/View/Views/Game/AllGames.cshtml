@@ -7,40 +7,28 @@
 
 <main class="home-user">
     <div class="text">
-        <h1>All Games</h1>
+        <h1>@ViewData[ "TitleAll" ]</h1>
         <div class="NormalCenter">
             <section class="filter">
                 <form asp-controller="Game" asp-action="AllGames" method="post">
                     <div>
                         <select id="orderBy" name="orderBy">
-                            <option value="title">@ViewData[ "fOrderBy" ]</option>
+                            <option value="title">@ViewData[ "OrderBy" ]</option>
                             <option value="title">@ViewData[ "tTitle" ]</option>
-                            <option value="totalScore">@ViewData[ "tTotalScore" ]</option>
-                            <option value="platform">@ViewData[ "tPlatform" ]</option>
+                            <option value="platform">@ViewData[ "Platform" ]</option>
                         </select>
                     </div>
-                    @if ( ViewData[ "UserEmail" ].ToString() != "no" )
-                    {
-                        <div>
-                            <div class="input-group">
-                                <select name="isFav" id="isFav">
-                                    <option value="false">No Show Fav</option>
-                                    <option value="true">Show Fav</option>
-                                </select>
-                            </div>
-                        </div>
-                    }
 
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="title" name="title" placeholder="Search Games">
+                            <input type="text" id="title" name="title" placeholder="@ViewData[ "SearchGameTitle" ]">
                         </div>
                     </div>
                     <div>
                         <div class="input-group">
                             <select name="idPlatform" id="idPlatform" class="select2Single marginBotom">
-                                <option>@ViewData[ "fSearchPlatform" ]</option>
+                                <option>@ViewData[ "SearchPlatform" ]</option>
                                 @foreach ( var item in Model.platformList )
                                 {
                                     <option value="@item.id">@item.name</option>
@@ -50,7 +38,7 @@
                     </div>
 
                     <div>
-                        <input class="filtButton" type="submit" value="Filter">
+                        <input class="filtButton" type="submit" value="@ViewData[ "Filter" ]">
                     </div>
                 </form>
             </section>
@@ -127,7 +115,7 @@
                    asp-route-subtitle="@ViewBag.FormData.subtitle"
                    asp-route-subtitle="@ViewBag.FormData.idPlatform"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
-                        Previous
+                        @ViewData[ "ButtonPrevious" ]
                     </a>
                 }
 
@@ -145,7 +133,7 @@
                    asp-route-subtitle="@ViewBag.FormData.subtitle"
                    asp-route-subtitle="@ViewBag.FormData.idPlatform"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
-                        Next
+                        @ViewData[ "ButtonNext" ]
                     </a>
                 }
             </div>

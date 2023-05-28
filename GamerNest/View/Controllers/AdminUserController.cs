@@ -114,7 +114,7 @@ namespace View.Controllers
 
                     upModel.avatar = model.avatar;
 
-                    UpdateUserProcedure(upModel, false);
+                    UpdateUserProcedure( upModel, false );
                     return RedirectToAction( "Users" );
                 }
                 else

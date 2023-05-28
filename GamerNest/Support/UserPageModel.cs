@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace Support
 {
     public class UserPageModel
     {
         public int? id { get; set; }
-        
+
         public string? username { get; set; }
-        
+
         public string? email { get; set; }
         public string? avatar { get; set; }
-        
+
         public string? preferedLanguage { get; set; }
         public string? birthday { get; set; }
-        
+
         public string? creationDate { get; set; }
 
         public string? oldPassword { get; set; }
@@ -27,7 +21,7 @@ namespace Support
         public string? confirmPassword { get; set; }
 
         public UserPageModel()
-        { 
+        {
         }
 
         public UserPageModel(DataRow row)

@@ -1,9 +1,6 @@
 ﻿using Domain;
-using Google.Protobuf.Collections;
 using LogError;
 using Microsoft.AspNetCore.Mvc;
-using Support;
-using System.Runtime.InteropServices;
 
 namespace View.Controllers
 {
@@ -29,16 +26,16 @@ namespace View.Controllers
                 {
                     GetAllGames( language, "", idArticle, id, title, subtitle, idPlatform, orderBy );
                 }
-                
+
 
                 FiltersViewBag( language, user, idArticle, id, title, subtitle, idPlatform, orderBy );
 
 
                 GetAllPlatforms( -1, "", "", "name" );
 
-                if ( !string.IsNullOrEmpty( HttpContext.Session.GetString( "UserUsername" )) )
+                if ( !string.IsNullOrEmpty( HttpContext.Session.GetString( "UserUsername" ) ) )
                 {
-                    foreach (var item in lists.gameList)
+                    foreach ( var item in lists.gameList )
                     {
                         item.isFav = IsFav( user, item.id );
                     }
@@ -46,7 +43,7 @@ namespace View.Controllers
 
                 Pagination( page, pageSize );
 
-                WebText( "UserAllGames" );
+                WebText( "NormalGame" );
                 return View( "AllGames", lists );
             }
             catch ( Exception ex )
@@ -54,7 +51,7 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                WebText( "AdminGame" );
+                WebText( "NormalGame" );
                 ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
@@ -88,7 +85,7 @@ namespace View.Controllers
 
                 Pagination( page, pageSize );
 
-                WebText( "UserAllGames" );
+                WebText( "NormalGame" );
                 return View( "FavGames", lists );
             }
             catch ( Exception ex )
@@ -96,7 +93,7 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                WebText( "AdminGame" );
+                WebText( "NormalGame" );
                 ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
@@ -106,7 +103,7 @@ namespace View.Controllers
         {
             UserDefault();
             string user = HttpContext.Session.GetString( "UserUsername" );
-            GetAllGames( "", "", -1, id);
+            GetAllGames( "", "", -1, id );
             if ( !string.IsNullOrEmpty( HttpContext.Session.GetString( "UserUsername" ) ) )
             {
                 foreach ( var item in lists.gameList )
@@ -115,18 +112,18 @@ namespace View.Controllers
                 }
             }
 
-            GetAllGenres("", id);
+            GetAllGenres( "", id );
             GetAllPlayerTypes( "", id );
             GetAllLanguages( "", id );
 
-            WebText( "UserAllGames" );
+            WebText( "NormalGame" );
             return View( "SeeGames", lists );
         }
 
         public bool IsFav(string user, int idGame)
         {
-            CheckIfFav(user, idGame);
-            if (lists.favList.Count > 0)
+            CheckIfFav( user, idGame );
+            if ( lists.favList.Count > 0 )
             {
                 return true;
             }
@@ -138,9 +135,9 @@ namespace View.Controllers
 
         public ActionResult GameIsFav(int idGame, string act, string con, bool isSingleGame = false)
         {
-            GameService.CreateFav( int.Parse(HttpContext.Session.GetString( "UserID" )), idGame);
+            GameService.CreateFav( int.Parse( HttpContext.Session.GetString( "UserID" ) ), idGame );
 
-            if (isSingleGame)
+            if ( isSingleGame )
             {
                 return RedirectToAction( act, con, idGame );
             }

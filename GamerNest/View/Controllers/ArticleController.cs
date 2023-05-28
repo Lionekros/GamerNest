@@ -27,7 +27,7 @@ namespace View.Controllers
 
                 Pagination( page, pageSize );
 
-                WebText( "UserArticle" );
+                WebText( "NormalArticle" );
                 return View( "Index", lists );
             }
             catch ( Exception ex )
@@ -35,7 +35,7 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                WebText( "AdminArticle" );
+                WebText( "NormalArticle" );
                 ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
@@ -49,13 +49,21 @@ namespace View.Controllers
             try
             {
                 UserDefault();
-
-                GetAllArticles( language, author, idGame, id, headline, isPublished, orderBy );
-                FiltersViewBag( language, author, idGame, id, headline, isPublished, orderBy );
+                language = HttpContext.Session.GetString( "PageLanguage" );
+                if ( isFav )
+                {
+                    GetAllArticles( language, author, idGame, id, headline, isPublished, orderBy, isFav, int.Parse( HttpContext.Session.GetString( "UserID" ) ) );
+                    FiltersViewBag( language, author, idGame, id, headline, isPublished, orderBy, isFav, int.Parse( HttpContext.Session.GetString( "UserID" ) ) );
+                }
+                else
+                {
+                    GetAllArticles( language, author, idGame, id, headline, isPublished, orderBy );
+                    FiltersViewBag( language, author, idGame, id, headline, isPublished, orderBy );
+                }
 
                 Pagination( page, pageSize );
 
-                WebText( "UserAllArticle" );
+                WebText( "NormalArticle" );
                 return View( "AllArticles", lists );
             }
             catch ( Exception ex )
@@ -63,7 +71,7 @@ namespace View.Controllers
 
                 Log log = new Log();
                 log.Add( ex.Message );
-                WebText( "AdminArticle" );
+                WebText( "NormalArticle" );
                 ViewBag.ErrorTryCatch = ViewData[ "ErrorOccurred" ];
                 return RedirectToAction( "Index", "Admin" );
             }
@@ -76,7 +84,7 @@ namespace View.Controllers
             GetArticle( id );
             GetAuthor( lists.articleList[ 0 ].author );
 
-            WebText( "UserArticle" );
+            WebText( "NormalArticle" );
 
             return View( "Article", lists );
         }

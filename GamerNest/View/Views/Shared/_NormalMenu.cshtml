@@ -22,16 +22,16 @@
             @if ( ViewData[ "UserEmail" ].ToString() == "no" )
             {
                 <a class="join" asp-controller="User" asp-action="JoinForm">
-                    Join
+                    @ViewData[ "Join" ]
                 </a>
                 <a class="login" asp-controller="User" asp-action="LogInForm">
-                    Log In
+                    @ViewData[ "LogIn" ]
                 </a>
             }
             else
             {
                 <a class="closeSession" asp-controller="User" asp-action="LogOut">
-                    Log Out
+                    @ViewData[ "LogOut" ]
                 </a>
                 <a class="avatar" asp-controller="User" asp-action="UserPage">
                     <img class="" src="@ViewData["UserAvatar"]" alt="Avatar">
@@ -44,12 +44,12 @@
             <div class="navButtons">
                 <div class="News">
                     <a asp-controller="Article" asp-action="AllArticles">
-                        News
+                        @ViewData[ "AllArticles" ]
                     </a>
                 </div>
                 <div class="Games">
                     <a asp-controller="Game" asp-action="AllGames">
-                        Games
+                        @ViewData[ "AllGames" ]
                     </a>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="title" name="title" placeholder="Game Title">
+                            <input type="text" id="title" name="title" placeholder="@ViewData[ "SearchGameTitle" ]">
                         </div>
                     </div>
                 </form>

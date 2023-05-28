@@ -15,11 +15,30 @@
                 </div>
                 <div>
                     <div class="icons">
-                        <div class="FavButton">
+                        @if ( ViewData[ "UserEmail" ].ToString() != "no" )
+                        {
+                            <div class="favButton">
+                                <div>
+                                    @if ( item.isFav )
+                                    {
+                                        <a class="isFav" asp-controller="Game" asp-action="GameIsNotFav" asp-route-id="@item.id" asp-route-act="SeeGame" asp-route-con="Game">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="isNotFav" asp-controller="Game" asp-action="GameIsFav" asp-route-id="@item.id" asp-route-act="SeeGame" asp-route-con="Game">
+                                            <i class="fa-solid fa-heart-crack"></i>
+                                        </a>
+                                    }
+                                </div>
 
-                        </div>
+                            </div>
+                        }
                         <div class="seeNews">
-
+                            <a class="isNotFav" asp-controller="Article" asp-action="AllArticles" asp-route-idGame="@item.id" >
+                                @ViewData[ "SeeNews" ]
+                            </a>
                         </div>
                     </div>
                     <div class="info">
@@ -29,24 +48,24 @@
                         <hr>
                         <div class="secondRow">
                             <div class="secondFirstRow">
-                                <strong>Release Date:</strong> @item.releaseDate
+                                <strong>@ViewData[ "ReleaseDate" ]:</strong> @item.releaseDate
                             </div>
                             <div class="secondSecondRow">
-                                <strong>Platform:</strong> @item.platform
+                                <strong>@ViewData[ "Platform" ]:</strong> @item.platform
                             </div>
                         </div>
                         <div class="thirdRow">
                             <div class="thirdFirstRow">
-                                <strong>Developer:</strong> @item.dev
+                                <strong>@ViewData[ "Developer" ]:</strong> @item.dev
                             </div>
                             <div class="thirdSecondRow">
-                                <strong>Publisher:</strong> @item.publisher
+                                <strong>@ViewData[ "Publisher" ]:</strong> @item.publisher
                             </div>
                         </div>
                         <hr>
                         <div class="fourthRow">
                             <div class="playerTypes">
-                                <strong>Player type:</strong>
+                                <strong>@ViewData[ "PlayerType" ]:</strong>
                                 @foreach ( var item2 in Model.playerTypeList )
                                 {
                                     @item2.name
@@ -55,7 +74,7 @@
                         </div>
                         <div class="fifthRow">
                             <div class="languages">
-                                <strong>Languages:</strong>
+                                <strong>@ViewData[ "Language" ]:</strong>
                                 @foreach ( var item2 in Model.languageList )
                                 {
                                     @item2.name
@@ -64,7 +83,7 @@
                         </div>
                         <div class="sixthRow">
                             <div class="genres">
-                                <strong>Genres:</strong>
+                                <strong>@ViewData[ "Genre" ]:</strong>
                                 @foreach ( var item2 in Model.genreList )
                                 {
                                     @item2.name

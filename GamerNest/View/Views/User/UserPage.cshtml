@@ -20,72 +20,72 @@
         <section class="userpageConfig">
             <section class="firstRow">
                 <div class="seeFav">
-                    <h3>See Fav</h3>
+                    <h3>@ViewData[ "SeeFav" ]</h3>
                     <a asp-controller="Game" asp-action="FavGames">
-                        See Fav Games
+                        @ViewData[ "SeeFav" ]
                     </a>
                 </div>
                 <div class="changeAvatar">
-                    <h3>Change Avatar</h3>
+                    <h3>@ViewData[ "ChangeAvatar" ]</h3>
                     <form asp-controller="User" asp-action="ChangeAvatar" method="post" enctype="multipart/form-data">
                         <div>
-                            <label asp-for="avatar">Avatar:</label>
+                            <label asp-for="avatar">@ViewData[ "ChangeAvatar" ]:</label>
                             <input asp-for="avatar" type="file" />
                         </div>
-                        <button type="submit" class="mainButton">Change</button>
+                        <button type="submit" class="mainButton">@ViewData[ "ChangeButton" ]</button>
                      </form>
                 </div>
             </section>
             <hr />
             <section class="secondRow">
                 <div class="changePreferedLanguage">
-                    <h3>Change Prefered Language</h3>
+                    <h3>@ViewData[ "ChangePreferedLanguage" ]</h3>
                     <form asp-controller="User" asp-action="ChangePreferedLanguage" method="post">
                         <div>
-                            <label asp-for="preferedLanguage">Prefered Language:</label>
+                            <label asp-for="preferedLanguage">@ViewData[ "ChangePreferedLanguage" ]:</label>
                             <select asp-for="preferedLanguage">
                                 <option value="ENG">English</option>
                                 <option value="ESP">Español</option>
                             </select>
                         </div>
-                        <button type="submit" class="mainButton">Change</button>
+                        <button type="submit" class="mainButton">@ViewData[ "ChangeButton" ]</button>
                     </form>
                 </div>
                 <div class="changeBirthday">
-                    <h3>Change Prefered Language</h3>
+                    <h3>@ViewData[ "ChangeBirthday" ]</h3>
                     <form asp-controller="User" asp-action="ChangeBirthday" method="post">
                         <div>
-                            <label asp-for="birthday">Birthday:</label>
+                            <label asp-for="birthday">@ViewData[ "ChangeBirthday" ]:</label>
                             <input asp-for="birthday" type="date" />
                         </div>
-                        <button type="submit" class="mainButton">Change</button>
+                        <button type="submit" class="mainButton">@ViewData[ "ChangeButton" ]</button>
                     </form>
                 </div>
                 <div class="changePassword">
-                    <h3>Change Password</h3>
+                    <h3>@ViewData[ "ChangePassword" ]</h3>
                     <form asp-controller="User" asp-action="ChangePassword" method="post" enctype="multipart/form-data">
                         <div>
-                            <label asp-for="oldPassword" class="required">Old Password:</label>
-                            <input asp-for="oldPassword" placeholder="old Password" type="password" />
+                            <label asp-for="oldPassword" class="required">@ViewData[ "OldPassword" ]:</label>
+                            <input asp-for="oldPassword" placeholder="@ViewData[ "OldPassword" ]" type="password" />
                         </div>
                         <div>
-                            <label asp-for="newPassword" class="required">New Password:</label>
-                            <input asp-for="newPassword" placeholder="new Password" type="password" />
+                            <label asp-for="newPassword" class="required">@ViewData[ "NewPassword" ]:</label>
+                            <input asp-for="newPassword" placeholder="@ViewData[ "NewPassword" ]" type="password" />
                         </div>
                         <div>
-                            <label asp-for="confirmPassword" class="required">Repeat New Password:</label>
-                            <input asp-for="confirmPassword" placeholder="Repeat Password" type="password" required />
+                            <label asp-for="confirmPassword" class="required">@ViewData[ "RepeatPassword" ]:</label>
+                            <input asp-for="confirmPassword" placeholder="@ViewData[ "RepeatPassword" ]" type="password" required />
                         </div>
-                        <button type="submit" class="mainButton">Change</button>
+                        <button type="submit" class="mainButton">@ViewData[ "ChangeButton" ]</button>
                     </form>
                 </div>
             </section>
             <hr />
             <section class="thirdRow">
                 <div class="deleteUser">
-                    <h3>Delete User</h3>
+                    <h3>@ViewData[ "DeleteUser" ]</h3>
                     <a asp-controller="User" asp-action="DeleteUser">
-                        Delete User
+                        @ViewData[ "DeleteUser" ]
                     </a>
                 </div>
             </section>

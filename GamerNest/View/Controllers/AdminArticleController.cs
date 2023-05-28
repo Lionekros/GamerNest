@@ -1,13 +1,11 @@
 ﻿using Domain;
-using Google.Protobuf.Collections;
 using LogError;
 using Microsoft.AspNetCore.Mvc;
 using Support;
-using System.Xml.Linq;
 
 namespace View.Controllers
 {
-    public class AdminArticleController : MethodBaseController
+    public class AdminArticleController :MethodBaseController
     {
         public ActionResult Articles
             (
@@ -34,9 +32,9 @@ namespace View.Controllers
                     GetAllArticles( language, author, idGame, id, headline, isPublished, orderBy );
                     FiltersViewBag( language, author, idGame, id, headline, isPublished, orderBy );
                 }
-                
+
                 Pagination( page, pageSize );
-                
+
                 WebText( "AdminArticle" );
                 return View( "Article", lists );
             }
@@ -72,11 +70,11 @@ namespace View.Controllers
         {
             try
             {
-                if ( HttpContext.Session.GetString( "AdminType" ) == null)
+                if ( HttpContext.Session.GetString( "AdminType" ) == null )
                 {
                     return RedirectToAction( "Index", "Article" );
                 }
-                
+
                 SetDefaultAdminViewDatas();
                 WebText( "AdminArticleForm" );
                 ArticleModel model = new ArticleModel();
@@ -113,9 +111,9 @@ namespace View.Controllers
 
                 model.idGameList = new List<int>();
 
-                foreach (var item in tempList)
+                foreach ( var item in tempList )
                 {
-                    model.idGameList.Add(item.id);
+                    model.idGameList.Add( item.id );
                 }
                 WebText( "AdminArticleForm" );
                 return View( "UpdateArticle", model );
@@ -141,15 +139,15 @@ namespace View.Controllers
 
                 ModelState.Remove( "cover" );
 
-                GetAuthor(model.author);
-                model.idAuthor = lists.authorList[0].id;
+                GetAuthor( model.author );
+                model.idAuthor = lists.authorList[ 0 ].id;
 
                 model.createdDate = DateTime.Now.ToString( "yyyy-MM-dd HH:mm:ss" );
 
                 if ( ModelState.IsValid )
                 {
                     CreateArticleProcedure( model );
-                    GetAllArticles("", "", -1, -1, "", -1, "id");
+                    GetAllArticles( "", "", -1, -1, "", -1, "id" );
                     int lastIndex = lists.articleList.Count - 1;
                     model.id = lists.articleList[ lastIndex ].id;
                     model.cover = UploadImage( cover, model.id, "Cover", "Article", "cover" );
@@ -246,7 +244,7 @@ namespace View.Controllers
 
         public void CreateArticleProcedure(ArticleModel model)
         {
-            ArticleService.CreateArticle( model.headline, model.summary, model.body, model.cover, model.isPublished, model.createdDate, model.idAuthor, model.language, model.updatedDate, model.idGameList);
+            ArticleService.CreateArticle( model.headline, model.summary, model.body, model.cover, model.isPublished, model.createdDate, model.idAuthor, model.language, model.updatedDate, model.idGameList );
         }
 
         public void UpdateArticleProcedure(UpdateArticleModel model)

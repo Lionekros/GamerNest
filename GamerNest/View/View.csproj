@@ -9,9 +9,6 @@
 	<ItemGroup>
 		<Folder Include="wwwroot\img\Cover\Game\" />
 		<Folder Include="wwwroot\img\Cover\Article\" />
-		<Folder Include="wwwroot\scss\Article\" />
-		<Folder Include="wwwroot\scss\Game\" />
-		<Folder Include="wwwroot\scss\User\" />
 	</ItemGroup>
 
 	<ItemGroup>

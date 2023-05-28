@@ -37,7 +37,15 @@ namespace DBAccess
                     }
                     else
                     {
-                        queryBuilder.Append( " WHERE article.idAuthor = author.id" );
+                        if ( idGame > 0 )
+                        {
+                            queryBuilder.Append( " AND article.idAuthor = author.id" );
+                        }
+                        else
+                        {
+                            queryBuilder.Append( " WHERE article.idAuthor = author.id" );
+                        }
+
                     }
 
                     List<string> conditions = new List<string>();

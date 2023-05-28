@@ -7,15 +7,15 @@
 
 <main class="home-user">
     <div class="text">
-        <h1>News</h1>
+        <h1>@ViewData[ "TitlePrinc" ]</h1>
         <div class="NormalCenter">
             <section class="filter">
                 <form asp-controller="Article" asp-action="Index" method="post">
                     <div>
                         <select id="orderBy" name="orderBy">
-                            <option value="createdDate">Order By</option>
-                            <option value="headline">Headline</option>
-                            <option value="createdDate">Created Date</option>
+                            <option value="createdDate">@ViewData[ "OrderBy" ]</option>
+                            <option value="headline">@ViewData[ "oHeadline" ]</option>
+                            <option value="createdDate">@ViewData[ "oCreatedDate" ]</option>
                         </select>
                     </div>
                     @if (ViewData["UserEmail"].ToString() != "no")
@@ -23,8 +23,8 @@
                         <div>
                             <div class="input-group">
                                 <select name="isFav" id="isFav">
-                                    <option value="false">No Show Fav</option>
-                                    <option value="true">Show Fav</option>
+                                    <option value="false">@ViewData[ "fNoShowFav" ]</option>
+                                    <option value="true">@ViewData[ "fShowFav" ]</option>
                                 </select>
                             </div>
                         </div>
@@ -33,12 +33,12 @@
                     <div>
                         <div class="input-group">
                             <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="headline" name="headline" placeholder="Search Headline">
+                            <input type="text" id="headline" name="headline" placeholder="@ViewData[ "SearchHeadline" ]">
                         </div>
                     </div>
 
                     <div>
-                        <input class="filtButton" type="submit" value="Filter">
+                        <input class="filtButton" type="submit" value="@ViewData[ "Filter" ]">
                     </div>
                 </form>
             </section>
@@ -85,7 +85,7 @@
                    asp-route-orderBy="@ViewBag.FormData.orderBy"
                    asp-route-isFav="@ViewBag.FormData.isFav"
                    asp-route-user="@ViewBag.FormData.user">
-                        Previous
+                        @ViewData[ "ButtonPrevious" ]
                     </a>
                 }
 
@@ -104,7 +104,7 @@
                    asp-route-orderBy="@ViewBag.FormData.orderBy"
                    asp-route-isFav="@ViewBag.FormData.isFav"
                    asp-route-user="@ViewBag.FormData.user">
-                        Next
+                        @ViewData[ "ButtonNext" ]
                     </a>
                 }
             </div>

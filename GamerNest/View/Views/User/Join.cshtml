@@ -15,27 +15,27 @@
                         <partial name="_Error" />
 
                         <div>
-                            <label asp-for="username" class="required">Username:</label>
-                            <input asp-for="username" placeholder="Username" required />
+                            <label asp-for="username" class="required">@ViewData[ "Username" ]:</label>
+                            <input asp-for="username" placeholder="@ViewData[ "Username" ]" required />
                         </div>
                         <div>
-                            <label asp-for="email" class="required">Email:</label>
-                            <input asp-for="email" placeholder="Email" type="email" required />
+                            <label asp-for="email" class="required">@ViewData[ "Email" ]:</label>
+                            <input asp-for="email" placeholder="@ViewData[ "Email" ]" type="email" required />
                         </div>
                         <div>
-                            <label asp-for="password" class="required">Password:</label>
-                            <input asp-for="password" placeholder="Password" type="password" required />
+                            <label asp-for="password" class="required">@ViewData[ "Password" ]:</label>
+                            <input asp-for="password" placeholder="@ViewData[ "Password" ]" type="password" required />
                         </div>
                         <div>
-                            <label asp-for="confirmPassword" class="required">Repeat Password:</label>
-                            <input asp-for="confirmPassword" placeholder="Repeat Password" type="password" required />
+                            <label asp-for="confirmPassword" class="required">@ViewData[ "RepeatPassword" ]:</label>
+                            <input asp-for="confirmPassword" placeholder="@ViewData[ "RepeatPassword" ]" type="password" required />
                         </div>
                         <div>
-                            <label asp-for="avatar">Avatar:</label>
+                            <label asp-for="avatar">@ViewData[ "Avatar" ]:</label>
                             <input asp-for="avatar" type="file" />
                         </div>
                         <div>
-                            <label asp-for="preferedLanguage" class="required">Prefered Language:</label>
+                            <label asp-for="preferedLanguage" class="required">@ViewData[ "PreferedLanguage" ]:</label>
                             <select asp-for="preferedLanguage" required>
                                 <option value="ENG">English</option>
                                 <option value="ESP">Español</option>
@@ -46,13 +46,13 @@
                             <input asp-for="creationDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                         </div>
 
-                        <button type="submit" class="mainButton">Join</button>
+                        <button type="submit" class="mainButton">@ViewData[ "Join" ]</button>
                     </form>
                 </div>
             </section>
             <a asp-controller="User" asp-action="LogInForm">
                 <i class="fa-solid fa-arrow-left"></i>
-                <span>Log In</span>
+                <span>@ViewData[ "LogIn" ]</span>
             </a>
         </section>
     </div>

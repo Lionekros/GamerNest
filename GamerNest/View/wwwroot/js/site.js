@@ -8,7 +8,6 @@ function selectColor(selectElement)
     var selectedOption = selectElement.options[selectElement.selectedIndex];
     var selectedColor = selectedOption.className;
 
-    // Update the class of the <select> element
     selectElement.className = selectedColor;
 }
 

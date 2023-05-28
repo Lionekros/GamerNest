@@ -15,21 +15,21 @@
                         <partial name="_Error" />
 
                         <div>
-                            <label asp-for="username" class="required">Username:</label>
-                            <input asp-for="username" placeholder="Username" required />
+                            <label asp-for="username" class="required">@ViewData[ "Username" ]:</label>
+                            <input asp-for="username" placeholder="@ViewData[ "Username" ]" required />
                         </div>
                         <div>
-                            <label asp-for="password" class="required">Password:</label>
-                            <input asp-for="password" placeholder="Password" type="password" required />
+                            <label asp-for="password" class="required">@ViewData[ "Password" ]:</label>
+                            <input asp-for="password" placeholder="@ViewData[ "Password" ]" type="password" required />
                         </div>
 
-                        <button type="submit" class="mainButton">Log In</button>
+                        <button type="submit" class="mainButton">@ViewData[ "LogIn" ]</button>
                     </form>
                 </div>
             </section>
             <a asp-controller="User" asp-action="JoinForm">
                 <i class="fa-solid fa-arrow-left"></i>
-                <span>Join</span>
+                <span>@ViewData[ "Join" ]</span>
             </a>
         </section>
     </div>

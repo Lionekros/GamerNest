@@ -1241,22 +1241,10 @@ a {
   border-radius: 0.5rem;
   list-style: none;
 }
-.Createform div {
-  /* display: flex;
-  justify-content: flex-start;
-  margin-top: 1rem;
-  text-align: center;*/
-}
 @media (max-width: 767px) {
   .Createform div {
     flex-wrap: wrap;
   }
-}
-.Createform div div {
-  /*display: flex;
-  flex-direction: column;*/
-  /*width: 100%;
-  display: block;*/
 }
 .Createform div div label {
   display: block;
@@ -1495,7 +1483,7 @@ a {
 }
 .normalMenu .firstRow .logo-details img {
   max-width: 22rem;
-  margin-right: 0.5rem; /* Add margin to separate the logo name */
+  margin-right: 0.5rem;
 }
 .normalMenu .firstRow .logo-details .logo_name {
   font-size: 2rem;
@@ -1555,7 +1543,6 @@ a {
   flex-direction: row;
 }
 .normalMenu .secondRow .borderr .navButtons .News {
-  /* Styles for the news button */
   margin-right: 4rem;
 }
 .normalMenu .secondRow .borderr .navButtons .News a {
@@ -1586,7 +1573,6 @@ a {
   color: #efefef;
 }
 .normalMenu .secondRow .borderr .navButtons .Games {
-  /* Styles for the games button */
   border-right: 4px solid #FCFCFC;
   margin-right: 2rem;
 }
@@ -1666,18 +1652,8 @@ a {
     display: block;
     flex-direction: column;
   }
-  .normalMenu .secondRow .borderr .navButtons .News {
-    /* Styles for the news button */
-  }
-  .normalMenu .secondRow .borderr .navButtons .News a {
-    /*padding: 1.5rem 3rem;*/
-  }
   .normalMenu .secondRow .borderr .navButtons .Games {
-    /* Styles for the games button */
     border: none;
-  }
-  .normalMenu .secondRow .borderr .navButtons .Games a {
-    /*padding: 1.5rem 3rem;*/
   }
   .normalMenu .secondRow .borderr .searchGame {
     display: block;

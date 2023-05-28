@@ -13,7 +13,7 @@ namespace View.Controllers
             try
             {
                 UserDefault();
-                WebText( "UserJoinForm" );
+                WebText( "NormalUser" );
                 return View( "Join" );
             }
             catch ( Exception ex )
@@ -96,7 +96,7 @@ namespace View.Controllers
 
                 UserDefault();
                 ViewBag.ErrorMessages = errorMessageList;
-                WebText( "UserJoinForm" );
+                WebText( "NormalUser" );
                 return View( "Join", model );
             }
             catch ( Exception ex )
@@ -114,7 +114,7 @@ namespace View.Controllers
             try
             {
                 UserDefault();
-                WebText( "UserJoinForm" );
+                WebText( "NormalUser" );
                 return View( "LogIn" );
             }
             catch ( Exception ex )
@@ -132,7 +132,7 @@ namespace View.Controllers
             try
             {
                 HttpContext.Session.Clear();
-                WebText( "UserJoinForm" );
+                WebText( "NormalUser" );
                 return RedirectToAction( "Index", "Article" );
             }
             catch ( Exception ex )
@@ -174,7 +174,7 @@ namespace View.Controllers
                 }
                 UserDefault();
                 ViewBag.ErrorMessages = errorMessageList;
-                WebText( "UserLogInForm" );
+                WebText( "NormalUser" );
                 return View( "Login" );
             }
             catch ( Exception ex )
@@ -199,7 +199,7 @@ namespace View.Controllers
 
                 model.preferedLanguage = lists.userList[ 0 ].preferedLanguage;
 
-                WebText( "UserJoinForm" );
+                WebText( "NormalUser" );
                 return View( "UserPage", model );
             }
             catch ( Exception ex )
@@ -396,7 +396,7 @@ namespace View.Controllers
             {
                 model.preferedLanguage = upModel.preferedLanguage;
             }
-            if (changeBirthdat)
+            if ( changeBirthdat )
             {
                 model.birthday = upModel.birthday;
             }

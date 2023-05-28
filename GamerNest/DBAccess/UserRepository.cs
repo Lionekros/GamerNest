@@ -68,7 +68,7 @@ namespace DBAccess
                     {
                         cmd.CommandText += " WHERE id = " + id;
                     }
-                    else if (!string.IsNullOrEmpty(username))
+                    else if ( !string.IsNullOrEmpty( username ) )
                     {
                         cmd.CommandText += " WHERE username = '" + username + "'";
                     }
@@ -104,7 +104,7 @@ namespace DBAccess
         {
             try
             {
-                if ( string.IsNullOrEmpty(avatar) )
+                if ( string.IsNullOrEmpty( avatar ) )
                 {
                     avatar = "/img/Avatar/User/Default.png";
                 }

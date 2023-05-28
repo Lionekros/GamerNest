@@ -22,7 +22,7 @@
             img
             {
                 max-width: 22rem;
-                margin-right: 0.5rem; /* Add margin to separate the logo name */
+                margin-right: 0.5rem;
             }
 
             .logo_name
@@ -115,7 +115,6 @@
 
                 .News
                 {
-                    /* Styles for the news button */
                     a
                     {
                         @include button($secondary, $light, 100%);
@@ -128,7 +127,6 @@
 
                 .Games
                 {
-                    /* Styles for the games button */
                     a
                     {
                         @include button($secondary, $light, 100%);
@@ -190,23 +188,22 @@
     {
         .firstRow
         {
-            // Display as column and centered
             flex-direction: column;
             align-items: center;
 
             .logo-details
             {
-                margin-top: 2rem; // Increase margin for logo-details
+                margin-top: 2rem;
             }
 
             .flags
             {
-                margin-top: 2rem; // Increase margin for flags
+                margin-top: 2rem;
             }
 
             .userSession
             {
-                margin-top: 2rem; // Increase margin for userSession
+                margin-top: 2rem; 
             }
         }
 
@@ -221,22 +218,8 @@
                     display: block;
                     flex-direction: column;
 
-                    .News
-                    {
-                        /* Styles for the news button */
-                        a
-                        {
-                            /*padding: 1.5rem 3rem;*/
-                        }
-                    }
-
                     .Games
                     {
-                        /* Styles for the games button */
-                        a
-                        {
-                            /*padding: 1.5rem 3rem;*/
-                        }
 
                         border: none;
                     }
