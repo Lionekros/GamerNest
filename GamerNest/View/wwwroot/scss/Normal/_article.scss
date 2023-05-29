@@ -1,0 +1,105 @@
+﻿@import '../Utilities/_variables.scss', '../Utilities/_mixins.scss';
+
+.articlePreview2
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+
+    .Dates
+    {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        flex-direction: column;
+        margin-right: 14rem;
+
+        > div
+        {
+            margin-left: auto;
+        }
+    }
+
+    .Article
+    {
+        margin-bottom: 20px;
+        max-width: 90%;
+
+        h1
+        {
+            color: $primary
+        }
+
+        .summary
+        {
+            h3
+            {
+                border-radius: 2rem;
+            }
+
+            color: $light;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .body
+        {
+            text-align: justify;
+        }
+    }
+
+    .author
+    {
+        display: flex;
+        align-items: center;
+        background-color: $terciary;
+        border-radius: 1rem;
+        padding: 1rem;
+        justify-content: center;
+        max-width: 45rem;
+
+        .avatar
+        {
+            img
+            {
+                max-width: 10rem;
+                margin-right: 10px;
+            }
+        }
+
+        .info
+        {
+            .name
+            {
+                text-align: center;
+                font-weight: bold;
+                color: $primary;
+                margin-bottom: 1rem;
+                font-size: 2rem;
+            }
+
+            .description
+            {
+                text-align: center;
+                padding-right: 1rem;
+                padding-left: 1rem;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    @media (max-width: 768px)
+    {
+        .author
+        {
+            flex-direction: column;
+
+            .avatar
+            {
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

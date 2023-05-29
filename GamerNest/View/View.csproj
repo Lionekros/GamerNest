@@ -25,6 +25,7 @@
 	  <Content Remove="wwwroot\scss\Admin\_preview.scss" />
 	  <Content Remove="wwwroot\scss\Admin\_table.scss" />
 	  <Content Remove="wwwroot\scss\Normal\_allGames.scss" />
+	  <Content Remove="wwwroot\scss\Normal\_article.scss" />
 	  <Content Remove="wwwroot\scss\Normal\_articleIndex.scss" />
 	  <Content Remove="wwwroot\scss\Normal\_base.scss" />
 	  <Content Remove="wwwroot\scss\Normal\_footer.scss" />
@@ -45,6 +46,7 @@
 	  <SassFile Remove="wwwroot\scss\Admin\_preview.scss" />
 	  <SassFile Remove="wwwroot\scss\Admin\_table.scss" />
 	  <SassFile Remove="wwwroot\scss\Normal\_allGames.scss" />
+	  <SassFile Remove="wwwroot\scss\Normal\_article.scss" />
 	  <SassFile Remove="wwwroot\scss\Normal\_articleIndex.scss" />
 	  <SassFile Remove="wwwroot\scss\Normal\_base.scss" />
 	  <SassFile Remove="wwwroot\scss\Normal\_footer.scss" />
@@ -68,6 +70,7 @@
 	  <None Include="wwwroot\scss\Admin\_preview.scss" />
 	  <None Include="wwwroot\scss\Admin\_table.scss" />
 	  <None Include="wwwroot\scss\Normal\_allGames.scss" />
+	  <None Include="wwwroot\scss\Normal\_article.scss" />
 	  <None Include="wwwroot\scss\Normal\_articleIndex.scss" />
 	  <None Include="wwwroot\scss\Normal\_base.scss" />
 	  <None Include="wwwroot\scss\Normal\_footer.scss" />

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 28, 2023 at 05:22 PM
+-- Generation Time: May 29, 2023 at 03:57 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -2178,7 +2178,11 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (1167, 'tTitle', 'Title', 38, 'ENG'),
 (1168, 'tTitle', 'Título', 38, 'ESP'),
 (1169, 'ChangeButton', 'Change', 40, 'ENG'),
-(1170, 'ChangeButton', 'Cambiar', 40, 'ESP');
+(1170, 'ChangeButton', 'Cambiar', 40, 'ESP'),
+(1171, 'Updated', 'Updated', 39, 'ENG'),
+(1172, 'Updated', 'Actualizado', 39, 'ESP'),
+(1173, 'Created', 'Created', 39, 'ENG'),
+(1174, 'Created', 'Creado', 39, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -2395,7 +2399,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `web_text`
 --
 ALTER TABLE `web_text`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1171;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1175;
 
 --
 -- Constraints for dumped tables
