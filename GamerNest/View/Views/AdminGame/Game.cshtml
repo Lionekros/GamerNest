@@ -138,7 +138,10 @@
                             <td>@item.id</td>
                             <td>@item.title</td>
                             <td>@item.subtitle</td>
-                            <td>@Html.Raw(item.description)</td>
+                            <td>
+                                <div id="item_@item.id" class="collapsed">@Html.Raw(item.description)</div>
+                                <a href="#" onclick="toggleDescription(@item.id)">Read More</a>
+                            </td>
                             <td><img class="image-cell" src="@item.cover" alt="cover"></td>
                             <td>
                                 @if ( item.language == "ENG" )

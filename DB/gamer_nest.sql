@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 29, 2023 at 03:57 PM
+-- Generation Time: Jun 02, 2023 at 11:14 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -270,7 +270,6 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteUser` (IN `pId` INT)   begin
 	 DELETE FROM user_fav_game  WHERE idUser = pId;
-	DELETE FROM user_score_game  WHERE idUser = pId;
 DELETE FROM user WHERE id = pId;
 END$$
 
@@ -958,8 +957,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `avatar`, `birthday`, `preferedLanguage`, `creationDate`) VALUES
 (13, 'Cris', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'cristicarmat2@gmail.com', '/img/Avatar/User/avatar_13.jpg', NULL, 'ENG', ''),
-(14, 'Lidia', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'lidia@gmail.com', '/img/Avatar/User/avatar_0.jpg', '2023-03-22', 'ESP', '27/05/2023'),
-(26, 'Kuma', '$2a$11$rWv3S81NXwIRbZCo01ebEO6TmuNPQSCX1De2HcT0UIEN8wxEgPwI2', 'kuma@gmail.com', '/img/Avatar/User/avatar_26.jpg', NULL, 'ESP', '2023-05-28');
+(14, 'Lidia', '$2a$11$LSygS8Ad73LPlkwK0eWbZuEqPFfsTTVm9bID3PsrbV9o1sJqxeAuC', 'lidia@gmail.com', '/img/Avatar/User/avatar_0.jpg', '2023-03-22', 'ESP', '27/05/2023');
 
 -- --------------------------------------------------------
 
@@ -978,10 +976,7 @@ CREATE TABLE `user_fav_game` (
 
 INSERT INTO `user_fav_game` (`idUser`, `idGame`) VALUES
 (13, 27),
-(13, 29),
-(13, 30),
-(26, 24),
-(26, 26);
+(13, 30);
 
 -- --------------------------------------------------------
 
@@ -2182,7 +2177,15 @@ INSERT INTO `web_text` (`id`, `title`, `text`, `idCategory`, `language`) VALUES
 (1171, 'Updated', 'Updated', 39, 'ENG'),
 (1172, 'Updated', 'Actualizado', 39, 'ESP'),
 (1173, 'Created', 'Created', 39, 'ENG'),
-(1174, 'Created', 'Creado', 39, 'ESP');
+(1174, 'Created', 'Creado', 39, 'ESP'),
+(1175, 'ModalTitle', 'Confirmation', 40, 'ENG'),
+(1176, 'ModalTitle', 'Confirmación', 40, 'ESP'),
+(1177, 'ModalText', 'Are you sure you want to delete your user?', 40, 'ENG'),
+(1178, 'ModalText', '¿Estas seguro de que quieres eliminar tu usuario?', 40, 'ESP'),
+(1179, 'ModalButtonDelete', 'Delete', 40, 'ENG'),
+(1180, 'ModalButtonDelete', 'Eliminar', 40, 'ESP'),
+(1181, 'ModalButtonCancelar', 'Cancel', 40, 'ENG'),
+(1182, 'ModalButtonCancelar', 'Cancelar', 40, 'ESP');
 
 --
 -- Indexes for dumped tables
@@ -2399,7 +2402,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `web_text`
 --
 ALTER TABLE `web_text`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1175;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1183;
 
 --
 -- Constraints for dumped tables

@@ -1,6 +1,6 @@
 ﻿@model Support.ModelList
 @{
-    ViewData["Title"] = "Admin - Authors";
+    ViewData[ "Title" ] = "Admin - Authors";
 }
 
 <main class="home-section">
@@ -123,7 +123,10 @@
                             <td>@item.secondLastName</td>
                             <td>@item.email</td>
                             <td>@item.phone</td>
-                            <td>@Html.Raw(item.description)</td>
+                            <td>
+                                <div id="item_@item.id" class="collapsed">@Html.Raw(item.description)</div>
+                                <a href="#" onclick="toggleDescription(@item.id)">Read More</a>
+                            </td>
                             <td><img class="image-cell" src="@item.avatar" alt="avatar"></td>
                             <td>
                                 @if ( item.preferedLanguage == "ENG" )

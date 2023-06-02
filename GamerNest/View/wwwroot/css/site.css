@@ -702,6 +702,11 @@ a {
   text-decoration: none;
 }
 
+.collapsed {
+  overflow: hidden;
+  height: 100px;
+}
+
 :root {
   --primary-color: red;
 }
@@ -2017,6 +2022,164 @@ a {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+.userpageConfig .thirdRow .deleteUser div .modal2 {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+.userpageConfig .thirdRow .deleteUser div .modal2 .modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #292929;
+  max-width: 100%;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  border: 1px solid #FCFCFC;
+}
+.userpageConfig .thirdRow .deleteUser div .modal2 h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 3rem;
+}
+.userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions [id^=confirmBtn] {
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #FFB100;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  z-index: 1;
+  overflow: hidden;
+  text-shadow: -1px -1px 0 #292929, 1px -1px 0 #292929, -1px 1px 0 #292929, 1px 1px 0 #292929;
+}
+@media (max-width: 767px) {
+  .userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions [id^=confirmBtn] {
+    display: block;
+    width: 100%;
+  }
+}
+.userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions [id^=confirmBtn]:hover {
+  background-color: #e69f00;
+  color: #efefef;
+}
+.userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions [id^=cancelBtn] {
+  display: block;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #555555;
+  color: #FCFCFC;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FCFCFC;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions [id^=cancelBtn] {
+    display: block;
+    width: 100%;
+  }
+}
+.userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions [id^=cancelBtn]:hover {
+  background-color: #484848;
+  color: #efefef;
+}
+@media screen and (max-width: 768px) {
+  .userpageConfig .thirdRow .deleteUser div .modal2 {
+    position: absolute;
+  }
+  .userpageConfig .thirdRow .deleteUser div .modal2 .modal-content {
+    display: block;
+  }
+  .userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions {
+    display: block;
+  }
+  .userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions [id^=confirmBtn] {
+    margin-bottom: 1rem;
+    display: block;
+    max-width: 100%;
+    padding: 1rem;
+    background-color: #FFB100;
+    color: #FCFCFC;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid #FCFCFC;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    z-index: 1;
+    overflow: hidden;
+    text-shadow: -1px -1px 0 #292929, 1px -1px 0 #292929, -1px 1px 0 #292929, 1px 1px 0 #292929;
+  }
+}
+@media screen and (max-width: 768px) and (max-width: 767px) {
+  .userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions [id^=confirmBtn] {
+    display: block;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions [id^=confirmBtn]:hover {
+    background-color: #e69f00;
+    color: #efefef;
+  }
+}
+@media screen and (max-width: 768px) {
+  .userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions [id^=cancelBtn] {
+    display: block;
+    max-width: 100%;
+    padding: 1rem;
+    background-color: #555555;
+    color: #FCFCFC;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid #FCFCFC;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 768px) and (max-width: 767px) {
+  .userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions [id^=cancelBtn] {
+    display: block;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .userpageConfig .thirdRow .deleteUser div .modal2 .modal-actions [id^=cancelBtn]:hover {
+    background-color: #484848;
+    color: #efefef;
+  }
 }
 .userpageConfig .thirdRow .deleteUser div a {
   display: block;

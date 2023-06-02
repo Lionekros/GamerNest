@@ -11,7 +11,7 @@ namespace View.Controllers
         public ActionResult Authors
             (
                   int page = 1
-                , int pageSize = 5
+                , int pageSize = 3
                 , int id = -1
                 , string name = ""
                 , string firstLastName = ""

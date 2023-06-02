@@ -26,17 +26,17 @@
                             @ViewData[ "SeeFav" ]
                         </a>
                     </div>
-                    
+
                 </div>
                 <div class="changeAvatar">
                     <h3>@ViewData[ "ChangeAvatar" ]</h3>
-                    <form class="formUserPage" asp-controller="User" asp-action="ChangeAvatar" method="post" enctype="multipart/form class="formUserPage"-data">
+                    <form class="formUserPage" asp-controller="User" asp-action="ChangeAvatar" method="post" enctype="multipart/form class=" formUserPage"-data">
                         <div>
                             <label asp-for="avatar">@ViewData[ "ChangeAvatar" ]:</label>
                             <input asp-for="avatar" type="file" />
                         </div>
                         <button type="submit" class="mainButton">@ViewData[ "ChangeButton" ]</button>
-                     </form>
+                    </form>
                 </div>
             </section>
             <section class="secondRow">
@@ -65,7 +65,7 @@
                 </div>
                 <div class="changePassword">
                     <h3>@ViewData[ "ChangePassword" ]</h3>
-                    <form class="formUserPage" asp-controller="User" asp-action="ChangePassword" method="post" enctype="multipart/form class="formUserPage"-data">
+                    <form class="formUserPage" asp-controller="User" asp-action="ChangePassword" method="post" enctype="multipart/form class=" formUserPage"-data">
                         <div>
                             <label asp-for="oldPassword" class="required">@ViewData[ "OldPassword" ]:</label>
                             <input asp-for="oldPassword" placeholder="@ViewData[ "OldPassword" ]" type="password" />
@@ -86,15 +86,30 @@
                 <div class="deleteUser">
                     <h3>@ViewData[ "DeleteUser" ]</h3>
                     <div>
-                        <a asp-controller="User" asp-action="DeleteUser">
+                        @*<a asp-controller="User" asp-action="DeleteUser">
+                        @ViewData[ "DeleteUser" ]
+                        </a>*@
+                        <a id="deleteAction" class="delete-action" onclick="deleteUserModal('User')">
                             @ViewData[ "DeleteUser" ]
                         </a>
+
+                        <div id="confirmationModal" class="modal2">
+                            <div class="modal-content">
+                                <h2>@ViewData[ "ModalTitle" ]</h2>
+                                <p>@ViewData[ "ModalText" ]</p>
+                                <div class="modal-actions">
+                                    <button id="confirmBtn" asp-controller="User" asp-action="DeleteUser">@ViewData[ "ModalButtonDelete" ]</button>
+
+                                    <button id="cancelBtn">@ViewData[ "ModalButtonCancelar" ]</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
+
                 </div>
             </section>
-            
-            
+
+
         </section>
     </div>
 </main>
