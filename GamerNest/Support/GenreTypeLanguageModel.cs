@@ -18,7 +18,17 @@ namespace Support
         {
             string field = "id";
 
-            long selector = row.Field<long>("selector");
+            long selector;
+
+            try
+            {
+                selector = row.Field<int>( "selector" );
+            }
+            catch ( InvalidCastException )
+            {
+
+                selector = row.Field<long>( "selector" );
+            }
             switch ( selector )
             {
                 case 1:

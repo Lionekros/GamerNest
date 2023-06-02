@@ -45,7 +45,15 @@ namespace Support
             cover = row.Field<string?>( "cover" );
             language = row.Field<string>( "language" );
             releaseDate = row.Field<string>( "releaseDate" );
-            isFav = Utility.longToBool( row.Field<long>( "isFav" ) );
+            try
+            {
+                isFav = Utility.longToBool( row.Field<int>( "isFav" ) );
+            }
+            catch ( InvalidCastException )
+            {
+
+                isFav = Utility.longToBool( row.Field<long>( "isFav" ) );
+            }
             idDev = row.Field<int>( "idDev" );
             dev = row.Field<string?>( "dev" );
             idPlatform = row.Field<int>( "idPlatform" );

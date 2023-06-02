@@ -9,188 +9,186 @@
 
         <h3>@ViewData[ "Description" ]</h3>
 
-        @if ( ViewData[ "AdminType" ].ToString() == "Admin" )
-        {
-            <section class="filter">
-                <h4>@ViewData[ "FilterTitle" ]:</h4>
-                <form asp-controller="AdminAuthor" asp-action="Authors" method="post">
-                    @if ( Model.authorList?.Count > 0 )
-                    {
-                        <div>
-                            <select id="orderBy" name="orderBy">
-                                <option value="id">@ViewData[ "fOrderBy" ]</option>
-                                <option value="id">@ViewData[ "tId" ]</option>
-                                <option value="name">@ViewData[ "tName" ]</option>
-                                <option value="firstName">@ViewData[ "tFirstName" ]</option>
-                                <option value="seconName">@ViewData[ "tSecondName" ]</option>
-                                <option value="email">@ViewData[ "tEmail" ]</option>
-                            </select>
-                        </div>
-                    }
-                    <div>
-                        <div class="input-group">
-                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="number" id="id" name="id"  placeholder="@ViewData[ "fSearchId" ]">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-group">
-                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="name" name="name"  placeholder="@ViewData[ "fSearchName" ]">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-group">
-                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="firstLastName" name="firstLastName"  placeholder="@ViewData[ "fSearchLastName" ]">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-group">
-                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="secondLastName" name="secondLastName"  placeholder="@ViewData[ "fSearchSecondLastName" ]">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-group">
-                            <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="email" name="email" placeholder="@ViewData[ "fSearchEmail" ]">
-                        </div>
-                    </div>
-                    <div>
-                        <select class="normalSelect" onchange="selectColor(this)" id="isAdmin" name="isAdmin">
-                            <option class="normalSelect" value="">@ViewData[ "fIsAdmin" ]</option>
-                            <option class="greenSelect" value="1">&#xf058;</option>
-                            <option class="redSelect" value="0">&#xf057;</option>
-                        </select>
-                    </div>
-                    <div>
-                        <select class="normalSelect" onchange="selectColor(this)" id="isActive" name="isActive">
-                            <option class="normalSelect" value="">@ViewData[ "fIsActive" ]</option>
-                            <option class="greenSelect" value="1">&#xf058;</option>
-                            <option class="redSelect" value="0">&#xf057;</option>
-                        </select>
-                    </div>
-                    <div>
-                        <input class="filtButton" type="submit" value="@ViewData[ "ButtonFilter" ]">
-                    </div>
-
-
-                </form>
-            </section>
-
-            <section class="create">
-                <a asp-action="CreateForm" asp-controller="AdminAuthor">
-                    <i class="fa-solid fa-plus"></i>
-                    <span>@ViewData[ "ButtonNew" ]</span>
-                </a>
-            </section>
-
-            <section class="adminTable">
+        <section class="filter">
+            <h4>@ViewData[ "FilterTitle" ]:</h4>
+            <form asp-controller="AdminAuthor" asp-action="Authors" method="post">
                 @if ( Model.authorList?.Count > 0 )
                 {
-                    <table>
-                        <tr>
-                            <th>@ViewData[ "Actions" ]</th>
-                            <th>@ViewData[ "tId" ]</th>
-                            <th>@ViewData[ "tName" ]</th>
-                            <th>@ViewData[ "tFirstName" ]</th>
-                            <th>@ViewData[ "tSecondName" ]</th>
-                            <th>@ViewData[ "tEmail" ]</th>
-                            <th>@ViewData[ "tPhone" ]</th>
-                            <th>@ViewData[ "tDescription" ]</th>
-                            <th>@ViewData[ "tAvatar" ]</th>
-                            <th>@ViewData[ "tPrefLanguage" ]</th>
-                            <th>@ViewData[ "tIsAdmin" ]</th>
-                            <th>@ViewData[ "tCanPublish" ]</th>
-                            <th>@ViewData[ "tIsActive" ]</th>
-                            <th>@ViewData[ "tBirthday" ]</th>
-                            <th>@ViewData[ "tStartDate" ]</th>
-                            <th>@ViewData[ "tFinishDate" ]</th>
-                            <th>@ViewData[ "tArticleList" ]</th>
-                        </tr>
-                        @foreach ( var item in Model.authorList )
-                        {
-                            <tr>
-                                <td>
-
-                                    <!-- Edit Author -->
-                                    <a asp-controller="AdminAuthor" asp-action="UpdateForm" asp-route-email="@item.email">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </a>
-                                </td>
-                                <td>@item.id</td>
-                                <td>@item.name</td>
-                                <td>@item.firstLastName</td>
-                                <td>@item.secondLastName</td>
-                                <td>@item.email</td>
-                                <td>@item.phone</td>
-                                <td>@Html.Raw(item.description)</td>
-                                <td><img class="image-cell" src="@item.avatar" alt="avatar"></td>
-                                <td>
-                                    @if ( item.preferedLanguage == "ENG" )
-                                    {
-                                        <span class="fi fi-gb fis"></span>
-                                    }
-                                    else if ( item.preferedLanguage == "ESP" )
-                                    {
-                                        <span class="fi fi-es fis"></span>
-                                    }
-                                </td>
-                                <td>
-                                    @if ( item.isAdmin)
-                                    {
-                                        <i class="far fa-circle-check checkmark-icon"></i>
-                                    }
-                                    else if ( !item.isAdmin )
-                                    {
-                                        <i class="far fa-circle-xmark xmark-icon"></i>
-                                    }
-                                </td>
-                                <td>
-                                    @if ( item.canPublish)
-                                    {
-                                        <i class="far fa-circle-check checkmark-icon"></i>
-                                    }
-                                    else if ( !item.canPublish )
-                                    {
-                                        <i class="far fa-circle-xmark xmark-icon"></i>
-                                    }
-                                </td>
-                                <td>
-                                    @if ( item.isActive )
-                                    {
-                                        <i class="far fa-circle-check checkmark-icon"></i>
-                                    }
-                                    else if ( !item.isActive )
-                                    {
-                                        <i class="far fa-circle-xmark xmark-icon"></i>
-                                    }
-                                </td>
-                                <td>@item.birthday</td>
-                                <td>@item.startDate</td>
-                                <td>@item.endDate</td>
-                                <td>
-                                    <a asp-controller="AdminArticle" asp-action="Articles" asp-route-author="@item.email">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </table>
+                    <div>
+                        <select id="orderBy" name="orderBy">
+                            <option value="id">@ViewData[ "fOrderBy" ]</option>
+                            <option value="id">@ViewData[ "tId" ]</option>
+                            <option value="name">@ViewData[ "tName" ]</option>
+                            <option value="firstName">@ViewData[ "tFirstName" ]</option>
+                            <option value="seconName">@ViewData[ "tSecondName" ]</option>
+                            <option value="email">@ViewData[ "tEmail" ]</option>
+                        </select>
+                    </div>
                 }
-                else
-                {
-                    <h4>@ViewData[ "NoData" ]</h4>
-                }
-            </section>
-
-            <section class="pagination">
                 <div>
-                    @if ( Model.CurrentPage > 1 )
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="number" id="id" name="id" placeholder="@ViewData[ "fSearchId" ]">
+                    </div>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="name" name="name" placeholder="@ViewData[ "fSearchName" ]">
+                    </div>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="firstLastName" name="firstLastName" placeholder="@ViewData[ "fSearchLastName" ]">
+                    </div>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="secondLastName" name="secondLastName" placeholder="@ViewData[ "fSearchSecondLastName" ]">
+                    </div>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="email" name="email" placeholder="@ViewData[ "fSearchEmail" ]">
+                    </div>
+                </div>
+                <div>
+                    <select class="normalSelect" onchange="selectColor(this)" id="isAdmin" name="isAdmin">
+                        <option class="normalSelect" value="">@ViewData[ "fIsAdmin" ]</option>
+                        <option class="greenSelect" value="1">&#xf058;</option>
+                        <option class="redSelect" value="0">&#xf057;</option>
+                    </select>
+                </div>
+                <div>
+                    <select class="normalSelect" onchange="selectColor(this)" id="isActive" name="isActive">
+                        <option class="normalSelect" value="">@ViewData[ "fIsActive" ]</option>
+                        <option class="greenSelect" value="1">&#xf058;</option>
+                        <option class="redSelect" value="0">&#xf057;</option>
+                    </select>
+                </div>
+                <div>
+                    <input class="filtButton" type="submit" value="@ViewData[ "ButtonFilter" ]">
+                </div>
+
+
+            </form>
+        </section>
+
+        <section class="create">
+            <a asp-action="CreateForm" asp-controller="AdminAuthor">
+                <i class="fa-solid fa-plus"></i>
+                <span>@ViewData[ "ButtonNew" ]</span>
+            </a>
+        </section>
+
+        <section class="adminTable">
+            @if ( Model.authorList?.Count > 0 )
+            {
+                <table>
+                    <tr>
+                        <th>@ViewData[ "Actions" ]</th>
+                        <th>@ViewData[ "tId" ]</th>
+                        <th>@ViewData[ "tName" ]</th>
+                        <th>@ViewData[ "tFirstName" ]</th>
+                        <th>@ViewData[ "tSecondName" ]</th>
+                        <th>@ViewData[ "tEmail" ]</th>
+                        <th>@ViewData[ "tPhone" ]</th>
+                        <th>@ViewData[ "tDescription" ]</th>
+                        <th>@ViewData[ "tAvatar" ]</th>
+                        <th>@ViewData[ "tPrefLanguage" ]</th>
+                        <th>@ViewData[ "tIsAdmin" ]</th>
+                        <th>@ViewData[ "tCanPublish" ]</th>
+                        <th>@ViewData[ "tIsActive" ]</th>
+                        <th>@ViewData[ "tBirthday" ]</th>
+                        <th>@ViewData[ "tStartDate" ]</th>
+                        <th>@ViewData[ "tFinishDate" ]</th>
+                        <th>@ViewData[ "tArticleList" ]</th>
+                    </tr>
+                    @foreach ( var item in Model.authorList )
                     {
-                        <!-- Previous Page -->
-                        <a asp-controller="AdminAuthor" asp-action="Authors"
+                        <tr>
+                            <td>
+
+                                <!-- Edit Author -->
+                                <a asp-controller="AdminAuthor" asp-action="UpdateForm" asp-route-email="@item.email">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                            </td>
+                            <td>@item.id</td>
+                            <td>@item.name</td>
+                            <td>@item.firstLastName</td>
+                            <td>@item.secondLastName</td>
+                            <td>@item.email</td>
+                            <td>@item.phone</td>
+                            <td>@Html.Raw(item.description)</td>
+                            <td><img class="image-cell" src="@item.avatar" alt="avatar"></td>
+                            <td>
+                                @if ( item.preferedLanguage == "ENG" )
+                                {
+                                    <span class="fi fi-gb fis"></span>
+                                }
+                                else if ( item.preferedLanguage == "ESP" )
+                                {
+                                    <span class="fi fi-es fis"></span>
+                                }
+                            </td>
+                            <td>
+                                @if ( item.isAdmin )
+                                {
+                                    <i class="far fa-circle-check checkmark-icon"></i>
+                                }
+                                else if ( !item.isAdmin )
+                                {
+                                    <i class="far fa-circle-xmark xmark-icon"></i>
+                                }
+                            </td>
+                            <td>
+                                @if ( item.canPublish )
+                                {
+                                    <i class="far fa-circle-check checkmark-icon"></i>
+                                }
+                                else if ( !item.canPublish )
+                                {
+                                    <i class="far fa-circle-xmark xmark-icon"></i>
+                                }
+                            </td>
+                            <td>
+                                @if ( item.isActive )
+                                {
+                                    <i class="far fa-circle-check checkmark-icon"></i>
+                                }
+                                else if ( !item.isActive )
+                                {
+                                    <i class="far fa-circle-xmark xmark-icon"></i>
+                                }
+                            </td>
+                            <td>@item.birthday</td>
+                            <td>@item.startDate</td>
+                            <td>@item.endDate</td>
+                            <td>
+                                <a asp-controller="AdminArticle" asp-action="Articles" asp-route-author="@item.email">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <h4>@ViewData[ "NoData" ]</h4>
+            }
+        </section>
+
+        <section class="pagination">
+            <div>
+                @if ( Model.CurrentPage > 1 )
+                {
+                    <!-- Previous Page -->
+                    <a asp-controller="AdminAuthor" asp-action="Authors"
                    asp-route-page="@(Model.CurrentPage - 1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-id="@ViewBag.FormData.id"
@@ -201,14 +199,14 @@
                    asp-route-isAdmin="@ViewBag.FormData.isAdmin"
                    asp-route-isActive="@ViewBag.FormData.isActive"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
-                            @ViewData[ "ButtonPrevious" ]
-                        </a>
-                    }
+                        @ViewData[ "ButtonPrevious" ]
+                    </a>
+                }
 
-                    @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
-                    {
-                        <!-- Next Page -->
-                        <a asp-controller="AdminAuthor" asp-action="Authors"
+                @if ( Model.CurrentPage < Math.Ceiling( (double) Model.TotalItems / Model.PageSize ) )
+                {
+                    <!-- Next Page -->
+                    <a asp-controller="AdminAuthor" asp-action="Authors"
                    asp-route-page="@(Model.CurrentPage + 1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-id="@ViewBag.FormData.id"
@@ -219,101 +217,15 @@
                    asp-route-isAdmin="@ViewBag.FormData.isAdmin"
                    asp-route-isActive="@ViewBag.FormData.isActive"
                    asp-route-orderBy="@ViewBag.FormData.orderBy">
-                            @ViewData[ "ButtonNext" ]
-                        </a>
-                    }
-                </div>
-                <div>
-                    <p>
-                        @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.authorList?.Count @ViewData[ "OutOf" ] @Model.TotalItems)
-                    </p>
-                </div>
-            </section>
-        }
-        else
-        {
-            <section class="adminTable">
-                @if ( Model.authorList?.Count > 0 )
-                {
-                    <table>
-                        <tr>
-                            <th>@ViewData[ "Actions" ]</th>
-                            @foreach ( var prop in Model.authorList.First().GetType().GetProperties() )
-                            {
-                                // Exclude "Password" column from table
-                                if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
-                                {
-                                    <th>@prop.Name</th>
-                                }
-                            }
-                        </tr>
-                        @foreach ( var item in Model.authorList )
-                        {
-                            <tr>
-                                <td>
-                                    <!-- Edit Author -->
-                                    <a asp-controller="AdminAuthor" asp-action="UpdateForm" asp-route-email="@item.email">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </a>
-                                </td>
-                                @foreach ( var prop in item.GetType().GetProperties() )
-                                {
-                                    // Exclude "Password" column from table
-                                    if ( prop.Name.ToLower() != "password" && prop.Name.ToLower() != "newpassword" && prop.Name.ToLower() != "confirmpassword" )
-                                    {
-                                        <td>
-                                            @if ( prop.PropertyType == typeof( bool ) )
-                                            {
-                                                @if ( (bool) prop.GetValue( item ) )
-                                                {
-                                                    <i class="far fa-circle-check checkmark-icon"></i>
-                                                }
-                                                else
-                                                {
-                                                    <i class="far fa-circle-xmark xmark-icon"></i>
-                                                }
-                                            }
-                                            else if ( prop.PropertyType == typeof( string ) && ((string) prop.GetValue( item ))?.StartsWith( "/img/" ) == true )
-                                            {
-                                                <img class="image-cell" src="@prop.GetValue(item)" alt="Image">
-                                            }
-                                            else if ( prop.Name.ToLower() == "description" )
-                                            {
-                                                @Html.Raw(prop.GetValue(item))
-                                                ;
-                                            }
-                                            else
-                                            {
-                                                var propValue = prop.GetValue(item)?.ToString();
-                                                if ( !string.IsNullOrEmpty( propValue ) )
-                                                {
-                                                    if ( propValue == "ENG" )
-                                                    {
-                                                        <span class="fi fi-gb fis"></span>
-                                                    }
-                                                    else if ( propValue == "ESP" )
-                                                    {
-                                                        <span class="fi fi-es fis"></span>
-                                                    }
-                                                    else
-                                                    {
-                                                        @propValue
-                                                    }
-                                                }
-                                            }
-                                        </td>
-                                    }
-                                }
-                            </tr>
-                        }
-                    </table>
+                        @ViewData[ "ButtonNext" ]
+                    </a>
                 }
-                else
-                {
-                    <h4>@ViewData[ "NoData" ]</h4>
-                }
-            </section>
-        }
-        
+            </div>
+            <div>
+                <p>
+                    @ViewData[ "Page" ] @Model.CurrentPage @ViewData[ "Of" ] @Math.Ceiling((double)Model.TotalItems / Model.PageSize) (@Model.authorList?.Count @ViewData[ "OutOf" ] @Model.TotalItems)
+                </p>
+            </div>
+        </section>
     </div>
 </main>

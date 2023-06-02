@@ -14,8 +14,19 @@ namespace Support
         public DevPublisherModel(DataRow row)
         {
             string field = "id";
+            long selector;
 
-            long selector = row.Field<long>("selector");
+            try
+            {
+                selector = row.Field<int>("selector");
+            }
+            catch ( InvalidCastException )
+            {
+
+                selector = row.Field<long>("selector");
+            }
+
+            
             switch ( selector )
             {
                 case 0:
