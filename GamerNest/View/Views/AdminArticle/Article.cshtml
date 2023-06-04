@@ -19,7 +19,6 @@
                             <option value="id">@ViewData[ "fOrderBy" ]</option>
                             <option value="id">@ViewData[ "tId" ]</option>
                             <option value="headline">@ViewData[ "tHeadline" ]</option>
-                            <option value="idAuthor">@ViewData[ "tIdAuthor" ]</option>
                             <option value="author">@ViewData[ "tAuthor" ]</option>
                             <option value="createdDate">@ViewData[ "tCreatedDate" ]</option>
                         </select>
@@ -103,10 +102,13 @@
                     {
                         <tr>
                             <td>
-                                <!-- Delete Article -->
-                                <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'AdminArticle')">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </a>
+                                @if (ViewData["AdminType"].ToString() == "Admin")
+                                {
+                                    <!-- Delete Article -->
+                                    <a id="deleteAction_@item.id" class="delete-action" onclick="deleteModal('@item.id', 'AdminArticle')">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                }
 
                                 <!-- Edit Article -->
                                 <a asp-controller="AdminArticle" asp-action="UpdateForm" asp-route-id="@item.id">

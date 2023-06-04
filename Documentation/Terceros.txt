@@ -1,7 +1,0 @@
-<-- Side Menu -->
-https://www.codinglabweb.com/2021/04/responsive-side-navigation-bar-in-html.html
-
-<-- Font Awesome -->
-
-<-- flag-icons -->
-https://flagicons.lipis.dev/

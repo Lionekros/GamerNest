@@ -18,15 +18,15 @@ namespace Support
 
             try
             {
-                selector = row.Field<int>("selector");
+                selector = row.Field<int>( "selector" );
             }
             catch ( InvalidCastException )
             {
 
-                selector = row.Field<long>("selector");
+                selector = row.Field<long>( "selector" );
             }
 
-            
+
             switch ( selector )
             {
                 case 0:

@@ -160,13 +160,13 @@ namespace View.Controllers
             {
                 return RedirectToAction( "SeeGame", new { id = idGame } );
             }
-            else if (isFav)
+            else if ( isFav )
             {
                 return RedirectToAction( "FavGames" );
             }
             else
             {
-                return RedirectToAction("AllGames");
+                return RedirectToAction( "AllGames" );
             }
         }
 
