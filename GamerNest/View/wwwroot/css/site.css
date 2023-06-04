@@ -1,9 +1,5 @@
 ﻿@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-:root {
-  --primary-color: red;
-}
-
 /* Añadir siempre Normalize.css a los proyectos porque hace que se vea lo mas parecido posible en todos los navegadores!!!
 Acordarse de añadirlo en html también
 <link rel="preload" href="css/normailize.css" as="style">
@@ -316,18 +312,6 @@ template {
   display: none;
 }
 
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
-}
-
 .modal {
   display: none;
   justify-content: center;
@@ -487,14 +471,6 @@ template {
   }
 }
 
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
-}
-
 .pagination {
   display: flex;
   flex-direction: column;
@@ -548,14 +524,6 @@ template {
   background-color: #555555;
   pointer-events: none;
   cursor: not-allowed;
-}
-
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
 }
 
 .filter {
@@ -705,10 +673,6 @@ a {
 .collapsed {
   overflow: hidden;
   height: 100px;
-}
-
-:root {
-  --primary-color: red;
 }
 
 * {
@@ -939,14 +903,6 @@ a {
     display: none;
   }
 }
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
-}
-
 .AdminHeader {
   display: flex;
   flex-direction: row;
@@ -1116,10 +1072,6 @@ a {
   }
 }
 
-:root {
-  --primary-color: red;
-}
-
 .adminTable {
   margin-top: 1rem;
   overflow-x: auto;
@@ -1181,14 +1133,6 @@ a {
   .adminTable td {
     padding: 5px;
   }
-}
-
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
 }
 
 .create {
@@ -1331,14 +1275,6 @@ a {
   resize: none;
 }
 
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
-}
-
 .articlePreview {
   display: flex;
   justify-content: center;
@@ -1403,10 +1339,6 @@ a {
   }
 }
 
-:root {
-  --primary-color: red;
-}
-
 .AdminIndex {
   margin-top: 18rem;
   display: flex;
@@ -1460,14 +1392,6 @@ a {
 }
 .linkActive i {
   color: #FFB100;
-}
-
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
 }
 
 .normalMenu {
@@ -1672,10 +1596,6 @@ a {
     align-items: center;
   }
 }
-:root {
-  --primary-color: red;
-}
-
 .NormalCenter {
   display: flex;
   justify-content: center;
@@ -1720,10 +1640,6 @@ a {
 .news a .card .date {
   text-align: end;
   font-size: 1rem;
-}
-
-:root {
-  --primary-color: red;
 }
 
 .AllGames {
@@ -1813,14 +1729,6 @@ a {
 }
 .AllGames div .favButton div .isNotFav {
   color: #FCFCFC;
-}
-
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
 }
 
 .UserLogIn {
@@ -1963,14 +1871,6 @@ a {
     margin-top: 2rem;
     max-width: 70%;
   }
-}
-
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
 }
 
 .userpageConfig {
@@ -2289,14 +2189,6 @@ a {
   color: #efefef;
 }
 
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
-}
-
 .footer {
   margin-top: 2rem;
   border-top: 2px solid #FCFCFC;
@@ -2315,14 +2207,6 @@ a {
 }
 .footer a p {
   font-size: 1.2rem;
-}
-
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
 }
 
 .gameFile {
@@ -2435,14 +2319,6 @@ a {
 }
 .gameFile .info .info2 .seventhRow .description .desc {
   text-align: justify;
-}
-
-:root {
-  --primary-color: red;
-}
-
-:root {
-  --primary-color: red;
 }
 
 .articlePreview2 {
