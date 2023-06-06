@@ -83,7 +83,15 @@ namespace DBAccess
 
                     if ( !string.IsNullOrEmpty( orderBy ) )
                     {
-                        queryBuilder.Append( " ORDER BY " + orderBy );
+                        if (orderBy == "createdDate" )
+                        {
+                            queryBuilder.Append( " ORDER BY " + orderBy + " DESC" );
+                        }
+                        else
+                        {
+                            queryBuilder.Append( " ORDER BY " + orderBy );
+                        }
+                        
                     }
 
                     cmd.CommandText = queryBuilder.ToString();

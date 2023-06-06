@@ -39,6 +39,10 @@
                 border-radius: 2rem;
             }
 
+            p{
+                margin-bottom: 0;
+            }
+
             color: $light;
             margin-top: 2rem;
             margin-bottom: 2rem;
@@ -47,6 +51,10 @@
         .body
         {
             text-align: justify;
+        }
+        p
+            {
+            margin-bottom: 2rem;
         }
     }
 

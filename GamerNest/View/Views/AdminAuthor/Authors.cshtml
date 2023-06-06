@@ -77,12 +77,15 @@
             </form>
         </section>
 
-        <section class="create">
-            <a asp-action="CreateForm" asp-controller="AdminAuthor">
-                <i class="fa-solid fa-plus"></i>
-                <span>@ViewData[ "ButtonNew" ]</span>
-            </a>
-        </section>
+        @if (ViewData["AdminType"].ToString() == "Admin")
+        {
+            <section class="create">
+                <a asp-action="CreateForm" asp-controller="AdminAuthor">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>@ViewData[ "ButtonNew" ]</span>
+                </a>
+            </section>
+        }
 
         <section class="adminTable">
             @if ( Model.authorList?.Count > 0 )

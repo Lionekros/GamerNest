@@ -25,7 +25,7 @@
 
 </head>
 <body>
-    @if (ViewData["AdminType"] != null)
+    @if ( ViewData[ "AdminType" ] != null && ViewData[ "AdminType" ] != "")
     {
         <partial name="_LateralMenu" />
     }

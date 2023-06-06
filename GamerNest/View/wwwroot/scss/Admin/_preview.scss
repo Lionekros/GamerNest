@@ -34,11 +34,21 @@
             color: $light;
             margin-top: 2rem;
             margin-bottom: 2rem;
+
+            p
+            {
+                margin-bottom: 0;
+            }
         }
 
         .body
         {
             text-align: justify;
+        }
+
+        p
+        {
+            margin-bottom: 2rem;
         }
     }
 

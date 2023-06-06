@@ -1301,8 +1301,14 @@ a {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+.articlePreview .Article .summary p {
+  margin-bottom: 0;
+}
 .articlePreview .Article .body {
   text-align: justify;
+}
+.articlePreview .Article p {
+  margin-bottom: 2rem;
 }
 .articlePreview .author {
   display: flex;
@@ -2352,8 +2358,14 @@ a {
 .articlePreview2 .Article .summary h3 {
   border-radius: 2rem;
 }
+.articlePreview2 .Article .summary p {
+  margin-bottom: 0;
+}
 .articlePreview2 .Article .body {
   text-align: justify;
+}
+.articlePreview2 .Article p {
+  margin-bottom: 2rem;
 }
 .articlePreview2 .author {
   display: flex;
